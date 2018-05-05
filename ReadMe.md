@@ -1,6 +1,6 @@
-## INF1301 - Programação Modular
+# INF1301 - Programação Modular
 
-# T1: Elaboração da documentação do projeto
+## T1: Elaboração da documentação do projeto
 
 - Requisitos Funcionais e Não-Funcionais
 - Visão de Módulos e Visão de Interface
@@ -8,7 +8,7 @@
 - Estrutura de Tipos
 
 
-# T2: Criação dos módulos Baralho e TestaBaralho
+## T2: Criação dos módulos Baralho e TestaBaralho
 
 - Baralho:
     ````
@@ -26,7 +26,7 @@
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
     ````
 
-# T3: Criação do módulo Mesa
+## T3: Criação do módulo Mesa
 
 - Mesa:
     ````
@@ -46,7 +46,7 @@
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
     ````
     
-# T4: Criação do módulo Interface
+## T4: Criação do módulo Interface
 
 - Interface:
     ```
