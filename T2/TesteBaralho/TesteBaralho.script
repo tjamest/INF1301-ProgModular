@@ -1,0 +1,77 @@
+// Script:    TestBaralho.script
+// Autor:     Gustavo Contreiras, João Victor Galindo, Thiago Gioso Fernandes
+// Data:      05/mai/2018
+// Propósito: Testar o módulo baralho do jogo de truco
+//
+
+== Inicializar valores
+=declararparm   baralho0  int 0
+=declararparm   baralho1  int 1
+=declararparm   baralho2  int 2
+=declararparm   baralho3  int 3
+=declararparm   baralho4  int 4
+=declararparm   baralho5  int 5
+=declararparm   baralho6  int 6
+=declararparm   baralho7  int 7
+
+=declararparm   carta0  int 0
+=declararparm   carta1  int 1
+=declararparm   carta2  int 2
+=declararparm   carta3  int 3
+=declararparm   carta4  int 4
+=declararparm   carta5  int 5
+=declararparm   carta6  int 6
+=declararparm   carta7  int 7
+=declararparm   carta8  int 8
+=declararparm   carta9  int 9
+=declararparm   carta10 int 10
+=declararparm   carta11 int 11
+=declararparm   carta12 int 12
+=declararparm   carta13 int 13
+=declararparm   carta14 int 14
+
+=declararparm   OK                  	int 0
+=declararparm   CondRetErro		    	int 1
+=declararparm   CondRetParm       		int 2
+=declararparm   CondRetNaoExecutou      int 5
+=declararparm   CondRetNaoConhec       	int 6
+=declararparm   CondRetNaoImplementado  int 7
+=declararparm	CondRetMemoria			int 8
+
+=declararparm   pNULL          int  0
+=declararparm   pNaoNULL       int  1
+
+== Criar 9 baralhos
+=criarbaralho    baralho0 
+=criarbaralho    baralho1
+=criarbaralho    baralho2
+=criarbaralho    baralho3
+=criarbaralho    baralho4
+=criarbaralho    baralho5
+=criarbaralho    baralho6
+=criarbaralho    baralho7
+=criarbaralho    baralho8
+
+== Destruir o baralho 8
+=destruirbaralho	baralho8
+
+== Criar carta 4 ouros
+=criarcarta	carta0 	0 	0	OK
+
+== Criar carta 5 ouros
+=criarcarta	carta1 	1 	0	OK
+
+== Criar carta 7 espadas
+=criarcarta	carta2 	3 	1	OK
+
+== Criar carta inválida
+=criarcarta	carta3 	15 	1	CondRetParm
+
+== Criar carta inválida com CondRet errada
+=criarcarta	carta4 	15 	1	OK
+
+== Destruir carta
+=destruircarta	carta2
+=destruircarta	carta0
+
+// fim
