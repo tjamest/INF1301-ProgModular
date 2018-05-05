@@ -24,6 +24,11 @@
     GENERICO.h - Módulo de suporte para testes (não deve ser alterado)
     LERPARM.h - Módulo de suporte para testes (não deve ser alterado)
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
+    LimpaTudo.bat - Deleta os arquivos gerados por testes anteriores
+    TestaBaralho.bat - Realiza o teste automatizado
+    vsvars32.bat - Coloca o ambiente para uso do Visual Studio (não clicar nem chamar)
+    ArcaboucoTeste.lib - Biblioteca do Arcabouço
+    exbestat.exe - Programa que exibe as estatísticas do teste (não clicar nem chamar)
     ````
 
 ## T3: Criação do módulo Mesa e TesteMesa
