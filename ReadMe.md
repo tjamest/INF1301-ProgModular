@@ -31,7 +31,7 @@
     exbestat.exe - Programa que exibe as estatísticas do teste (não clicar nem chamar)
     ````
 
-## T3: Criação do módulo Mesa e TesteMesa
+## T3: Criação dos módulos Mesa e TesteMesa
 
 - Mesa:
     ````
@@ -51,7 +51,7 @@
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
     ````
     
-## T4: Criação do módulo Interface e TesteInterface
+## T4: Criação dos módulos Interface e TesteInterface
 
 - Interface:
     ```
