@@ -12,10 +12,10 @@
 # T2: Criação dos módulos Baralho e TestaBaralho
 
 - Baralho:
-    BARALHO.c - Implementação do módulo BARALHO
-    BARALHO.h - Definição do módulo BARALHO
-    LISTA.c - Implementação do módulo LISTA
-    LISTA.h - Definição do módulo LISTA
+BARALHO.c - Implementação do módulo BARALHO
+BARALHO.h - Definição do módulo BARALHO
+LISTA.c - Implementação do módulo LISTA
+LISTA.h - Definição do módulo LISTA
     
 - TesteBaralho:
     TestBAR.c - Implementação do teste do módulo BARALHO
