@@ -1,12 +1,9 @@
-# INF1301 ProgModular
-
-
 # T1: Elaboração da documentação do projeto
 
-- Requisitos Funcionais e Não-Funcionais
-- Visão de Módulos e Visão de Interface
-- Estrutura Lista de Listas
-- Estrutura de Tipos
+- Requisitos Funcionais e Não-Funcionais;
+- Visão de Módulos e Visão de Interface;
+- Estrutura Lista de Listas;
+- Estrutura de Tipos;
 
 
 # T2: Criação dos módulos Baralho e TestaBaralho
