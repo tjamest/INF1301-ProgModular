@@ -1,18 +1,18 @@
 # T1: Elaboração da documentação do projeto
 
-- Requisitos Funcionais e Não-Funcionais;
-- Visão de Módulos e Visão de Interface;
-- Estrutura Lista de Listas;
-- Estrutura de Tipos;
+- Requisitos Funcionais e Não-Funcionais
+- Visão de Módulos e Visão de Interface
+- Estrutura Lista de Listas
+- Estrutura de Tipos
 
 
 # T2: Criação dos módulos Baralho e TestaBaralho
 
 - Baralho:
-BARALHO.c - Implementação do módulo BARALHO
-BARALHO.h - Definição do módulo BARALHO
-LISTA.c - Implementação do módulo LISTA
-LISTA.h - Definição do módulo LISTA
+--BARALHO.c - Implementação do módulo BARALHO
+--BARALHO.h - Definição do módulo BARALHO
+--LISTA.c - Implementação do módulo LISTA
+--LISTA.h - Definição do módulo LISTA
     
 - TesteBaralho:
     TestBAR.c - Implementação do teste do módulo BARALHO
