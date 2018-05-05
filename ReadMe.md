@@ -8,7 +8,7 @@
 - Estrutura de Tipos
 
 
-## T2: Criação dos módulos Baralho e TestaBaralho
+## T2: Criação dos módulos Baralho e TesteBaralho
 
 - Baralho:
     ````
@@ -17,7 +17,7 @@
     LISTA.c - Implementação do módulo LISTA
     LISTA.h - Definição do módulo LISTA
     ````
-- TestaBaralho:
+- TesteBaralho:
     ````
     TestBAR.c - Implementação do teste do módulo BARALHO
     TesteBaralho.script - Massa de testes para testes do módulo BARALHO
@@ -26,7 +26,7 @@
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
     ````
 
-## T3: Criação do módulo Mesa e TestaMesa
+## T3: Criação do módulo Mesa e TesteMesa
 
 - Mesa:
     ````
@@ -37,7 +37,7 @@
     LISTA.c - Implementação do módulo LISTA
     LISTA.h - Definição do módulo LISTA
     ````
-- TestaMesa:
+- TesteMesa:
     ````
     TestMES.c - Implementação do teste do módulo MESA
     TesteMesa.script - Massa de testes para testes do módulo MESA
@@ -46,7 +46,7 @@
     TST_ESPC.h - Módulo de suporte para testes (não deve ser alterado)
     ````
     
-## T4: Criação do módulo Interface e TestaInterface
+## T4: Criação do módulo Interface e TesteInterface
 
 - Interface:
     ```
@@ -59,7 +59,7 @@
     LISTA.c - Implementação do módulo LISTA
     LISTA.h - Definição do módulo LISTA
     ```   
-- TestaInterface:
+- TesteInterface:
     ```
     TestINT.c - Implementação do teste do módulo MESA
     TesteInterface.script - Massa de testes para testes do módulo MESA
