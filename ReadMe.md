@@ -27,8 +27,7 @@
     ArcaboucoTeste.lib - Biblioteca do Arcabouço
     LimpaTudo.bat - Deleta os arquivos gerados por testes anteriores
     TestaBaralho.bat - Realiza o teste automatizado
-    vsvars32.bat - Seta o ambiente para uso do Visual Studio (não clicar nem chamar)
-    exbestat.exe - Programa que exibe as estatísticas do teste (não clicar nem chamar)
+    vsvars32.bat - Seta o ambiente para uso do Visual Studio
     ````
 
 ## T3: Criação dos módulos Mesa e TesteMesa
