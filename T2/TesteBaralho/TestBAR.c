@@ -1,22 +1,15 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: TLIS Teste lista de símbolos
+*  $MCI Módulo de implementação: TBAR Teste baralho
 *
-*  Arquivo gerado:              TestLIS.c
-*  Letras identificadoras:      TLIS
+*  Arquivo gerado:              TestBAR.c
+*  Letras identificadoras:      TBAR
 *
-*  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
-*  Arquivo da base de software: D:\AUTOTEST\PROJETOS\LISTA.BSW
-*
-*  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
-*  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs
+*  Projeto: INF 1301 - Jogo de Truco
+*  Autores: gsc, tgf, jvr
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
-*     4       avs   01/fev/2006 criar linguagem script simbólica
-*     3       avs   08/dez/2004 uniformização dos exemplos
-*     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
-*     1       avs   16/abr/2003 início desenvolvimento
+*     1       avs   26/abr/2018 início desenvolvimento
 *
 ***************************************************************************/
 
@@ -36,8 +29,8 @@
 static const char RESET_BARALHO_CMD     [ ] = "=resetteste"       ;
 static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
-//static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
-//static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
+static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
+static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
 
 
 #define TRUE  1
@@ -51,7 +44,7 @@ static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 #define DIM_VALOR     100
 
 LIS_tppLista vtBaralhos[ DIM_VT_BARALHO ] ;
-//BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
+BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 
 /************* PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO **************/
    static int ValidarInxBaralho( int inxBaralho, int Modo ) ;
@@ -77,10 +70,11 @@ LIS_tppLista vtBaralhos[ DIM_VT_BARALHO ] ;
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   
-  //VARIÁVEIS USADAS POR TODOS COMANDOS
+  //VARIÁVEIS USADAS PELOS COMANDOS
   int inxBaralho  = -1 ,
+	  inxCarta = -1 ,
       numLidos   = -1 ,
-      CondRetEsp = -1  ;
+      CondRetEsp = -1 ;
   char   StringDado[  DIM_VALOR ] ;
   int ValEsp = -1 ;
   int i ;
@@ -93,6 +87,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
     //preenche o vetor baralho com Null
     for( i = 0 ; i < DIM_VT_BARALHO ; i++ ) {
                vtBaralhos[ i ] = NULL ;
+			   vtCartas[ i ] = NULL ;
     }
     return TST_CondRetOK ;
   } //fim ativa: Efetuar reset de teste de baralho
@@ -132,27 +127,35 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
       return TST_CondRetParm ;
     }//fim if
 
-	//anula o ponteiro pro baralho
+	BAR_DestruirBaralho( vtBaralhos[ inxBaralho ] ) ;
     vtBaralhos[ inxBaralho ] = NULL ;
 
     return TST_CondRetOK ;
 
   } //fim ativa: Testar DestruirBaralho
 
-/*  //CRIAR CARTA
+  //CRIAR CARTA
   //se o comando for "criarcarta"
 	else if ( strcmp( ComandoTeste , CRIAR_CARTA_CMD ) == 0 ){
+		
+		//valor e naipe em tipo específico
+		BAR_tpValorCarta ValorCarta ;
+		BAR_tpNaipeCarta NaipeCarta ;
+
+		//valor e naipe em int
+		int valorCarta, naipeCarta;
+
+		//condicao de retorno da função da lista
 
 		//conta quantos parametros foram declarados
-		numLidos = LER_LerParametros( "iii" , &inxBaralho, &valorCarta,
-                                         &naipeCarta ) ;
+		numLidos = LER_LerParametros( "iii" , &inxCarta, &valorCarta, &naipeCarta ) ;
 
-		//se for diferente de 4 retorna erro de declaração de parametro
-        	if ( (numLidos != 4) || ValidarInxBaralho ( inxBaralho ) == 0 ){
+		//se for diferente de 2 retorna erro de declaração de parametro
+        	if ( (numLidos != 2) ){
 			return TST_CondRetParm ;
 		}
 
-		//transformando o parâmetro int recebido em tipo específico
+		//transformando o parâmetro int recebido em tipo especifico
 		switch (valorCarta) {
 		case 0: ValorCarta = _4;	break;
 		case 1: ValorCarta = _5;	break;
@@ -180,19 +183,30 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		}//fim switch naipeCarta
 
 		//armazena em pCarta um ponteiro pra um tipo carta criado
-		pCarta = BAR_CriarCarta( ValorCarta, NaipeCarta ) ;
-
-		//adiciona uma carta no baralho
-		CondRetLista = LIS_InserirElementoApos(vtBaralhos[inxBaralho], pCarta);
-		
-		//assertiva de saída
-		if (CondRetLista != LIS_CondRetOK) {
-			return TST_CondRetErro;
-		}
+		vtCartas[ inxCarta ] = BAR_CriarCarta( ValorCarta, NaipeCarta ) ;
 
 		return TST_CondRetOK ;
 
-	} //fim ativa: Testar CriarCarta*/
+	} //fim ativa: Testar CriarCarta
+
+  //DESTRUIR CARTA
+  //se o comando for "destruircarta"
+	else if ( strcmp( ComandoTeste , DESTRUIR_CARTA_CMD ) == 0 ) {
+
+    //conta quantos parametros foram declarados
+    numLidos = LER_LerParametros( "i" , &inxCarta ) ;
+
+    //se for diferente de 1 retorna erro de declaração de parametro
+    if ( (numLidos != 1) || (! ValidarInxBaralho( inxCarta , NAO_VAZIO )) )  {
+      return TST_CondRetParm ;
+    }//fim if
+
+	BAR_DestruirCarta( vtCartas[ inxCarta ] ) ;
+    vtCartas[ inxCarta ] = NULL ;
+
+    return TST_CondRetOK ;
+
+  } //fim ativa: Testar DestruirCarta
 
 return TST_CondRetNaoConhec ;
 
