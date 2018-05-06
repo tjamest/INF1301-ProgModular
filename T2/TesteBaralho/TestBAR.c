@@ -150,8 +150,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros( "iii" , &inxCarta, &valorCarta, &naipeCarta ) ;
 
-		//se for diferente de 2 retorna erro de declaração de parametro
-        	if ( (numLidos != 2) ){
+		//se for diferente de 3 retorna erro de declaração de parametro
+        	if ( (numLidos != 3) ){
 			return TST_CondRetParm ;
 		}
 
