@@ -1,0 +1,35 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: TesteBaralho
+!!!      Script de teste:     TesteBaralho.script
+
+!!!    0  Linha:     1  // Script:    TestBaralho.script 
+!!!    0  Linha:     2  // Autor:     Gustavo Contreiras, JoÃ£o Victor Galindo, Thiago Gioso Fernandes 
+!!!    0  Linha:     3  // Data:      05/mai/2018 
+!!!    0  Linha:     4  // PropÃ³sito: Testar o mÃ³dulo baralho do jogo de truco 
+!!!    0  Linha:     5  // 
+    7  == Inicializar valores
+   19  == Criar baralhos
+>>>    1  Linha:    25  Erro nos parâmetros do comando:  =criarbaralho   17
+<<<    0  Linha:    26  Falha esperada foi recuperada. 
+>>>    1  Linha:    28  Erro nos parâmetros do comando:  =criarbaralho
+<<<    0  Linha:    29  Falha esperada foi recuperada. 
+   33  == Criar baralhos
+   37  == Destruir baralho
+>>>    1  Linha:    38  Erro nos parâmetros do comando:  =destruirbaralho 17
+<<<    0  Linha:    39  Falha esperada foi recuperada. 
+>>>    1  Linha:    43  Erro nos parâmetros do comando:  =destruirbaralho
+<<<    0  Linha:    44  Falha esperada foi recuperada. 
+>>>    1  Linha:    46  Erro nos parâmetros do comando:  =destruirbaralho	8
+<<<    0  Linha:    47  Falha esperada foi recuperada. 
+!!!    0  Linha:    55  // fim 
+
+!!! Número de linhas lidas:          55
+!!! Número de casos de teste:         4
+!!! Número comandos corretos:        22
+!!! Número de falhas encontradas:     0
+
+!!! Não foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0
