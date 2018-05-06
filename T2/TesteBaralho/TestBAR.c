@@ -155,32 +155,18 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 			return TST_CondRetParm ;
 		}
 
-		//transformando o parâmetro int recebido em tipo especifico
-		switch (valorCarta) {
-		case 0: ValorCarta = _4;	break;
-		case 1: ValorCarta = _5;	break;
-		case 2: ValorCarta = _6;	break;
-		case 3:	ValorCarta = _7;	break;
-		case 4:	ValorCarta = _Q;	break;
-		case 5:	ValorCarta = _J;	break;
-		case 6:	ValorCarta = _K;	break;
-		case 7:	ValorCarta = _A;	break;
-		case 8:	ValorCarta = _2;	break;
-		case 9:	ValorCarta = _3;	break;
-		default: 
-			printf("Erro de parametro invalido") ;
-			return TST_CondRetParm ;
-		}//fim switch valorCarta
+		//validando e transformando o parâmetro
+		//int recebido em tipo especifico
+		if ( (valorCarta >= 0 && valorCarta <= 9) && (naipeCarta >= 0 && naipeCarta <= 3) ) { 
+			ValorCarta = (BAR_tpValorCarta) valorCarta;
+			NaipeCarta = (BAR_tpNaipeCarta) naipeCarta;
+		} //fim if
 
-		switch (naipeCarta) {
-		case 0: NaipeCarta = Ouros;		break;
-		case 1:	NaipeCarta = Espadas;	break;
-		case 2:	NaipeCarta = Copas;		break;
-		case 3:	NaipeCarta = Paus;		break;
-		default:
+		//recebendo um valor e naipe invalidos
+		else {
 			printf("Erro de parametro invalido") ;
 			return TST_CondRetParm ;
-		}//fim switch naipeCarta
+		} //fim if
 
 		//armazena em pCarta um ponteiro pra um tipo carta criado
 		vtCartas[ inxCarta ] = BAR_CriarCarta( ValorCarta, NaipeCarta ) ;

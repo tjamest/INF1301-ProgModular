@@ -108,7 +108,7 @@
 =resetteste
 
 == Criar carta 4 de ouros
-=criarcarta carta1  0 int 0
+=criarcarta carta1 0 0
 
 == Criar carta 4 de espadas
 =criarcarta carta1 0 1

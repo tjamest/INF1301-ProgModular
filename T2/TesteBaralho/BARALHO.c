@@ -49,6 +49,9 @@ typedef struct BAR_tagCarta {
 ***************************************************************************/
 LIS_tppLista BAR_CriarBaralho() {
 
+	int i; //contador
+	int valor, naipe;
+
 	//aloca memória pro ponteiro que aponta pra cabeca
 	//do baralho (um ponteiro pro tipo lista)
 	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
@@ -64,31 +67,31 @@ LIS_tppLista BAR_CriarBaralho() {
 	//pro tpCarta que é o elemento do vetor
 	BAR_tpCarta *pCarta;
 
-	for (int i = 0, j = 0, k = 0; i < TAM; i++, j++) {
-		BAR_tpValorCarta valor = j;
-		BAR_tpNaipeCarta naipe = k;
+	for (i = 0, valor = 0, naipe = 0; i < TAM; i++, valor++) {
+		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
+		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
 
-		pCarta = BAR_CriarCarta(valor, naipe);
+		pCarta = BAR_CriarCarta(Valor, Naipe);
 		VetorAux[i] = *pCarta;
 
 		if (i == 9 || i == 19 || i == 29) { // Quando estiver terminado o naipe atual
-			j = -1; // Volto para valor 0
-			k++; // Passando para o próximo naipe
+			valor = -1; // Volta para valor 0
+			naipe++; // Passando para o próximo naipe
 		}
 	} //fim for
 	
 	//checando se o vetor está preenchido
-	printf("Checando se o vetor esta preenchido:\n");
-	for (int i = 0; i < TAM; i++){
+/*	printf("Checando se o vetor esta preenchido:\n");
+	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
-	} //fim for
+	} //fim for*/
 
 	//função suporte da rand que faz gerar números diferentes sempre
 	srand ((unsigned)time(NULL));
 
 	//embaralhando o vetor (troca os indices aleatoriamente)
-	for (int i = 0; i < TAM; i++){
+	for (i = 0; i < TAM; i++){
 
 		BAR_tpCarta pCartaAux;
 		
@@ -108,21 +111,21 @@ LIS_tppLista BAR_CriarBaralho() {
 		
 	} //fim for
 
-	//checando se o vetor está embaralhado
+/*	//checando se o vetor está embaralhado
 	printf("\nChecando se o vetor esta embaralhado:\n");
-	for (int i = 0; i < TAM; i++){
+	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
-	} //fim for
+	} //fim for*/
 	
 	// preenche um por um usando o vetor embaralhado
-	for (int i = 0; i < TAM; i++){
+	for (i = 0; i < TAM; i++){
 		
 		//pCarta recebe um ponteiro pra um tipo Carta do vetor embaralhado
 		pCarta = &VetorAux[i] ;
 
-		//checando se pCarta recebe um valor aleatorio
-		printf("\npCarta: Valor %d / Naipe %d", pCarta->valor,pCarta->naipe);
+/*		//checando se pCarta recebe um valor aleatorio
+		printf("\npCarta: Valor %d / Naipe %d", pCarta->valor,pCarta->naipe);*/
 		
 		//é inserido um elemento na lista Baralho e 
 		//seu valor é um ponteiro pra um tipo Carta
@@ -133,12 +136,8 @@ LIS_tppLista BAR_CriarBaralho() {
 			printf("\nNão inseriu elemento");
 			return NULL;
 		}
-		else{
-			printf("    (Elemento inserido)");
-		}
 
 	} //fim for
-	// fim minha solução
 	
   return pCabecaBaralho ;
    
