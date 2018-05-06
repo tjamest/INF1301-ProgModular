@@ -31,7 +31,7 @@ static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
-static const char OBTER_INFO_CARTA_CMD  [ ] = "=obterinfocarta"   ;
+static const char OBTER_INFO_CMD  [ ] = "=obterinfo"   ;
 
 
 #define TRUE  1
@@ -58,6 +58,8 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *  $ED Descrição da função
 *     Podem ser criados até 10 baralhos guardados em um vetor, 
 *     identificados pelos índices 0 a 9
+*     Podem ser criadas até 40 cartas guardadas em um vetor, 
+*     identificadas pelos índices 0 a 39
 *
 *     Comandos disponíveis:
 *
@@ -67,6 +69,7 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *     =destruirbaralho              <inxBaralho>
 *     =criarcarta                   <int>  <int> 
 *     =destruircarta                <inxCarta>   
+*	  =obterinfo					<inxCarta>
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
@@ -80,9 +83,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   int i ;
   int numElem = -1 ;
 
-  BAR_tpValorCarta *pValorCarta ;
-  BAR_tpNaipeCarta *pNaipeCarta ;
   BAR_tpCondRet CondRetBaralho;
+  BAR_tpValorCarta *pValorCarta = (BAR_tpValorCarta*)malloc(sizeof(BAR_tpValorCarta)) ;
+  BAR_tpNaipeCarta *pNaipeCarta = (BAR_tpNaipeCarta*)malloc(sizeof(BAR_tpNaipeCarta));
 
   //RESET TEST
   //se o comando for "resettest":
@@ -197,15 +200,15 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   } //fim ativa: Testar DestruirCarta
 
-  //OBTER INFO CARTA
-  //se o comando for "obterinfocarta"
-	else if ( strcmp( ComandoTeste , OBTER_INFO_CARTA_CMD ) == 0 ) {
+  //OBTER INFO
+  //se o comando for "obterinfo"
+	else if ( strcmp( ComandoTeste , OBTER_INFO_CMD ) == 0 ) {
 
     //conta quantos parametros foram declarados
     numLidos = LER_LerParametros( "i" , &inxCarta ) ;
 
     //se for diferente de 1 retorna erro de declaração de parametro
-    if ( (numLidos != 1) || (! ValidarInxCarta( inxCarta , VAZIO )) )  {
+    if ( (numLidos != 1) || (! ValidarInxCarta( inxCarta , NAO_VAZIO )) )  {
       return TST_CondRetParm ;
     }//fim if
 
@@ -217,7 +220,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
     return TST_CondRetOK ;
 
-  } //fim ativa: Testar ObterInfoCarta
+  } //fim ativa: Testar ObterInfo
 
 return TST_CondRetNaoConhec ;
 

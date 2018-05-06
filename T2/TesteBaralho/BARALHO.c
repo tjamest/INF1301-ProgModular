@@ -212,7 +212,7 @@ BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta pCarta,
 	*pValor = pCarta->valor;
 	*pNaipe = pCarta->naipe;
 	
-	//faltou assertiva de saída
+	//assertiva de saída
 	if (pValor == NULL || pNaipe == NULL) {
 		return BAR_CondRetNaoObteveInfo;
 	}

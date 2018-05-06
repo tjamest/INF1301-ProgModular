@@ -209,18 +209,6 @@
 == Resetar os vetores de teste
 =resetteste
 
-== Criar cartas
-=criarcarta carta0 0 0
-=criarcarta carta1 1 0
-=criarcarta carta2 2 0
-=criarcarta carta3 3 0
-
-== Obter valor e naipe
-=obterinfocarta carta0 //erro
-
-== Resetar os vetores de teste
-=resetteste
-
 == Criar carta 5 de ouros
 =criarcarta carta5  1 0
 
@@ -325,5 +313,30 @@
 
 == Criar carta 3 de copas
 =criarcarta carta39 9 2
+
+== Resetar os vetores de teste
+=resetteste
+
+== Criar cartas
+=criarcarta carta0 0 0
+=criarcarta carta1 1 0
+=criarcarta carta2 2 0
+=criarcarta carta3 3 0
+
+== Obter info
+=obterinfo carta1
+
+== Destruir carta
+=destruircarta carta1
+
+== Obter info carta inexistente
+=obterinfo carta1
+=recuperar
+
+== Resetar vetores de teste
+=resetteste
+
+== Obter info carta inexistente
+=obterinfo carta39 //nao ta acusando erro
 
 // fim
