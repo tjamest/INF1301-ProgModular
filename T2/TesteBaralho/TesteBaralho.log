@@ -22,11 +22,11 @@
 <<<    0  Linha:    44  Falha esperada foi recuperada. 
 >>>    1  Linha:    46  Erro nos parâmetros do comando:  =destruirbaralho	8
 <<<    0  Linha:    47  Falha esperada foi recuperada. 
-!!!    0  Linha:    55  // fim 
+!!!    0  Linha:    57  // fim 
 
-!!! Número de linhas lidas:          55
+!!! Número de linhas lidas:          57
 !!! Número de casos de teste:         4
-!!! Número comandos corretos:        22
+!!! Número comandos corretos:        23
 !!! Número de falhas encontradas:     0
 
 !!! Não foram encontrados problemas
