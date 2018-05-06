@@ -48,6 +48,7 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 
 /************* PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO **************/
    static int ValidarInxBaralho( int inxBaralho, int Modo ) ;
+   static int ValidarInxCarta( int inxCarta, int Modo ) ;
 
 /**************  CÓDIGO DAS FUNÇÕES EXPORTADAS PELO MÓDULO  ***************/
 
@@ -183,7 +184,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
     numLidos = LER_LerParametros( "i" , &inxCarta ) ;
 
     //se for diferente de 1 retorna erro de declaração de parametro
-    if ( (numLidos != 1) || (! ValidarInxBaralho( inxCarta , NAO_VAZIO )) )  {
+    if ( (numLidos != 1) || (! ValidarInxCarta( inxCarta , NAO_VAZIO )) )  {
       return TST_CondRetParm ;
     }//fim if
 
@@ -224,6 +225,31 @@ int ValidarInxBaralho( int inxBaralho, int Modo ){
     return TRUE ;
 
 } /************** Fim função: TBAR &Validar indice baralho ****************/
+
+
+/***************************************************************************
+*  $FC Função: TBAR - Validar indice de carta
+***************************************************************************/
+int ValidarInxCarta( int inxCarta, int Modo ){
+
+	if ( ( inxCarta <  0 ) || ( inxCarta >= DIM_VT_CARTA )){
+		return FALSE ;
+	} // if
+         
+    if ( Modo == VAZIO ){
+		if ( vtCartas[ inxCarta ] != 0 ){
+			return FALSE ;
+        } //fim if
+	} 
+	else{
+		if ( vtCartas[ inxCarta ] == 0 ) {
+			return FALSE ;
+        } //fim if
+    } //fim if
+         
+    return TRUE ;
+
+} /************** Fim função: TBAR &Validar indice carta ****************/
 
 
 /********* FIM DO MÓDULO DE IMPLEMENTAÇÃO: TBAR Teste Baralho *************/

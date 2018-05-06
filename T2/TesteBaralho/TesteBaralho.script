@@ -111,12 +111,99 @@
 =criarcarta carta1 0 0
 
 == Criar carta 4 de espadas
-=criarcarta carta1 0 1
+=criarcarta carta2 0 1
 
 == Criar carta 4 de copas
-=criarcarta carta1 0 2
+=criarcarta carta3 0 2
 
 == Criar carta 4 de paus
-=criarcarta carta1 0 3
+=criarcarta carta4 0 3
+
+== Resetar os vetores de teste
+=resetteste
+
+== Criar todas cartas do baralho
+=criarcarta carta0 0 0
+=criarcarta carta1 1 0
+=criarcarta carta2 2 0
+=criarcarta carta3 3 0
+=criarcarta carta4 4 0
+=criarcarta carta5 5 0
+=criarcarta carta6 6 0
+=criarcarta carta7 7 0
+=criarcarta carta8 8 0
+=criarcarta carta9 9 0
+=criarcarta carta10 0 1
+=criarcarta carta11 1 1
+=criarcarta carta12 2 1
+=criarcarta carta13 3 1
+=criarcarta carta14 4 1
+=criarcarta carta15 5 1
+=criarcarta carta16 6 1
+=criarcarta carta17 7 1
+=criarcarta carta18 8 1
+=criarcarta carta19 9 1
+=criarcarta carta20 0 2
+=criarcarta carta21 1 2
+=criarcarta carta22 2 2
+=criarcarta carta23 3 2
+=criarcarta carta24 4 2
+=criarcarta carta25 5 2
+=criarcarta carta26 6 2
+=criarcarta carta27 7 2
+=criarcarta carta28 8 2
+=criarcarta carta29 9 2
+=criarcarta carta30 0 3
+=criarcarta carta31 1 3
+=criarcarta carta32 2 3
+=criarcarta carta33 3 3
+=criarcarta carta34 4 3
+=criarcarta carta35 5 3
+=criarcarta carta36 6 3
+=criarcarta carta37 7 3
+=criarcarta carta38 8 3
+=criarcarta carta39 9 3
+
+== Destruir todas cartas do baralho
+=destruircarta carta0
+=destruircarta carta1
+=destruircarta carta2
+=destruircarta carta3
+=destruircarta carta4
+=destruircarta carta5
+=destruircarta carta6
+=destruircarta carta7
+=destruircarta carta8
+=destruircarta carta9
+=destruircarta carta10
+=destruircarta carta11
+=destruircarta carta12
+=destruircarta carta13
+=destruircarta carta14
+=destruircarta carta15
+=destruircarta carta16
+=destruircarta carta17
+=destruircarta carta18
+=destruircarta carta19
+=destruircarta carta20
+=destruircarta carta21
+=destruircarta carta22
+=destruircarta carta23
+=destruircarta carta24
+=destruircarta carta25
+=destruircarta carta26
+=destruircarta carta27
+=destruircarta carta28
+=destruircarta carta29
+=destruircarta carta30
+=destruircarta carta31
+=destruircarta carta32
+=destruircarta carta33
+=destruircarta carta34
+=destruircarta carta35
+=destruircarta carta36
+=destruircarta carta37
+=destruircarta carta38
+=destruircarta carta39
 
 // fim
