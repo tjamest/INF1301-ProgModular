@@ -52,7 +52,8 @@ typedef enum { //não tenho certeza se algumas dessas condições de retorno dev
    BAR_CondRetNaoCriouMesa,       // 4 Não criou ponteiro pro tpLista
    BAR_CondRetNaoDestruiu,        // 5 Não liberou ponteiro
    BAR_CondRetFaltouMemoria,      // 6 Faltou memoria 
-   BAR_CondRetParamIncorretos     // 7 Parâmetros da função incorretos
+   BAR_CondRetParamIncorretos,    // 7 Parâmetros da função incorretos
+   BAR_CondRetNaoObteveInfo		  // 8 Não obteve valores
 
 } BAR_tpCondRet;
 
@@ -140,9 +141,6 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 *     Destrói uma carta.
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta);
-//se não receber void e retornar ponteiro pra void não
-//tem como passar ela como parâmetro pra LIS_CriarLista
-//quando for criar uma "lista inferior" (lista de elementos cartas)
 
 
 /***************************************************************************
@@ -156,9 +154,21 @@ void BAR_DestruirCarta(void * pCarta);
 *     OBS. não existe previsão para possíveis falhas de execução.
 ***************************************************************************/
 void BAR_DestruirBaralho(void * pBaralho);
-//se não receber void e retornar ponteiro pra void não
-//tem como passar ela como parâmetro pra LIS_CriarLista
-//quando for criar a "lista superior" (lista de elementos listas)
+
+
+/***************************************************************************
+*  $FC Função: BAR  &Obter Informacao Carta
+*
+*  $ED Descrição da função
+*     Destrói a lista baralho fornecida.
+*     O parâmetro ponteiro para a lista não é modificado.
+*     Se ocorrer algum erro durante a destruição, a lista resultará
+*     estruturalmente incorreta.
+*     OBS. não existe previsão para possíveis falhas de execução.
+***************************************************************************/
+BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta pCarta, 
+								BAR_tpValorCarta *pValor, 
+								BAR_tpNaipeCarta *pNaipe) ;
 
 
 #undef BARALHO_EXT

@@ -115,8 +115,8 @@ LIS_tppLista BAR_CriarBaralho() {
 		
 	} //fim for
 
-/*	//checando se o vetor está embaralhado
-	printf("\nChecando se o vetor esta embaralhado:\n");
+	//checando se o vetor está embaralhado
+/*	printf("\nChecando se o vetor esta embaralhado:\n");
 	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
@@ -201,17 +201,21 @@ void BAR_DestruirCarta(void * pCarta) {
 /***************************************************************************
 *  Função: BAR  &Obter informações da carta
 ***************************************************************************/
-BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta carta, 
-				 BAR_tpValorCarta *valor, 
-				 BAR_tpNaipeCarta *naipe) {
+BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta pCarta, 
+				 BAR_tpValorCarta *pValor, 
+				 BAR_tpNaipeCarta *pNaipe) {
+
 	//assertiva de entrada
-	if (carta == NULL)
+	if (pCarta == NULL)
 		return BAR_CondRetParamIncorretos;
 	
-	*valor = carta->valor;
-	*naipe = carta->naipe;
+	*pValor = pCarta->valor;
+	*pNaipe = pCarta->naipe;
 	
 	//faltou assertiva de saída
+	if (pValor == NULL || pNaipe == NULL) {
+		return BAR_CondRetNaoObteveInfo;
+	}
 	
 	return BAR_CondRetOK;
 } /************ Fim função: BAR &Obter informações da carta ****************/
