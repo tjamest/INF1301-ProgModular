@@ -211,14 +211,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
 	CondRetBaralho = BAR_ObterInfoCarta( vtCartas[ inxCarta ], pValorCarta , pNaipeCarta ) ;
 
-	if ( (*pValorCarta >= (BAR_tpValorCarta)0 && *pValorCarta <= (BAR_tpValorCarta)39) ||
-		 (*pNaipeCarta >= (BAR_tpNaipeCarta)0 && *pValorCarta <= (BAR_tpNaipeCarta)4) ) {
-		return TST_CondRetOK ;
-	}
-	else {
-      return TST_CondRetParm ;
-	}
-	
 	if (CondRetBaralho ==  BAR_CondRetNaoObteveInfo) {
 		TST_CondRetErro ;
 	}
