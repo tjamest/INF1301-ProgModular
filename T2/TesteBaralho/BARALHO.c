@@ -50,7 +50,7 @@ typedef struct BAR_tagCarta {
 LIS_tppLista BAR_CriarBaralho() {
 
 	int i; //contador
-	int valor, naipe;
+	int valor = 0, naipe = 0;
 
 	//aloca memória pro ponteiro que aponta pra cabeca
 	//do baralho (um ponteiro pro tipo lista)
@@ -67,16 +67,20 @@ LIS_tppLista BAR_CriarBaralho() {
 	//pro tpCarta que é o elemento do vetor
 	BAR_tpCarta *pCarta;
 
-	for (i = 0, valor = 0, naipe = 0; i < TAM; i++, valor++) {
+	//preenchendo o baralho de forma ordenada
+	for (i = 0; i < TAM; i++, valor++) {
+		
 		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
 		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
 
 		pCarta = BAR_CriarCarta(Valor, Naipe);
 		VetorAux[i] = *pCarta;
 
-		if (i == 9 || i == 19 || i == 29) { // Quando estiver terminado o naipe atual
-			valor = -1; // Volta para valor 0
-			naipe++; // Passando para o próximo naipe
+		if (i == 9 || i == 19 || i == 29) {
+			//reinicia o preenchimento do valor de 0 a 9
+			valor = -1 ;
+			//passa pro proximo naipe
+			naipe++;
 		}
 	} //fim for
 	
