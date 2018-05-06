@@ -31,6 +31,16 @@
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
 //não há funções encapsuladas no módulo
 
+/***************************************************************************
+*  $TC Tipo de dados: BAR tpCarta
+*
+*  $ED Descrição do tipo
+*     Estrutura de uma carta, que tem um valor e um naipe.
+***************************************************************************/
+typedef struct BAR_tagCarta {
+	BAR_tpValorCarta valor ;
+	BAR_tpNaipeCarta naipe ;
+} BAR_tpCarta;
 
 /***********  CÓDIGO DAS FUNÇÕES EXPORTADAS PELO MÓDULO  ******************/
 
