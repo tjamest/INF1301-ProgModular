@@ -206,4 +206,124 @@
 =destruircarta carta38
 =destruircarta carta39
 
+== Resetar os vetores de teste
+=resetteste
+
+== Criar cartas
+=criarcarta carta0 0 0
+=criarcarta carta1 1 0
+=criarcarta carta2 2 0
+=criarcarta carta3 3 0
+
+== Obter valor e naipe
+=obterinfocarta carta0 //erro
+
+== Resetar os vetores de teste
+=resetteste
+
+== Criar carta 5 de ouros
+=criarcarta carta5  1 0
+
+== Criar carta 5 de espadas
+=criarcarta carta6 1 1
+
+== Criar carta 5 de copas
+=criarcarta carta7 1 2
+
+== Criar carta 5 de paus
+=criarcarta carta8 1 3
+
+== Criar carta 6 de ouros
+=criarcarta carta9 2 0
+
+== Criar carta 6 de espadas
+=criarcarta carta10 2 1
+
+== Criar carta 6 de copas
+=criarcarta carta11 2 2
+
+== Criar carta 6 de paus
+=criarcarta carta12 2 3
+
+== Criar carta 7 de ouros
+=criarcarta carta13 3 0
+
+== Criar carta 7 de espadas
+=criarcarta carta14 3 1
+
+== Criar carta 7 de copas
+=criarcarta carta15 3 2
+
+== Criar carta 7 de paus
+=criarcarta carta16 3 3
+
+== Criar carta Q de ouros
+=criarcarta carta17 4 0
+
+== Criar carta Q de espadas
+=criarcarta carta18 4 1
+
+== Criar carta Q de copas
+=criarcarta carta19 4 2
+
+== Criar carta Q de paus
+=criarcarta carta20 4 3
+
+== Criar carta J de ouros
+=criarcarta carta21 5 0
+
+== Criar carta J de espadas
+=criarcarta carta22 5 1
+
+== Criar carta J de copas
+=criarcarta carta23 5 2
+
+== Criar carta J de paus
+=criarcarta carta24 5 3
+
+== Criar carta K de ouros
+=criarcarta carta25 6 0
+
+== Criar carta K de espadas
+=criarcarta carta26 6 1
+
+== Criar carta K de copas
+=criarcarta carta27 6 2
+
+== Criar carta K de paus
+=criarcarta carta28 6 3
+
+== Criar carta A de ouros
+=criarcarta carta29 7 0
+
+== Criar carta A de espadas
+=criarcarta carta30 7 1
+
+== Criar carta A de copas
+=criarcarta carta31 7 2
+
+== Criar carta A de paus
+=criarcarta carta32 7 3
+
+== Criar carta 2 de ouros
+=criarcarta carta33 8 0
+
+== Criar carta 2 de espadas
+=criarcarta carta34 8 1
+
+== Criar carta 2 de copas
+=criarcarta carta35 8 2
+
+== Criar carta 2 de paus
+=criarcarta carta36 8 3
+
+== Criar carta 3 de ouros
+=criarcarta carta37 9 0
+
+== Criar carta 3 de espadas
+=criarcarta carta38 9 1
+
+== Criar carta 3 de copas
+=criarcarta carta39 9 2
+
 // fim
