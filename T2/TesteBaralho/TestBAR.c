@@ -65,12 +65,17 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *     Comandos disponíveis:
 *
 *     =resetteste
-*           - anula o vetor de baralho e provoca vazamento de memória.
+*       - anula os vetores de baralhos e testes e provoca vazamento de memória.
 *     =criarbaralho                 <inxBaralho>
+*	- retorna um ponteiro pra cabeça do baralho
+*	  que é armazenado no vtBaralhos.
 *     =destruirbaralho              <inxBaralho>
 *     =criarcarta                   <int>  <int> 
 *     =destruircarta                <inxCarta>   
-*	  =obtercarta					<inxCarta>
+*     =obternaipe		    <inxCarta>
+*	- para o comando ter sucesso é necessário ter um
+*	  ponteiro pra um tipo carta armazenado no vtCartas
+*	  (deve-se usar o comando criarcarta antes).
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
