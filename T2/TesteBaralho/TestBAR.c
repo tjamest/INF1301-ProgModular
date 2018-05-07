@@ -71,6 +71,8 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *	  que é armazenado no vtBaralhos.
 *     =destruirbaralho              <inxBaralho>
 *     =criarcarta                   <int>  <int> 
+*	- retorna um ponteiro pra tipo carta
+*	  que é armazenado no vtCartas.
 *     =destruircarta                <inxCarta>   
 *     =obternaipe		    <inxCarta>
 *	- para o comando ter sucesso é necessário ter um
