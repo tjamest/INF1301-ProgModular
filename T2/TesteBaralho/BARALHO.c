@@ -53,11 +53,10 @@ LIS_tppLista BAR_CriarBaralho() {
 	int i; //contador
 	int valor = 0, naipe = 0;
 
-	//aloca memória pro ponteiro que aponta pra cabeca
-	//do baralho (um ponteiro pro tipo lista)
+	//cria uma lista retornando um ponteiro pra cabeca da lista
 	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
 		
-	//cria um vetor de TAM elementos que são ponteiros pra tpCarta
+	//declara um vetor (um vetor eh um ponteiro) pra tipo carta
 	BAR_tpCarta VetorAux[TAM] ;
 	
 	//declara uma variável que armazena a condição de
@@ -71,6 +70,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	//preenchendo o baralho de forma ordenada
 	for (i = 0; i < TAM; i++, valor++) {
 		
+		//faz a transformacao de int pra tipo especifico
 		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
 		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
 
@@ -87,8 +87,8 @@ LIS_tppLista BAR_CriarBaralho() {
 		} //fim if
 	} //fim for
 	
-	//checando se o vetor está preenchido
-	/*printf("Checando se o vetor esta preenchido:\n");
+/*	//checando se o vetor está preenchido
+	printf("Checando se o vetor esta preenchido:\n");
 	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
@@ -112,8 +112,8 @@ LIS_tppLista BAR_CriarBaralho() {
 		
 	} //fim for
 
-	//checando se o vetor está embaralhado
-	/*printf("\nChecando se o vetor esta embaralhado:\n");
+/*	//checando se o vetor está embaralhado
+	printf("\nChecando se o vetor esta embaralhado:\n");
 	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
@@ -122,7 +122,6 @@ LIS_tppLista BAR_CriarBaralho() {
 	// preenche um por um usando o vetor embaralhado
 	for (i = 0; i < TAM; i++){
 		
-		//pCarta recebe um ponteiro pra um tipo Carta do vetor embaralhado
 		*pCarta = VetorAux[i] ;
 
 /*		//checando se pCarta recebe um valor aleatorio
@@ -168,9 +167,7 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 ***************************************************************************/
 void BAR_DestruirBaralho(void * pCabecaBaralho) {
 //tem que ser void e *void pra LIS_CriarLista aceitar
-	
 	free(pCabecaBaralho) ;	
-	
 } /************* Fim função: BAR &Destruir baralho ************************/
 
 
@@ -178,9 +175,7 @@ void BAR_DestruirBaralho(void * pCabecaBaralho) {
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta) {
-	
 	free(pCarta) ;
-	
 } /************ Fim função: BAR &Destruir carta ****************************/
 
 
@@ -189,13 +184,11 @@ void BAR_DestruirCarta(void * pCarta) {
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
 
-	BAR_tpCarta *pCarta = (BAR_tpCarta*)malloc(sizeof(BAR_tpCarta)) ;;
+	//declara e aloca memoria pra um ponteiro pra tipo carta
+	BAR_tppCarta pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tpCarta)) ;
 
-	pCarta = (BAR_tpCarta*)LIS_ObterValor (pCabecaBaralho) ;
-
-	if ( pCarta == NULL ){
-		return NULL ;
-    }
+	//ponteiro pra tipo carta recebe o pValor do ElemLista
+	pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaBaralho) ;
 
 	return pCarta;
 } /***************** Fim função: BAR &Obter carta **************************/
@@ -205,7 +198,6 @@ BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
 *  Função: BAR  &Obter naipe
 ****************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
-
 	return pCarta->naipe;
 } /***************** Fim função: BAR &Obter naipe **************************/
 
@@ -214,7 +206,6 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 *  Função: BAR  &Obter valor
 ****************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
-
 	return pCarta->valor;
 } /***************** Fim função: BAR &Obter valor **************************/
 

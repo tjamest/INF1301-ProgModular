@@ -31,6 +31,7 @@ static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
+static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
 //static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
 
 
@@ -69,7 +70,7 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *     =destruirbaralho              <inxBaralho>
 *     =criarcarta                   <int>  <int> 
 *     =destruircarta                <inxCarta>   
-*	  =obternaipe					<inxCarta>
+*	  =obtercarta					<inxCarta>
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
@@ -94,11 +95,17 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   //RESET TEST
   //se o comando for "resettest":
   if ( strcmp( ComandoTeste ,	 RESET_BARALHO_CMD ) == 0 )  {
-    //preenche o vetor baralho com Null
+
+    //preenche o vetor baralhos com Null
     for( i = 0 ; i < DIM_VT_BARALHO ; i++ ) {
                vtBaralhos[ i ] = NULL ;
+    }
+
+    //preenche o vetor cartas com Null
+	for( i = 0 ; i < DIM_VT_CARTA ; i++ ) {
 			   vtCartas[ i ] = NULL ;
     }
+
     return TST_CondRetOK ;
   } //fim ativa: Efetuar reset de teste de baralho
 
@@ -155,8 +162,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		//valor e naipe em int
 		int valorCarta, naipeCarta;
 
-		//condicao de retorno da função da lista
-
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros( "iii" , &inxCarta, &valorCarta, &naipeCarta ) ;
 
@@ -204,23 +209,26 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   } //fim ativa: Testar DestruirCarta
 
- /* //OBTER NAIPE
+  //OBTER NAIPE
   //se o comando for "obternaipe"
 	else if ( strcmp( ComandoTeste , OBTER_NAIPE_CMD ) == 0 ) {
 
     //conta quantos parametros foram declarados
-    numLidos = LER_LerParametros( "i" , &inxCarta ) ;
+    numLidos = LER_LerParametros( "i" , &inxCarta) ;
 	
     //se for diferente de 1 retorna erro de declaração de parametro
-    if ( (numLidos != 1) )  {
+    if ( (numLidos != 1) || (! ValidarInxCarta( inxCarta , NAO_VAZIO )) ) {
       return TST_CondRetParm ;
     }//fim if
-	
-	naipe = BAR_ObterNaipe (vtCartas[ inxCarta ]) ;
 
-	
-	if ( (naipe < 0 || naipe > 3) ) {
-		TST_CondRetErro ;
+	else if (vtCartas[inxCarta] == NULL) {
+		return TST_CondRetErro ;
+	}
+
+	naipe = BAR_ObterNaipe (vtCartas[inxCarta]) ;
+
+	if ( naipe < 0 || naipe > 3 ) {
+		return TST_CondRetErro ;
 	}
 
     return TST_CondRetOK ;

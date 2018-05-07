@@ -1,0 +1,106 @@
+
+!!! Inicio dos testes
+!!!      Construto sob teste: TesteBaralho
+!!!      Script de teste:     TesteBaralho.script
+
+!!!    0  Linha:     1  // Script:    TesteBaralho.script 
+!!!    0  Linha:     2  // Autor:     Gustavo Contreiras, JoÃ£o Victor Galindo, Thiago Gioso Fernandes 
+!!!    0  Linha:     3  // Data:      05/mai/2018 
+!!!    0  Linha:     4  // PropÃ³sito: Testar o mÃ³dulo baralho do jogo de truco 
+!!!    0  Linha:     5  // 
+    7  == Inicializar valores validos de indice do vetor baralhos
+   19  == Inicializar valores validos de indice do vetor cartas
+   61  == MASSA DE TESTE 1
+   64  == Criar baralhos
+   70  == Criar baralho de indice invalido
+>>>    1  Linha:    71  Erro nos parâmetros do comando:  =criarbaralho   17
+<<<    0  Linha:    72  Falha esperada foi recuperada. 
+   74  == Criar baralho sem passar parametro
+>>>    1  Linha:    75  Erro nos parâmetros do comando:  =criarbaralho
+<<<    0  Linha:    76  Falha esperada foi recuperada. 
+   78  == MASSA DE TESTE 2
+   81  == Criar baralhos
+   85  == Destruir baralho de indice invalido
+>>>    1  Linha:    86  Erro nos parâmetros do comando:  =destruirbaralho 23
+<<<    0  Linha:    87  Falha esperada foi recuperada. 
+   89  == Destruir baralho
+   92  == Destruir baralho sem passar parametro
+>>>    1  Linha:    93  Erro nos parâmetros do comando:  =destruirbaralho
+<<<    0  Linha:    94  Falha esperada foi recuperada. 
+   96  == Destruir baralho que nao existe
+>>>    1  Linha:    97  Erro nos parâmetros do comando:  =destruirbaralho baralho8
+<<<    0  Linha:    98  Falha esperada foi recuperada. 
+  100  == Criar baralho
+  103  == Destruir baralho
+  106  == Criar baralho de indice invalido
+>>>    1  Linha:   107  Erro nos parâmetros do comando:  =criarbaralho	32
+<<<    0  Linha:   108  Falha esperada foi recuperada. 
+  110  == MASSA DE TESTE 3
+  113  == Criar carta 4 de ouros
+  116  == Criar carta 4 de espadas
+  119  == Criar carta 4 de copas
+  122  == Criar carta 4 de paus
+  125  == Resetar os vetores de teste
+  128  == Criar todas cartas do baralho
+  170  == Destruir todas cartas do baralho
+  212  == MASSA DE TESTE 4
+  215  == Criar carta 5 de ouros
+  218  == Criar carta 5 de espadas
+  221  == Criar carta 5 de copas
+  224  == Criar carta 5 de paus
+  227  == Criar carta 6 de ouros
+  230  == Criar carta 6 de espadas
+  233  == Criar carta 6 de copas
+  236  == Criar carta 6 de paus
+  239  == Criar carta 7 de ouros
+  242  == Criar carta 7 de espadas
+  245  == Criar carta 7 de copas
+  248  == Criar carta 7 de paus
+  251  == Criar carta Q de ouros
+  254  == Criar carta Q de espadas
+  257  == Criar carta Q de copas
+  260  == Criar carta Q de paus
+  263  == Criar carta J de ouros
+  266  == Criar carta J de espadas
+  269  == Criar carta J de copas
+  272  == Criar carta J de paus
+  275  == Criar carta K de ouros
+  278  == Criar carta K de espadas
+  281  == Criar carta K de copas
+  284  == Criar carta K de paus
+  287  == Criar carta A de ouros
+  290  == Criar carta A de espadas
+  293  == Criar carta A de copas
+  296  == Criar carta A de paus
+  299  == Criar carta 2 de ouros
+  302  == Criar carta 2 de espadas
+  305  == Criar carta 2 de copas
+  308  == Criar carta 2 de paus
+  311  == Criar carta 3 de ouros
+  314  == Criar carta 3 de espadas
+  317  == Criar carta 3 de copas
+  320  == Obter naipe carta 39
+  323  == Obter naipe carta 37
+  326  == Obter naipe carta 10
+  329  == Obter naipe carta 23
+  332  == MASSA DE TESTE 5
+  335  == Obter naipe de carta que nao existe
+>>>    1  Linha:   336  Erro nos parâmetros do comando:  =obternaipe carta36
+<<<    0  Linha:   337  Falha esperada foi recuperada. 
+  339  == Obter naipe carta de indice invalido
+>>>    1  Linha:   340  Erro nos parâmetros do comando:  =obternaipe 54
+<<<    0  Linha:   341  Falha esperada foi recuperada. 
+  343  == Criar baralho
+  346  == Obter naipe
+>>>    1  Linha:   347  Erro nos parâmetros do comando:  =obternaipe carta25
+!!!    1  Linha:   349  // fim 
+
+!!! Número de linhas lidas:         349
+!!! Número de casos de teste:        68
+!!! Número comandos corretos:       189
+!!! Número de falhas encontradas:     1
+
+!!! Foram encontrados problemas
+
+
+!!! Numero de espacos ainda alocados: 0

@@ -58,6 +58,9 @@
 =declararparm   carta38	int 38
 =declararparm   carta39	int 39
 
+== MASSA DE TESTE 1
+=resetteste
+
 == Criar baralhos
 =criarbaralho   baralho0 
 =criarbaralho   baralho1
@@ -72,7 +75,7 @@
 =criarbaralho
 =recuperar
 
-== Resetar vetores de teste
+== MASSA DE TESTE 2
 =resetteste
 
 == Criar baralhos
@@ -104,7 +107,7 @@
 =criarbaralho	32
 =recuperar
 
-== Resetar vetores de teste
+== MASSA DE TESTE 3
 =resetteste
 
 == Criar carta 4 de ouros
@@ -206,7 +209,7 @@
 =destruircarta carta38
 =destruircarta carta39
 
-== Resetar os vetores de teste
+== MASSA DE TESTE 4
 =resetteste
 
 == Criar carta 5 de ouros
@@ -314,16 +317,34 @@
 == Criar carta 3 de copas
 =criarcarta carta39 9 2
 
-== Obter naipe
+== Obter naipe carta 39
 =obternaipe carta39
 
-== Resetar os vetores de teste
+== Obter naipe carta 37
+=obternaipe carta37
+
+== Obter naipe carta 10
+=obternaipe carta10
+
+== Obter naipe carta 23
+=obternaipe carta23
+
+== MASSA DE TESTE 5
 =resetteste
 
-== Criar baralho
-=criarbaralho baralho0
+== Obter naipe de carta que nao existe
+=obternaipe carta36
+=recuperar
 
-== Obter naipe
-=obternaipe carta0
+== Obter naipe carta de indice invalido
+=obternaipe 54
+=recuperar
+
+== Criar baralho
+=criarbaralho baralho7
+
+== Obter naipe carta que nao existe
+=obternaipe carta25
+=recuperar
 
 // fim
