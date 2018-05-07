@@ -31,7 +31,7 @@ static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
-//static const char OBTER_INFO_CMD		[ ] = "=obterinfo"		  ;
+//static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
 
 
 #define TRUE  1
@@ -69,7 +69,7 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *     =destruirbaralho              <inxBaralho>
 *     =criarcarta                   <int>  <int> 
 *     =destruircarta                <inxCarta>   
-*	  =obterinfo					<inxCarta>
+*	  =obternaipe					<inxCarta>
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
@@ -83,7 +83,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   int i ;
   int numElem = -1 ;
 
-  BAR_tpCondRet CondRetBaralho;
+  BAR_tpValorCarta valor;
+  BAR_tpNaipeCarta naipe;
+
+  BAR_tppCarta pCarta;
+
   BAR_tpValorCarta *pValorCarta = (BAR_tpValorCarta*)malloc(sizeof(BAR_tpValorCarta)) ;
   BAR_tpNaipeCarta *pNaipeCarta = (BAR_tpNaipeCarta*)malloc(sizeof(BAR_tpNaipeCarta));
 
@@ -200,27 +204,28 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   } //fim ativa: Testar DestruirCarta
 
-/*  //OBTER INFO
-  //se o comando for "obterinfo"
-	else if ( strcmp( ComandoTeste , OBTER_INFO_CMD ) == 0 ) {
+ /* //OBTER NAIPE
+  //se o comando for "obternaipe"
+	else if ( strcmp( ComandoTeste , OBTER_NAIPE_CMD ) == 0 ) {
 
     //conta quantos parametros foram declarados
     numLidos = LER_LerParametros( "i" , &inxCarta ) ;
-
+	
     //se for diferente de 1 retorna erro de declaração de parametro
-    if ( (numLidos != 1) || (! ValidarInxCarta( inxCarta , NAO_VAZIO )) )  {
+    if ( (numLidos != 1) )  {
       return TST_CondRetParm ;
     }//fim if
+	
+	naipe = BAR_ObterNaipe (vtCartas[ inxCarta ]) ;
 
-	CondRetBaralho = BAR_ObterInfoCarta( vtCartas[ inxCarta ], pValorCarta , pNaipeCarta ) ;
-
-	if (CondRetBaralho ==  BAR_CondRetNaoObteveInfo) {
+	
+	if ( (naipe < 0 || naipe > 3) ) {
 		TST_CondRetErro ;
 	}
 
     return TST_CondRetOK ;
 
-  } //fim ativa: Testar ObterInfo*/
+  } //fim ativa: Testar ObterNaipe*/
 
 return TST_CondRetNaoConhec ;
 

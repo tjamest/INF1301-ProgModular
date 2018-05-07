@@ -88,7 +88,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	} //fim for
 	
 	//checando se o vetor está preenchido
-/*	printf("Checando se o vetor esta preenchido:\n");
+	/*printf("Checando se o vetor esta preenchido:\n");
 	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
@@ -113,7 +113,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	} //fim for
 
 	//checando se o vetor está embaralhado
-/*	printf("\nChecando se o vetor esta embaralhado:\n");
+	/*printf("\nChecando se o vetor esta embaralhado:\n");
 	for (i = 0; i < TAM; i++){
 		printf("VetorAux[%d]: Valor %d / Naipe %d\n",(i+1), 
 			VetorAux[i].valor,VetorAux[i].naipe);
@@ -123,7 +123,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	for (i = 0; i < TAM; i++){
 		
 		//pCarta recebe um ponteiro pra um tipo Carta do vetor embaralhado
-		pCarta = &VetorAux[i] ;
+		*pCarta = VetorAux[i] ;
 
 /*		//checando se pCarta recebe um valor aleatorio
 		printf("\npCarta: Valor %d / Naipe %d", pCarta->valor,pCarta->naipe);
@@ -187,7 +187,7 @@ void BAR_DestruirCarta(void * pCarta) {
 /***************************************************************************
 *  Função: BAR  &Obter carta
 ***************************************************************************/
-/*BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
+BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
 
 	BAR_tpCarta *pCarta = (BAR_tpCarta*)malloc(sizeof(BAR_tpCarta)) ;;
 
@@ -200,13 +200,23 @@ void BAR_DestruirCarta(void * pCarta) {
 	return pCarta;
 } /***************** Fim função: BAR &Obter carta **************************/
 
+
 /***************************************************************************
 *  Função: BAR  &Obter naipe
 ****************************************************************************/
-/*BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
+BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 
 	return pCarta->naipe;
 } /***************** Fim função: BAR &Obter naipe **************************/
+
+
+/***************************************************************************
+*  Função: BAR  &Obter valor
+****************************************************************************/
+BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
+
+	return pCarta->valor;
+} /***************** Fim função: BAR &Obter valor **************************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/

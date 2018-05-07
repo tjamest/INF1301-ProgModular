@@ -314,7 +314,16 @@
 == Criar carta 3 de copas
 =criarcarta carta39 9 2
 
+== Obter naipe
+=obternaipe carta39
+
 == Resetar os vetores de teste
 =resetteste
+
+== Criar baralho
+=criarbaralho baralho0
+
+== Obter naipe
+=obternaipe carta0
 
 // fim

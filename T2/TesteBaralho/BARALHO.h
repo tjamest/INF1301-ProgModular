@@ -52,8 +52,7 @@ typedef enum { //não tenho certeza se algumas dessas condições de retorno dev
    BAR_CondRetNaoCriouMesa,       // 4 Não criou ponteiro pro tpLista
    BAR_CondRetNaoDestruiu,        // 5 Não liberou ponteiro
    BAR_CondRetFaltouMemoria,      // 6 Faltou memoria 
-   BAR_CondRetParamIncorretos,    // 7 Parâmetros da função incorretos
-   BAR_CondRetNaoObteveInfo		  // 8 Não obteve valores
+   BAR_CondRetParamIncorretos    // 7 Parâmetros da função incorretos
 
 } BAR_tpCondRet;
 
@@ -158,6 +157,9 @@ void BAR_DestruirBaralho(void * pBaralho);
 /***************************************************************************
 *  $FC Função: BAR  &Obter Carta
 *
+*  $EP Parâmetros
+*  LIS_tppLista pCabecaBaralho: ponteiro pra cabeca da lista baralho
+*
 *  $ED Descrição da função
 *     Obtém um ponteiro pra um tipo carta.
 ***************************************************************************/
@@ -167,10 +169,25 @@ BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) ;
 /***************************************************************************
 *  $FC Função: BAR  &Obter Naipe
 *
+*  $EP Parâmetros
+*  BAR_tppCarta pCarta: ponteiro pra uma carta
+*
 *  $ED Descrição da função
 *     Obtém o naipe de uma carta.
 ***************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
+
+
+/***************************************************************************
+*  $FC Função: BAR  &Obter valor
+*
+*  $EP Parâmetros
+*  BAR_tppCarta pCarta: ponteiro pra uma carta
+*
+*  $ED Descrição da função
+*     Obtém o valor de uma carta.
+***************************************************************************/
+BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 
 
 #undef BARALHO_EXT
