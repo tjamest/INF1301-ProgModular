@@ -95,7 +95,6 @@ typedef enum {
 /***************************************************************************
 
 
-
 /***************************************************************************
 *  $FC Função: BAR  &Criar Baralho
 *
@@ -157,18 +156,21 @@ void BAR_DestruirBaralho(void * pBaralho);
 
 
 /***************************************************************************
-*  $FC Função: BAR  &Obter Informacao Carta
+*  $FC Função: BAR  &Obter Carta
 *
 *  $ED Descrição da função
-*     Destrói a lista baralho fornecida.
-*     O parâmetro ponteiro para a lista não é modificado.
-*     Se ocorrer algum erro durante a destruição, a lista resultará
-*     estruturalmente incorreta.
-*     OBS. não existe previsão para possíveis falhas de execução.
+*     Obtém um ponteiro pra um tipo carta.
 ***************************************************************************/
-BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta pCarta, 
-								BAR_tpValorCarta *pValor, 
-								BAR_tpNaipeCarta *pNaipe) ;
+BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) ;
+
+
+/***************************************************************************
+*  $FC Função: BAR  &Obter Naipe
+*
+*  $ED Descrição da função
+*     Obtém o naipe de uma carta.
+***************************************************************************/
+BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 
 
 #undef BARALHO_EXT

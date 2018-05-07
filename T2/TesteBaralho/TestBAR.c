@@ -31,7 +31,7 @@ static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
-static const char OBTER_INFO_CMD  [ ] = "=obterinfo"   ;
+//static const char OBTER_INFO_CMD		[ ] = "=obterinfo"		  ;
 
 
 #define TRUE  1
@@ -200,7 +200,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   } //fim ativa: Testar DestruirCarta
 
-  //OBTER INFO
+/*  //OBTER INFO
   //se o comando for "obterinfo"
 	else if ( strcmp( ComandoTeste , OBTER_INFO_CMD ) == 0 ) {
 
@@ -220,7 +220,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
     return TST_CondRetOK ;
 
-  } //fim ativa: Testar ObterInfo
+  } //fim ativa: Testar ObterInfo*/
 
 return TST_CondRetNaoConhec ;
 

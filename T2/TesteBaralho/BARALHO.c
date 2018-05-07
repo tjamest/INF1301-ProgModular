@@ -18,6 +18,7 @@
 #include   <string.h>
 #include   <malloc.h>
 #include   <time.h>
+#include   <assert.h>
 
 #define BARALHO_OWN
 #include "BARALHO.h"
@@ -65,7 +66,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	
 	//declara uma variável que armazena o ponteiro
 	//pro tpCarta que é o elemento do vetor
-	BAR_tpCarta *pCarta;
+	BAR_tppCarta pCarta;
 
 	//preenchendo o baralho de forma ordenada
 	for (i = 0; i < TAM; i++, valor++) {
@@ -77,11 +78,13 @@ LIS_tppLista BAR_CriarBaralho() {
 		VetorAux[i] = *pCarta;
 
 		if (i == 9 || i == 19 || i == 29) {
+
 			//reinicia o preenchimento do valor de 0 a 9
 			valor = -1 ;
 			//passa pro proximo naipe
 			naipe++;
-		}
+
+		} //fim if
 	} //fim for
 	
 	//checando se o vetor está preenchido
@@ -102,15 +105,9 @@ LIS_tppLista BAR_CriarBaralho() {
 		//gera um número aleatorio entre 0 e 39
 		int random = rand() % TAM ;
 
-		//um ponteiro pra um tipo Carta recebe um ponteiro pra um tipo Carta
+		//embaralhando os indices
 		pCartaAux = VetorAux[i] ;
-		
-		//o ponteiro pra um tipo Carta usado anteriormente recebe agora
-		//um ponteiro pra um tipo Carta escolhido aleatoriamente
 		VetorAux[i] = VetorAux[random] ;
-		
-		//o ponteiro pra um tipo Carta aleatório
-		//recebe o ponteiro pra um tipo Carta inicial
 		VetorAux[random] = pCartaAux ;
 		
 	} //fim for
@@ -129,8 +126,8 @@ LIS_tppLista BAR_CriarBaralho() {
 		pCarta = &VetorAux[i] ;
 
 /*		//checando se pCarta recebe um valor aleatorio
-		printf("\npCarta: Valor %d / Naipe %d", pCarta->valor,pCarta->naipe);*/
-		
+		printf("\npCarta: Valor %d / Naipe %d", pCarta->valor,pCarta->naipe);
+*/		
 		//é inserido um elemento na lista Baralho e 
 		//seu valor é um ponteiro pra um tipo Carta
 		condRetLista = LIS_InserirElementoApos (pCabecaBaralho, pCarta) ;
@@ -154,15 +151,7 @@ LIS_tppLista BAR_CriarBaralho() {
 BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 
 	//declara um ponteiro pra um tipo carta com valor null
-	BAR_tpCarta * pCarta = NULL;
-	
-	//aloca memoria pra esse ponteiro do tamanho do tipo carta
-	pCarta = (BAR_tpCarta*) malloc(sizeof(BAR_tpCarta)) ;
-	
-	//assertiva
-	if (pCarta == NULL) {
-		return NULL ;
-	}
+	BAR_tpCarta * pCarta = (BAR_tpCarta*) malloc(sizeof(BAR_tpCarta)) ;
 	
 	//atribui valor e naipe a um tipo carta
 	pCarta->valor = valor ;
@@ -180,7 +169,6 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 void BAR_DestruirBaralho(void * pCabecaBaralho) {
 //tem que ser void e *void pra LIS_CriarLista aceitar
 	
-	//destruição do ponteiro pro tipo lista
 	free(pCabecaBaralho) ;	
 	
 } /************* Fim função: BAR &Destruir baralho ************************/
@@ -190,35 +178,35 @@ void BAR_DestruirBaralho(void * pCabecaBaralho) {
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta) {
-//tem que ser void e *void pra LIS_CriarLista aceitar
 	
-	//destruição do ponteiro pro tipo carta
 	free(pCarta) ;
 	
 } /************ Fim função: BAR &Destruir carta ****************************/
 
 
 /***************************************************************************
-*  Função: BAR  &Obter informações da carta
+*  Função: BAR  &Obter carta
 ***************************************************************************/
-BAR_tpCondRet BAR_ObterInfoCarta(BAR_tppCarta pCarta, 
-				 BAR_tpValorCarta *pValor, 
-				 BAR_tpNaipeCarta *pNaipe) {
+/*BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
 
-	//assertiva de entrada
-	if (pCarta == NULL)
-		return BAR_CondRetParamIncorretos;
-	
-	*pValor = pCarta->valor;
-	*pNaipe = pCarta->naipe;
-	
-	//assertiva de saída
-	if (pValor == NULL || pNaipe == NULL) {
-		return BAR_CondRetNaoObteveInfo;
-	}
-	
-	return BAR_CondRetOK;
-} /************ Fim função: BAR &Obter informações da carta ****************/
+	BAR_tpCarta *pCarta = (BAR_tpCarta*)malloc(sizeof(BAR_tpCarta)) ;;
+
+	pCarta = (BAR_tpCarta*)LIS_ObterValor (pCabecaBaralho) ;
+
+	if ( pCarta == NULL ){
+		return NULL ;
+    }
+
+	return pCarta;
+} /***************** Fim função: BAR &Obter carta **************************/
+
+/***************************************************************************
+*  Função: BAR  &Obter naipe
+****************************************************************************/
+/*BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
+
+	return pCarta->naipe;
+} /***************** Fim função: BAR &Obter naipe **************************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
