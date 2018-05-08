@@ -1,1 +1,0 @@
-TesteBaralho /sTesteBaralho.script /lTesteBaralho
