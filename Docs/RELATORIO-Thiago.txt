@@ -1,0 +1,68 @@
+﻿04/04/2018 - 1h trabalhada - Estudar
+Estudamos os requisitos funcionais e não funcionais de um jogo de truco.
+
+05/04/2018 - 1h trabalhada - Estudar
+Estudamos as regras do jogo de truco baseados nas regras de um encontro nacional de jogos de truco.
+
+09/04/2018 - 2h trabalhadas - Revisar Especificações
+Revisamos as especificações do programa vendo especificações de outros grupos.
+
+11/04/2018 - 1h	trabalhada - Especificar as Funções
+Fizemos um esboço das funções que existirão no programa.
+
+11/04/2018 - 1h trabalhada - Especificar os Módulos
+Fizemos um esboço dos módulos que existirão no programa.
+
+16/04/2018 - 3h trabalhadas - Revisar Especificações
+Foi feita uma revisão da Visão de Módulos, da Visão de Interface e dos Requisitos.
+
+19/04/2018 - 2h trabalhadas - Estudar o Módulo lista do Arcabouço / codificar o Módulo Baralho
+Foi feito tentativas de testar o modulo lista do arcabouço e foi dado inicio a codificação do Baralho
+
+20/04/2018 - 4h trabalhadas - Estudar
+Tirando duvidas na moniria sobre como implementar o Baralho.c
+
+27/04/2018 - 4h trabalhadas - Estudar
+Tirando duvidas e estudando o metodo de funcionamento do arcabouço na monitoria
+
+30/04/2018 - 3h trabalhadas - Observando e corrigindo os Modulos existentes
+Feitas Correções nas funções criadas no Modulo Baralho
+
+31/04/2018 - 3h trabalhadas -codificar módulo Baralho
+Aplicando uma forma diferente de construção do embaralhar o baralho no baralho.c
+
+
+01/05/2018- 3h  trabalhadas - diagnosticar e corrigir os problemas encontrados
+Revertendo para antiga forma de embaralhar Baralho devido há problemas com nova forma
+
+02/05/2018 - 2h trabalhadas - revisar código do módulo
+Revisto o Modulo Baralho a fim de procurar erros , e acrescentar funções mais nescessárias.
+
+04/05/2018 - 3h trabalhada - revisar especificações, estudar
+Revistos as especificações e estudar de como aplicar eles no modulo baralho
+
+05/05/2018 - 6h trabalhadas -codificar módulo,revisar código do módulo ,realizar os testes,diagnosticar e corrigir os problemas encontrados.
+Dado um gás para terminar de codificar o módulo baralho , testar ele no arcabouço e feito a correção de erros
+
+07/05/2018 - 7h trabalhadas - codificar módulo,revisar código do módulo ,realizar os testes,diagnosticar e corrigir os problemas encontrados.
+Término de codificação e correção do modulo baralho, correção dos ultimos bugs e acressentando as assertivas corretamente.
+
+
+
+
+
+
+
+Os tipos de tarefa são:
+- estudar
+- especificar os módulos
+- especificar as funções
+- revisar especificações
+- projetar
+- revisar projetos
+- codificar módulo
+- revisar código do módulo
+- redigir script de teste
+- revisar script de teste
+- realizar os testes
+- diagnosticar e corrigir os problemas encontrados
