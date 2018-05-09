@@ -1,8 +1,8 @@
-#if ! defined( TIPOS_LISTA_ )
-#define TIPOS_LISTA_
+#if ! defined( TIPOS_BARALHO_ )
+#define TIPOS_BARALHO_
 /***************************************************************************
 *
-*  $MCD Arquivo de definição: TiposEspacosLista.def
+*  $MCD Arquivo de definição: TiposEspacosBaralho.def
 *
 *  Projeto: Automatização de testes
 *  Gestor:  LES/DI/PUC-Rio
@@ -17,9 +17,8 @@
 *
 ***************************************************************************/
 
-      ARV_TipoEspacoLista , 
-      ARV_TipoEspacoElemLista    ,
+      BAR_TipoEspacoCarta , 
 
-/********** Fim do arquivo de definição: TiposEspacosLista.def  **********/
+/********** Fim do arquivo de definição: TiposEspacosBaralho.def  **********/
 
 #endif

@@ -2,7 +2,9 @@ REM Recompila e retesta tudo
 
 cls
 
-Call LISLimpaTudo
 Call LISGeraTudoMake
 Call LISCompilaTudo
+Call BARGeraTudoMake
+Call BARCompilaTudo
 Call LISTestaApenasLista
+Call BARTestaApenasBaralho

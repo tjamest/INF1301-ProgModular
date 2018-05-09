@@ -1,12 +1,5 @@
 REM   Limpa tudo que sera' regerado
 
-
-if exist TestaTudo.bat goto faz
-rem >>> esta' no diretorio ilegal
-goto sai
-
-:faz
-
 pushd .
 
 cd ..\Batches
@@ -14,8 +7,12 @@ del *.bak
 
 cd ..\Composicao
 del *.bak
-del *.list
-del *.make
+del TesteLista.list
+del TesteLista.make
+del TesteListaProd.list
+del TesteListaProd.make
+del TesteListaDebug.list
+del TesteListaDebug.make
 
 cd ..\Fontes
 del *.bak
@@ -23,18 +20,25 @@ del *.err
 
 cd ..\Objetos
 del *.bak
-del *.obj
-del *.lib
-del *.build
+del TesteLista.obj
+del TesteLista.lib
+del TesteLista.build
+del TesteListaProd.obj
+del TesteListaProd.lib
+del TesteListaProd.build
+del TesteListaDebug.obj
+del TesteListaDebug.lib
+del TesteListaDebug.build
 
 cd ..\Produto
 del *.bak
-del *.log
-del *.exe
+del TesteLista.log
+del TesteLista.exe
+del TesteListaProd.log
+del TesteListaProd.exe
+del TesteListaDebug.log
+del TesteListaDebug.exe
 del *.err
-
-cd ..\Projeto
-del *.bak
 
 cd ..\Tabelas
 del *.bak
@@ -43,15 +47,11 @@ cd ..\Scripts
 del *.bak
 del *.estat
 
-cd ..\..\Documentos
+cd ..\Docs
 del *.bak
 
 cd ..\Ferramnt
 del *.bak
-del *.err
-del *.obj
 
 
 popd
-
-:sai
