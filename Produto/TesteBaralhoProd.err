@@ -1,0 +1,13 @@
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\produto\TesteBaralhoProd.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+baralho.obj testbar.obj 
+ArcaboucoTeste.lib 
+baralho.obj : error LNK2019: unresolved external symbol _IrInicioLista referenced in function _BAR_CriarBaralho
+baralho.obj : error LNK2019: unresolved external symbol _LIS_InserirElementoApos referenced in function _BAR_CriarBaralho
+baralho.obj : error LNK2019: unresolved external symbol _LIS_CriarLista referenced in function _BAR_CriarBaralho
+baralho.obj : error LNK2019: unresolved external symbol _LIS_ObterValor referenced in function _BAR_ObterCarta
+..\produto\TesteBaralhoProd.exe : fatal error LNK1120: 4 unresolved externals

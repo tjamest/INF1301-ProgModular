@@ -21,10 +21,10 @@ Módulos do construto: TesteBaralhoProd.comp
 Estatísticas do construto
 
    Estatísticas do arquivo: baralho.c
-      Total linhas:             219
-      Linhas de código:          85
-      Linhas de comentário:      78
-      Linhas em branco:          64
+      Total linhas:             218
+      Linhas de código:          86
+      Linhas de comentário:      77
+      Linhas em branco:          63
    Arquivos de inclusão de que necessita
       baralho.h
       lista.h
@@ -69,10 +69,10 @@ Estatísticas do construto
       testbar.c
 
    Estatísticas do arquivo: testbar.c
-      Total linhas:             345
-      Linhas de código:         158
-      Linhas de comentário:     108
-      Linhas em branco:          89
+      Total linhas:             337
+      Linhas de código:         148
+      Linhas de comentário:     110
+      Linhas em branco:          88
    Arquivos de inclusão de que necessita
       baralho.h
       generico.h
@@ -127,17 +127,17 @@ Totais por tipo de arquivo
          Arquivos deste tipo:          0
 
   Tipo: c        Path: ..\Fontes
-         Total linhas do tipo:       564
-         Linhas de código:           243
-         Linhas de comentário:       186
-         Linhas em branco:           153
+         Total linhas do tipo:       555
+         Linhas de código:           234
+         Linhas de comentário:       187
+         Linhas em branco:           151
          Arquivos deste tipo:          2
 
 Totais para todo o construto TesteBaralhoProd
 
-   Total linhas:              2332
-   Linhas de código:           443
-   Linhas de comentário:      1515
-   Linhas em branco:           401
+   Total linhas:              2323
+   Linhas de código:           434
+   Linhas de comentário:      1516
+   Linhas em branco:           399
    Arquivos processados:         7
 

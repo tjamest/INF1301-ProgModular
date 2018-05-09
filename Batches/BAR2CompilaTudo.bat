@@ -3,9 +3,6 @@ REM Requer o ambiente (environment) inicializado para compilar com o VisualStudi
 
 cls
 
-del ..\produto\*.err
-del ..\objetos\TesteBaralho.obj
-
 REM compila para producao sem otimizacoes
 pushd .
 nmake /F..\composicao\TesteBaralho.make 
@@ -20,8 +17,6 @@ REM compila para debug - o arquivo .comp indica quem deve ser compilado com _DEB
 del ..\objetos\TesteBaralhoDebug.obj
 pushd .
 nmake /F..\composicao\TesteBaralhoDebug.make 
-
-del ..\objetos\*.obj
 
 popd
 

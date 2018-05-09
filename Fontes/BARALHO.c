@@ -1,4 +1,3 @@
-
 /***************************************************************************
 *  $MCI Módulo de implementação: BAR  Baralho
 *
@@ -10,7 +9,7 @@
 *
 *  $HA Histórico de evolução:
 *  Versão  	Autor    	Data    	Observações
-*     1     gsc, jvr, tgf    19/abr/2018    início desenvolvimento
+*     1     gsc, jvr, tgf    19/abr/2018    início desenvolviment
 ***************************************************************************/
 
 #include   <stdio.h>
@@ -57,15 +56,11 @@ LIS_tppLista BAR_CriarBaralho() {
 	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
 		
 	//declara um vetor (um vetor eh um ponteiro) pra tipo carta
-	BAR_tpCarta VetorAux[TAM] ;
+	BAR_tppCarta VetorAux[TAM] ;
 	
 	//declara uma variável que armazena a condição de
 	//retorno de funções de manipulação da lista
 	LIS_tpCondRet condRetLista;
-	
-	//declara uma variável que armazena o ponteiro
-	//pro tpCarta que é o elemento do vetor
-	BAR_tppCarta pCarta;
 
 	//preenchendo o vetor de cartas de forma ordenada
 	for (i = 0; i < TAM; i++, valor++) {
@@ -74,8 +69,8 @@ LIS_tppLista BAR_CriarBaralho() {
 		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
 		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
 
-		pCarta = BAR_CriarCarta(Valor, Naipe);
-		VetorAux[i] = *pCarta;
+		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
+		VetorAux[i] = pCarta;
 
 		if (i == 9 || i == 19 || i == 29) {
 
@@ -94,7 +89,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	for (i = 0; i < TAM; i++){
 
 		//declara um ponteiro pra um tipo carta
-		BAR_tpCarta pCartaAux;
+		BAR_tppCarta pCartaAux;
 		
 		//gera um número aleatorio entre 0 e 39
 		int random = rand() % TAM ;
@@ -109,7 +104,8 @@ LIS_tppLista BAR_CriarBaralho() {
 	//preenche um por um usando o vetor embaralhado
 	for (i = 0; i < TAM; i++){
 		
-		*pCarta = VetorAux[i] ;
+		BAR_tppCarta pCarta;
+		pCarta = VetorAux[i] ;
 	
 		//é inserido um elemento na lista Baralho e 
 		//seu valor é um ponteiro pra um tipo Carta
@@ -122,8 +118,11 @@ LIS_tppLista BAR_CriarBaralho() {
 		}//fim if
 
 	}//fim for
-	
-  return pCabecaBaralho ;
+
+	//elemento corrente passa a ser o primeiro
+	IrInicioLista(pCabecaBaralho) ;
+
+	return pCabecaBaralho ;
    
 } /***************** Fim função: BAR &Criar baralho ***********************/
 

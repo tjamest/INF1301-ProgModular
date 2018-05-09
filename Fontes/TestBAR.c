@@ -85,21 +85,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   //VARIÁVEIS USADAS PELOS COMANDOS
   int inxBaralho  = -1 ,
 	  inxCarta = -1 ,
-      numLidos   = -1 ,
-      CondRetEsp = -1 ,
-	  valor = 0 ,
-	  naipe = 0;
+      numLidos   = -1 ;
 
-  int ValEsp = -1 ;
   int i ;
-  int numElem = -1 ;
-
-  LIS_tpCondRet CondRetLis;
-
-  BAR_tppCarta pCarta;
-
-  BAR_tpValorCarta *pValorCarta = (BAR_tpValorCarta*)malloc(sizeof(BAR_tpValorCarta)) ;
-  BAR_tpNaipeCarta *pNaipeCarta = (BAR_tpNaipeCarta*)malloc(sizeof(BAR_tpNaipeCarta));
 
   //RESET TEST
   //se o comando for "resettest":
@@ -234,6 +222,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   //se o comando for "obternaipe"
 	else if ( strcmp( ComandoTeste , OBTER_NAIPE_CMD ) == 0 ) {
 
+		BAR_tpNaipeCarta naipe;
+
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros("i" , &inxCarta) ;
 	
@@ -249,9 +239,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		naipe = BAR_ObterNaipe (vtCartas[inxCarta]) ;
 
 		//assertiva de saida do conteudo de naipe
-		if ( naipe < 0 || naipe > 3 ) {
-		return TST_CondRetErro ;
-		}
+		//if ( naipe < 0 || naipe > 3 ) {
+		//	return TST_CondRetErro ;
+		//}
 
 		return TST_CondRetOK ;
 
@@ -260,6 +250,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   //OBTER VALOR
   //se o comando for "obtervalor"
 	else if ( strcmp( ComandoTeste , OBTER_VALOR_CMD ) == 0 ) {
+
+		int valor;
 
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros( "i" , &inxCarta) ;

@@ -3,9 +3,6 @@ REM Requer o ambiente (environment) inicializado para compilar com o VisualStudi
 
 cls
 
-del ..\produto\TesteLista.err
-del ..\objetos\TesteLista.obj
-
 REM compila para producao sem otimizacoes
 pushd .
 nmake /F..\composicao\TesteLista.make 
@@ -24,6 +21,3 @@ nmake /F..\composicao\TesteListaDebug.make
 popd
 
 copy ..\produto\*.err ..\produto\tudo.err
-
-notepad ..\produto\tudo.err
-
