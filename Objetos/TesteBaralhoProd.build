@@ -1,6 +1,0 @@
-/OUT:..\produto\TesteBaralhoProd.exe
-/INCREMENTAL:NO
-/MACHINE:IX86
-baralho.obj  testbar.obj  
-ArcaboucoTeste.lib
-
