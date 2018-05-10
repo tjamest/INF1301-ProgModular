@@ -28,7 +28,6 @@
 
 static const char RESET_BARALHO_CMD     [ ] = "=resetteste"       ;
 static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
-static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
 static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
@@ -120,7 +119,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		}//fim if
 
 		//criarbaralho retorna ponteiro pra tpLista
-		vtBaralhos[inxBaralho] = BAR_CriarBaralho( ) ;
+		BAR_CriarBaralho(&vtCartas[inxCarta]) ;
 
 		//assertiva de saida do conteudo do ponteiro
 		//retorna TST_CondRetErro se os dois ponteiros forem diferentes
@@ -130,28 +129,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 						 "Erro na criacao do ponteiro do baralho."  ) ;
 
   } //fim ativa: Testar CriarBaralho
-
-  //DESTRUIR BARALHO
-  //se o comando for "destruirbaralho"
-  else if ( strcmp( ComandoTeste , DESTRUIR_BARALHO_CMD ) == 0 ) {
-
-		//conta quantos parametros foram declarados
-		numLidos = LER_LerParametros( "i" , &inxBaralho ) ;
-
-		//assertiva de entrada dos parametros do comando
-		if ( (numLidos != 1) || (! ValidarInxBaralho( inxBaralho , NAO_VAZIO )) )  {
-			return TST_CondRetParm ;
-		}//fim if
-
-		//destruicao do conteudo do vetor
-		BAR_DestruirBaralho( vtBaralhos[ inxBaralho ] ) ;
-		vtBaralhos[ inxBaralho ] = NULL ;
-
-		//assertiva de saida do conteudo do ponteiro
-		return TST_CompararPonteiroNulo( 0 , vtBaralhos[ inxBaralho ] ,
-						"Erro na destruicao do ponteiro do baralho."  ) ;
-
-  } //fim ativa: Testar DestruirBaralho
 
   //CRIAR CARTA
   //se o comando for "criarcarta"

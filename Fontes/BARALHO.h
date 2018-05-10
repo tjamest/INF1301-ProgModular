@@ -24,6 +24,7 @@
 ***************************************************************************/
 
 #include "LISTA.h"
+#define TAM 40
 
 #if defined( BARALHO_OWN )
    #define BARALHO_EXT
@@ -105,7 +106,7 @@ typedef enum {
 *     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
 *     funções que manipulem este baralho. 
 ***************************************************************************/
-LIS_tppLista BAR_CriarBaralho();
+LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]);
 
 
 /***************************************************************************
@@ -134,19 +135,6 @@ void BAR_DestruirCarta(void * pCarta);
 
 
 /***************************************************************************
-*  $FC Função: BAR  &Destruir Baralho
-*
-*  $ED Descrição da função
-*     Destrói a lista baralho fornecida.
-*     O parâmetro ponteiro para a lista não é modificado.
-*     Se ocorrer algum erro durante a destruição, a lista resultará
-*     estruturalmente incorreta.
-*     OBS. não existe previsão para possíveis falhas de execução.
-***************************************************************************/
-void BAR_DestruirBaralho(void * pBaralho);
-
-
-/***************************************************************************
 *  $FC Função: BAR  &Obter Carta
 *
 *  $EP Parâmetros
@@ -155,7 +143,7 @@ void BAR_DestruirBaralho(void * pBaralho);
 *  $ED Descrição da função
 *     Obtém um ponteiro pra um tipo carta criado.
 ***************************************************************************/
-BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) ;
+BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 
 
 /***************************************************************************

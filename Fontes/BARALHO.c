@@ -29,7 +29,7 @@
 
 
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
-//não há funções encapsuladas no módulo
+//nao ha funcoes encapsuladas no modulo
 
 /***************************************************************************
 *  $TC Tipo de dados: BAR tpCarta
@@ -47,65 +47,22 @@ typedef struct BAR_tagCarta {
 /***************************************************************************
 *  Função: BAR  &Criar baralho
 ***************************************************************************/
-LIS_tppLista BAR_CriarBaralho() {
+LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[]) {
 
 	int i; //contador
-	int valor = 0, naipe = 0;
-
+	
 	//cria uma lista retornando um ponteiro pra cabeca da lista
 	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
-		
-	//declara um vetor (um vetor eh um ponteiro) pra tipo carta
-	BAR_tppCarta VetorAux[TAM] ;
-	
+
 	//declara uma variável que armazena a condição de
 	//retorno de funções de manipulação da lista
 	LIS_tpCondRet condRetLista;
-
-	//preenchendo o vetor de cartas de forma ordenada
-	for (i = 0; i < TAM; i++, valor++) {
-		
-		//faz a transformacao de int pra tipo especifico
-		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
-		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
-
-		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
-		VetorAux[i] = pCarta;
-
-		if (i == 9 || i == 19 || i == 29) {
-
-			//reinicia o preenchimento do valor de 0 a 9
-			valor = -1 ;
-			//passa pro proximo naipe
-			naipe++;
-
-		} //fim if
-	} //fim for
-	
-	//função suporte da rand que faz gerar números diferentes sempre
-	srand ((unsigned)time(NULL));
-
-	//embaralhando o vetor (troca os indices aleatoriamente)
-	for (i = 0; i < TAM; i++){
-
-		//declara um ponteiro pra um tipo carta
-		BAR_tppCarta pCartaAux;
-		
-		//gera um número aleatorio entre 0 e 39
-		int random = rand() % TAM ;
-
-		//embaralhando os indices
-		pCartaAux = VetorAux[i] ;
-		VetorAux[i] = VetorAux[random] ;
-		VetorAux[random] = pCartaAux ;
-		
-	} //fim for
 	
 	//preenche um por um usando o vetor embaralhado
-	for (i = 0; i < TAM; i++){
+	for (i = 0; i < 27; i++){
 		
 		BAR_tppCarta pCarta;
-		pCarta = VetorAux[i] ;
+		pCarta = vtCartas[i] ;
 	
 		//é inserido um elemento na lista Baralho e 
 		//seu valor é um ponteiro pra um tipo Carta
@@ -146,19 +103,6 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 
 
 /***************************************************************************
-*  Função: BAR  &Destruir baralho
-***************************************************************************/
-void BAR_DestruirBaralho(void * pCabecaBaralho) {
-
-	#ifdef _DEBUG
-		assert( pCabecaBaralho != NULL ) ;
-	#endif
-
-	free(pCabecaBaralho) ;	
-} /************* Fim função: BAR &Destruir baralho ************************/
-
-
-/***************************************************************************
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta) {
@@ -174,13 +118,10 @@ void BAR_DestruirCarta(void * pCarta) {
 /***************************************************************************
 *  Função: BAR  &Obter carta
 ***************************************************************************/
-BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
+BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {
 
 	//declara e aloca memoria pra um ponteiro pra tipo carta
-	BAR_tppCarta pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tpCarta)) ;
-
-	//ponteiro pra tipo carta recebe o pValor do ElemLista
-	pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaBaralho) ;
+	BAR_tppCarta pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaBaralho) ;
 
 	return pCarta;
 } /***************** Fim função: BAR &Obter carta **************************/
@@ -213,6 +154,6 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
-//não há funções encapsuladas no módulo
+//nao ha funcoes encapsuladas no modulo
 
 /************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: BAR Baralho ******************/

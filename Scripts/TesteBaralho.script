@@ -58,56 +58,7 @@
 =declararparm   carta38	int 38
 =declararparm   carta39	int 39
 
-== MASSA DE TESTE 1
-=resetteste
-
-== Criar baralhos
-=criarbaralho   baralho0 
-=criarbaralho   baralho1
-=criarbaralho   baralho2
-=criarbaralho   baralho3
-
-== Criar baralho de indice invalido
-=criarbaralho   17
-=recuperar
-
-== Criar baralho sem passar parametro
-=criarbaralho
-=recuperar
-
-== MASSA DE TESTE 2
-=resetteste
-
-== Criar baralhos
-=criarbaralho   baralho0 
-=criarbaralho   baralho1
-
-== Destruir baralho de indice invalido
-=destruirbaralho 23
-=recuperar
-
-== Destruir baralho
-=destruirbaralho baralho0
-
-== Destruir baralho sem passar parametro
-=destruirbaralho
-=recuperar
-
-== Destruir baralho que nao existe
-=destruirbaralho baralho8
-=recuperar
-
-== Criar baralho
-=criarbaralho   baralho8
-
-== Destruir baralho
-=destruirbaralho baralho8
-
-== Criar baralho de indice invalido
-=criarbaralho	32
-=recuperar
-
-== MASSA DE TESTE 3
+== TESTES
 =resetteste
 
 == Criar carta 4 de ouros
@@ -122,7 +73,7 @@
 == Criar carta 4 de paus
 =criarcarta carta4 0 3
 
-== MASSA DE TESTE 4
+== TESTE
 =resetteste
 
 == Criar todas cartas do baralho
@@ -423,10 +374,6 @@
 == Obter naipe carta de indice invalido
 =obternaipe 43
 =recuperar
-
-== Criar baralho
-=criarbaralho baralho7
-//ao criar um baralho as cartas nao sao armazenadas no vetor cartas
 
 == Obter naipe carta que nao existe
 =obternaipe carta25
