@@ -232,16 +232,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 			return TST_CondRetParm ;
 		}//fim if
 
-		//assertiva de entrada do conteudo do vetor cartas
-		return TST_CompararPonteiroNulo( 1 , vtCartas[inxCarta] ,
-						"Erro na obtencao do naipe da carta."  ) ;
-
 		naipe = BAR_ObterNaipe (vtCartas[inxCarta]) ;
 
 		//assertiva de saida do conteudo de naipe
-		//if ( naipe < 0 || naipe > 3 ) {
-		//	return TST_CondRetErro ;
-		//}
+		if ( naipe < 0 || naipe > 3 ) {
+			return TST_CondRetErro ;
+		}
 
 		return TST_CondRetOK ;
 
@@ -260,10 +256,6 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		if ( (numLidos != 1) || (! ValidarInxCarta(inxCarta , NAO_VAZIO)) ) {
 			return TST_CondRetParm ;
 		}//fim if
-
-		//assertiva de saida do conteudo do vetor cartas
-		return TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
-								"Erro na obtencao do valor da carta."  ) ;
 
 		valor = BAR_ObterValor (vtCartas[inxCarta]) ;
 

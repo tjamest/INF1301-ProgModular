@@ -191,9 +191,9 @@ BAR_tppCarta BAR_ObterCarta(LIS_tppLista pCabecaBaralho) {
 ****************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 
-	/*#ifdef _DEBUG
+	#ifdef _DEBUG
 		assert( pCarta != NULL ) ;
-	#endif*/
+	#endif
 
 	return pCarta->naipe;
 } /***************** Fim função: BAR &Obter naipe **************************/
@@ -204,9 +204,9 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 ****************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
 	
-	/*#ifdef _DEBUG
+	#ifdef _DEBUG
 		assert( pCarta != NULL ) ;
-	#endif*/
+	#endif
 
 	return pCarta->valor;
 } /***************** Fim função: BAR &Obter valor **************************/
