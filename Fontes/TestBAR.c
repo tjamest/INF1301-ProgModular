@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 *  $MCI Módulo de implementação: TBAR Teste baralho
 *
 *  Arquivo gerado:              TestBAR.c
@@ -31,8 +31,8 @@ static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char DESTRUIR_BARALHO_CMD  [ ] = "=destruirbaralho"  ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
-//static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
-//static const char OBTER_VALOR_CMD		[ ] = "=obtervalor"		  ;
+static const char OBTER_NAIPE_CMD		[ ] = "=obternaipe"		  ;
+static const char OBTER_VALOR_CMD		[ ] = "=obtervalor"		  ;
 
 
 #define TRUE  1
@@ -218,7 +218,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
 	} //fim ativa: Testar DestruirCarta
 
-/*  //OBTER NAIPE
+  //OBTER NAIPE
   //se o comando for "obternaipe"
 	else if ( strcmp( ComandoTeste , OBTER_NAIPE_CMD ) == 0 ) {
 
@@ -247,7 +247,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   } //fim ativa: Testar ObterNaipe*/
 
-/*  //OBTER VALOR
+  //OBTER VALOR
   //se o comando for "obtervalor"
 	else if ( strcmp( ComandoTeste , OBTER_VALOR_CMD ) == 0 ) {
 

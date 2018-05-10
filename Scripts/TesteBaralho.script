@@ -167,6 +167,90 @@
 =criarcarta carta38 8 3
 =criarcarta carta39 9 3
 
+== Obter todos naipes de todas cartas do baralho
+=obternaipe carta0
+=obternaipe carta1
+=obternaipe carta2
+=obternaipe carta3
+=obternaipe carta4
+=obternaipe carta5
+=obternaipe carta6
+=obternaipe carta7
+=obternaipe carta8
+=obternaipe carta9
+=obternaipe carta10
+=obternaipe carta11
+=obternaipe carta12
+=obternaipe carta13
+=obternaipe carta14
+=obternaipe carta15
+=obternaipe carta16
+=obternaipe carta17
+=obternaipe carta18
+=obternaipe carta19
+=obternaipe carta20
+=obternaipe carta21
+=obternaipe carta22
+=obternaipe carta23
+=obternaipe carta24
+=obternaipe carta25
+=obternaipe carta26
+=obternaipe carta27
+=obternaipe carta28
+=obternaipe carta29
+=obternaipe carta30
+=obternaipe carta31
+=obternaipe carta32
+=obternaipe carta33
+=obternaipe carta34
+=obternaipe carta35
+=obternaipe carta36
+=obternaipe carta37
+=obternaipe carta38
+=obternaipe carta39
+
+== Obter todos valores de todas cartas do baralho
+=obtervalor carta0
+=obtervalor carta1
+=obtervalor carta2
+=obtervalor carta3
+=obtervalor carta4
+=obtervalor carta5
+=obtervalor carta6
+=obtervalor carta7
+=obtervalor carta8
+=obtervalor carta9
+=obtervalor carta10
+=obtervalor carta11
+=obtervalor carta12
+=obtervalor carta13
+=obtervalor carta14
+=obtervalor carta15
+=obtervalor carta16
+=obtervalor carta17
+=obtervalor carta18
+=obtervalor carta19
+=obtervalor carta20
+=obtervalor carta21
+=obtervalor carta22
+=obtervalor carta23
+=obtervalor carta24
+=obtervalor carta25
+=obtervalor carta26
+=obtervalor carta27
+=obtervalor carta28
+=obtervalor carta29
+=obtervalor carta30
+=obtervalor carta31
+=obtervalor carta32
+=obtervalor carta33
+=obtervalor carta34
+=obtervalor carta35
+=obtervalor carta36
+=obtervalor carta37
+=obtervalor carta38
+=obtervalor carta39
+
 == Destruir todas cartas do baralho
 =destruircarta carta0
 =destruircarta carta1
@@ -317,7 +401,38 @@
 == Criar carta 3 de copas
 =criarcarta carta39 9 2
 
+== Obter naipe carta 39
+=obternaipe carta39
+
+== Obter naipe carta 37
+=obternaipe carta37
+
+== Obter naipe carta 10
+=obternaipe carta10
+
+== Obter naipe carta 23
+=obternaipe carta23
+
 == MASSA DE TESTE 6
+=resetteste
+
+== Obter naipe de carta que nao existe
+=obternaipe carta36
+=recuperar
+
+== Obter naipe carta de indice invalido
+=obternaipe 43
+=recuperar
+
+== Criar baralho
+=criarbaralho baralho7
+//ao criar um baralho as cartas nao sao armazenadas no vetor cartas
+
+== Obter naipe carta que nao existe
+=obternaipe carta25
+=recuperar
+
+== MASSA DE TESTE 7
 =resetteste
 
 == Criar Cartas
@@ -325,5 +440,17 @@
 =criarcarta carta23 7 2
 =criarcarta carta37 9 0
 =criarcarta carta8 0 1
+
+== Obter Naipes
+=obternaipe carta10
+=obternaipe carta23
+=obternaipe carta37
+=obternaipe carta8
+
+== Obter Valores
+=obtervalor carta10
+=obtervalor carta23
+=obtervalor carta37
+=obtervalor carta8
 
 // fim

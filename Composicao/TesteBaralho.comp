@@ -11,9 +11,9 @@ h           =  ..\Fontes
 def         =  ..\Tabelas
 
 [Modulos]
+Lista
 Baralho
 TestBAR
-Lista
 
 [BuildInicio]
 /OUT:..\produto\TesteBaralho.exe
