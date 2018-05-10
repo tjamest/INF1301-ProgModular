@@ -1,0 +1,25 @@
+# Teste do módulo lista compilado com debug
+
+[Diretorios]
+
+Nome        =  TesteArvoreDebug
+PathDefault =  ..\Fontes
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Fontes
+h           =  ..\Fontes
+def         =  ..\Tabelas
+
+[Modulos]
+Lista      /D_DEBUG
+TestLIS    /D_DEBUG
+
+[BuildInicio]
+/OUT:..\produto\TesteListaDebug.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+ArcaboucoTeste.lib
+
+[Fim]

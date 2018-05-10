@@ -1,0 +1,25 @@
+# Teste do módulo lista usando a biblioteca contendo o arcabouço
+
+[Diretorios]
+
+Nome        =  TesteLista
+PathDefault =  ..\Fontes
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Fontes
+h           =  ..\Fontes
+def         =  ..\Tabelas
+
+[Modulos]
+Lista
+TestLIS
+
+[BuildInicio]
+/OUT:..\produto\TesteLista.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+ArcaboucoTeste.lib
+
+[Fim]
