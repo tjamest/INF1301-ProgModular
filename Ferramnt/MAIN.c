@@ -61,7 +61,7 @@ void PrintaBaralho (LIS_tppLista pCabecaBaralho) {
 		CondRetLis = LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 
 	}//fim for
-} /***************** Fim função: BAR &Printa baralho ***********************/
+} /***************** Fim funÃ§Ã£o: BAR &Printa baralho ***********************/
 
 
 BAR_tppCarta EmbaralhaVetorCartas (BAR_tppCarta vtCartas[]) {
@@ -90,7 +90,7 @@ BAR_tppCarta EmbaralhaVetorCartas (BAR_tppCarta vtCartas[]) {
 		} //fim if
 	} //fim for
 	
-	//função suporte da rand que faz gerar números diferentes sempre
+	//funÃ§Ã£o suporte da rand que faz gerar nÃºmeros diferentes sempre
 	srand ((unsigned)time(NULL));
 
 	//embaralhando o vetor (troca os indices aleatoriamente)
@@ -99,7 +99,7 @@ BAR_tppCarta EmbaralhaVetorCartas (BAR_tppCarta vtCartas[]) {
 		//declara um ponteiro pra um tipo carta
 		BAR_tppCarta pCartaAux;
 		
-		//gera um número aleatorio entre 0 e 39
+		//gera um nÃºmero aleatorio entre 0 e 39
 		int random = rand() % TAM ;
 
 		//embaralhando os indices
@@ -111,4 +111,4 @@ BAR_tppCarta EmbaralhaVetorCartas (BAR_tppCarta vtCartas[]) {
 
 	return *vtCartas ;
 
-}  /************ Fim função: BAR &Vetor de cartas embaralhado **************/
+}  /************ Fim funÃ§Ã£o: BAR &Embaralha vetor cartas **************/

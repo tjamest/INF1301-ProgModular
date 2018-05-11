@@ -104,3 +104,16 @@
 07/05/2018 - 9h trabalhadas - Revisar projetos, codificar modulo, realizar testes
 	O modulo teste baralho foi incrementado, assim como os testes.
 	O projeto foi revisado.
+
+08/05/2018 - 4h trabalhadas - Revisar projetos, codificar modulo, realizar testes
+	O projeto foi todo revisado após o prazo de entrega.
+	Foi iniciada a tarefa de aprender sobre e desenvolver os arquivos necessários para compilar.
+
+09/05/2018 - 6h trabalhadas - Revisar projetos, codificar modulo, realizar testes
+	O módulo baralho foi revisado, algumas funções foram dispensadas.
+	O módulo está mais coeso.
+
+10/05/2018 - 5h trabalhadas - Estudar, Revisar projetos, codificar modulo, realizar testes
+	Estudo do teste lista. Incrementação do script de teste do módulo lista.
+	Revisão dos documentos do programa (visão de módulo, visão de interface, etc).
+	Descoberta a solução de alguns problemas como retornar vetor de uma função.

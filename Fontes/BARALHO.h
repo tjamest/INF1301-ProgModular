@@ -12,15 +12,15 @@
 *
 *  $HA Histórico de evolução:
 *     Versão      Autor         Data            Observações
+*	    3		         gsc		     10/mai/2018	  revisão para entrega na data
 *     2       gsc, jvr, tgf   31/abr/2018     criação da função CriarBaralho
 *     1            gsc        19/abr/2018     início desenvolvimento
 *
 *  $ED Descrição do módulo
-*     Cria um baralho (lista) de 40 (ou vamos fazer com 52?) cartas (sem os 8,
-*     9, 10 e coringa) pegando elementos previamente embaralhados em um vetor;
-*     Cria as mãos dos jogadores (lista de 3 elementos, que são 3 cartas);
-*     Cria uma lista que armazena as cartas apostadas na mesa e a manilha;
-*     Destrói esse baralho.
+*     Cria um baralho pegando elementos previamente embaralhados em um vetor;
+*     Cria cartas para serem armazenadas na lista baralho;
+*	  Obter o valor e naipe de cartas.
+*	  Destrói uma carta.
 ***************************************************************************/
 
 #include "LISTA.h"
@@ -44,16 +44,16 @@ typedef struct BAR_tagCarta * BAR_tppCarta ;
 *  $ED Descrição do tipo
 *     Condições de retorno das funções de carta.
 ***************************************************************************/
-typedef enum { //não tenho certeza se algumas dessas condições de retorno devem existir
+typedef enum {
 
-   BAR_CondRetOK,                 // 0 Concluiu corretamente
-   BAR_CondRetNaoCriouBaralho,    // 1 Não criou ponteiro pro tpLista
-   BAR_CondRetNaoCriouCarta,      // 2 Não criou ponteiro pro tpCarta
-   BAR_CondRetNaoCriouMaoJogador, // 3 Não criou ponteiro pro tpLista
-   BAR_CondRetNaoCriouMesa,       // 4 Não criou ponteiro pro tpLista
-   BAR_CondRetNaoDestruiu,        // 5 Não liberou ponteiro
-   BAR_CondRetFaltouMemoria,      // 6 Faltou memoria 
-   BAR_CondRetParamIncorretos    // 7 Parâmetros da função incorretos
+   BAR_CondRetOK,                 // Concluiu corretamente
+   BAR_CondRetNaoCriouBaralho,    // Não criou ponteiro pro tpLista
+   BAR_CondRetNaoCriouCarta,      // Não criou ponteiro pro tpCarta
+   BAR_CondRetNaoCriouMaoJogador, // Não criou ponteiro pro tpLista
+   BAR_CondRetNaoCriouMesa,       // Não criou ponteiro pro tpLista
+   BAR_CondRetNaoDestruiu,        // Não liberou ponteiro
+   BAR_CondRetFaltouMemoria,      // Faltou memoria 
+   BAR_CondRetParamIncorretos     // Parâmetros da função incorretos
 
 } BAR_tpCondRet;
 
@@ -99,7 +99,10 @@ typedef enum {
 *  $FC Função: BAR  &Criar Baralho
 *
 *  $ED Descrição da função
-*     Cria um baralho de 40 cartas (sem os 8, 9, 10 e coringas)
+*     Cria um baralho com cartas.
+*
+*  $EP Parâmetros
+*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca do baralho
@@ -130,6 +133,10 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 *
 *  $ED Descrição da função
 *     Destrói uma carta.
+*
+*  $EP Parâmetros
+*     Recebe ponteiro pra um tipo void.
+*
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta);
 
@@ -138,10 +145,14 @@ void BAR_DestruirCarta(void * pCarta);
 *  $FC Função: BAR  &Obter Carta
 *
 *  $EP Parâmetros
-*  LIS_tppLista pCabecaBaralho: ponteiro pra cabeca da lista do baralho.
+*  	  Recebe ponteiro pra cabeca da lista do baralho.
 *
 *  $ED Descrição da função
 *     Obtém um ponteiro pra um tipo carta criado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro pra um tipo carta.
+*
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 
@@ -150,10 +161,14 @@ BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 *  $FC Função: BAR  &Obter Naipe
 *
 *  $EP Parâmetros
-*  BAR_tppCarta pCarta: ponteiro pra uma carta.
+*  	  Recebe um ponteiro pra um tipo carta.
 *
 *  $ED Descrição da função
 *     Obtém o naipe de uma carta.
+*
+*  $FV Valor retornado
+*     Retorna um tipo de naipe de carta.
+*
 ***************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 
@@ -162,10 +177,14 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 *  $FC Função: BAR  &Obter valor
 *
 *  $EP Parâmetros
-*  BAR_tppCarta pCarta: ponteiro pra uma carta.
+*     Recebe um ponteiro pra um tipo carta.
 *
 *  $ED Descrição da função
 *     Obtém o valor de uma carta.
+*
+*  $FV Valor retornado
+*     Retorna um tipo de valor de carta.
+*
 ***************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 

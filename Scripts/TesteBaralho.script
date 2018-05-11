@@ -118,6 +118,9 @@
 =criarcarta carta38 8 3
 =criarcarta carta39 9 3
 
+== Criar Baralhos
+=criarbaralho baralho0
+
 == Obter todos naipes de todas cartas do baralho
 =obternaipe carta0
 =obternaipe carta1
@@ -283,6 +286,9 @@
 == Criar carta 7 de paus
 =criarcarta carta16 3 3
 
+== Criar baralho
+=criarbaralho baralho9
+
 == Criar carta Q de ouros
 =criarcarta carta17 4 0
 
@@ -297,6 +303,10 @@
 
 == Criar carta J de ouros
 =criarcarta carta21 5 0
+
+== Criar baralho de indice invalido
+=criarbaralho 20
+=recuperar
 
 == Criar carta J de espadas
 =criarcarta carta22 5 1

@@ -26,7 +26,7 @@
 #include    "Baralho.h"
 
 
-static const char RESET_BARALHO_CMD     [ ] = "=resetteste"       ;
+static const char RESET_TESTE_CMD     	[ ] = "=resetteste"       ;
 static const char CRIAR_BARALHO_CMD     [ ] = "=criarbaralho"     ;
 static const char CRIAR_CARTA_CMD       [ ] = "=criarcarta"       ;
 static const char DESTRUIR_CARTA_CMD    [ ] = "=destruircarta"    ;
@@ -39,6 +39,8 @@ static const char OBTER_VALOR_CMD		[ ] = "=obtervalor"		  ;
 
 #define VAZIO     0
 #define NAO_VAZIO 1
+
+#define NaoNULL 1
 
 #define DIM_VT_BARALHO   10
 #define DIM_VT_CARTA  40
@@ -64,19 +66,15 @@ BAR_tppCarta vtCartas[ DIM_VT_CARTA ] ;
 *     Comandos disponíveis:
 *
 *     =resetteste
-*       - anula os vetores de baralhos e testes e provoca vazamento de memória.
+*       - anula os vetores de baralhos e cartas e provoca vazamento de memória.
 *     =criarbaralho                 <inxBaralho>
-*	- retorna um ponteiro pra cabeça do baralho
-*	  que é armazenado no vtBaralhos.
-*     =destruirbaralho              <inxBaralho>
+*		- retorna um ponteiro pra cabeça do 
+* 		  baralho que é armazenado no vtBaralhos.
 *     =criarcarta                   <int>  <int> 
-*	- retorna um ponteiro pra tipo carta
+*		- retorna um ponteiro pra tipo carta que é armazenado no vtCartas.
 *	  que é armazenado no vtCartas.
 *     =destruircarta                <inxCarta>   
 *     =obternaipe		    <inxCarta>
-*	- para o comando ter sucesso é necessário ter um
-*	  ponteiro pra um tipo carta armazenado no vtCartas
-*	  (deve-se usar o comando criarcarta antes).
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
@@ -90,7 +88,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
   //RESET TEST
   //se o comando for "resettest":
-  if ( strcmp( ComandoTeste , RESET_BARALHO_CMD ) == 0 )  {
+  if ( strcmp( ComandoTeste , RESET_TESTE_CMD ) == 0 )  {
 
 		//preenche o vetor baralhos com Null
 		for( i = 0 ; i < DIM_VT_BARALHO ; i++ ) {
@@ -119,14 +117,16 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		}//fim if
 
 		//criarbaralho retorna ponteiro pra tpLista
-		BAR_CriarBaralho(&vtCartas[inxCarta]) ;
+		vtBaralhos[inxBaralho] = BAR_CriarBaralho(vtCartas) ;
 
 		//assertiva de saida do conteudo do ponteiro
 		//retorna TST_CondRetErro se os dois ponteiros forem diferentes
 		//retorna TST_CondRetOK se os dois ponteiros forem iguais
 		//0 = ponteiro Null   //1 = ponteiro não-Null
-		return TST_CompararPonteiroNulo( 1 , vtBaralhos[inxBaralho] ,
-						 "Erro na criacao do ponteiro do baralho."  ) ;
+		//return TST_CompararPonteiroNulo( NaoNULL , vtCartas[inxCarta] ,
+		//				 "Erro na criacao do ponteiro do baralho."  ) ;
+
+		return TST_CondRetOK;
 
   } //fim ativa: Testar CriarBaralho
 
@@ -168,7 +168,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		vtCartas[ inxCarta ] = BAR_CriarCarta( ValorCarta, NaipeCarta ) ;
 
 		//assertiva de saida do conteudo do vetor carta
-		return TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
+		return TST_CompararPonteiroNulo( NaoNULL , vtCartas[ inxCarta ] ,
 						"Erro na criacao do ponteiro da carta."  ) ;
 
 	} //fim ativa: Testar CriarCarta

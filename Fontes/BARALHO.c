@@ -8,8 +8,9 @@
 *  Autores: gsc, jvr, tgf
 *
 *  $HA Histórico de evolução:
-*  Versão  	Autor    	Data    	Observações
-*     1     gsc, jvr, tgf    19/abr/2018    início desenvolviment
+*  Versão  		Autor  			Data    	Observações
+*	  2			gsc			 10/mai/2018	revisão para entrega na data
+*     1     gsc, jvr, tgf    19/abr/2018    início desenvolvimento
 ***************************************************************************/
 
 #include   <stdio.h>
@@ -59,7 +60,7 @@ LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[]) {
 	LIS_tpCondRet condRetLista;
 	
 	//preenche um por um usando o vetor embaralhado
-	for (i = 0; i < 27; i++){
+	for (i = 0; i < TAM; i++){
 		
 		BAR_tppCarta pCarta;
 		pCarta = vtCartas[i] ;
@@ -120,7 +121,7 @@ void BAR_DestruirCarta(void * pCarta) {
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {
 
-	//declara e aloca memoria pra um ponteiro pra tipo carta
+	//obtem o valor corrente de uma lista e retorna
 	BAR_tppCarta pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaBaralho) ;
 
 	return pCarta;

@@ -10,17 +10,33 @@
 *						Diretórios e arquivos 						*
 *********************************************************************
 * Batches: 															*
-*	TestaBaralho.bat 	Executa os testes do módulo teste baralho 	*
-*	TestaLista.bat 		Executa os testes do módulo teste lista 	*
+*	Tudo.bat 		Executa todos os batches em sequencia		 	*
+*	LimpaTudo.bat 	Limpa arquivos de testes anteriores		 		*
+*	GMake.bat 		Gera os arquivos necessários para compilar	 	*
+*	Compila.bat 	Compila o programa							 	*
+*	Testa.bat 		Executa os testes dos módulos BARALHO e LISTA 	*
+*	CriaLib.bat 	Cria a biblioteca do arcabouço 					.
+*********************************************************************
+* Composicao: 														*
+*	Gmake.parm 			Parâmetros para a ferramenta GMake 			*
+*	TesteBaralho.comp 	Arquivo de composição do Teste Baralho 		*
+*	TesteLista.comp 	Arquivo de composição do Teste Lista		*
 *********************************************************************
 * Docs: 															*
 *	Requisitos Funcionais e Não-Funcionais.docx 					*
-*	Visão de Módulos e Visão de Interface.png 						*
-*	Estrutura Lista de Listas.png 									*
-*	Estrutura de Tipos.png 											*
+*	Modelo Estrutural.png					 						*
+*	Arquitetura do Programa.png 									*
+*	Modelo Físico.png 												*
 *	RELATORIO-Gustavo.txt											*
 *	RELATORIO-Thiago.txt 											*
 *	RELATORIO-João.txt												*
+*********************************************************************
+* Ferramnt: 														*
+*	arcaboucoteste_2_02 		Arcabouco de testes					*
+*	Compilebanner.exe			Compilador	 						*
+*	exbestat.exe 				Mostra as estatísticas dos testes 	*
+*	GMake.exe 					Gera o arquivo .make para compilar 	*
+*	MAIN.c 						Usada para testes do módulo BARALHO *
 *********************************************************************
 * Fontes:															*
 *	BARALHO.c 		Implementação do módulo BARALHO 				*
@@ -37,21 +53,25 @@
 *	ArcaboucoTeste.lib	Biblioteca do arcabouço						*
 *********************************************************************
 * Produtos:															*
-*	TesteBaralho.exe 												*
-*	TesteLista.exe 													*
+*	TesteBaralho.exe 		Arquivo executável do módulo BARALHO	*
+*	TesteLista.exe 			Arquivo executável do módulo BARALHO	*
 *********************************************************************
 * Scripts: 															*
 *	TesteBaralho.script 	Script de testes do módulo BARALHO 		*
 *	TesteLista.script 		Script de testes do módulo LISTA 		*
 *********************************************************************
+* Tabeelas: 														*
+*	IdTiposEspaco.def 			Define os tipos que o programa usa	*
+*	TiposEspacosBaralho.def 	Tipos do módulo BARALHO 			*
+*	TiposEspacosListadef 		Tipos do módulo LISTA 				*
+*********************************************************************
 *							Instruções		 						*
 *********************************************************************
 * Para executar testes:												*
-*	Abra o prompt													*
+*	Abra o prompt de comando										*
 *	Vá para o diretório da pasta Batches							*
-*	Sete o ambiente para o Visual Studio carregando vsvars32.bat	*		   
-*	Execute TestaLista.bat											*
-*	Execute TestaBaralho.bat										*
+*	Sete o ambiente para o Visual Studio executando "vsvars32.bat"	*		   
+*	Execute "Tudo.bat"												*
 *																	*
 * Para adicionar ou remover comandos de teste:						*
 * 	Acesse TesteLista.script										*
