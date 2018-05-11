@@ -49,20 +49,3 @@ Término de codificação e correção do modulo baralho, correção dos ultimos
 
 
 
-
-
-
-
-Os tipos de tarefa são:
-- estudar
-- especificar os módulos
-- especificar as funções
-- revisar especificações
-- projetar
-- revisar projetos
-- codificar módulo
-- revisar código do módulo
-- redigir script de teste
-- revisar script de teste
-- realizar os testes
-- diagnosticar e corrigir os problemas encontrados

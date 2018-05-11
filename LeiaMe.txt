@@ -15,7 +15,6 @@
 *	GMake.bat 		Gera os arquivos necessários para compilar	 	*
 *	Compila.bat 	Compila o programa							 	*
 *	Testa.bat 		Executa os testes dos módulos BARALHO e LISTA 	*
-*	CriaLib.bat 	Cria a biblioteca do arcabouço 					.
 *********************************************************************
 * Composicao: 														*
 *	Gmake.parm 			Parâmetros para a ferramenta GMake 			*
@@ -24,7 +23,7 @@
 *********************************************************************
 * Docs: 															*
 *	Requisitos Funcionais e Não-Funcionais.docx 					*
-*	Modelo Estrutural.png					 						*
+*	Modelo Estrutural da Lista de Listas.png 						*
 *	Arquitetura do Programa.png 									*
 *	Modelo Físico.png 												*
 *	RELATORIO-Gustavo.txt											*
@@ -32,7 +31,6 @@
 *	RELATORIO-João.txt												*
 *********************************************************************
 * Ferramnt: 														*
-*	arcaboucoteste_2_02 		Arcabouco de testes					*
 *	Compilebanner.exe			Compilador	 						*
 *	exbestat.exe 				Mostra as estatísticas dos testes 	*
 *	GMake.exe 					Gera o arquivo .make para compilar 	*

@@ -43,18 +43,3 @@ Foi escrito o script de teste do módulo baralho.
 
 07/05/2018 - 3h trabalhadas - Realizar os testes / Revisar Script de Teste
 Foram realizados os testes do módulo baralho  e o script de teste do módulo lista foi revisado com mais casos de teste.
-
-
-Os tipos de tarefa são:
-- estudar
-- especificar os módulos
-- especificar as funções
-- revisar especificações
-- projetar
-- revisar projetos
-- codificar módulo
-- revisar código do módulo
-- redigir script de teste
-- revisar script de teste
-- realizar os testes
-- diagnosticar e corrigir os problemas encontrados
