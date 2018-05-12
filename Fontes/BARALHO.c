@@ -13,21 +13,15 @@
 *     1     gsc, jvr, tgf    19/abr/2018    início desenvolvimento
 ***************************************************************************/
 
-#include   <stdio.h>
-#include   <stdlib.h> 
-#include   <string.h>
-#include   <malloc.h>
-#include   <time.h>
-#include   <assert.h>
+#include   <stdio.h>	//printf
+#include   <stdlib.h>	//malloc, free
+#include   <assert.h>	//assert
 
 #define BARALHO_OWN
 #include "BARALHO.h"
 #include "LISTA.h"
 
 #undef BARALHO_OWN
-
-#define TAM 40
-
 
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
 //nao ha funcoes encapsuladas no modulo
@@ -50,7 +44,7 @@ typedef struct BAR_tagCarta {
 ***************************************************************************/
 LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[]) {
 
-	int i; //contador
+	int i ; //contador
 	
 	//cria uma lista retornando um ponteiro pra cabeca da lista
 	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
@@ -152,6 +146,28 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
 
 	return pCarta->valor;
 } /***************** Fim função: BAR &Obter valor **************************/
+
+/***************************************************************************
+*  Função: BAR  &Transferir carta
+****************************************************************************/
+void BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
+
+	LIS_tpCondRet CondRetLista ;
+
+	BAR_tppCarta pCarta = BAR_ObterCartaCorr(pOrigem) ;
+
+	CondRetLista = LIS_ExcluirElemento(pOrigem) ;
+	
+	if (CondRetLista == LIS_CondRetListaVazia) {
+		printf("Erro na exclusao de elemento ao transferir carta.\n") ;
+	}
+
+	CondRetLista = LIS_InserirElementoApos(pDestino, pCarta) ;
+
+	if (CondRetLista == LIS_CondRetFaltouMemoria) {
+		printf("Erro na insercao de elemento ao transferir carta.\n") ;
+	}
+} /***************** Fim função: BAR &Transferir carta *********************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/

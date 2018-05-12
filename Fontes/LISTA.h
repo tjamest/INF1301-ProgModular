@@ -75,22 +75,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 ***********************************************************************/
 
    typedef enum {
-
-         LIS_CondRetOK ,
-               /* Concluiu corretamente */
-
-         LIS_CondRetListaVazia ,
-               /* A lista não contém elementos */
-
-         LIS_CondRetFimLista ,
-               /* Foi atingido o fim de lista */
-
-         LIS_CondRetNaoAchou ,
-               /* Não encontrou o valor procurado */
-
-         LIS_CondRetFaltouMemoria
-               /* Faltou memória ao tentar criar um elemento de lista */
-
+         LIS_CondRetOK ,			// Concluiu corretamente
+         LIS_CondRetListaVazia ,	// A lista não contém elementos
+         LIS_CondRetFimLista ,		// Foi atingido o fim de lista
+         LIS_CondRetNaoAchou ,		// Não encontrou o valor procurado
+         LIS_CondRetFaltouMemoria	// Faltou memória ao tentar criar um elemento de lista
    } LIS_tpCondRet ;
 
 

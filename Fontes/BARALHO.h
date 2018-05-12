@@ -12,9 +12,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão      Autor         Data            Observações
-*	    3		         gsc		     10/mai/2018	  revisão para entrega na data
-*     2       gsc, jvr, tgf   31/abr/2018     criação da função CriarBaralho
-*     1            gsc        19/abr/2018     início desenvolvimento
+*	    3		   gsc		  10/mai/2018	  revisão para entrega na data
+*       2     gsc, jvr, tgf   31/abr/2018     criação da função CriarBaralho
+*       1          gsc        19/abr/2018     início desenvolvimento
 *
 *  $ED Descrição do módulo
 *     Cria um baralho pegando elementos previamente embaralhados em um vetor;
@@ -65,16 +65,16 @@ typedef enum {
 *     Domínio dos possíveis valores de uma carta.
 ***************************************************************************/
 typedef enum {
-   _4,               // 0
-   _5,               // 1
-   _6,               // 2
-   _7,               // 3
-   _Q,               // 4
-   _J,               // 5
-   _K,               // 6
-   _A,               // 7                        
-   _2,               // 8
-   _3,               // 9
+   _4,     // 0
+   _5,     // 1
+   _6,     // 2
+   _7,     // 3
+   _Q,     // 4
+   _J,     // 5
+   _K,     // 6
+   _A,     // 7                        
+   _2,     // 8
+   _3,     // 9
 } BAR_tpValorCarta ;
 
 
@@ -85,10 +85,10 @@ typedef enum {
 *     Dominio dos possiveis naipes de uma carta.
 ***************************************************************************/
 typedef enum {
-  Ouros,          // 0
-  Espadas,        // 1
-  Copas,          // 2
-  Paus            // 3
+  Ouros,      // 0
+  Espadas,    // 1
+  Copas,      // 2
+  Paus        // 3
 } BAR_tpNaipeCarta ;
 
 
@@ -103,13 +103,14 @@ typedef enum {
 *
 *  $EP Parâmetros
 *     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
+*	  Recebe a quantidade de pessoas que vao jogar.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca do baralho
 *     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
 *     funções que manipulem este baralho. 
 ***************************************************************************/
-LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]);
+LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]) ;
 
 
 /***************************************************************************
@@ -131,12 +132,8 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 /***************************************************************************
 *  $FC Função: BAR  &Destruir Carta
 *
-*  $ED Descrição da função
-*     Destrói uma carta.
-*
 *  $EP Parâmetros
 *     Recebe ponteiro pra um tipo void.
-*
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta);
 
@@ -148,11 +145,10 @@ void BAR_DestruirCarta(void * pCarta);
 *  	  Recebe ponteiro pra cabeca da lista do baralho.
 *
 *  $ED Descrição da função
-*     Obtém um ponteiro pra um tipo carta criado.
+*     Obtém um ponteiro pra um tipo carta.
 *
 *  $FV Valor retornado
 *     Retorna um ponteiro pra um tipo carta.
-*
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 
@@ -163,12 +159,8 @@ BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 *  $EP Parâmetros
 *  	  Recebe um ponteiro pra um tipo carta.
 *
-*  $ED Descrição da função
-*     Obtém o naipe de uma carta.
-*
 *  $FV Valor retornado
 *     Retorna um tipo de naipe de carta.
-*
 ***************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 
@@ -179,14 +171,19 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 *  $EP Parâmetros
 *     Recebe um ponteiro pra um tipo carta.
 *
-*  $ED Descrição da função
-*     Obtém o valor de uma carta.
-*
 *  $FV Valor retornado
 *     Retorna um tipo de valor de carta.
-*
 ***************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
+
+
+/***************************************************************************
+*  $FC Função: BAR  &Transferir carta
+*
+*  $EP Parâmetros
+*     Recebe uma lista de onde vai ser retirada a carta e uma pra onde vai.
+***************************************************************************/
+void BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 
 
 #undef BARALHO_EXT
