@@ -121,3 +121,7 @@
 11/05/2018 - 8h trabalhadas - Codificar modulo
 	Iniciado o desenvolvimento do módulo mesa (funções CriarMesa, CriarMao, DistribuirMaos e ObterValorManilha).
 	Funções ExcluirPtrParaElem e ObterQtdElem criadas no módulo lista.
+
+12/05/2018 - 5h trabalhadas - Codificar módulo
+	Foi iniciado o módulo Interface do Usuário.
+	O jogo está começando a ganhar forma e já é possível interagir com ele pelo terminal.

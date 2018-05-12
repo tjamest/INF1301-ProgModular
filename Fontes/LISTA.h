@@ -218,7 +218,7 @@ void * LIS_ObterValor(LIS_tppLista pLista) ;
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
 ***********************************************************************/
-void IrInicioLista(LIS_tppLista pLista) ;
+void LIS_IrInicioLista(LIS_tppLista pLista) ;
 
 
 /***********************************************************************
@@ -231,7 +231,7 @@ void IrInicioLista(LIS_tppLista pLista) ;
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
 ***********************************************************************/
-void IrFinalLista(LIS_tppLista pLista) ;
+void LIS_IrFinalLista(LIS_tppLista pLista) ;
 
 
 /***********************************************************************

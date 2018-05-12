@@ -34,7 +34,15 @@
 *  Função: MES  &Criar mesa
 ***************************************************************************/
 LIS_tppLista MES_CriarMesa() {
+
+	//criando ponteiro pra cabeca da lista mesa
 	LIS_tppLista pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pCabecaMesa != NULL ) ;
+	#endif
+
 	return pCabecaMesa ;
 } /***************** Fim função: MES &Criar lista***********************/
 
@@ -42,7 +50,15 @@ LIS_tppLista MES_CriarMesa() {
 *  Função: MES  &Criar mao
 ***************************************************************************/
 LIS_tppLista MES_CriarMao() {
+
+	//criando ponteiro pra cabeca da lista mao
 	LIS_tppLista pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pCabecaMao != NULL ) ;
+	#endif
+
 	return pCabecaMao ;
 } /***************** Fim função: MES &Criar mao ***********************/
 
@@ -113,9 +129,14 @@ int MES_ObterValorManilha (LIS_tppLista pCabecaMesa) {
 	int valor, valorManilha ;
 	BAR_tppCarta pCarta ;
 
-	IrInicioLista(pCabecaMesa) ;
+	LIS_IrInicioLista(pCabecaMesa) ;
 
 	pCarta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	//assertiva de saída
+	if (pCarta == NULL) {
+		return -10;
+	}
 
 	valor = BAR_ObterValor(pCarta) ;
 

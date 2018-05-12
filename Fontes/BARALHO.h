@@ -33,10 +33,8 @@
 #endif
 
 /**************** DECLARAÇÕES EXPORTADAS PELO MÓDULO **********************/
-
 // Tipo referência para uma carta
 typedef struct BAR_tagCarta * BAR_tppCarta ;
-
 
 /***************************************************************************
 *  $TC Tipo de dados: BAR Condições de retorno
@@ -45,16 +43,10 @@ typedef struct BAR_tagCarta * BAR_tppCarta ;
 *     Condições de retorno das funções de carta.
 ***************************************************************************/
 typedef enum {
-
-   BAR_CondRetOK,                 // Concluiu corretamente
-   BAR_CondRetNaoCriouBaralho,    // Não criou ponteiro pro tpLista
-   BAR_CondRetNaoCriouCarta,      // Não criou ponteiro pro tpCarta
-   BAR_CondRetNaoCriouMaoJogador, // Não criou ponteiro pro tpLista
-   BAR_CondRetNaoCriouMesa,       // Não criou ponteiro pro tpLista
-   BAR_CondRetNaoDestruiu,        // Não liberou ponteiro
-   BAR_CondRetFaltouMemoria,      // Faltou memoria 
-   BAR_CondRetParamIncorretos     // Parâmetros da função incorretos
-
+   BAR_CondRetOK,			
+   BAR_CondRetNaoObteveCarta,		
+   BAR_CondRetNaoInseriuCarta,
+   BAR_CondRetNaoExcluiuPtrParaElem
 } BAR_tpCondRet;
 
 
@@ -112,7 +104,6 @@ typedef enum {
 ***************************************************************************/
 LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]) ;
 
-
 /***************************************************************************
 *  $FC Função: BAR  &Criar Carta
 *
@@ -128,7 +119,6 @@ LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]) ;
 ***************************************************************************/
 BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 
-
 /***************************************************************************
 *  $FC Função: BAR  &Destruir Carta
 *
@@ -136,7 +126,6 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 *     Recebe ponteiro pra um tipo void.
 ***************************************************************************/
 void BAR_DestruirCarta(void * pCarta);
-
 
 /***************************************************************************
 *  $FC Função: BAR  &Obter Carta
@@ -152,7 +141,6 @@ void BAR_DestruirCarta(void * pCarta);
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 
-
 /***************************************************************************
 *  $FC Função: BAR  &Obter Naipe
 *
@@ -163,7 +151,6 @@ BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
 *     Retorna um tipo de naipe de carta.
 ***************************************************************************/
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
-
 
 /***************************************************************************
 *  $FC Função: BAR  &Obter valor
@@ -176,14 +163,13 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) ;
 ***************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 
-
 /***************************************************************************
 *  $FC Função: BAR  &Transferir carta
 *
 *  $EP Parâmetros
 *     Recebe uma lista de onde vai ser retirada a carta e uma pra onde vai.
 ***************************************************************************/
-void BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
+BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 
 
 #undef BARALHO_EXT
