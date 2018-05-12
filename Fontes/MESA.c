@@ -33,99 +33,104 @@
 /***************************************************************************
 *  Função: MES  &Criar mesa
 ***************************************************************************/
-LIS_tppLista MES_CriarMesa(BAR_tppCarta vtCartas[], int numJogadores) {
-
-	int inx; //indice do vetor
-	
-	//cria uma lista retornando um ponteiro pra cabeca da lista
+LIS_tppLista MES_CriarMesa() {
 	LIS_tppLista pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
-
-	//declara uma variável que armazena a condição de
-	//retorno de funções de manipulação da lista
-	LIS_tpCondRet condRetLista;
-
-	//declara um ponteiro pra um tipo carta
-	BAR_tppCarta pCarta;
-	
-	switch (numJogadores) {
-		case 2: inx = 33; break;
-		case 4: inx = 27; break;
-		case 6: inx = 21; break;
-		default: return NULL;
-	}
-
-	//armazena a vira no primeiro elemento da mesa
-	pCarta = vtCartas[inx] ;
-	
-	//é inserido um elemento na lista Baralho e 
-	//seu valor é um ponteiro pra um tipo Carta
-	condRetLista = LIS_InserirElementoApos (pCabecaMesa, pCarta) ;
-
-	//assertiva de saída
-	if (condRetLista != LIS_CondRetOK){
-		printf("\nNão inseriu carta no baralho.");
-		return NULL;
-	}//fim if
-
-	//elemento corrente passa a ser o primeiro
-	IrInicioLista(pCabecaMesa) ;
-
 	return pCabecaMesa ;
-   
-} /******************* Fim função: BAR &Criar mesa *************************/
+} /***************** Fim função: MES &Criar lista***********************/
 
 /***************************************************************************
 *  Função: MES  &Criar mao
-***************************************************************************//*
-LIS_tppLista MES_CriarMao(BAR_tppCarta vtCartas[], int numMao) {
-
-	int inx; //indice do vetor
-	
-	//cria uma lista retornando um ponteiro pra cabeca da lista
+***************************************************************************/
+LIS_tppLista MES_CriarMao() {
 	LIS_tppLista pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
+	return pCabecaMao ;
+} /***************** Fim função: MES &Criar mao ***********************/
 
-	//declara uma variável que armazena a condição de
-	//retorno de funções de manipulação da lista
-	LIS_tpCondRet condRetLista;
+/***************************************************************************
+*  Função: MES  &Distribuir maos
+***************************************************************************/
+void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho, 
+						LIS_tppLista pCabecaMao1, 
+						LIS_tppLista pCabecaMao2, 
+						LIS_tppLista pCabecaMao3, 
+						LIS_tppLista pCabecaMao4, 
+						LIS_tppLista pCabecaMao5, 
+						LIS_tppLista pCabecaMao6, 
+						int numJogadores) {
 
-	//declara um ponteiro pra um tipo carta
-	BAR_tppCarta pCarta;
+	if (numJogadores == 2) {
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+	} //fim if
 	
-
-	//PAREI AQUI FUDEU Q TEM Q PASSAR NUMERO DE JOGADORES E NUMERO DA MAO
-	switch (numMao) {
-		case 1: inx = 33; break;
-		case 2: inx = 27; break;
-		case 3: inx = 21; break;
-		case 4: inx = 21; break;
-		case 5: inx = 21; break;
-		case 6: inx = 21; break;
-		default: return NULL;
-	}
-
-	//armazena a vira no primeiro elemento da mesa
-	pCarta = vtCartas[inx] ;
+	else if (numJogadores == 4) {
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;	
+	} //fim else if
 	
-	//é inserido um elemento na lista Baralho e 
-	//seu valor é um ponteiro pra um tipo Carta
-	condRetLista = LIS_InserirElementoApos (pCabecaMesa, pCarta) ;
+	else {
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;	
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+	} //fim else
 
-	//assertiva de saída
-	if (condRetLista != LIS_CondRetOK){
-		printf("\nNão inseriu carta no baralho.");
-		return NULL;
-	}//fim if
+} /***************** Fim função: MES &Distribuir maos ***********************/
 
-	//elemento corrente passa a ser o primeiro
+/***************************************************************************
+*  Função: MES  &Obter valor manilha
+***************************************************************************/
+int MES_ObterValorManilha (LIS_tppLista pCabecaMesa) {
+
+	int valor, valorManilha ;
+	BAR_tppCarta pCarta ;
+
 	IrInicioLista(pCabecaMesa) ;
 
-	return pCabecaMesa ;
-   
-} /******************* Fim função: BAR &Criar mesa *************************/
+	pCarta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	valor = BAR_ObterValor(pCarta) ;
+
+	if (valor == 9) {
+		valorManilha = 0 ;
+	}
+	else {
+		valorManilha = valor+1 ;
+	}
+
+	return valorManilha ;
+} /************ Fim função: MES &Obter Valor Manilha ********************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
 //ainda nao ha funcoes encapsuladas no modulo
 
-
-/************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: BAR Baralho ******************/
+/************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: MES Mesa ******************/

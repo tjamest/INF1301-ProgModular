@@ -12,12 +12,12 @@
 *  Autores: avs
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*     4       avs   01/fev/2006 criar linguagem script simbólica
-*     3       avs   08/dez/2004 uniformização dos exemplos
-*     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
-*     1       avs   16/abr/2003 início desenvolvimento
-*
+*     Versão  Autor      Data      Observações
+*	  5		gsc, tgf   11/mai/2018 criadas as funções ObterQtdElem e ExcluirPtrParaElem 
+*     4        avs     01/fev/2006 criar linguagem script simbólica
+*     3        avs     08/dez/2004 uniformização dos exemplos
+*     2        avs     07/jul/2003 unificação de todos os módulos em um só projeto
+*     1        avs     16/abr/2003 início desenvolvimento
 ***************************************************************************/
 
 #include   <stdio.h>
@@ -31,10 +31,7 @@
 #undef LISTA_OWN
 
 /***********************************************************************
-*
 *  $TC Tipo de dados: LIS Elemento da lista
-*
-*
 ***********************************************************************/
 
    typedef struct tagElemLista {
@@ -51,10 +48,7 @@
    } tpElemLista ;
 
 /***********************************************************************
-*
 *  $TC Tipo de dados: LIS Descritor da cabeça de lista
-*
-*
 ***********************************************************************/
 
    typedef struct LIS_tagLista {
@@ -89,7 +83,6 @@
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
-*
 *  Função: LIS  &Criar lista
 *  ****/
 
@@ -114,7 +107,6 @@
    } /* Fim função: LIS  &Criar lista */
 
 /***************************************************************************
-*
 *  Função: LIS  &Destruir lista
 *  ****/
 
@@ -132,7 +124,6 @@
    } /* Fim função: LIS  &Destruir lista */
 
 /***************************************************************************
-*
 *  Função: LIS  &Esvaziar lista
 *  ****/
 
@@ -159,7 +150,6 @@
    } /* Fim função: LIS  &Esvaziar lista */
 
 /***************************************************************************
-*
 *  Função: LIS  &Inserir elemento antes
 *  ****/
 
@@ -209,7 +199,6 @@
    } /* Fim função: LIS  &Inserir elemento antes */
 
 /***************************************************************************
-*
 *  Função: LIS  &Inserir elemento após
 *  ****/
 
@@ -261,7 +250,6 @@
    } /* Fim função: LIS  &Inserir elemento após */
 
 /***************************************************************************
-*
 *  Função: LIS  &Excluir elemento
 *  ****/
 
@@ -308,8 +296,70 @@
 
    } /* Fim função: LIS  &Excluir elemento */
 
+
 /***************************************************************************
-*
+*  Função: LIS  &Excluir ponteiro para elemento
+*  ****/
+
+   LIS_tpCondRet LIS_ExcluirPtrParaElemento( LIS_tppLista pLista )
+   {
+
+      tpElemLista *pElem ;
+
+      #ifdef _DEBUG
+         assert( pLista  != NULL ) ;
+      #endif
+
+      if ( pLista->pElemCorr == NULL )
+      {
+         return LIS_CondRetListaVazia ;
+      } /* if */
+
+      pElem = pLista->pElemCorr ;
+
+      /* Desencadeia à esquerda */
+
+         if ( pElem->pAnt != NULL )
+         {
+            pElem->pAnt->pProx   = pElem->pProx ;
+            pLista->pElemCorr    = pElem->pAnt ;
+         } else {
+            pLista->pElemCorr    = pElem->pProx ;
+            pLista->pOrigemLista = pLista->pElemCorr ;
+         } /* if */
+
+      /* Desencadeia à direita */
+
+         if ( pElem->pProx != NULL )
+         {
+            pElem->pProx->pAnt = pElem->pAnt ;
+         } else
+         {
+            pLista->pFimLista = pElem->pAnt ;
+         } /* if */
+
+      free(pElem) ;
+
+	  pLista->numElem-- ;
+
+      return LIS_CondRetOK ;
+
+   } /* Fim função: LIS  &Excluir ponteiro para elemento */
+
+
+/***************************************************************************
+*  Função: LIS  &Quantidade de elementos
+*  ****/
+
+   int LIS_ObterQtdElem( LIS_tppLista pLista )
+   {
+      int qtd;
+      qtd = pLista->numElem;
+      return qtd;
+
+} /* Fim função: LIS  &Quantidade de elementos */
+
+/***************************************************************************
 *  Função: LIS  &Obter referência para o valor contido no elemento
 *  ****/
 
@@ -330,7 +380,6 @@
    } /* Fim função: LIS  &Obter referência para o valor contido no elemento */
 
 /***************************************************************************
-*
 *  Função: LIS  &Ir para o elemento inicial
 *  ****/
 
@@ -346,7 +395,6 @@
    } /* Fim função: LIS  &Ir para o elemento inicial */
 
 /***************************************************************************
-*
 *  Função: LIS  &Ir para o elemento final
 *  ****/
 
@@ -362,7 +410,6 @@
    } /* Fim função: LIS  &Ir para o elemento final */
 
 /***************************************************************************
-*
 *  Função: LIS  &Avançar elemento
 *  ****/
 
@@ -446,7 +493,6 @@
    } /* Fim função: LIS  &Avançar elemento */
 
 /***************************************************************************
-*
 *  Função: LIS  &Procurar elemento contendo valor
 *  ****/
 
@@ -485,13 +531,11 @@
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  -Liberar elemento da lista
 *
 *  $ED Descrição da função
 *     Elimina os espaços apontados pelo valor do elemento e o
 *     próprio elemento.
-*
 ***********************************************************************/
 
    void LiberarElemento( LIS_tppLista   pLista ,
@@ -512,9 +556,7 @@
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  -Criar o elemento
-*
 ***********************************************************************/
 
    tpElemLista * CriarElemento( LIS_tppLista pLista ,
@@ -541,9 +583,7 @@
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  -Limpar a cabeça da lista
-*
 ***********************************************************************/
 
    void LimparCabeca( LIS_tppLista pLista )

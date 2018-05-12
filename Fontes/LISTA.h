@@ -1,7 +1,6 @@
 #if ! defined( LISTA_ )
 #define LISTA_
 /***************************************************************************
-*
 *  $MCD Módulo de definição: LIS  Lista duplamente encadeada
 *
 *  Arquivo gerado:              LISTA.h
@@ -48,7 +47,6 @@
 *        Caso o elemento da lista seja a única âncora do valor referenciado,
 *        esta função deve promover a destruição (free) desse valor e
 *        de todos os dados nele ancorados.
-*
 ***************************************************************************/
  
 #if defined( LISTA_OWN )
@@ -65,13 +63,10 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
 
 /***********************************************************************
-*
 *  $TC Tipo de dados: LIS Condições de retorno
-*
 *
 *  $ED Descrição do tipo
 *     Condições de retorno das funções da lista
-*
 ***********************************************************************/
 
    typedef enum {
@@ -84,7 +79,6 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Criar lista
 *
 *  $ED Descrição da função
@@ -106,15 +100,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
 *     a função retornará NULL.
 *     Não será dada mais informação quanto ao problema ocorrido.
-*
 ***********************************************************************/
-
-   LIS_tppLista LIS_CriarLista(
-             void   ( * ExcluirValor ) ( void * pDado ) ) ;
+LIS_tppLista LIS_CriarLista(void( * ExcluirValor ) ( void * pDado )) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Destruir lista
 *
 *  $ED Descrição da função
@@ -126,14 +116,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 *  $FV Valor retornado
 *     LIS_CondRetOK    - destruiu sem problemas
-*
 ***********************************************************************/
-
-   void LIS_DestruirLista( LIS_tppLista pLista ) ;
+void LIS_DestruirLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Esvaziar lista
 *
 *  $ED Descrição da função
@@ -141,14 +128,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a ser esvaziada
-*
 ***********************************************************************/
-
-   void LIS_EsvaziarLista( LIS_tppLista pLista ) ;
+void LIS_EsvaziarLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Inserir elemento antes
 *
 *  $ED Descrição da função
@@ -163,15 +147,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $FV Valor retornado
 *     LIS_CondRetOK
 *     LIS_CondRetFaltouMemoria
-*
 ***********************************************************************/
-
-   LIS_tpCondRet LIS_InserirElementoAntes( LIS_tppLista pLista ,
-                                           void * pValor        ) ;
+LIS_tpCondRet LIS_InserirElementoAntes(LIS_tppLista pLista, void * pValor) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Inserir elemento após
 *
 *  $ED Descrição da função
@@ -184,18 +164,12 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *        pValor - ponteiro para o valor do novo elemento
 *                 Pode ser NULL
 *           
-*
 *  $FV Valor retornado
 *     Valor retornado
 *        LIS_CondRetOK
 *        LIS_CondRetFaltouMemoria
-*
 ***********************************************************************/
-
-   LIS_tpCondRet LIS_InserirElementoApos( LIS_tppLista pLista ,
-                                          void * pValor        )
-       ;
-
+LIS_tpCondRet LIS_InserirElementoApos(LIS_tppLista pLista, void * pValor) ;
 
 /***********************************************************************
 *
@@ -213,14 +187,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *  $FV Valor retornado
 *     LIS_CondRetOK
 *     LIS_CondRetListaVazia
-*
 ***********************************************************************/
-
-   LIS_tpCondRet LIS_ExcluirElemento( LIS_tppLista pLista ) ;
+LIS_tpCondRet LIS_ExcluirElemento( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Obter referência para o valor contido no elemento
 *
 *  $ED Descrição da função
@@ -233,14 +204,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     não NULL - se o elemento corrente existe
 *     NULL     - se a lista estiver vazia
 *                Pode retornar NULL se o valor inserido no elemento for NULL.
-*
 ***********************************************************************/
-
-   void * LIS_ObterValor( LIS_tppLista pLista ) ;
+void * LIS_ObterValor(LIS_tppLista pLista) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Ir para o elemento inicial
 *
 *  $ED Descrição da função
@@ -249,14 +217,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
-*
 ***********************************************************************/
-
-   void IrInicioLista( LIS_tppLista pLista ) ;
+void IrInicioLista(LIS_tppLista pLista) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Ir para o elemento final
 *
 *  $ED Descrição da função
@@ -265,14 +230,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 *  $EP Parâmetros
 *     pLista - ponteiro para a lista a manipular
-*
 ***********************************************************************/
-
-   void IrFinalLista( LIS_tppLista pLista ) ;
+void IrFinalLista(LIS_tppLista pLista) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Avançar elemento
 *
 *  $ED Descrição da função
@@ -292,15 +254,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     CondRetFimLista   - se encontrou o fim da lista antes de andar numElem
 *                         elementos
 *     CondRetListaVazia - se a lista está vazia
-*
 ***********************************************************************/
-
-   LIS_tpCondRet LIS_AvancarElementoCorrente( LIS_tppLista pLista ,
-                                              int numElem ) ;
+LIS_tpCondRet LIS_AvancarElementoCorrente(LIS_tppLista pLista, int numElem) ;
 
 
 /***********************************************************************
-*
 *  $FC Função: LIS  &Procurar elemento contendo valor
 *
 *  $ED Descrição da função
@@ -321,11 +279,36 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     LIS_CondRetNaoEncontrou - se o ponteiro não foi encontrado
 *                      O elemento corrente continua o mesmo
 *     LIS_CondRetListaVazia   - se a lista estiver vazia
+***********************************************************************/
+LIS_tpCondRet LIS_ProcurarValor(LIS_tppLista pLista, void * pValor) ;
+
+/***********************************************************************
+*  $FC Função: LIS  &Excluir ponteiro para elemento
+*
+*  $ED Descrição da função
+*     Excluir uma carta sem destruir o ponteiro pra ela.
+*	  Isso permite que continue existindo um ponteiro pra essa carta.
+*	  Consequentemente permite a transferência de cartas entre baralhos.
+*
+*  $EP Parâmetros
+*
+*  $FV Valor retornado
 *
 ***********************************************************************/
+LIS_tpCondRet LIS_ExcluirPtrParaElemento(LIS_tppLista pLista) ;
 
-   LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
-                                    void * pValor        ) ;
+
+/***********************************************************************
+*  $FC Função: LIS  &Quantidade de elementos
+*
+*  $ED Descrição da função
+*     Obtem quantos elementos há na lista.
+*
+*  $EP Parâmetros
+*	  Ponteiro pra cabeça da lista.
+***********************************************************************/
+int LIS_ObterQtdElem(LIS_tppLista pLista) ;
+
 
 #undef LISTA_EXT
 

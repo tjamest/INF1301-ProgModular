@@ -43,7 +43,7 @@
 *     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
 *     funções que manipulem esta mesa. 
 ***************************************************************************/
-LIS_tppLista MES_CriarMesa(BAR_tppCarta vtCartas[TAM], int numJogadores) ;
+LIS_tppLista MES_CriarMesa() ;
 
 
 /***************************************************************************
@@ -61,7 +61,37 @@ LIS_tppLista MES_CriarMesa(BAR_tppCarta vtCartas[TAM], int numJogadores) ;
 *     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
 *     funções que manipulem esta mao. 
 ***************************************************************************/
-//LIS_tppLista MES_CriarMao(BAR_tppCarta vtCartas[TAM], int numMao) ;
+LIS_tppLista MES_CriarMao() ;
+
+/***************************************************************************
+*  $FC Função: MES  &Distribuir maos
+*
+*  $ED Descrição da função
+*     Distribui as maos para os jogadores
+*
+*  $EP Parâmetros
+*     Ponteiros para cabeca do baralho e das maos.
+*	  Numero de jogadores.
+***************************************************************************/
+void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho, 
+						LIS_tppLista pCabecaMao1, 
+						LIS_tppLista pCabecaMao2, 
+						LIS_tppLista pCabecaMao3, 
+						LIS_tppLista pCabecaMao4, 
+						LIS_tppLista pCabecaMao5, 
+						LIS_tppLista pCabecaMao6, 
+						int numJogadores) ;
+
+/***************************************************************************
+*  $FC Função: MES  &Obter valor manilha
+*
+*  $ED Descrição da função
+*     Obtem o valor da carta manilha.
+*
+*  $EP Parâmetros
+*     Ponteiros para cabeca da mesa.
+***************************************************************************/
+int MES_ObterValorManilha(LIS_tppLista pCabecaMesa) ;
 
 
 #undef MESA_EXT

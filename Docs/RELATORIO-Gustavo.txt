@@ -117,3 +117,7 @@
 	Estudo do teste lista. Incrementação do script de teste do módulo lista.
 	Revisão dos documentos do programa (visão de módulo, visão de interface, etc).
 	Descoberta a solução de alguns problemas como retornar vetor de uma função.
+
+11/05/2018 - 8h trabalhadas - Codificar modulo
+	Iniciado o desenvolvimento do módulo mesa (funções CriarMesa, CriarMao, DistribuirMaos e ObterValorManilha).
+	Funções ExcluirPtrParaElem e ObterQtdElem criadas no módulo lista.

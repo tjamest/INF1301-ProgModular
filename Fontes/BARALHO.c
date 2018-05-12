@@ -9,7 +9,8 @@
 *
 *  $HA Histórico de evolução:
 *  Versão  		Autor  			Data    	Observações
-*	  2			gsc			 10/mai/2018	revisão para entrega na data
+*	  3			 gsc		 11/mai/2018	criada a TransferirCarta
+*	  2			 gsc		 10/mai/2018	revisão para entrega na data
 *     1     gsc, jvr, tgf    19/abr/2018    início desenvolvimento
 ***************************************************************************/
 
@@ -78,7 +79,6 @@ LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[]) {
    
 } /***************** Fim função: BAR &Criar baralho ***********************/
 
-
 /****************************************************************************
 *  $FC Função: BAR  &Criar Carta
 ****************************************************************************/
@@ -96,7 +96,6 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 	
 } /******************** Fim função: BAR &Criar Carta ***********************/
 
-
 /***************************************************************************
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
@@ -109,7 +108,6 @@ void BAR_DestruirCarta(void * pCarta) {
 	free(pCarta) ;
 } /************ Fim função: BAR &Destruir carta ****************************/
 
-
 /***************************************************************************
 *  Função: BAR  &Obter carta
 ***************************************************************************/
@@ -120,7 +118,6 @@ BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {
 
 	return pCarta;
 } /***************** Fim função: BAR &Obter carta **************************/
-
 
 /***************************************************************************
 *  Função: BAR  &Obter naipe
@@ -133,7 +130,6 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 
 	return pCarta->naipe;
 } /***************** Fim função: BAR &Obter naipe **************************/
-
 
 /***************************************************************************
 *  Função: BAR  &Obter valor
@@ -156,19 +152,11 @@ void BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 
 	BAR_tppCarta pCarta = BAR_ObterCartaCorr(pOrigem) ;
 
-	CondRetLista = LIS_ExcluirElemento(pOrigem) ;
-	
-	if (CondRetLista == LIS_CondRetListaVazia) {
-		printf("Erro na exclusao de elemento ao transferir carta.\n") ;
-	}
-
 	CondRetLista = LIS_InserirElementoApos(pDestino, pCarta) ;
 
-	if (CondRetLista == LIS_CondRetFaltouMemoria) {
-		printf("Erro na insercao de elemento ao transferir carta.\n") ;
-	}
-} /***************** Fim função: BAR &Transferir carta *********************/
+	CondRetLista = LIS_ExcluirPtrParaElemento(pOrigem) ;
 
+} /***************** Fim função: BAR &Transferir carta *********************/
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
 //nao ha funcoes encapsuladas no modulo

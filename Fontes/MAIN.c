@@ -1,14 +1,10 @@
 #include "LISTA.h"
 #include "BARALHO.h"
 #include "MESA.h"
-#include   <stdio.h>
-#include   <stdlib.h> 
-#include   <string.h>
-#include   <malloc.h>
+#include   <stdio.h>	//printf
+#include   <stdlib.h>	//rand e srand
 #include   <time.h>
-#include   <assert.h>
 
-//tamanho de um baralho sem os 8, 9, 10 e coringas
 #define TAM 40
 
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
@@ -16,36 +12,67 @@ void PreencheVetorCartas(BAR_tppCarta vtCartas[]) ;
 void EmbaralhaVetorCartas(BAR_tppCarta vtCartas[]) ;
 void PrintaBaralho(LIS_tppLista pCabecaBaralho) ;
 void PrintaMesa(LIS_tppLista pCabecaMesa) ;
+void PrintaMao(LIS_tppLista pCabecaMao, int numMao) ;
 /**************************************************************************/
-
 //declara um vetor que armazena ponteiro pra tipo carta
 BAR_tppCarta VetorAux[TAM];
-
-/************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
+/**************************************************************************/
 int main (void) {
+
+	int numJogadores, 
+		valorManilha ;
 
 	//declara o vetor que armazena os ponteiros pras cartas
 	BAR_tppCarta vtCartas[TAM] ;
 
 	//declara ponteiros pras cabecas das listas
-	LIS_tppLista pCabecaBaralho ;
-	LIS_tppLista pCabecaMesa ;
-//	LIS_tppLista pCabecaMao1 ;
+	LIS_tppLista pCabecaBaralho,
+				 pCabecaMesa,
+				 pCabecaMao1,
+				 pCabecaMao2,
+				 pCabecaMao3,
+				 pCabecaMao4,
+				 pCabecaMao5,
+				 pCabecaMao6;
+
+	printf("Quantas pessoas vao jogar?\n");
+	scanf_s("%d", &numJogadores);
 
 	//preenche o vetor e embaralha os indices
 	PreencheVetorCartas(vtCartas) ;
 	EmbaralhaVetorCartas(vtCartas) ;
 
-	//ponteiros que apontam pras cabecas de listas
+	//cria um baralho com 40 cartas
 	pCabecaBaralho = BAR_CriarBaralho(vtCartas) ;
 
-	pCabecaMesa = LIS_CriarLista(BAR_DestruirCarta) ;
+	//cria uma mesa sem cartas
+	pCabecaMesa = MES_CriarMesa() ;
 
+	//cria maos sem cartas
+	pCabecaMao1 = MES_CriarMao() ;
+	pCabecaMao2 = MES_CriarMao() ;
+	pCabecaMao3 = MES_CriarMao() ;
+	pCabecaMao4 = MES_CriarMao() ;
+	pCabecaMao5 = MES_CriarMao() ;
+	pCabecaMao6 = MES_CriarMao() ;
+
+	//vira vai pra mesa
 	BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
 
-	//printa as listas
-	PrintaBaralho(pCabecaBaralho) ;	
+	//distribui as maos
+	MES_DistribuirMaos(pCabecaBaralho, 
+					   pCabecaMao1, pCabecaMao2, pCabecaMao3,
+					   pCabecaMao4, pCabecaMao5, pCabecaMao6, 
+					   numJogadores) ;
+
+	PrintaBaralho(pCabecaBaralho) ;
 	PrintaMesa(pCabecaMesa) ;
+	PrintaMao(pCabecaMao1, 1) ;
+	PrintaMao(pCabecaMao2, 2) ;
+	PrintaMao(pCabecaMao3, 3) ;
+	PrintaMao(pCabecaMao4, 4) ;
+	PrintaMao(pCabecaMao5, 5) ;
+	PrintaMao(pCabecaMao6, 6) ;
 
 	return 0;
 }
@@ -82,7 +109,6 @@ void PreencheVetorCartas (BAR_tppCarta vtCartas[]) {
 	//return *vtCartas ;
 
 } /***************** Fim função: &Preenche vetor cartas *******************/
-
 
 /***************************************************************************
 *  Função: &Embaralha vetor cartas
@@ -136,13 +162,12 @@ void EmbaralhaVetorCartas (BAR_tppCarta vtCartas[]) {
 
 } /***************** Fim função: &Embaralha vetor cartas ******************/
 
-
 /***************************************************************************
 *  Função: &Printa baralho
 ***************************************************************************/
 void PrintaBaralho (LIS_tppLista pCabecaBaralho) {
 	
-	int i, valor, naipe ;
+	int i, qtdCartas, valor, naipe ;
 
 	//condicao de retorno da manipulacao da lista
 	LIS_tpCondRet CondRetLis;
@@ -152,10 +177,12 @@ void PrintaBaralho (LIS_tppLista pCabecaBaralho) {
 
 	//elemento corrente passa a ser o primeiro
 	IrInicioLista(pCabecaBaralho);
+
+	qtdCartas = LIS_ObterQtdElem(pCabecaBaralho) ;
 	
 	//printando as cartas
-	printf("\nCartas na lista baralho:\n") ;
-	for(i = 0; i < TAM; i++) {
+	printf("\n     BARALHO:\n") ;
+	for(i = 0; i < qtdCartas; i++) {
 
 		//obtem o ponteiro pra uma carta
 		pCarta = BAR_ObterCartaCorr (pCabecaBaralho);
@@ -169,7 +196,7 @@ void PrintaBaralho (LIS_tppLista pCabecaBaralho) {
 		}
 
 		//verificando com printf
-		printf ("Carta %d - Valor: %d  Naipe: %d\n", i+1, valor, naipe);
+		printf ("Carta %d - Valor %d  Naipe %d\n", i+1, valor, naipe);
 
 		//avancando com o elemento
 		CondRetLis = LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
@@ -178,13 +205,12 @@ void PrintaBaralho (LIS_tppLista pCabecaBaralho) {
 
 } /***************** Fim função: &Printa baralho **********************/
 
-
 /***************************************************************************
 *  Função: &Printa mesa
 ***************************************************************************/
 void PrintaMesa (LIS_tppLista pCabecaMesa) {
 	
-	int i, valor, naipe;
+	int i, qtdCartas, valor, naipe;
 
 	//condicao de retorno da manipulacao da lista
 	LIS_tpCondRet CondRetLis;
@@ -194,10 +220,13 @@ void PrintaMesa (LIS_tppLista pCabecaMesa) {
 
 	//elemento corrente passa a ser o primeiro
 	IrInicioLista(pCabecaMesa);
-	
+
+	//obtem a quantidade de elementos na mesa
+	qtdCartas = LIS_ObterQtdElem(pCabecaMesa);
+
 	//printando as cartas
-	printf("\nCartas na lista mesa:\n") ;
-	for(i = 0; i < 4; i++) {
+	printf("\n     MESA:\n") ;
+	for(i = 0; i < qtdCartas; i++) {
 
 		//obtem o ponteiro pra uma carta
 		pCarta = BAR_ObterCartaCorr (pCabecaMesa);
@@ -206,8 +235,12 @@ void PrintaMesa (LIS_tppLista pCabecaMesa) {
 		valor = (int)BAR_ObterValor (pCarta);
 		naipe = (int)BAR_ObterNaipe (pCarta);
 
-		//verificando com printf
-		printf ("Carta %d - Valor: %d  Naipe: %d\n", i+1, valor, naipe);
+		if (i == 0) {
+			printf("Vira - Valor %d  Naipe %d\n", valor, naipe) ;
+		}
+		else {
+			printf ("Carta %d - Valor %d  Naipe %d\n", i, valor, naipe);
+		}
 
 		//avancando com o elemento
 		CondRetLis = LIS_AvancarElementoCorrente(pCabecaMesa, 1) ;
@@ -215,3 +248,43 @@ void PrintaMesa (LIS_tppLista pCabecaMesa) {
 	}//fim for
 
 } /***************** Fim função: &Printa mesa *************************/
+
+/***************************************************************************
+*  Função: &Printa mao
+***************************************************************************/
+void PrintaMao (LIS_tppLista pCabecaMao, int numMao) {
+	
+	int i, qtdCartas, valor, naipe;
+
+	//condicao de retorno da manipulacao da lista
+	LIS_tpCondRet CondRetLis;
+
+	//declarando ponteiro temporario pra carta
+	BAR_tppCarta pCarta;
+
+	//elemento corrente passa a ser o primeiro
+	IrInicioLista(pCabecaMao);
+
+	//obtem a quantidade de elementos na mao
+	qtdCartas = LIS_ObterQtdElem(pCabecaMao);
+	
+	//printando as cartas
+	printf("\n     JOGADOR %d:\n", numMao) ;
+	for(i = 0; i < qtdCartas; i++) {
+
+		//obtem o ponteiro pra uma carta
+		pCarta = BAR_ObterCartaCorr (pCabecaMao);
+
+		//obtem valor e naipe
+		valor = (int)BAR_ObterValor (pCarta);
+		naipe = (int)BAR_ObterNaipe (pCarta);
+
+		//verificando com printf
+		printf ("Carta %d - Valor %d  Naipe %d\n", i+1, valor, naipe);
+
+		//avancando com o elemento
+		CondRetLis = LIS_AvancarElementoCorrente(pCabecaMao, 1) ;
+
+	}//fim for
+
+} /***************** Fim função: &Printa mao *************************/
