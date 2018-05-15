@@ -110,6 +110,18 @@ void BAR_DestruirCarta(void * pCarta) {
 } /************ Fim função: BAR &Destruir carta ****************************/
 
 /***************************************************************************
+*  Função: BAR  &Destruir baralho
+***************************************************************************/
+void BAR_DestruirBaralho(void * pBaralho) {
+
+	#ifdef _DEBUG
+		assert( pBaralho != NULL ) ;
+	#endif
+
+	free(pBaralho) ;
+} /************ Fim função: BAR &Destruir baralho ****************************/
+
+/***************************************************************************
 *  Função: BAR  &Obter carta
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {

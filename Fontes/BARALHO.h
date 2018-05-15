@@ -128,6 +128,14 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 void BAR_DestruirCarta(void * pCarta);
 
 /***************************************************************************
+*  $FC Função: BAR  &Destruir Baralho
+*
+*  $EP Parâmetros
+*     Recebe ponteiro pra um tipo void.
+***************************************************************************/
+void BAR_DestruirBaralho(void * pBaralho) ;
+
+/***************************************************************************
 *  $FC Função: BAR  &Obter Carta
 *
 *  $EP Parâmetros
@@ -170,6 +178,7 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 *     Recebe uma lista de onde vai ser retirada a carta e uma pra onde vai.
 ***************************************************************************/
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
+
 
 
 #undef BARALHO_EXT

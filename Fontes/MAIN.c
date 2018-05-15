@@ -5,10 +5,13 @@
 #include   <stdlib.h>	//rand e srand
 #include   <string.h>	//strcmp
 #include   <time.h>
+#include   <assert.h>
 
 #define TAM 40
 
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
+
+LIS_tppLista IU_CriarCabecaSuperior() ;
 
 void PreencheVetorCartas(BAR_tppCarta vtCartas[]) ;
 void EmbaralhaVetorCartas(BAR_tppCarta vtCartas[]) ;
@@ -17,18 +20,42 @@ void PrintaMesa(LIS_tppLista pCabecaMesa) ;
 void PrintaMao(LIS_tppLista pCabecaMao) ;
 void PrintaRegras() ;
 
-void IniciarPartida () ;
+void IniciarPartida (int * quemComeca,
+					 LIS_tppLista pCabecaSuperior, 
+					 LIS_tppLista pCabecaMesa,
+					 LIS_tppLista pCabecaMao1, 
+					 LIS_tppLista pCabecaMao2, 
+					 LIS_tppLista pCabecaMao3, 
+					 LIS_tppLista pCabecaMao4,
+					 LIS_tppLista pCabecaMao5, 
+					 LIS_tppLista pCabecaMao6) ;
 
 int PrintaOpcoesInicio() ;
-void ExecutaOpcaoInicio (int opcaoInicio) ;
+void ExecutaOpcaoInicio (int opcaoInicio, int * quemComeca,
+						 LIS_tppLista pCabecaSuperior, 
+						 LIS_tppLista pCabecaMesa,
+						 LIS_tppLista pCabecaMao1, 
+						 LIS_tppLista pCabecaMao2, 
+						 LIS_tppLista pCabecaMao3, 
+						 LIS_tppLista pCabecaMao4,
+						 LIS_tppLista pCabecaMao5, 
+						 LIS_tppLista pCabecaMao6) ;
 
 int PrintaOpcoesJogadores() ;
 void ExecutaOpcaoJogadores(int opcaoJogadores, 
 						   LIS_tppLista pCabecaBaralho,
-						   LIS_tppLista pCabecaMesa) ;
+						   LIS_tppLista pCabecaMesa, int * quemComeca) ;
 
 int PrintaOpcoesRegras();
-void ExecutaOpcaoRegras();
+void ExecutaOpcaoRegras(int opcaoRegras, int * quemComeca,
+						LIS_tppLista pCabecaSuperior, 
+						LIS_tppLista pCabecaMesa,
+						LIS_tppLista pCabecaMao1, 
+						LIS_tppLista pCabecaMao2, 
+						LIS_tppLista pCabecaMao3, 
+						LIS_tppLista pCabecaMao4,
+						LIS_tppLista pCabecaMao5, 
+						LIS_tppLista pCabecaMao6);
 
 int PrintaOpcoesPrimeiraJogada() ;
 void ExecutaOpcaoPrimeiraJogada(int opcaoJogada,
@@ -44,6 +71,16 @@ BAR_tppCarta VetorAux[TAM];
 int main (void) {
 
 	int opcaoInicio ;
+	int * quemComeca = (int*)malloc(sizeof(int));
+	LIS_tppLista pCabecaSuperior = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao4 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
 
 	//(1) iniciar, (2) regras, (3) sair
 	opcaoInicio = PrintaOpcoesInicio() ;
@@ -53,7 +90,16 @@ int main (void) {
 	//distribui as maos, transfere a vira pra mesa
 	//sorteia quem começa
 	//imprime a mesa e a mao
-	ExecutaOpcaoInicio(opcaoInicio) ;
+	ExecutaOpcaoInicio(opcaoInicio, quemComeca, pCabecaSuperior, pCabecaMesa,
+								pCabecaMao1, pCabecaMao2, pCabecaMao3, pCabecaMao4, 
+								pCabecaMao5, pCabecaMao6) ;
+
+	switch(*quemComeca) {
+	case 1: 
+		LIS_IrInicioLista(pCabecaSuperior) ;
+
+
+	}
 
 	return 0;
 }
@@ -203,7 +249,7 @@ void PrintaMesa (LIS_tppLista pCabecaMesa) {
 		}
 
 		if (i == 0) {
-			printf (" VIRA - %s de %s\n", valorStr, naipeStr);
+			printf ("  VIRA - %s de %s\n", valorStr, naipeStr);
 		}
 		else {
 			printf (" CARTA - %s de %s\n", valorStr, naipeStr);
@@ -332,20 +378,30 @@ int PrintaOpcoesInicio () {
 /***************************************************************************
 *  Função: &Executa opcao inicio
 ***************************************************************************/
-void ExecutaOpcaoInicio (int opcaoInicio) {
+void ExecutaOpcaoInicio (int opcaoInicio, int * quemComeca, 
+						 LIS_tppLista pCabecaSuperior, 
+						 LIS_tppLista pCabecaMesa,
+						 LIS_tppLista pCabecaMao1, 
+						 LIS_tppLista pCabecaMao2, 
+						 LIS_tppLista pCabecaMao3, 
+						 LIS_tppLista pCabecaMao4,
+						 LIS_tppLista pCabecaMao5, 
+						 LIS_tppLista pCabecaMao6) {
 
 	int opcaoRegras;
 	
 	switch (opcaoInicio){
 
 		case 49: //iniciar partida
-			IniciarPartida() ;			
+			IniciarPartida(quemComeca, pCabecaSuperior, pCabecaMesa, pCabecaMao1, 
+						   pCabecaMao2, pCabecaMao3, pCabecaMao4, pCabecaMao5, pCabecaMao6) ;			
 			break;
 
 		case 50: //regras
 			PrintaRegras();
 			opcaoRegras = PrintaOpcoesRegras() ;
-			ExecutaOpcaoRegras(opcaoRegras) ;
+			ExecutaOpcaoRegras(opcaoRegras, quemComeca, pCabecaSuperior, pCabecaMesa, pCabecaMao1, 
+							   pCabecaMao2, pCabecaMao3, pCabecaMao4, pCabecaMao5, pCabecaMao6) ;
 			break;
 
 		case 51: //exit
@@ -377,19 +433,31 @@ int PrintaOpcoesRegras() {
 /***************************************************************************
 *  Função: &Executa opcao regras
 ***************************************************************************/
-void ExecutaOpcaoRegras (int opcaoRegras) {
+void ExecutaOpcaoRegras (int opcaoRegras, int * quemComeca,
+						LIS_tppLista pCabecaSuperior, 
+						LIS_tppLista pCabecaMesa,
+						LIS_tppLista pCabecaMao1, 
+						LIS_tppLista pCabecaMao2, 
+						LIS_tppLista pCabecaMao3, 
+						LIS_tppLista pCabecaMao4,
+						LIS_tppLista pCabecaMao5, 
+						LIS_tppLista pCabecaMao6) {
 
 	int opcaoInicio;
 	
 	switch (opcaoRegras){
 
 		case 49: //iniciar partida
-			IniciarPartida() ;
+			IniciarPartida(quemComeca, pCabecaSuperior, pCabecaMesa,
+						   pCabecaMao1, pCabecaMao2, pCabecaMao3, pCabecaMao4, 
+						   pCabecaMao5, pCabecaMao6) ;
 			break;
 
 		case 50: //voltar
 			opcaoInicio = PrintaOpcoesInicio();
-			ExecutaOpcaoInicio (opcaoInicio);
+			ExecutaOpcaoInicio (opcaoInicio, quemComeca, pCabecaSuperior, pCabecaMesa,
+								pCabecaMao1, pCabecaMao2, pCabecaMao3, pCabecaMao4, 
+								pCabecaMao5, pCabecaMao6);
 			break;
 
 		case 51: //exit
@@ -401,7 +469,15 @@ void ExecutaOpcaoRegras (int opcaoRegras) {
 /***************************************************************************
 *  Função: &Iniciar partida
 ***************************************************************************/
-void IniciarPartida() {
+void IniciarPartida(int * quemComeca,
+					 LIS_tppLista pCabecaSuperior, 
+					 LIS_tppLista pCabecaMesa,
+					 LIS_tppLista pCabecaMao1, 
+					 LIS_tppLista pCabecaMao2, 
+					 LIS_tppLista pCabecaMao3, 
+					 LIS_tppLista pCabecaMao4,
+					 LIS_tppLista pCabecaMao5, 
+					 LIS_tppLista pCabecaMao6) {
 
 	int opcaoJogadores;
 
@@ -413,7 +489,7 @@ void IniciarPartida() {
 	BAR_tpCondRet CondRetBaralho ;
 
 	//declara ponteiros pras cabecas das listas
-	LIS_tppLista pCabecaBaralho, pCabecaMesa;
+	LIS_tppLista pCabecaBaralho ;
 
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf("~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
@@ -437,7 +513,7 @@ void IniciarPartida() {
 	opcaoJogadores = PrintaOpcoesJogadores() ;
 
 	//distribui as cartas de acordo com a quantidade de jogadores
-	ExecutaOpcaoJogadores(opcaoJogadores, pCabecaBaralho, pCabecaMesa) ;
+	ExecutaOpcaoJogadores(opcaoJogadores, pCabecaBaralho, pCabecaMesa, quemComeca) ;
 }
 
 /***************************************************************************
@@ -465,13 +541,21 @@ int PrintaOpcoesJogadores() {
 ***************************************************************************/
 void ExecutaOpcaoJogadores (int opcaoJogadores, 
 							LIS_tppLista pCabecaBaralho,
-							LIS_tppLista pCabecaMesa) {
+							LIS_tppLista pCabecaMesa, int * quemComeca) {
 
-	int numJogadores, quemComeca, opcaoJogada;
+	int numJogadores, opcaoJogada;
 	
 	char * ok = (char*)malloc(sizeof(char)) ;
 	LIS_tppLista pCabecaMao1, pCabecaMao2, pCabecaMao3,
 				 pCabecaMao4, pCabecaMao5, pCabecaMao6;
+
+	LIS_tpCondRet CondRetLista ;
+
+	LIS_tppLista pCabecaSuperior = IU_CriarCabecaSuperior() ;
+
+	LIS_IrInicioLista(pCabecaSuperior) ;
+
+	CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;
 
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf("~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
@@ -487,13 +571,16 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			pCabecaMao1 = MES_CriarMao() ;
 			pCabecaMao2 = MES_CriarMao() ;
 
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;
+
 			MES_DistribuirMaos( pCabecaBaralho, 
 								pCabecaMao1, pCabecaMao2, NULL,
 								NULL, NULL, NULL, numJogadores) ;
 
-			quemComeca = 1 + (rand() % 2) ;
+			*quemComeca = 1 + (rand() % 2) ;
 
-			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", quemComeca) ;
+			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", *quemComeca) ;
 			printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
 			scanf_s(" %s", ok, 4);
 
@@ -504,7 +591,7 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			system ("cls") ;
 			PrintaMesa(pCabecaMesa) ;
 
-			switch (quemComeca) {
+			switch (*quemComeca) {
 
 			case 1: //primeiro jogador comeca
 				PrintaMao(pCabecaMao1) ;
@@ -541,13 +628,18 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			pCabecaMao3 = MES_CriarMao() ;
 			pCabecaMao4 = MES_CriarMao() ;
 
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;
+
 			MES_DistribuirMaos( pCabecaBaralho, 
 								pCabecaMao1, pCabecaMao2, pCabecaMao3,
 								pCabecaMao4, NULL, NULL, numJogadores) ;
 
-			quemComeca = 1 + (rand() % 4) ;
+			*quemComeca = 1 + (rand() % 4) ;
 
-			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", quemComeca) ;
+			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", *quemComeca) ;
 			printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
 			scanf_s(" %s", ok, 4);
 
@@ -558,7 +650,7 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			system ("cls") ;
 			PrintaMesa(pCabecaMesa) ;
 
-			switch (quemComeca) {
+			switch (*quemComeca) {
 
 			case 1: //primeiro jogador comeca
 				
@@ -624,12 +716,19 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			pCabecaMao5 = MES_CriarMao() ;
 			pCabecaMao6 = MES_CriarMao() ;
 
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao5) ;
+			CondRetLista = LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;
+
 			MES_DistribuirMaos( pCabecaBaralho, pCabecaMao1, pCabecaMao2, pCabecaMao3,
 								pCabecaMao4, pCabecaMao5, pCabecaMao6, numJogadores) ;
 
-			quemComeca = 1 + (rand() % 6) ;
+			*quemComeca = 1 + (rand() % 6) ;
 
-			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", quemComeca) ;
+			printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", *quemComeca) ;
 			printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
 			scanf_s(" %s", ok, 4);
 
@@ -640,7 +739,7 @@ void ExecutaOpcaoJogadores (int opcaoJogadores,
 			system ("cls") ;
 			PrintaMesa(pCabecaMesa) ;
 
-			switch (quemComeca) {
+			switch (*quemComeca) {
 
 			case 1: //primeiro jogador comeca
 				
@@ -764,4 +863,19 @@ void ExecutaOpcaoPrimeiraJogada (int opcaoJogada,
 
 	} //fim switch opcaoJogada
 
+}
+
+/***************************************************************************
+*  Função: &Executa opcao da primeira jogada
+***************************************************************************/
+LIS_tppLista IU_CriarCabecaSuperior () {
+
+	LIS_tppLista pCabecaSuperior = LIS_CriarLista(BAR_DestruirBaralho) ;
+
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pCabecaSuperior != NULL ) ;
+	#endif
+
+	return pCabecaSuperior ;
 }
