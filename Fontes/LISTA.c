@@ -266,7 +266,6 @@ LIS_tpCondRet LIS_ExcluirElemento( LIS_tppLista pLista )
 
 } /************* Fim função: LIS &Excluir elemento *********************/
 
-
 /***************************************************************************
 *  Função: LIS  &Excluir ponteiro para elemento
 ***************************************************************************/
@@ -342,6 +341,22 @@ void * LIS_ObterValor( LIS_tppLista pLista )
       return pLista->pElemCorr->pValor ;
 
 } /* Fim função: LIS &Obter referencia para valor contigo no elementos */
+
+/***************************************************************************
+*  Função: LIS  &Obter lista corrente
+***************************************************************************/
+LIS_tppLista LIS_ObterListaCorr(LIS_tppLista pCabecaLista) {
+
+	//obtem o valor corrente de uma lista e retorna
+	LIS_tppLista pLista = (LIS_tppLista)LIS_ObterValor (pCabecaLista) ;
+	
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pLista != NULL ) ;
+    #endif
+
+	return pLista;
+} /***************** Fim função: BAR &Obter carta **************************/
 
 /***************************************************************************
 *  Função: LIS  &Ir para o elemento inicial

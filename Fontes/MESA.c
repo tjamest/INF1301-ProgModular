@@ -44,6 +44,7 @@ LIS_tppLista MES_CriarMesa() {
 	#endif
 
 	return pCabecaMesa ;
+
 } /***************** Fim função: MES &Criar lista***********************/
 
 /***************************************************************************
@@ -60,6 +61,7 @@ LIS_tppLista MES_CriarMao() {
 	#endif
 
 	return pCabecaMao ;
+
 } /***************** Fim função: MES &Criar mao ***********************/
 
 /***************************************************************************

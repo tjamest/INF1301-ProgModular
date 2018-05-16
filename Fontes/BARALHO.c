@@ -122,7 +122,7 @@ void BAR_DestruirBaralho(void * pBaralho) {
 } /************ Fim função: BAR &Destruir baralho ****************************/
 
 /***************************************************************************
-*  Função: BAR  &Obter carta
+*  Função: BAR  &Obter carta corrente
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {
 
@@ -169,7 +169,7 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 	LIS_tpCondRet CondRetLista ;
 
 	BAR_tppCarta pCarta = BAR_ObterCartaCorr(pOrigem) ;
-
+	
 	//assertiva de saida
 	if (pCarta == NULL) { 
 		return BAR_CondRetNaoObteveCarta ;

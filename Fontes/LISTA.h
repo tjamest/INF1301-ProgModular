@@ -282,6 +282,31 @@ LIS_tpCondRet LIS_AvancarElementoCorrente(LIS_tppLista pLista, int numElem) ;
 ***********************************************************************/
 LIS_tpCondRet LIS_ProcurarValor(LIS_tppLista pLista, void * pValor) ;
 
+
+/***********************************************************************
+*  $FC Função: LIS  &Quantidade de elementos
+*
+*  $ED Descrição da função
+*     Obtem quantos elementos há na lista.
+*
+*  $EP Parâmetros
+*	  Ponteiro pra cabeça da lista.
+***********************************************************************/
+int LIS_ObterQtdElem(LIS_tppLista pLista) ;
+
+
+/***********************************************************************
+*  $FC Função: LIS  &Obter lista corrente
+*
+*  $ED Descrição da função
+*     Obtem um ponteiro pra lista corrente na lista de listas.
+*
+*  $EP Parâmetros
+*	  Ponteiro pra cabeça da lista superior.
+***********************************************************************/
+LIS_tppLista LIS_ObterListaCorr(LIS_tppLista pCabecaLista) ;
+
+
 /***********************************************************************
 *  $FC Função: LIS  &Excluir ponteiro para elemento
 *
@@ -296,18 +321,6 @@ LIS_tpCondRet LIS_ProcurarValor(LIS_tppLista pLista, void * pValor) ;
 *
 ***********************************************************************/
 LIS_tpCondRet LIS_ExcluirPtrParaElemento(LIS_tppLista pLista) ;
-
-
-/***********************************************************************
-*  $FC Função: LIS  &Quantidade de elementos
-*
-*  $ED Descrição da função
-*     Obtem quantos elementos há na lista.
-*
-*  $EP Parâmetros
-*	  Ponteiro pra cabeça da lista.
-***********************************************************************/
-int LIS_ObterQtdElem(LIS_tppLista pLista) ;
 
 
 #undef LISTA_EXT
