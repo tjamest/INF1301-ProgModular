@@ -100,13 +100,16 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 /***************************************************************************
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
-void BAR_DestruirCarta(void * pCarta) {
+void BAR_DestruirCarta(void * pLista) {
+
+	LIS_tpCondRet condRetLista ;
 
 	#ifdef _DEBUG
-		assert( pCarta != NULL ) ;
+		assert( pLista != NULL ) ;
 	#endif
 
-	free(pCarta) ;
+	condRetLista = LIS_ExcluirElemento(pLista) ;
+
 } /************ Fim função: BAR &Destruir carta ****************************/
 
 /***************************************************************************

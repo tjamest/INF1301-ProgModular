@@ -125,7 +125,7 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 *  $EP Parâmetros
 *     Recebe ponteiro pra um tipo void.
 ***************************************************************************/
-void BAR_DestruirCarta(void * pCarta);
+void BAR_DestruirCarta(void * pLista);
 
 /***************************************************************************
 *  $FC Função: BAR  &Destruir Baralho
