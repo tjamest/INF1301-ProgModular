@@ -7,6 +7,12 @@
 #include   <time.h>
 #include   <assert.h>
 
+//1 PARTIDA formada por 12 RODADAS
+//1 RODADA formada por 3 apostas
+//1 APOSTA é uma jogada (apostar, dispensar, pedir truco, pedir seis, pedir doze, aceitar, correr)
+
+//PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA RODADA
+
 #define TAM 40
 
 #define AUMENTOU_APOSTA 1
@@ -28,7 +34,7 @@ int PrintarTelaProximoJogador(int *quemComeca, LIS_tppLista pCabecaSuperior, int
 //printar listas
 //void PrintarBaralho (LIS_tppLista pCabecaBaralho) ;
 void PrintarLixo (LIS_tppLista pCabecaLixo) ;
-void PrintarMesa (LIS_tppLista pCabecaMesa, int *quemComeca) ;
+void PrintarMesa (LIS_tppLista pCabecaMesa) ;
 void PrintarMao (LIS_tppLista pCabecaMao) ;
 
 //executar opcoes
@@ -61,9 +67,7 @@ int main (void) {
 	int * quemComeca = (int*)malloc(sizeof(int)) ;
 	int * valorRodada = (int*)malloc(sizeof(int)) ;
 	int * numJogadores = (int*)malloc(sizeof(int)) ;
-	int numJogadas, ptosRodadaA, ptosRodadaB, ptosPartidaA, ptosPartidaB ;
-
-	*valorRodada = 1;
+	int numJogadas, AptosRodada, BptosRodada, AptosPartida, BptosPartida ;
 
 	//cria e embaralha um vetor de cartas
 	PreencherVetorCartas(VetorAux) ;
@@ -89,9 +93,6 @@ int main (void) {
 	//cria o lixo (vazio)
 	pCabecaLixo = LIS_CriarLista(BAR_DestruirBaralho) ;
 
-	//transfere a vira do baralho pra mesa
-	BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
-
 	//insere as listas (baralho, maos, lixo e mesa) na lista de listas
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;
@@ -103,6 +104,12 @@ int main (void) {
 	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;
 	LIS_InserirElementoApos(pCabecaSuperior, pCabecaLixo) ;
 	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;
+
+	//primeira aposta da primeira rodada começa
+	*valorRodada = 1;
+
+	//transfere a vira do baralho pra mesa
+	BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
 
 	//imprime a tela de abertura do jogo
 	*opcao = PrintarTelaInicio() ;
@@ -140,7 +147,7 @@ int main (void) {
 
 	//checagem dos resultados
 	system("cls");
-	PrintarMesa(pCabecaMesa, quemComeca) ;
+	PrintarMesa(pCabecaMesa) ;
 	printf("\n JOGADOR 1:") ;
 	PrintarMao(pCabecaMao1);
 	printf("\n JOGADOR 2:") ;
@@ -317,7 +324,7 @@ void PrintarBaralho (LIS_tppLista pCabecaBaralho) {
 /***************************************************************************
 *  Função: &Printar mesa
 ***************************************************************************/
-void PrintarMesa (LIS_tppLista pCabecaMesa, int *quemComeca) {
+void PrintarMesa (LIS_tppLista pCabecaMesa) {
 	
 	int i, qtdCartas, valorInt, naipeInt;
 
@@ -650,17 +657,38 @@ int PrintarTelaQuemComeca(int *quemComeca, LIS_tppLista pCabecaSuperior, int *va
 	}
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
-	PrintarMesa(pCabecaMesa, quemComeca) ;
+	PrintarMesa(pCabecaMesa) ;
 	PrintarMao(pCabecaMao) ;
 
 	printf("\n Valor da rodada: %d\n", *valorRodada);
 
 	printf(" \n O que deseja fazer?\n\n") ;
-	printf(" (1) Apostar carta 1 | (2) Apostar carta 2 | (3) Apostar carta 3\n") ;
+	printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
+
+	if (LIS_ObterQtdElem(pCabecaMao) < 3) {
+
+		printf(" (4) Dispensar carta 1   | (5) Dispensar carta 2   | (6) Dispensar carta 3\n") ;
+		switch (*valorRodada) {
+		case 1: printf(" (7) Pedir truco\n\n"); break;
+		case 3: printf(" (7) Pedir seis\n\n"); break;
+		case 6: printf(" (7) Pedir doze\n\n"); break;
+		}
+
+	} //fim if
+
+	else {
+
+		switch (*valorRodada) {
+		case 1: printf(" (4) Pedir truco\n\n"); break;
+		case 3: printf(" (4) Pedir seis\n\n"); break;
+		case 6: printf(" (4) Pedir doze\n\n"); break;
+		} //fim switch
+	} //fim else
+
 	printf(" Opcao: ") ;
 	scanf_s(" %c", opcao, 1) ;
 
-	while (*opcao != 49 && *opcao != 50 && *opcao != 51) {
+	while (*opcao < 49 && *opcao > 52) {
 		scanf_s(" %c", opcao, 1);
 	} //fim while
 
@@ -725,7 +753,7 @@ int PrintarTelaProximoJogador(int * quemComeca, LIS_tppLista pCabecaSuperior,
 	}
 	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
-	PrintarMesa(pCabecaMesa, quemComeca) ;
+	PrintarMesa(pCabecaMesa) ;
 	PrintarMao(pCabecaMao) ;
 
 	printf("\n Valor da rodada: %d\n", *valorRodada);
@@ -796,7 +824,7 @@ int PrintarTelaCorrerAceitarAumentar(int * quemComeca, LIS_tppLista pCabecaSuper
 	LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
 	pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
-	PrintarMesa(pCabecaMesa, quemComeca) ;
+	PrintarMesa(pCabecaMesa) ;
 	PrintarMao(pCabecaMao1) ;
 
 	switch(*quemComeca) {

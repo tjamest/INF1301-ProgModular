@@ -196,6 +196,46 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 
 } /***************** Fim função: BAR &Transferir carta *********************/
 
+/***************************************************************************
+*  Função: BAR  &Verificar se eh manilha
+****************************************************************************/
+BAR_tpCondRet BAR_VerificarSeEhManilha(LIS_tppLista pCabecaSuperior) {
+
+	//declara valor especifico pra vira e pra carta apostada
+	BAR_tpValorCarta valorEspVira, valorEspAposta ;
+
+	//declara ponteiros pra carta que acabou de ser apostada e pras cartas da mesa
+	BAR_tppCarta pCartaAposta, pCartaVira;
+
+	//declara e aloca memoria pro ponteiro da cabeca da mesa
+	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
+	//obtem o ponteiro pra cabeca da lista mesa
+	LIS_IrFinalLista(pCabecaSuperior) ;
+	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	//obtem o ponteiro pra carta que acabou de ser apostada
+	LIS_IrFinalLista(pCabecaMesa) ;
+	pCartaAposta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	//obtem o ponteiro pra carta vira
+	LIS_IrInicioLista(pCabecaMesa) ;
+	pCartaVira = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	//obtem o valor especifico da carta que acabou de ser apostada
+	valorEspAposta = BAR_ObterValor(pCartaAposta) ;
+
+	//obtem o valor especifico da carta vira
+	valorEspVira = BAR_ObterValor(pCartaVira) ;
+
+	if (valorEspAposta == valorEspVira + 1){
+		return BAR_CondRetEhManilha ;
+	} //fim if
+	else {
+		return BAR_CondRetNaoEhManilha ;
+	} //fim else
+}
+
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
 //nao ha funcoes encapsuladas no modulo
 

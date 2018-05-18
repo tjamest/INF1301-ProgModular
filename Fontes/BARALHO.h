@@ -46,7 +46,9 @@ typedef enum {
    BAR_CondRetOK,			
    BAR_CondRetNaoObteveCarta,		
    BAR_CondRetNaoInseriuCarta,
-   BAR_CondRetNaoExcluiuPtrParaElem
+   BAR_CondRetNaoExcluiuPtrParaElem,
+   BAR_CondRetEhManilha,
+   BAR_CondRetNaoEhManilha
 } BAR_tpCondRet;
 
 
@@ -178,6 +180,15 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 *     Recebe uma lista de onde vai ser retirada a carta e uma pra onde vai.
 ***************************************************************************/
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
+
+/***************************************************************************
+*  $FC Função: BAR  &Verificar se eh manilha
+*
+*  $EP Parâmetros
+*     Recebe a cabeca da lista de listas, pega a carta apostada e compara
+*	  com a vira na mesa pra saber se eh manilha.
+***************************************************************************/
+BAR_tpCondRet BAR_VerificarSeEhManilha(LIS_tppLista pCabecaSuperior) ;
 
 
 
