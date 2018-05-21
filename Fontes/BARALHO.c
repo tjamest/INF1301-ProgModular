@@ -115,22 +115,24 @@ void BAR_DestruirCarta(void * pLista) {
 /***************************************************************************
 *  Função: BAR  &Destruir baralho
 ***************************************************************************/
-void BAR_DestruirBaralho(void * pBaralho) {
+void BAR_DestruirBaralho(void * pLista) {
+
+	LIS_tpCondRet condRetLista ;
 
 	#ifdef _DEBUG
-		assert( pBaralho != NULL ) ;
+		assert( pLista != NULL ) ;
 	#endif
 
-	free(pBaralho) ;
+	condRetLista = LIS_ExcluirElemento(pLista) ;
 } /************ Fim função: BAR &Destruir baralho ****************************/
 
 /***************************************************************************
 *  Função: BAR  &Obter carta corrente
 ***************************************************************************/
-BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) {
+BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaLista) {
 
 	//obtem o valor corrente de uma lista e retorna
-	BAR_tppCarta pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaBaralho) ;
+	BAR_tppCarta pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaLista) ;
 	
 	//assertiva de saída
 	#ifdef _DEBUG
@@ -199,40 +201,41 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 /***************************************************************************
 *  Função: BAR  &Verificar se eh manilha
 ****************************************************************************/
-BAR_tpCondRet BAR_VerificarSeEhManilha(LIS_tppLista pCabecaSuperior) {
+BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira) {
 
 	//declara valor especifico pra vira e pra carta apostada
-	BAR_tpValorCarta valorEspVira, valorEspAposta ;
+	BAR_tpValorCarta valorEspVira, valorEspAposta, valorEspManilha;
 
-	//declara ponteiros pra carta que acabou de ser apostada e pras cartas da mesa
-	BAR_tppCarta pCartaAposta, pCartaVira;
+	//obtem o valor tpValorCarta da carta que acabou de ser apostada e da vira
+	valorEspAposta = BAR_ObterValor(pAposta) ;
+	valorEspVira = BAR_ObterValor(pVira) ;
 
-	//declara e aloca memoria pro ponteiro da cabeca da mesa
-	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	if ((int)valorEspVira == 9) {
 
-	//obtem o ponteiro pra cabeca da lista mesa
-	LIS_IrFinalLista(pCabecaSuperior) ;
-	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		(int)valorEspManilha = 0 ;
 
-	//obtem o ponteiro pra carta que acabou de ser apostada
-	LIS_IrFinalLista(pCabecaMesa) ;
-	pCartaAposta = BAR_ObterCartaCorr(pCabecaMesa) ;
+		if (valorEspAposta == valorEspManilha) {
+			return BAR_CondRetEhManilha ;
+		} //fim if
+		
+		else {
+			return BAR_CondRetNaoEhManilha ;
+		} //fim else
 
-	//obtem o ponteiro pra carta vira
-	LIS_IrInicioLista(pCabecaMesa) ;
-	pCartaVira = BAR_ObterCartaCorr(pCabecaMesa) ;
-
-	//obtem o valor especifico da carta que acabou de ser apostada
-	valorEspAposta = BAR_ObterValor(pCartaAposta) ;
-
-	//obtem o valor especifico da carta vira
-	valorEspVira = BAR_ObterValor(pCartaVira) ;
-
-	if (valorEspAposta == valorEspVira + 1){
-		return BAR_CondRetEhManilha ;
 	} //fim if
+
 	else {
-		return BAR_CondRetNaoEhManilha ;
+
+		(int)valorEspManilha = ((int)valorEspVira) + 1 ;
+
+		if (valorEspAposta == valorEspManilha) {
+			return BAR_CondRetEhManilha ;
+		} //fim if
+		
+		else {
+			return BAR_CondRetNaoEhManilha ;
+		} //fim else
+
 	} //fim else
 }
 

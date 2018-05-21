@@ -149,7 +149,7 @@ void BAR_DestruirBaralho(void * pBaralho) ;
 *  $FV Valor retornado
 *     Retorna um ponteiro pra um tipo carta.
 ***************************************************************************/
-BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaBaralho) ;
+BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaLista) ;
 
 /***************************************************************************
 *  $FC Função: BAR  &Obter Naipe
@@ -188,7 +188,7 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 *     Recebe a cabeca da lista de listas, pega a carta apostada e compara
 *	  com a vira na mesa pra saber se eh manilha.
 ***************************************************************************/
-BAR_tpCondRet BAR_VerificarSeEhManilha(LIS_tppLista pCabecaSuperior) ;
+BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira) ;
 
 
 

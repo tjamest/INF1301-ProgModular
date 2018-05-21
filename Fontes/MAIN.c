@@ -9,40 +9,43 @@
 
 //1 PARTIDA formada por 12 RODADAS
 //1 RODADA formada por 3 apostas
-//1 APOSTA é uma jogada (apostar, dispensar, pedir truco, pedir seis, pedir doze, aceitar, correr)
+//1 APOSTA é uma jogada
 
-//PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA RODADA
+//TODO MUNDO PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA RODADA
 
 #define TAM 40
 
-#define AUMENTOU_APOSTA 1
-#define NAO_AUMENTOU_APOSTOU 0
+#define EQUIPE_IMPAR 1
+#define EQUIPE_PAR 0
 
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
 
 //criar e embaralhar vetor
 void PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
 void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) ;
+void DeterminarVencedorDaRodada (LIS_tppLista pCabecaMesa, int *quemComeca, int *numJogadores,
+								 int *pontosRodadaPar, int *pontosRodadaImpar) ;
+int CompararCartas2Jogadres (LIS_tppLista pCabecaMesa, int *quemComeca) ;
+
+//printar listas
+void PrintarBaralho (LIS_tppLista pCabecaBaralho) ;
+void PrintarLixo (LIS_tppLista pCabecaLixo) ;
+void PrintarMesa (LIS_tppLista pCabecaMesa) ;
+void PrintarMao (LIS_tppLista pCabecaMao) ;
 
 //printar telas (com opcoes)
 int PrintarTelaInicio () ;
 int PrintarTelaRegras () ;
 int PrintarTelaNumJogadores () ;
-int PrintarTelaQuemComeca(int *quemComeca, LIS_tppLista pCabecaSuperior, int *valorRodada) ;
-int PrintarTelaProximoJogador(int *quemComeca, LIS_tppLista pCabecaSuperior, int *numJogadores, int *valorRodada) ;
-
-//printar listas
-//void PrintarBaralho (LIS_tppLista pCabecaBaralho) ;
-void PrintarLixo (LIS_tppLista pCabecaLixo) ;
-void PrintarMesa (LIS_tppLista pCabecaMesa) ;
-void PrintarMao (LIS_tppLista pCabecaMao) ;
+int PrintarTelaRodada(int *quemComeca, int *numJogadores, int *valorRodada, int *vencedorAtual,
+					  int *pontosRodadaPar, int *pontosRodadaImpar, LIS_tppLista pCabecaSuperior) ;
 
 //executar opcoes
 void ExecutarOpcaoInicio(char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior, int *numJogadores) ;
 void ExecutarOpcaoRegras(char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior, int *numJogadores) ;
-void ExecutarOpcaoNumJogadores( char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior, int *numJogadores) ;
-void ExecutarOpcaoQuemComeca( char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior) ;
-void ExecutarOpcaoProximoJogador( char *opcao, int *quemComeca, int *valorRodada, LIS_tppLista pCabecaSuperior) ;
+void ExecutarOpcaoNumJogadores(char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior, int *numJogadores) ;
+void ExecutarOpcaoRodada(char *opcao, int *quemComeca, int *numJogadores, 
+						 int *pontosRodadaPar, int *pontosRodadaImpar, LIS_tppLista pCabecaSuperior) ;
 
 /**************************************************************************/
 
@@ -67,7 +70,14 @@ int main (void) {
 	int * quemComeca = (int*)malloc(sizeof(int)) ;
 	int * valorRodada = (int*)malloc(sizeof(int)) ;
 	int * numJogadores = (int*)malloc(sizeof(int)) ;
-	int numJogadas, AptosRodada, BptosRodada, AptosPartida, BptosPartida ;
+	int * vencedorAtual = (int*)malloc(sizeof(int)) ;
+	int * pontosRodadaPar = (int*)malloc(sizeof(int)) ;
+	int * pontosRodadaImpar = (int*)malloc(sizeof(int)) ;
+
+	int *pontosPartidaPar = 0 ;
+	int *pontosPartidaImpar = 0 ;
+	* pontosRodadaPar = 0 ;
+	* pontosRodadaImpar = 0 ;
 
 	//cria e embaralha um vetor de cartas
 	PreencherVetorCartas(VetorAux) ;
@@ -116,53 +126,40 @@ int main (void) {
 	ExecutarOpcaoInicio(opcao, quemComeca, pCabecaSuperior, numJogadores) ;
 
 	//após distribuir a vira e as maos e definir quem comeca
-	//imprime a tela da primeira rodada/jogada
-	*opcao = PrintarTelaQuemComeca(quemComeca, pCabecaSuperior, valorRodada) ;
-	ExecutarOpcaoQuemComeca(opcao, quemComeca, pCabecaSuperior) ;
+	while (*pontosRodadaPar != 2 || *pontosRodadaImpar != 2) {
 
-	//após a primeira jogada do primeiro jogador
-	//imprime a tela da proxima jogada
-	for (numJogadas = 1 ; numJogadas < *numJogadores ; numJogadas++) {
+		//imprime a tela da rodada
+		*opcao = PrintarTelaRodada(quemComeca, numJogadores, valorRodada, vencedorAtual,
+								   pontosRodadaPar, pontosRodadaImpar, pCabecaSuperior) ;
 
-		*opcao = PrintarTelaProximoJogador(quemComeca, pCabecaSuperior, numJogadores, valorRodada) ;
-		if (*opcao == 55) {
-
-			switch(*valorRodada) {
-			case 1: *valorRodada = 3; break;
-			case 3: *valorRodada = 6; break;
-			case 6: *valorRodada = 12; break;
-			}
-
-			*opcao = PrintarTelaCorrerAceitarAumentar(quemComeca, pCabecaSuperior, numJogadores, valorRodada) ;
-			//ExecutarOpcaoCorrerAceitarAumentar(opcao, quemComeca, pCabecaSuperior) ;
+		if (*pontosRodadaPar == 2) {
+			pontosPartidaPar += (*valorRodada) ;
 		}
-		else {
-		ExecutarOpcaoProximoJogador(opcao, quemComeca, valorRodada, pCabecaSuperior) ;
+		else if (*pontosRodadaImpar == 2) {
+			pontosPartidaImpar += (*valorRodada) ;
 		}
 
-
-		//checa se a carta apostada ganha das cartas que ja estavam na mesa
-
-	}
+	} //fim while
 
 	//checagem dos resultados
 	system("cls");
+	printf("\n pontosPartidaPar: %d\n\n", pontosPartidaPar) ; 	
+	printf("\n pontosPartidaImpar: %d\n\n", pontosPartidaImpar) ;
 	PrintarMesa(pCabecaMesa) ;
 	printf("\n JOGADOR 1:") ;
-	PrintarMao(pCabecaMao1);
+	PrintarMao(pCabecaMao1) ;
 	printf("\n JOGADOR 2:") ;
-	PrintarMao(pCabecaMao2);
+	PrintarMao(pCabecaMao2) ;/*
 	printf("\n JOGADOR 3:") ;
-	PrintarMao(pCabecaMao3);
+	PrintarMao(pCabecaMao3) ;
 	printf("\n JOGADOR 4:") ;
-	PrintarMao(pCabecaMao4);
+	PrintarMao(pCabecaMao4) ;
 	printf("\n JOGADOR 5:") ;
-	PrintarMao(pCabecaMao5);
+	PrintarMao(pCabecaMao5) ;
 	printf("\n JOGADOR 6:") ;
-	PrintarMao(pCabecaMao6);
-	PrintarLixo(pCabecaLixo) ;
+	PrintarMao(pCabecaMao6) ;
+	PrintarLixo(pCabecaLixo) ;*/
 
-	
 	return 0;
 }
 
@@ -199,7 +196,7 @@ void PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 
 	//return *vtCartas ;
 
-} /***************** Fim função: &Preenche vetor cartas *******************/
+} /***************** Fim função: &Preencher vetor cartas *******************/
 
 /***************************************************************************
 *  Função: &Embaralhar vetor cartas
@@ -251,7 +248,189 @@ void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 
 	//return *vtCartas ;
 
-} /***************** Fim função: &Embaralha vetor cartas ******************/
+} /***************** Fim função: &Embaralhar vetor cartas ******************/
+
+/***************************************************************************
+*  Função: &Comparar cartas em um jogo de 2 jogadores
+***************************************************************************/
+int CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemComeca) {
+
+	BAR_tppCarta pVira = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
+	BAR_tppCarta pAposta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
+	BAR_tppCarta pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
+
+	int i, qtdCartasNaMesa ;
+	int apostadorVenceu = 0 ;
+
+	BAR_tpCondRet condRetBar ;
+
+	BAR_tpValorCarta valorAposta, valorCarta ;
+	BAR_tpNaipeCarta naipeAposta, naipeCarta ;
+
+	qtdCartasNaMesa = LIS_ObterQtdElem(pCabecaMesa) ;
+
+	LIS_IrInicioLista(pCabecaMesa) ;
+	pVira = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	LIS_IrFinalLista(pCabecaMesa) ;
+	pAposta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+	condRetBar = BAR_VerificarSeEhManilha(pAposta, pVira) ;
+
+	//CARTA APOSTADA == MANILHA
+	if (condRetBar == BAR_CondRetEhManilha) {
+
+		LIS_IrInicioLista(pCabecaMesa) ;
+
+		for (i = 2 ; i < qtdCartasNaMesa ; i++ ) {
+
+			LIS_AvancarElementoCorrente(pCabecaMesa, 1) ;
+			pCarta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+			condRetBar = BAR_VerificarSeEhManilha(pCarta, pVira) ;
+
+			//CARTA DA MESA == MANILHA (tem que comparar naipes)
+			if (condRetBar == BAR_CondRetEhManilha) {
+
+				naipeAposta = BAR_ObterNaipe(pAposta) ;
+				naipeCarta = BAR_ObterNaipe(pCarta) ;
+
+				if ((int)naipeAposta > (int)naipeCarta) {
+					apostadorVenceu += 1 ;
+				}
+				else {
+					apostadorVenceu += 0 ;
+				}
+
+			} //fim if
+
+			//CARTA DA MESA != MANILHA (apostador venceu)
+			else {
+				apostadorVenceu += 1 ;
+			} //fim else
+
+		} //fim for
+
+		//se o apostador venceu todas cartas da mesa
+		if (apostadorVenceu == (qtdCartasNaMesa - 2)) {
+			if ((*quemComeca % 2) == 0) { return EQUIPE_PAR ; }
+			else { return EQUIPE_IMPAR ; }
+		} //fim if
+
+		//se o apostador nao venceu todas cartas da mesa
+		else {
+			if ((*quemComeca % 2) == 0) { return EQUIPE_IMPAR ; }
+			else { return EQUIPE_PAR ; }
+		} //fim else
+	} //fim if
+
+	//CARTA APOSTADA != MANILHA
+	else {
+
+		LIS_IrInicioLista(pCabecaMesa) ;
+
+		for (i = 2 ; i < qtdCartasNaMesa ; i++ ) {
+
+			LIS_AvancarElementoCorrente(pCabecaMesa, 1) ;
+			pCarta = BAR_ObterCartaCorr(pCabecaMesa) ;
+
+			condRetBar = BAR_VerificarSeEhManilha(pCarta, pVira) ;
+
+			//CARTA DA MESA == MANILHA (apostador nao venceu)
+			if (condRetBar == BAR_CondRetEhManilha) {
+				apostadorVenceu += 0 ;
+			} //fim if
+
+			//CARTA DA MESA != MANILHA (tem que comparar valores)
+			else {
+
+				valorAposta = BAR_ObterValor(pAposta) ;
+				valorCarta = BAR_ObterValor(pCarta) ;
+
+				if ((int)valorAposta > (int)valorCarta) {
+					apostadorVenceu += 1 ;
+				}
+				else {
+					apostadorVenceu += 0 ;
+				}
+
+			} //fim else
+
+		} //fim for
+
+		//se o apostador venceu todas cartas da mesa
+		if (apostadorVenceu == (qtdCartasNaMesa - 2)) {
+			if ((*quemComeca % 2) == 0) { 
+				return EQUIPE_PAR ;
+			}
+			else { 
+				return EQUIPE_IMPAR ;
+			}
+		} //fim if
+
+		//se o apostador nao venceu todas cartas da mesa
+		else {
+			if ((*quemComeca % 2) == 0) { 
+				return EQUIPE_IMPAR ;
+			}
+			else { return 
+				EQUIPE_PAR ;
+			}
+		} //fim else
+
+	} //fim else "se a carta apostada nao for manilha"
+} /*************** Fim função: &Comparar cartas 2 jogadores ***************/
+
+/***************************************************************************
+*  Função: &Checar vencedor da rodada
+***************************************************************************/
+void DeterminarVencedorDaRodada (LIS_tppLista pCabecaMesa, int *quemComeca, int *numJogadores,
+								 int *pontosRodadaPar, int *pontosRodadaImpar) {
+
+	int qtdCartasNaMesa, equipeVencedora ;
+
+	qtdCartasNaMesa = LIS_ObterQtdElem(pCabecaMesa) ;
+
+	//caso só tenha a vira e a carta apostada na mesa
+	if (qtdCartasNaMesa == 2) {
+		if ((*quemComeca % 2) == 0) { *pontosRodadaPar += 1 ; }
+		else { *pontosRodadaImpar += 1 ; }
+	}
+
+	//caso tenha que comparar cartas
+	else {
+
+		switch(*numJogadores) {
+
+		case 2: 
+			equipeVencedora = CompararCartas2Jogadores(pCabecaMesa, quemComeca) ;
+
+			switch (equipeVencedora) {
+			case 0:
+				*pontosRodadaPar += 1 ;
+				break ;
+			case 1:
+				*pontosRodadaImpar += 1 ;
+				break ;
+			} //fim switch
+
+			break;
+
+			/*
+		case 4:
+			equipeVencedora = CompararCartas2Jogadores(pCabecaMesa, quemComeca) ;
+			return equipeVencedora ;
+			break;
+
+		case 6:
+			equipeVencedora = CompararCartas2Jogadores(pCabecaMesa, quemComeca) ;
+			return equipeVencedora ;
+			break;
+			*/
+		} //fim switch
+
+	} //fim else "se for comparar cartas"
+} /***************** Fim função: &Checar vencedor da rodada ***************/
 
 
 /**************** FUNÇÕES DE IMPRESSAO DE LISTAS NA TELA ******************/
@@ -609,176 +788,129 @@ int PrintarTelaNumJogadores () {
 }
 
 /***************************************************************************
-*  Função: &Printar tela de quem comeca
+*  Função: &Printar tela da primeira jogada
 ***************************************************************************/
-int PrintarTelaQuemComeca(int *quemComeca, LIS_tppLista pCabecaSuperior, int *valorRodada) {
+int PrintarTelaRodada(int *quemComeca, int *numJogadores, int *valorRodada, int *vencedorAtual, 
+					  int *pontosRodadaPar, int *pontosRodadaImpar, LIS_tppLista pCabecaSuperior) {
 
+	int i ;
 	char * ok = (char*)malloc(sizeof(char)) ;
 	char * opcao = (char*)malloc(sizeof(char)) ;
-
+	
 	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
 	LIS_IrFinalLista(pCabecaSuperior) ;
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
-	LIS_IrInicioLista(pCabecaSuperior) ;
+	//inicio da rodada e da jogada
+	for (i = 0 ; i < *numJogadores ; i++) {
 
-	LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
-	pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
+		pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
-	//tela de confirmacao
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
-	switch (*quemComeca) {
-	case 1: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 2: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 3: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 4: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 5: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 6: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	}
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-	printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", *quemComeca) ;
-	printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
-	scanf_s(" %s", ok, 4);
-	system("cls");
-
-	//proxima tela
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf("~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
-	switch (*quemComeca) {
-	case 1: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 2: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 3: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 4: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 5: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 6: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	}
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-
-	PrintarMesa(pCabecaMesa) ;
-	PrintarMao(pCabecaMao) ;
-
-	printf("\n Valor da rodada: %d\n", *valorRodada);
-
-	printf(" \n O que deseja fazer?\n\n") ;
-	printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
-
-	if (LIS_ObterQtdElem(pCabecaMao) < 3) {
-
-		printf(" (4) Dispensar carta 1   | (5) Dispensar carta 2   | (6) Dispensar carta 3\n") ;
-		switch (*valorRodada) {
-		case 1: printf(" (7) Pedir truco\n\n"); break;
-		case 3: printf(" (7) Pedir seis\n\n"); break;
-		case 6: printf(" (7) Pedir doze\n\n"); break;
+		//tela de confirmacao
+		printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
+		switch (*quemComeca) {
+		case 1: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 2: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
+		case 3: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 4: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
+		case 5: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 6: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
 		}
+		printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+		printf(" Jogador %d comeca (nao deixe que ninguem veja suas cartas).\n\n", *quemComeca) ;
+		printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
+		scanf_s(" %s", ok, 4);
+		system("cls");
 
-	} //fim if
+		//tela da jogada
+		printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
+		switch (*quemComeca) {
+		case 1: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 2: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
+		case 3: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 4: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
+		case 5: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", *quemComeca); break;
+		case 6: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", *quemComeca); break;
+		}
+		printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
-	else {
+		PrintarMesa(pCabecaMesa) ;
+		PrintarMao(pCabecaMao) ;
 
-		switch (*valorRodada) {
-		case 1: printf(" (4) Pedir truco\n\n"); break;
-		case 3: printf(" (4) Pedir seis\n\n"); break;
-		case 6: printf(" (4) Pedir doze\n\n"); break;
-		} //fim switch
-	} //fim else
+		printf("\n Valor da rodada: %d\n", *valorRodada);
 
-	printf(" Opcao: ") ;
-	scanf_s(" %c", opcao, 1) ;
+		printf(" \n O que deseja fazer?\n\n") ;
+		printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
 
-	while (*opcao < 49 && *opcao > 52) {
-		scanf_s(" %c", opcao, 1);
-	} //fim while
+		//se nao tiver na primeira jogada da rodada (pode dispensar carta)
+		if (LIS_ObterQtdElem(pCabecaMao) < 3) {
 
-	system("cls") ;
-	return *opcao ;
+			printf(" (4) Dispensar carta 1   | (5) Dispensar carta 2   | (6) Dispensar carta 3\n") ;
 
-}
+			switch (*valorRodada) {
+			case 1: printf(" (7) Pedir truco\n\n"); break;
+			case 3: printf(" (7) Pedir seis\n\n"); break;
+			case 6: printf(" (7) Pedir doze\n\n"); break;
+			} //fim switch
 
-/***************************************************************************
-*  Função: &Printar tela do proximo jogador
-***************************************************************************/
-int PrintarTelaProximoJogador(int * quemComeca, LIS_tppLista pCabecaSuperior,
-							  int *numJogadores, int *valorRodada) {
+			printf(" Opcao: ") ;
+			scanf_s(" %c", opcao, 1) ;
+			system("cls");
 
-	char * ok = (char*)malloc(sizeof(char)) ;
-	char * opcao = (char*)malloc(sizeof(char)) ;
+			while (*opcao < 49 && *opcao > 55) {
+				scanf_s(" %c", opcao, 1);
+				system("cls");
+			} //fim while
 
-	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-	LIS_tppLista pCabecaMao = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+			ExecutarOpcaoRodada(opcao, quemComeca, numJogadores,
+								pontosRodadaPar, pontosRodadaImpar, pCabecaSuperior) ;
 
-	LIS_IrFinalLista(pCabecaSuperior) ;
-	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		} //fim if
 
-	LIS_IrInicioLista(pCabecaSuperior) ;
+		//se tiver na primeira jogada da rodada (nao pode dispensar carta)
+		else {
 
-	if (*quemComeca == *numJogadores) {
-		*quemComeca = 1 ;
-	}
-	else {
-		*quemComeca += 1;
-	}
+			switch (*valorRodada) {
+			case 1: printf(" (4) Pedir truco\n\n"); break;
+			case 3: printf(" (4) Pedir seis\n\n"); break;
+			case 6: printf(" (4) Pedir doze\n\n"); break;
+			} //fim switch
 
-	LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
-	pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			printf(" Opcao: ") ;
+			scanf_s(" %c", opcao, 1) ;
+			system("cls");
 
-	//tela de confirmacao
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf("~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
-	switch (*quemComeca) {
-	case 1: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 2: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 3: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 4: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 5: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 6: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	}
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-	printf(" Digite 'ok' para ver a mesa e sua mao.\n\n ") ;
-	scanf_s(" %s", ok, 4);
-	system("cls");
+			while (*opcao < 49 && *opcao > 52) {
+				scanf_s(" %c", opcao, 1);
+				system("cls");
+			} //fim while
 
-	//proxima tela
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf("~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
-	switch (*quemComeca) {
-	case 1: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 2: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 3: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 4: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 5: printf("~~~~~~~~~~~~ EQUIPE A JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	case 6: printf("~~~~~~~~~~~~ EQUIPE B JOGADOR %d ~~~~~~~~~~~\n", *quemComeca); break;
-	}
-	printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+			ExecutarOpcaoRodada(opcao, quemComeca, numJogadores, 
+								pontosRodadaPar, pontosRodadaImpar, pCabecaSuperior) ;
 
-	PrintarMesa(pCabecaMesa) ;
-	PrintarMao(pCabecaMao) ;
+		} //fim else
 
-	printf("\n Valor da rodada: %d\n", *valorRodada);
+		//quemComeca passa a ser o proximo jogador
+		if (*quemComeca == *numJogadores) {
+			*quemComeca = 1 ;
+		} //fim if
+		else {
+			*quemComeca += 1;
+		} //fim else
 
-	printf(" \n O que deseja fazer?\n\n") ;
-	printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
-	printf(" (4) Dispensar carta 1 | (5) Dispensar carta 2 | (6) Dispensar carta 3\n") ;
-
-	switch (*valorRodada) {
-	case 1: printf(" (7) Pedir truco\n\n"); break;
-	case 3: printf(" (7) Pedir seis\n\n"); break;
-	case 6: printf(" (7) Pedir doze\n\n"); break;
-	}
-
-	printf(" Opcao: ") ;
-	scanf_s(" %c", opcao, 1) ;
-
-	while (*opcao < 49 && *opcao > 55) {
-		scanf_s(" %c", opcao, 1);
-	} //fim while
+	} //fim for
 
 	system("cls") ;
 	return *opcao ;
 
 }
+
 
 /***************************************************************************
 *  Função: &Printar tela de correr, aceitar ou aumentar
@@ -1042,73 +1174,19 @@ void ExecutarOpcaoNumJogadores(char *opcao, int *quemComeca, LIS_tppLista pCabec
 /***************************************************************************
 *  Função: &Executar opcao da tela de quem comeca
 ***************************************************************************/
-void ExecutarOpcaoQuemComeca(char *opcao, int *quemComeca, LIS_tppLista pCabecaSuperior) {
+void ExecutarOpcaoRodada(char *opcao, int *quemComeca, int *numJogadores,
+						 int *pontosRodadaPar, int *pontosRodadaImpar, LIS_tppLista pCabecaSuperior) {
 
-	LIS_tppLista pCabecaMao = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-
-	LIS_IrFinalLista(pCabecaSuperior) ;
-	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-	switch(*opcao) {
-	case 49: //(1) apostar carta 1
-
-		LIS_IrInicioLista(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
-		pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-		LIS_IrInicioLista(pCabecaMao) ;
-		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
-
-		break;
-
-	case 50: //(2) apostar carta 2
-		
-		LIS_IrInicioLista(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
-		pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-		LIS_IrInicioLista(pCabecaMao) ;
-		LIS_AvancarElementoCorrente(pCabecaMao, 1) ;
-		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
-
-		break;
-
-	case 51: //(3) apostar carta 3
-		
-		LIS_IrInicioLista(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, *quemComeca) ;
-		pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-		LIS_IrInicioLista(pCabecaMao) ;
-		LIS_AvancarElementoCorrente(pCabecaMao, 2) ;
-		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
-
-		break;
-	} //fim switch
-
-}
-
-/***************************************************************************
-*  Função: &Executar opcao da tela do proximo jogador
-***************************************************************************/
-void ExecutarOpcaoProximoJogador(char *opcao, int *quemComeca, int *valorRodada,
-								 LIS_tppLista pCabecaSuperior) {
-	int valorRodadaAnterior ;
-
-	//declarando e alocando espaco pra mao, mesa e lixo
+	//declarando ponteiros e alocando pras cabecas da mao, mesa e lixo
 	LIS_tppLista pCabecaMao = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
-	//armazenando ponteiro pra lista lixo no pCabecaLixo
-	LIS_IrInicioLista(pCabecaSuperior) ;
-	LIS_AvancarElementoCorrente(pCabecaSuperior, 7) ;
-	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-	//armazenando ponteiro pra lista mesa no pCabecaMesa
-	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	//armazenando ponteiro pra lista mesa e lista lixo
+	LIS_IrFinalLista(pCabecaSuperior) ;
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, -1) ;
+	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
 	//armazenando ponteiro pra lista mao de quem vai fazer a jogada no pCabecaMao
 	LIS_IrInicioLista(pCabecaSuperior) ;
@@ -1119,50 +1197,41 @@ void ExecutarOpcaoProximoJogador(char *opcao, int *quemComeca, int *valorRodada,
 	switch(*opcao) {
 
 	case 49: //(1) apostar carta 1
-
 		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
+		DeterminarVencedorDaRodada(pCabecaMesa, quemComeca, numJogadores, pontosRodadaPar, pontosRodadaImpar) ;
 		break;
 
 	case 50: //(2) apostar carta 2
-	
 		LIS_AvancarElementoCorrente(pCabecaMao, 1) ;
 		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
+		DeterminarVencedorDaRodada(pCabecaMesa, quemComeca, numJogadores, pontosRodadaPar, pontosRodadaImpar) ;
 		break;
 
 	case 51: //(3) apostar carta 3
-		
 		LIS_AvancarElementoCorrente(pCabecaMao, 2) ;
 		BAR_TransferirCarta(pCabecaMao, pCabecaMesa) ;
+		DeterminarVencedorDaRodada(pCabecaMesa, quemComeca, numJogadores, pontosRodadaPar, pontosRodadaImpar) ;
 		break;
 
 	case 52: //(4) dispensar carta 1
-
 		BAR_TransferirCarta(pCabecaMao, pCabecaLixo) ;
 		break;
 
 	case 53: //(5) dispensar carta 2
-
 		LIS_AvancarElementoCorrente(pCabecaMao, 1) ;
 		BAR_TransferirCarta(pCabecaMao, pCabecaLixo) ;
 		break;
 
 	case 54: //(6) dispensar carta 3
-
 		LIS_AvancarElementoCorrente(pCabecaMao, 2) ;
 		BAR_TransferirCarta(pCabecaMao, pCabecaLixo) ;
 		break;
 
-	case 55: //(7) pedir truco, seis, doze
-
-		valorRodadaAnterior = *valorRodada;
-
-		switch (valorRodadaAnterior) {
-		case 1: *valorRodada = 3; break;
-		case 3: *valorRodada = 6; break;
-		case 6: *valorRodada = 12; break;
-		}
+	case 55: //(7) pedir truco/seis/doze
+		//*opcao = PrintarTelaAumentouAposta() ;
+		//ExecutarOpcaoAumentouAposta() ;
 		break;
 
-	} //fim switch*/
+	} //fim switch
 
 }
