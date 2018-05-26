@@ -67,16 +67,23 @@ LIS_tppLista MES_CriarMao() {
 /***************************************************************************
 *  Função: MES  &Distribuir maos
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho, 
-						LIS_tppLista pCabecaMao1, 
-						LIS_tppLista pCabecaMao2, 
-						LIS_tppLista pCabecaMao3, 
-						LIS_tppLista pCabecaMao4, 
-						LIS_tppLista pCabecaMao5, 
-						LIS_tppLista pCabecaMao6, 
-						int numJogadores) {
+void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
+
+	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao4 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
 	if (numJogadores == 2) {
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
@@ -86,6 +93,16 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho,
 	} //fim if
 	
 	else if (numJogadores == 4) {
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
@@ -101,6 +118,20 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho,
 	} //fim else if
 	
 	else {
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao5 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao6 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;

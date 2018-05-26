@@ -72,14 +72,7 @@ LIS_tppLista MES_CriarMao() ;
 *     Ponteiros para cabeca do baralho e das maos.
 *	  Numero de jogadores.
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaBaralho, 
-						LIS_tppLista pCabecaMao1, 
-						LIS_tppLista pCabecaMao2, 
-						LIS_tppLista pCabecaMao3, 
-						LIS_tppLista pCabecaMao4, 
-						LIS_tppLista pCabecaMao5, 
-						LIS_tppLista pCabecaMao6, 
-						int numJogadores) ;
+void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Obter valor manilha
