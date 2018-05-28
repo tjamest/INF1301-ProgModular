@@ -17,7 +17,9 @@
 
 #define EQUIPE_IMPAR 1
 #define EQUIPE_PAR 0
-
+#define EMPATE1 -1
+#define EMPATE2 -2
+#define EMPATE3 -3
 /************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
 
 //criar e embaralhar vetor
@@ -25,7 +27,7 @@ void PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
 void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) ;
 void DeterminarVencedorDaRodada (LIS_tppLista pCabecaSuperior, int *quemJoga, int *numJogadores,
 								 int *pontosRodadaPar, int *pontosRodadaImpar) ;
-int CompararCartas2Jogadres (LIS_tppLista pCabecaMesa, int *quemJoga) ;
+int CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemJoga) ;
 void TransferirCartasProLixo (LIS_tppLista pCabecaSuperior) ;
 
 //printar listas
@@ -306,7 +308,7 @@ int CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemJoga) {
 	BAR_tppCarta pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
 
 	int i, qtdCartasNaMesa ;
-	int apostadorVenceu = 0 ;
+	int quemVenceu = 0 ;
 
 	BAR_tpCondRet condRetBar ;
 
@@ -341,33 +343,34 @@ int CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemJoga) {
 				naipeAposta = BAR_ObterNaipe(pAposta) ;
 				naipeCarta = BAR_ObterNaipe(pCarta) ;
 
+				//apostador venceu
 				if ((int)naipeAposta > (int)naipeCarta) {
-					apostadorVenceu += 1 ;
+					switch (*quemJoga) {
+					case 1: return EQUIPE_IMPAR; break;
+					case 2: return EQUIPE_PAR; break;
+					}
 				}
+
+				//apostador perdeu
 				else {
-					apostadorVenceu += 0 ;
+					switch (*quemJoga) {
+					case 1: return EQUIPE_PAR; break;
+					case 2: return EQUIPE_IMPAR; break;
+					}
 				}
 
 			} //fim if
 
 			//CARTA DA MESA != MANILHA (apostador venceu)
 			else {
-				apostadorVenceu += 1 ;
+				switch (*quemJoga) {
+				case 1: return EQUIPE_IMPAR; break;
+				case 2: return EQUIPE_PAR; break;
+				}
 			} //fim else
 
 		} //fim for
 
-		//se o apostador venceu todas cartas da mesa
-		if (apostadorVenceu == (qtdCartasNaMesa - 2)) {
-			if ((*quemJoga % 2) == 0) { return EQUIPE_PAR ; }
-			else { return EQUIPE_IMPAR ; }
-		} //fim if
-
-		//se o apostador nao venceu todas cartas da mesa
-		else {
-			if ((*quemJoga % 2) == 0) { return EQUIPE_IMPAR ; }
-			else { return EQUIPE_PAR ; }
-		} //fim else
 	} //fim if
 
 	//CARTA APOSTADA != MANILHA
@@ -389,40 +392,45 @@ int CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemJoga) {
 				valorAposta = BAR_ObterValor(pAposta) ;
 				valorCarta = BAR_ObterValor(pCarta) ;
 
+				//apostador venceu
 				if ((int)valorAposta > (int)valorCarta) {
-					apostadorVenceu += 1 ;
-
+					switch (*quemJoga) {
+					case 1: return EQUIPE_IMPAR; break;
+					case 2: return EQUIPE_PAR; break;
+					}
 				} //fim if
+
+				//empataram (empatar 3 vezes ninguem ganha ponto,  )
+				else if ((int)valorAposta == (int)valorCarta) {
+					return EMPATE1; 
+
+				} //fim else if
+				
+				//apostador perdeu
+				else {
+					switch (*quemJoga) {
+					case 1: return EQUIPE_PAR; break;
+					case 2: return EQUIPE_IMPAR; break;
+					} //fim switch 
+				} //fim else
 
 			} //fim if
 
+			//CARTA DA MESA == MANILHA (apostador perdeu)
+			else {
+				switch (*quemJoga) {
+				case 1: return EQUIPE_PAR; break;
+				case 2: return EQUIPE_IMPAR; break;
+				} //fim switch 
+			}
+
 		} //fim for
-
-		//se o apostador venceu todas cartas da mesa
-		if (apostadorVenceu == (qtdCartasNaMesa - 2)) {
-			if ((*quemJoga % 2) == 0) { 
-				return EQUIPE_PAR ;
-			}
-			else { 
-				return EQUIPE_IMPAR ;
-			}
-		} //fim if
-
-		//se o apostador nao venceu todas cartas da mesa
-		else {
-			if ((*quemJoga % 2) == 0) { 
-				return EQUIPE_IMPAR ;
-			}
-			else { 
-				return EQUIPE_PAR ;
-			}
-		} //fim else
 
 	} //fim else "se a carta apostada nao for manilha"
 } /*************** Fim função: &Comparar cartas 2 jogadores ***************/
 
 /***************************************************************************
-*  Função: &Checar vencedor da rodada
+*  Função: &Determinar vencedor da rodada
 ***************************************************************************/
 void DeterminarVencedorDaRodada (LIS_tppLista pCabecaSuperior, int *quemJoga, int *numJogadores,
 								 int *pontosRodadaPar, int *pontosRodadaImpar) {
@@ -453,6 +461,12 @@ void DeterminarVencedorDaRodada (LIS_tppLista pCabecaSuperior, int *quemJoga, in
 			case EQUIPE_IMPAR:
 				*pontosRodadaImpar += 1 ;
 				break ;
+			case EMPATE1:
+				break ;
+			case EMPATE2:
+				break;
+			case EMPATE3:
+				break;
 			} //fim switch
 
 			qtdCartasApostadas = LIS_ObterQtdElem(pCabecaMesa)-1 ;
@@ -475,10 +489,11 @@ void DeterminarVencedorDaRodada (LIS_tppLista pCabecaSuperior, int *quemJoga, in
 			return equipeVencedora ;
 			break;
 			*/
+
 		} //fim switch
 
 	} //fim if
-} /***************** Fim função: &Checar vencedor da rodada ***************/
+} /************* Fim função: &Determinar vencedor da rodada ***************/
 
 /***************************************************************************
 *  Função: &Transferir cartas pro lixo
