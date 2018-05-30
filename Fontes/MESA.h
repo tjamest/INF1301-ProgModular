@@ -32,11 +32,7 @@
 *  $FC Função: MES  &Criar Mesa
 *
 *  $ED Descrição da função
-*     Cria uma mesa com uma carta vira.
-*
-*  $EP Parâmetros
-*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
-*	  Recebe a quantidade de pessoas que vao jogar.
+*     Cria uma mesa vazia.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca da mesa
@@ -49,11 +45,7 @@ LIS_tppLista MES_CriarMesa() ;
 *  $FC Função: MES  &Criar Mao
 *
 *  $ED Descrição da função
-*     Cria uma mão com 3 cartas.
-*
-*  $EP Parâmetros
-*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
-*	  Recebe o numero da mao.
+*     Cria uma mão vazia.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca da mao
@@ -66,24 +58,26 @@ LIS_tppLista MES_CriarMao() ;
 *  $FC Função: MES  &Distribuir maos
 *
 *  $ED Descrição da função
-*     Distribui as maos para os jogadores
+*     Distribui as maos para os jogadores.
 *
 *  $EP Parâmetros
 *     Ponteiros para cabeca do baralho e das maos.
 *	  Numero de jogadores.
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
+void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int *numJogadores) ;
 
 /***************************************************************************
-*  $FC Função: MES  &Obter valor manilha
+*  $FC Função: MES  &Criar Lixo
 *
 *  $ED Descrição da função
-*     Obtem o valor da carta manilha.
+*     Cria o lixo vazio.
 *
-*  $EP Parâmetros
-*     Ponteiros para cabeca da mesa.
+*  $FV Valor retornado
+*     Se executar corretamente retorna o ponteiro para a cabeca da mao
+*     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
+*     funções que manipulem este lixo. 
 ***************************************************************************/
-int MES_ObterValorManilha(LIS_tppLista pCabecaMesa) ;
+LIS_tppLista MES_CriarLixo() ;
 
 
 #undef MESA_EXT

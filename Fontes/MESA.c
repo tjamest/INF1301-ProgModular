@@ -65,9 +65,26 @@ LIS_tppLista MES_CriarMao() {
 } /***************** Fim função: MES &Criar mao ***********************/
 
 /***************************************************************************
+*  Função: MES  &Criar lixo
+***************************************************************************/
+LIS_tppLista MES_CriarLixo() {
+
+	//criando ponteiro pra cabeca da lista mao
+	LIS_tppLista pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pCabecaLixo != NULL ) ;
+	#endif
+
+	return pCabecaLixo ;
+
+} /***************** Fim função: MES &Criar mao ***********************/
+
+/***************************************************************************
 *  Função: MES  &Distribuir maos
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
+void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int * numJogadores) {
 
 	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
@@ -77,7 +94,9 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
-	if (numJogadores == 2) {
+	switch (* numJogadores) {
+
+	case 2:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -90,9 +109,9 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
-	} //fim if
+		break;
 	
-	else if (numJogadores == 4) {
+	case 4:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -115,9 +134,9 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;	
-	} //fim else if
+		break;
 	
-	else {
+	case 6:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -150,38 +169,10 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
-	} //fim else
+		break;
+	} // fim switch
 
 } /***************** Fim função: MES &Distribuir maos ***********************/
-
-/***************************************************************************
-*  Função: MES  &Obter valor manilha
-***************************************************************************/
-int MES_ObterValorManilha (LIS_tppLista pCabecaMesa) {
-
-	int valor, valorManilha ;
-	BAR_tppCarta pCarta ;
-
-	LIS_IrInicioLista(pCabecaMesa) ;
-
-	pCarta = BAR_ObterCartaCorr(pCabecaMesa) ;
-
-	//assertiva de saída
-	if (pCarta == NULL) {
-		return -10;
-	}
-
-	valor = BAR_ObterValor(pCarta) ;
-
-	if (valor == 9) {
-		valorManilha = 0 ;
-	}
-	else {
-		valorManilha = valor+1 ;
-	}
-
-	return valorManilha ;
-} /************ Fim função: MES &Obter Valor Manilha ********************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/

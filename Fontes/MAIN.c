@@ -78,17 +78,13 @@ int main (void) {
 	int * pontosPartidaImpar = (int*)malloc(sizeof(int)) ;
 	char * opcao = (char*)malloc(sizeof(char)) ;
 	int * quemJoga = (int*)malloc(sizeof(int)) ;
+	int * quemAumentouAposta = (int*)malloc(sizeof(int)) ;
 	int * valorRodada = (int*)malloc(sizeof(int)) ;
 	int * numJogadores = (int*)malloc(sizeof(int)) ;
 	int * vencedorAtual = (int*)malloc(sizeof(int)) ;
 
-	BAR_tpCondRet condRetBar ;
-
 	//cria a cabeça da lista de listas
 	pCabecaSuperior = LIS_CriarLista(BAR_DestruirBaralho) ;
-
-	//cria um vetor de cartas
-	PreencherVetorCartas(VetorAux) ;
 
 	//cria as 6 maos (vazias)
 	pCabecaMao1 = MES_CriarMao() ;
@@ -102,7 +98,13 @@ int main (void) {
 	pCabecaMesa = MES_CriarMesa() ;
 
 	//cria o lixo (vazio)
-	pCabecaLixo = LIS_CriarLista(BAR_DestruirBaralho) ;
+	pCabecaLixo = MES_CriarLixo() ;
+
+	//cria um vetor de cartas
+	PreencherVetorCartas(VetorAux) ;
+
+	//embaralha o vetor
+	EmbaralharVetorCartas(VetorAux) ;
 
 	//cria a lista baralho preenchida com as cartas embaralhadas
 	pCabecaBaralho = BAR_CriarBaralho(VetorAux) ;
@@ -134,79 +136,88 @@ int main (void) {
 		*pontosRodadaImpar = 0 ;
 		*valorRodada = 1;
 
-		//embaralha o vetor
-		EmbaralharVetorCartas(VetorAux) ;
+		//se nao for a primeira rodada (tem que repreencher o baralho)
+		if (LIS_ObterQtdElem(pCabecaBaralho) == 0) {
 
-		//cria a lista baralho preenchida com as cartas embaralhadas
-		pCabecaBaralhoAux = BAR_CriarBaralho(VetorAux) ;
+			//embaralha o vetor
+			EmbaralharVetorCartas(VetorAux) ;
 
-		//transfere as cartas desse baralho auxiliar pro baralho principal
-		while (LIS_ObterQtdElem(pCabecaBaralhoAux) > 0) {
+			//cria a lista baralho auxiliar preenchida com as cartas embaralhadas
+			pCabecaBaralhoAux = BAR_CriarBaralho(VetorAux) ;
+
+			//transfere as cartas desse baralho auxiliar pro baralho principal
+			while (LIS_ObterQtdElem(pCabecaBaralhoAux) > 0) {
 			LIS_IrInicioLista(pCabecaBaralhoAux) ;
 			BAR_TransferirCarta(pCabecaBaralhoAux, pCabecaBaralho) ;
-		}
+			} //fim while
 
-		//distribui as maos
-		MES_DistribuirMaos(pCabecaSuperior, *numJogadores) ;
-	
-		//define quem comeca
-		switch (*numJogadores) {
-		case 2: *quemJoga = 1 + (rand() % 2); break;
-		case 4: *quemJoga = 1 + (rand() % 4); break;
-		case 6: *quemJoga = 1 + (rand() % 6); break;
-		} //fim switch
-
-		//transfere a vira do baralho pra mesa
-		condRetBar = BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
-
-		//jogadores apostam
-		while (*pontosRodadaPar < 2 && *pontosRodadaImpar < 2) {
-
-			//imprime a tela da rodada
-			*opcao = PrintarTelaRodada(quemJoga, valorRodada, pontosRodadaPar, pontosRodadaImpar,
-										pontosPartidaPar, pontosPartidaImpar, pCabecaSuperior) ;
-
-			//executa a jogada do jogador
-			ExecutarOpcaoRodada(opcao, quemJoga, numJogadores, valorRodada, 
-								pontosRodadaPar, pontosRodadaImpar, pCabecaSuperior,
-								pontosPartidaPar, pontosPartidaImpar) ;
-
-		} //fim while apostas
-
-		//atualiza pontuacao da partida
-		if (*pontosRodadaPar == 2) {
-			*pontosPartidaPar += *valorRodada ;
 		} //fim if
+
+		//se for a primeira rodada (baralho ja ta preenchido)
 		else {
-			*pontosPartidaImpar += *valorRodada ;
-		} //fim else
 
-		TransferirCartasProLixo(pCabecaSuperior) ;
+			//distribui as maos
+			MES_DistribuirMaos(pCabecaSuperior, numJogadores) ;
 
-		//checagem dos resultados
-		/*system("cls");
-		printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(" Equipe Par                 Equipe Impar\n") ;
-		printf( " Partida: %d/12              Partida: %d/12\n", *pontosPartidaPar, *pontosPartidaImpar) ;
-		printf(" Rodada: %d/2                Rodada: %d/2\n", *pontosRodadaPar, *pontosRodadaImpar) ;
-		printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-		PrintarBaralho(pCabecaBaralho) ;
-		PrintarMesa(pCabecaMesa) ;
-		printf("\n JOGADOR 1:") ;
-		PrintarMao(pCabecaMao1) ;
-		printf("\n JOGADOR 2:") ;
-		PrintarMao(pCabecaMao2) ;
-		printf("\n JOGADOR 3:") ;
-		PrintarMao(pCabecaMao3) ;
-		printf("\n JOGADOR 4:") ;
-		PrintarMao(pCabecaMao4) ;
-		printf("\n JOGADOR 5:") ;
-		PrintarMao(pCabecaMao5) ;
-		printf("\n JOGADOR 6:") ;
-		PrintarMao(pCabecaMao6) ;
-		PrintarLixo(pCabecaLixo) ;*/
+			//transfere a vira do baralho pra mesa
+			BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
+
+			//define quem comeca
+			switch (*numJogadores) {
+			case 2: *quemJoga = 1 + (rand() % 2); break;
+			case 4: *quemJoga = 1 + (rand() % 4); break;
+			case 6: *quemJoga = 1 + (rand() % 6); break;
+			} //fim switch
+
+			//jogadores apostam
+			while (*pontosRodadaPar < 2 && *pontosRodadaImpar < 2) {
+
+				//imprime a tela da rodada
+				*opcao = PrintarTelaRodada(quemJoga, valorRodada, pontosRodadaPar, pontosRodadaImpar,
+											pontosPartidaPar, pontosPartidaImpar, pCabecaSuperior) ;
+
+				//executa a jogada do jogador
+				ExecutarOpcaoRodada(opcao, quemJoga, numJogadores, valorRodada, 
+									pontosRodadaPar, pontosRodadaImpar, pCabecaSuperior,
+									pontosPartidaPar, pontosPartidaImpar) ;
+
+			} //fim while apostas
+
+			//atualiza pontuacao da partida
+			if (*pontosRodadaPar == 2) {
+				*pontosPartidaPar += *valorRodada ;
+			} //fim if
+			else {
+				*pontosPartidaImpar += *valorRodada ;
+			} //fim else
+
+			TransferirCartasProLixo(pCabecaSuperior) ;
+
+			//checagem dos resultados
+			/*system("cls");
+			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+			printf(" Equipe Par                 Equipe Impar\n") ;
+			printf( " Partida: %d/12              Partida: %d/12\n", *pontosPartidaPar, *pontosPartidaImpar) ;
+			printf(" Rodada: %d/2                Rodada: %d/2\n", *pontosRodadaPar, *pontosRodadaImpar) ;
+			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+			PrintarBaralho(pCabecaBaralho) ;
+			PrintarMesa(pCabecaMesa) ;
+			printf("\n JOGADOR 1:") ;
+			PrintarMao(pCabecaMao1) ;
+			printf("\n JOGADOR 2:") ;
+			PrintarMao(pCabecaMao2) ;
+			printf("\n JOGADOR 3:") ;
+			PrintarMao(pCabecaMao3) ;
+			printf("\n JOGADOR 4:") ;
+			PrintarMao(pCabecaMao4) ;
+			printf("\n JOGADOR 5:") ;
+			PrintarMao(pCabecaMao5) ;
+			printf("\n JOGADOR 6:") ;
+			PrintarMao(pCabecaMao6) ;
+			PrintarLixo(pCabecaLixo) ;*/
 	
-	} //fim while partida
+			} //fim while partida
+	} //fim else
 
 	return 0;
 }
