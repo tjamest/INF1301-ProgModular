@@ -190,19 +190,6 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 ***************************************************************************/
 BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira) ;
 
-/***************************************************************************
-*  $FC Função: BAR  &Comparar cartas em um jogo de 2 jogadores
-*
-*  $EP Parâmetros
-*     Recebe a cabeca da lista mesa e o numero do jogador que joga.
-*
-*  $ED Descrição da função
-*	  Compara a carta apostada com as cartas da mesa e com a vira.
-*
-*  $FV Valor retornado
-*     Retorna a equipe vencedora (EQUIPE_PAR ou EQUIPE_IMPAR).
-***************************************************************************/
-int BAR_CompararCartas2Jogadores (LIS_tppLista pCabecaMesa, int *quemJoga) ;
 
 
 #undef BARALHO_EXT
