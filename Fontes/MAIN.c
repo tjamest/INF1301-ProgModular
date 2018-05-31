@@ -390,6 +390,7 @@ void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 } /***************** Fim função: &Embaralhar vetor cartas ******************/
 
 /***************************************************************************
+<<<<<<< HEAD
 *  Função: &Comparar cartas em um jogo de 2 jogadores
 ***************************************************************************/
 int CompararCartas2Jogadores (LIS_tppLista pCabecaSuperior, LIS_tppLista pCabecaMesa, int *quemJoga) {
