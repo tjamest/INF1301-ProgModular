@@ -1,3 +1,5 @@
+T2:
+
 04/04/2018 - 1h trabalhada - Estudar
 	Estudamos os requisitos funcionais e não funcionais de um jogo de truco.
 
@@ -118,6 +120,9 @@
 	Revisão dos documentos do programa (visão de módulo, visão de interface, etc).
 	Descoberta a solução de alguns problemas como retornar vetor de uma função.
 
+
+T4:
+
 11/05/2018 - 8h trabalhadas - Codificar modulo
 	Iniciado o desenvolvimento do módulo mesa (funções CriarMesa, CriarMao, DistribuirMaos e ObterValorManilha).
 	Funções ExcluirPtrParaElem e ObterQtdElem criadas no módulo lista.
@@ -125,3 +130,17 @@
 12/05/2018 - 5h trabalhadas - Codificar módulo
 	Foi iniciado o módulo Interface do Usuário.
 	O jogo está começando a ganhar forma e já é possível interagir com ele pelo terminal.
+
+23/05/2018 - 4h trabalhadas - Codificar módulo
+	Foi desenvolvida a tela inicial e a tela de regras.
+
+25/05/2018 - 5h trabalhadas - Codificar módulo, Estudar, Revisar projetos
+	Foram criadas as funções PreencherVetorCartas e EmbaralharVetorCartas que auxiliam na criação do baralho.
+	Foi desenvolvido o sistema de sorteio de quem começa a jogar.
+
+31/05/2018 - 8h trabalhadas - Codificar módulo, Estudar, Revisar projetos.
+	Foram criadas as funções PrintarTelaFimApostas e PrintarTelaFimRodada.
+	Foram criadas as funções DeterminarVencedorApostas e DeterminarVencedorRodada.
+	Foi criada a função EsvaziarMesa que tem a funcionalidade de tirar (ou não) a vira da mesa.
+	Foi estudado a lógica do jogo de truco e suas regras.
+	O projeto foi revisado para poder implementar a lógica do jogo.
