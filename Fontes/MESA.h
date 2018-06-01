@@ -32,11 +32,7 @@
 *  $FC Função: MES  &Criar Mesa
 *
 *  $ED Descrição da função
-*     Cria uma mesa com uma carta vira.
-*
-*  $EP Parâmetros
-*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
-*	  Recebe a quantidade de pessoas que vao jogar.
+*     Cria uma lista mesa vazia.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca da mesa
@@ -49,11 +45,7 @@ LIS_tppLista MES_CriarMesa() ;
 *  $FC Função: MES  &Criar Mao
 *
 *  $ED Descrição da função
-*     Cria uma mão com 3 cartas.
-*
-*  $EP Parâmetros
-*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
-*	  Recebe o numero da mao.
+*     Cria uma lista mão vazia.
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca da mao
@@ -61,6 +53,19 @@ LIS_tppLista MES_CriarMesa() ;
 *     funções que manipulem esta mao. 
 ***************************************************************************/
 LIS_tppLista MES_CriarMao() ;
+
+/***************************************************************************
+*  $FC Função: MES  &Criar lixo
+*
+*  $ED Descrição da função
+*     Cria a lista lixo vazia.
+*
+*  $FV Valor retornado
+*     Se executar corretamente retorna o ponteiro para a cabeca do lixo
+*     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
+*     funções que manipulem esta mao. 
+***************************************************************************/
+LIS_tppLista MES_CriarLixo() ;
 
 /***************************************************************************
 *  $FC Função: MES  &Distribuir maos
@@ -85,6 +90,18 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
 ***************************************************************************/
 int MES_ObterValorManilha(LIS_tppLista pCabecaMesa) ;
 
+/***************************************************************************
+*  $FC Função: MES  &Esvaziar mesa
+*
+*  $ED Descrição da função
+*     Tira as cartas da mesa.
+*
+*  $EP Parâmetros
+*     Ponteiros para cabeca da mesa, cabeca do lixo e tipo, que pode ser:
+*	  TIRA_VIRA ou DEIXA_VIRA caso seja apenas o fim de uma aposta ou fim
+*	  de uma rodada.
+***************************************************************************/
+void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
 
 #undef MESA_EXT
 

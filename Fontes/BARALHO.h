@@ -48,7 +48,7 @@ typedef enum {
    BAR_CondRetNaoInseriuCarta,
    BAR_CondRetNaoExcluiuPtrParaElem,
    BAR_CondRetEhManilha,
-   BAR_CondRetNaoEhManilha
+   BAR_CondRetNaoEhManilha,
 } BAR_tpCondRet;
 
 
@@ -180,6 +180,15 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 *     Recebe uma lista de onde vai ser retirada a carta e uma pra onde vai.
 ***************************************************************************/
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
+
+/***************************************************************************
+*  $FC Função: BAR  &Transferir todas cartas pro lixo
+*
+*  $EP Parâmetros
+*     Recebe uma lista de listas de cartas e transfere todos elementos
+*	  de todas listas pra penultima lista (lixo).
+***************************************************************************/
+BAR_tpCondRet BAR_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
 
 /***************************************************************************
 *  $FC Função: BAR  &Verificar se eh manilha

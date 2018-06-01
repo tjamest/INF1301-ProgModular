@@ -199,6 +199,86 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 } /***************** Fim função: BAR &Transferir carta *********************/
 
 /***************************************************************************
+*  Função: &Transferir todas cartas pro lixo
+***************************************************************************/
+BAR_tpCondRet BAR_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
+
+	BAR_tpCondRet condRetBar ;
+
+	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao4 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
+	LIS_IrInicioLista(pCabecaSuperior) ;
+	pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao5 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMao6 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+	LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	while (LIS_ObterQtdElem(pCabecaBaralho) > 0) {
+		LIS_IrFinalLista(pCabecaBaralho) ;
+		condRetBar = BAR_TransferirCarta(pCabecaBaralho, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao1) > 0) {
+		LIS_IrFinalLista(pCabecaMao1) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao1, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao2) > 0) {
+		LIS_IrFinalLista(pCabecaMao2) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao2, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao3) > 0) {
+		LIS_IrFinalLista(pCabecaMao3) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao3, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao4) > 0) {
+		LIS_IrFinalLista(pCabecaMao4) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao4, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao5) > 0) {
+		LIS_IrFinalLista(pCabecaMao5) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao5, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMao6) > 0) {
+		LIS_IrFinalLista(pCabecaMao6) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMao6, pCabecaLixo) ;
+	}
+
+	while (LIS_ObterQtdElem(pCabecaMesa) > 0) {
+		LIS_IrFinalLista(pCabecaMesa) ;
+		condRetBar = BAR_TransferirCarta(pCabecaMesa, pCabecaLixo) ;
+	}
+
+	return condRetBar ;
+
+}
+
+/***************************************************************************
 *  Função: BAR  &Verificar se eh manilha
 ****************************************************************************/
 BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira) {

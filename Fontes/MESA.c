@@ -21,6 +21,9 @@
 #include "BARALHO.h"
 #include "LISTA.h"
 
+#define DEIXA_VIRA 0
+#define TIRA_VIRA 1
+
 #undef MESA_OWN
 
 
@@ -63,6 +66,23 @@ LIS_tppLista MES_CriarMao() {
 	return pCabecaMao ;
 
 } /***************** Fim função: MES &Criar mao ***********************/
+
+/***************************************************************************
+*  Função: MES  &Criar lixo
+***************************************************************************/
+LIS_tppLista MES_CriarLixo() {
+
+	//criando ponteiro pra cabeca da lista mao
+	LIS_tppLista pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	//assertiva de saída
+	#ifdef _DEBUG
+		assert( pCabecaLixo != NULL ) ;
+	#endif
+
+	return pCabecaLixo ;
+
+} /***************** Fim função: MES &Criar lixo ***********************/
 
 /***************************************************************************
 *  Função: MES  &Distribuir maos
@@ -182,6 +202,33 @@ int MES_ObterValorManilha (LIS_tppLista pCabecaMesa) {
 
 	return valorManilha ;
 } /************ Fim função: MES &Obter Valor Manilha ********************/
+
+/***************************************************************************
+*  Função: &Esvaziar mesa
+***************************************************************************/
+void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) {
+
+	switch (tipo) {
+
+	case TIRA_VIRA:
+
+		while (LIS_ObterQtdElem(pCabecaMesa) > 0) {
+			LIS_IrFinalLista(pCabecaMesa) ;
+			BAR_TransferirCarta(pCabecaMesa, pCabecaLixo) ;
+		} //fim while
+		break;
+
+	case DEIXA_VIRA:
+
+		while (LIS_ObterQtdElem(pCabecaMesa) > 1) {
+			LIS_IrFinalLista(pCabecaMesa) ;
+			BAR_TransferirCarta(pCabecaMesa, pCabecaLixo) ;
+		} //fim while
+		break;
+
+	} //fim switch
+
+} /******* fim função EsvaziaMesa*********/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
