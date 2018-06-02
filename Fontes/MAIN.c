@@ -8,10 +8,10 @@
 #include   <assert.h>
 
 //1 PARTIDA formada por varias RODADAS
-//1 RODADA formada por 3 jogadas
-//1 APOSTA é uma jogada
+//1 RODADA formada por 3 baterias de apostas
+//1 BATERIA DE APOSTA é formada por 2 a 6 jogadas
 
-//TODO MUNDO PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA RODADA
+//TODO MUNDO PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA JOGADA
 
 #define TAM 40
 
@@ -313,7 +313,7 @@ int main (void) {
 				else {
 
 					switch (numBateriasDeApostas) {
-					case 1: //empate na primeira bateria de apostas
+					case 1: //na primeira bateria de apostas
 						equipeVencedoraDaAposta = EMPATE1 ;
 						equipeVencedoraDaPrimeiraAposta = EMPATE1 ;
 						pontosRodadaImpar += 1 ;
@@ -330,34 +330,10 @@ int main (void) {
 
 						break;
 
-					case 2: //empate na segunda bateria de apostas
+					case 2: //na segunda bateria de apostas
 
-						//se teve vencedor na primeira bateria de apostas (essa equipe vence)
-						if (equipeVencedoraDaPrimeiraAposta == EQUIPE_PAR || equipeVencedoraDaPrimeiraAposta == EQUIPE_IMPAR) {
-							switch (equipeVencedoraDaPrimeiraAposta) {
-							case EQUIPE_PAR: 
-								pontosRodadaPar += 1 ;
-								equipeVencedoraDaAposta = EQUIPE_PAR ;
-								break;
-							case EQUIPE_IMPAR:
-								pontosRodadaImpar += 1 ;
-								equipeVencedoraDaAposta = EQUIPE_IMPAR ;
-								break;
-							} //fim switch
-
-						PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta, numRodadas,
-											  pontosRodadaPar, pontosRodadaImpar,
-											  pontosPartidaPar, pontosPartidaImpar) ;
-
-						MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
-
-						//quemJoga = atualJogadorVencedor;
-						numJogadas = 0;
-
-						} //fim if
-
-						//se tiver sido empate na primeira bateria de apostas tambem (ninguem ganha ponto)
-						else {
+						//se tiver sido empate na primeira bateria de apostas tambem
+						if (equipeVencedoraDaPrimeiraAposta == EMPATE1) {
 
 							equipeVencedoraDaAposta = EMPATE2 ;
 
@@ -371,50 +347,48 @@ int main (void) {
 							numJogadas = 0;
 						}
 
+						//se teve vencedor na primeira bateria de apostas (essa equipe vence)
+						else {
+							switch (equipeVencedoraDaPrimeiraAposta) {
+							case EQUIPE_PAR: 
+								pontosRodadaPar += 1 ;
+								equipeVencedoraDaAposta = EQUIPE_PAR ;
+								break;
+							case EQUIPE_IMPAR:
+								pontosRodadaImpar += 1 ;
+								equipeVencedoraDaAposta = EQUIPE_IMPAR ;
+								break;
+							} //fim switch
+
+							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta, numRodadas,
+												  pontosRodadaPar, pontosRodadaImpar,
+												  pontosPartidaPar, pontosPartidaImpar) ;
+
+							MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
+
+							//quemJoga = atualJogadorVencedor;
+							numJogadas = 0;
+
+						} //fim else
+
 						break;
 
 					case 3: //empate na terceira bateria de apostas
 
-						//caso estejam empatados
-						if (pontosRodadaPar == pontosRodadaImpar) {
+						equipeVencedoraDaAposta = EMPATE3 ;
 
-							equipeVencedoraDaAposta = EMPATE3 ;
+						PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta, numRodadas,
+												pontosRodadaPar, pontosRodadaImpar,
+											    pontosPartidaPar, pontosPartidaImpar) ;
 
-							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta, numRodadas,
-												  pontosRodadaPar, pontosRodadaImpar,
-											      pontosPartidaPar, pontosPartidaImpar) ;
+						pontosRodadaPar = 2 ;
+						pontosRodadaImpar = 2 ;
 
-							pontosRodadaPar = 2 ;
-							pontosRodadaImpar = 2 ;
+						MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
 
-							MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
-
-							//quemJoga = atualJogadorVencedor;
-							numJogadas = 0;
-						}
-
-						//caso nao estejam empatados
-						else {
-
-							pontosRodadaPar += 1 ;
-							pontosRodadaImpar += 1 ;
-
-							if (pontosRodadaPar == 2) {
-								equipeVencedoraDaAposta = EQUIPE_PAR ;
-							}
-							else if (pontosRodadaImpar == 2) {
-								equipeVencedoraDaAposta = EQUIPE_IMPAR ;
-							}
-
-							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta, numRodadas,
-												  pontosRodadaPar, pontosRodadaImpar,
-											      pontosPartidaPar, pontosPartidaImpar) ;
-
-							MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
-
-							//quemJoga = atualJogadorVencedor;
-							numJogadas = 0;
-						}
+						//quemJoga = atualJogadorVencedor;
+						numJogadas = 0;
+						
 
 						break;
 					} //fim switch
@@ -1530,11 +1504,11 @@ void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada,
 
 	case NINGUEM_VENCEU:
 		printf(	   "               Rodada empatou\n") ;
-		printf(	   "      (nenhuma das equipes ganha ponto)\n") ;
+		printf(	   "         (nenhuma das equipes pontua)\n") ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		printf(	   " Equipe Par                  Equipe Impar\n") ;
 		printf(	   " Partida: %d/12               Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar-1, pontosRodadaImpar-1) ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 		break ;
 
@@ -1576,50 +1550,28 @@ void PrintarTelaFimApostas(LIS_tppLista pCabecaSuperior, int valorRodada,
 	switch (equipeVencedoraDaAposta) {
 
 	case EMPATE3:
-
-		printf(	   "          Terceira aposta empatou\n") ;
-		printf(	   "        (nenhuma equipe ganha ponto)\n") ;
+		printf(	   "    Terceira bateria de apostas empatou\n") ;
+		printf(	   "        (nenhuma das equipes pontua)\n") ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		printf(	   " Equipe Par                  Equipe Impar\n") ;
 		printf(	   " Partida: %d/12               Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-/*
-		printf(	   "          Terceira aposta empatou\n") ;
-		printf(	   "        (vencedor da primeira pontua)\n") ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   " Equipe Par                  Equipe Impar\n") ;
-		printf(	   " Partida: %d/12               Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-*/
 		break ;
 
 	case EMPATE2:
-
-		printf(	   "          Segunda aposta empatou\n") ;
-		printf(	   "        (nenhuma equipe ganha ponto)\n") ;
+		printf(	   "     Segunda bateria de apostas empatou\n") ;
+		printf(	   "        (nenhuma das equipes pontua)\n") ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		printf(	   " Equipe Par                  Equipe Impar\n") ;
 		printf(	   " Partida: %d/12               Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-
-/*
-		printf(	   "          Segunda aposta empatou\n") ;
-		printf(	   "       (vencedor da primeira pontua)\n") ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   " Equipe Par                  Equipe Impar\n") ;
-		printf(	   " Partida: %d/12               Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-		printf(	   " Rodada: %d/2                 Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-*/
-
 		break ;
 
 	case EMPATE1:
-		printf(	   "          Primeira aposta empatou \n") ;
-		printf(	   "       (as duas equipes ganham ponto)\n") ;
+		printf(	   "     Primeira bateria de apostas empatou \n") ;
+		printf(	   "         (as duas equipes pontuam)\n") ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		printf(	   " Equipe Par                Equipe Impar\n") ;
 		printf(	   " Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
