@@ -222,31 +222,6 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 } /***************** Fim função: BAR &Transferir carta *********************/
 
 /***************************************************************************
-*  Função: BAR  &Copiar carta
-****************************************************************************/
-BAR_tpCondRet BAR_CopiarCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
-
-	LIS_tpCondRet CondRetLista ;
-
-	BAR_tppCarta pCarta = BAR_ObterCartaCorr(pOrigem) ;
-	
-	//assertiva de saida
-	if (pCarta == NULL) { 
-		return BAR_CondRetNaoObteveCarta ;
-	}
-
-	CondRetLista = LIS_InserirElementoApos(pDestino, pCarta) ;
-
-	//assertiva de saida
-	if (CondRetLista == LIS_CondRetFaltouMemoria) {
-		return BAR_CondRetNaoInseriuCarta ;
-	}
-
-	return BAR_CondRetOK ;
-
-} /***************** Fim função: BAR &Transferir carta *********************/
-
-/***************************************************************************
 *  Função: BAR  &Verificar se eh manilha
 ****************************************************************************/
 BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira) {

@@ -204,115 +204,23 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 
-		//copia da mao 1 pra mao 2
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
+		//preenche a mao 2
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+
+		LIS_IrInicioLista(pCabecaBaralho) ;
 
 		break;
 	
 	case 4:
-		
-		LIS_IrInicioLista(pCabecaSuperior) ;
-		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-		//preenche a mao 1
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-
-		//copia da mao 1 pra mao 2
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-
-		//copia da mao 1 pra mao 3
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-
-		//copia da mao 1 pra mao 4
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
+		break;
 	
 	case 6:
-
-		LIS_IrInicioLista(pCabecaSuperior) ;
-		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
-		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-		//preenche a mao 1
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
-
-		//copia da mao 1 pra mao 2
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao2) ;
-
-		//copia da mao 1 pra mao 3
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao3) ;
-
-		//copia da mao 1 pra mao 4
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao4) ;
-
-		//copia da mao 1 pra mao 5
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao5) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao5) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao5) ;
-
-		//copia da mao 1 pra mao 6
-		LIS_IrInicioLista(pCabecaMao1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao6) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao6) ;
-		LIS_AvancarElementoCorrente(pCabecaMao1, 1) ;
-		BAR_CopiarCarta(pCabecaMao1, pCabecaMao6) ;
+		break;
 
 	} //fim switch
 

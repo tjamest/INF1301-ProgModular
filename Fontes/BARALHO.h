@@ -196,14 +196,6 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 
 /***************************************************************************
-*  $FC Função: BAR  &Copiar carta
-*
-*  $EP Parâmetros
-*     Recebe uma lista de onde vai ser copiada a carta e uma pra onde vai.
-***************************************************************************/
-BAR_tpCondRet BAR_CopiarCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
-
-/***************************************************************************
 *  $FC Função: BAR  &Verificar se eh manilha
 *
 *  $EP Parâmetros
