@@ -49,6 +49,7 @@ typedef enum {
    BAR_CondRetNaoExcluiuPtrParaElem,
    BAR_CondRetEhManilha,
    BAR_CondRetNaoEhManilha,
+   BAR_CondRetNaoPreencheuBaralho
 } BAR_tpCondRet;
 
 
@@ -93,18 +94,31 @@ typedef enum {
 *  $FC Função: BAR  &Criar Baralho
 *
 *  $ED Descrição da função
-*     Cria um baralho com cartas.
-*
-*  $EP Parâmetros
-*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
-*	  Recebe a quantidade de pessoas que vao jogar.
+*     Cria um baralho vazio..
 *
 *  $FV Valor retornado
 *     Se executar corretamente retorna o ponteiro para a cabeca do baralho
 *     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
 *     funções que manipulem este baralho. 
 ***************************************************************************/
-LIS_tppLista BAR_CriarBaralho(BAR_tppCarta vtCartas[TAM]) ;
+LIS_tppLista BAR_CriarBaralho() ;
+
+/***************************************************************************
+*  $FC Função: BAR  &Preencher Baralho
+*
+*  $ED Descrição da função
+*     Preenche um baralho com cartas.
+*
+*  $EP Parâmetros
+*     Recebe um vetor embaralhado que armazena ponteiros pra tipo carta.
+*	  Recebe um ponteiro pra cabeca do baralho.
+*
+*  $FV Valor retornado
+*     Se executar corretamente retorna o ponteiro para a cabeca do baralho
+*     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
+*     funções que manipulem este baralho. 
+***************************************************************************/
+BAR_tpCondRet BAR_PreencherBaralho(LIS_tppLista pCabecaBaralho, BAR_tppCarta VetorAux[TAM]) ;
 
 /***************************************************************************
 *  $FC Função: BAR  &Criar Carta
@@ -182,13 +196,12 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta);
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 
 /***************************************************************************
-*  $FC Função: BAR  &Transferir todas cartas pro lixo
+*  $FC Função: BAR  &Copiar carta
 *
 *  $EP Parâmetros
-*     Recebe uma lista de listas de cartas e transfere todos elementos
-*	  de todas listas pra penultima lista (lixo).
+*     Recebe uma lista de onde vai ser copiada a carta e uma pra onde vai.
 ***************************************************************************/
-BAR_tpCondRet BAR_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
+BAR_tpCondRet BAR_CopiarCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) ;
 
 /***************************************************************************
 *  $FC Função: BAR  &Verificar se eh manilha

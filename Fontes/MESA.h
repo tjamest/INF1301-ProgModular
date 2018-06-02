@@ -78,17 +78,7 @@ LIS_tppLista MES_CriarLixo() ;
 *	  Numero de jogadores.
 ***************************************************************************/
 void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
-
-/***************************************************************************
-*  $FC Função: MES  &Obter valor manilha
-*
-*  $ED Descrição da função
-*     Obtem o valor da carta manilha.
-*
-*  $EP Parâmetros
-*     Ponteiros para cabeca da mesa.
-***************************************************************************/
-int MES_ObterValorManilha(LIS_tppLista pCabecaMesa) ;
+void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Esvaziar mesa
@@ -102,6 +92,15 @@ int MES_ObterValorManilha(LIS_tppLista pCabecaMesa) ;
 *	  de uma rodada.
 ***************************************************************************/
 void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
+
+/***************************************************************************
+*  $FC Função: MES  &Transferir todas cartas pro lixo
+*
+*  $EP Parâmetros
+*     Recebe uma lista de listas de cartas e transfere todos elementos
+*	  de todas listas pra penultima lista (lixo).
+***************************************************************************/
+void MES_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
 
 #undef MESA_EXT
 
