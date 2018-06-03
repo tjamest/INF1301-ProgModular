@@ -144,3 +144,9 @@ T4:
 	Foi criada a função EsvaziarMesa que tem a funcionalidade de tirar (ou não) a vira da mesa.
 	Foi estudado a lógica do jogo de truco e suas regras.
 	O projeto foi revisado para poder implementar a lógica do jogo.
+
+03/06/2018 - 4h trabalhadas - Codificar módulo, Revisar projetos
+	Foi feita a parte de dispensar carta e aumentar aposta.
+	Sendo necessario agora fazer isso pra um jogo de 4 ou 6 jogadores.
+	Falta impedir que quem tenha aumentado a aposta possa aumentar de novo apos aceitarem.
+	Falta determinar quem jogará em caso de empate (jogador que apostou a carta empatada primeiro).
