@@ -70,6 +70,7 @@ typedef enum {
    _A,     // 7                        
    _2,     // 8
    _3,     // 9
+   _X	   // 10
 } BAR_tpValorCarta ;
 
 
@@ -83,7 +84,8 @@ typedef enum {
   Ouros,      // 0
   Espadas,    // 1
   Copas,      // 2
-  Paus       // 3
+  Paus,		  // 3
+  X			  // 4
 } BAR_tpNaipeCarta ;
 
 

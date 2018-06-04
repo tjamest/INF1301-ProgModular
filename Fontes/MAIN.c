@@ -15,7 +15,6 @@
 
 #define TAM 40
 
-#define NINGUEM_VENCEU 0
 #define EQUIPE_IMPAR 1
 #define EQUIPE_PAR 2
 #define EMPATE1 -1
@@ -23,11 +22,12 @@
 #define EMPATE3 -3
 
 //resultados de apostar ou dispensar carta
-#define JOGADA_PERDEU -1
-#define JOGADA_EMPATOU 0
-#define JOGADA_VENCEU 1
+#define PERDEU -1
+#define EMPATOU 0
+#define VENCEU 1
 
 //jogadores
+#define NINGUEM 0
 #define JOGADOR1 1
 #define JOGADOR2 2
 #define JOGADOR3 3
@@ -53,9 +53,9 @@
 void PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
 void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) ;
 
-int DeterminarResultadoDaAposta (LIS_tppLista pCabecaSuperior, int quemJoga, int qtdJogadores) ;
+//int DeterminarResultadoDaAposta (LIS_tppLista pCabecaSuperior, int quemJoga, int qtdJogadores) ;
 
-int VerResultadoEntre2Jogadores (LIS_tppLista pCabecaSuperior, int quemJoga) ; 
+int DeterminarResultado(LIS_tppLista pCabecaSuperior, int quemJoga, int qtdJogadores) ;
 
 int DefinirQuemComeca(int qtdJogadores) ;
 
@@ -64,30 +64,32 @@ int ProximoJogador(int quemJoga, int qtdJogadores) ;
 //printar listas
 void PrintarBaralho (LIS_tppLista pCabecaBaralho) ;
 void PrintarLixo (LIS_tppLista pCabecaLixo) ;
-void PrintarMesa (LIS_tppLista pCabecaMesa, int qtdCartasViradas) ;
+void PrintarMesa (LIS_tppLista pCabecaMesa, int quemJogouAPrimeira, int qtdJogadores) ;
 void PrintarMao (LIS_tppLista pCabecaMao) ;
 
 //printar telas (com opcoes)
 int PrintarTelaInicio () ;
 int PrintarTelaRegras () ;
 int PrintarTelaQtdJogadores () ;
-int PrintarTelaJogada(int quemJoga, int valorRodada, 
-					  LIS_tppLista pCabecaSuperior, int qtdCartasViradas,
+int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
+					  LIS_tppLista pCabecaSuperior,
+					  int quemJogouAPrimeira, int qtdJogadores,
 					  int pontosRodadaPar, int pontosRodadaImpar,
 					  int pontosPartidaPar, int pontosPartidaImpar) ;
 
 int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogadores,
-									 LIS_tppLista pCabecaSuperior, int qtdCartasViradas, 
+									 LIS_tppLista pCabecaSuperior, 
+									 int quemJogouAPrimeira,
 									 int pontosRodadaPar, int pontosRodadaImpar, 
 									 int pontosPartidaPar, int pontosPartidaImpar) ;
 
 void PrintarTelaFimApostas(LIS_tppLista pCabecaSuperior, int valorRodada, int equipeVencedoraDaAposta,
-						   int qtdRodadas, int qtdCartasViradas,
+						   int qtdRodadas, int quemJogouAPrimeira, int qtdJogadores,
 						   int pontosRodadaPar, int pontosRodadaImpar,
 						   int pontosPartidaPar, int pontosPartidaImpar) ;
 
 void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada, int equipeVencedoraDaRodada,
-						  int qtdRodadas, int qtdCartasViradas,
+						  int qtdRodadas,
 						  int pontosRodadaPar, int pontosRodadaImpar,
 						  int pontosPartidaPar, int pontosPartidaImpar) ;
 //executar opcoes
@@ -123,6 +125,7 @@ int main (void) {
 		pontosPartidaPar ,					//quantidade de rodadas ganhas da equipe par
 		pontosPartidaImpar ,				//quantidade de rodadas ganhas da equipe impar
 		quemJoga ,							//quem ta na vez
+		quemJogouAPrimeira ,
 		quemAumentou ,						//quem pediu truco, seis ou doze
 		qtdJogadores ,						//quantidade de jogadores 
 		qtdRodadas ,						//quantidade de rodadas iniciadas
@@ -188,6 +191,8 @@ int main (void) {
 	while (pontosPartidaPar < 12 && pontosPartidaImpar < 12) {
 
 		atualJogadorVencedor = 0 ;
+		quemAumentou = 0 ;
+		quemJogouAPrimeira = 0 ;
 
 		pontosRodadaPar = 0 ;
 		pontosRodadaImpar = 0 ;
@@ -208,6 +213,9 @@ int main (void) {
 
 		//distribui as maos
 		//MES_DistribuirMaos(pCabecaSuperior, qtdJogadores) ;
+
+		//distribui as maos para testar empates (deve-se coomentar a funçao embaralhar)
+		//(para testar empates com manilha deve-se transferir a vira pra mesa antes)
 		MES_DistribuirMaosParaTestarEmpates(pCabecaSuperior, qtdJogadores) ;
 
 		//transfere a vira do baralho pra mesa
@@ -219,45 +227,66 @@ int main (void) {
 			qtdJogadas += 1 ;
 
 			//imprime tela com as opçoes de jogadas
-			jogada = PrintarTelaJogada(quemJoga, valorRodada, 
-									   pCabecaSuperior, qtdCartasViradas,
+			jogada = PrintarTelaJogada(quemJoga, valorRodada, quemAumentou,
+									   pCabecaSuperior,
+									   quemJogouAPrimeira, qtdJogadores,
 									   pontosRodadaPar, pontosRodadaImpar,
 									   pontosPartidaPar, pontosPartidaImpar) ;
 
 			//executa a jogada escolhida (APOSTAR / DISPENSAR / AUMENTAR)
 			valorRodada = ExecutarOpcaoJogada(pCabecaSuperior, quemJoga, jogada, valorRodada) ;
 
+			//se for a primeira carta a ser apostada
+			if (LIS_ObterQtdElem(pCabecaMesa) == 2 && 
+			   (jogada == 49 || jogada == 50 || jogada == 51)) {
+
+				quemJogouAPrimeira = quemJoga ;
+			}
+
 			//APOSTOU CARTA
 			if (jogada >= 49 && jogada <= 51) {
 
 				//TEM QUE COMPARAR CARTAS
-				if (LIS_ObterQtdElem(pCabecaMesa) > 2) {
+				if ((LIS_ObterQtdElem(pCabecaMesa) - qtdCartasViradas) > 2) {
 
 					//determina o resultado da aposta (VENCEU / PERDEU / EMPATOU)
-					resultado = DeterminarResultadoDaAposta(pCabecaSuperior,
-															quemJoga,
-															qtdJogadores) ;
+					//no caso de empate retorna o jogador com quem empatou
+					//(ainda nao implementado)
+					//resultado = DeterminarResultadoDaAposta(pCabecaSuperior, quemJoga, qtdJogadores) ;
+
+					//retorna quemJoga se venceu, jogador com quem empatou se empatou e 0 se perdeu
+					resultado = DeterminarResultado(pCabecaSuperior, quemJoga, qtdJogadores) ;
+
 					//JOGADOR VENCEU TODAS CARTAS DA MESA
-					if (resultado == JOGADA_VENCEU) {
+					if (resultado == quemJoga) {
 						atualJogadorVencedor = quemJoga ;
 					} //fim if "se venceu"
 
 					//JOGADOR EMPATOU COM ALGUMA CARTA DA MESA
-					else if (resultado == JOGADA_EMPATOU) {
-						//empatouCom = ;//jogador com quem empatou
-						//quemJoga = //jogador com quem empatou
-						qtdEmpates += 1 ;
-						atualJogadorVencedor = -10 ;
+					else if (resultado != quemJoga && resultado != 0) {
+
+						//quem joga na proxima é quem pôs a primeira carta q empatou
+						quemJoga = resultado ;
+						atualJogadorVencedor = NINGUEM ;
 					}
 
 				} //fim if "se tem que comparar cartas"
 
 				//NAO TEM CARTA PRA COMPARAR
 				else {
-					atualJogadorVencedor = quemJoga ;
-				}
 
-				quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
+					atualJogadorVencedor = quemJoga ;
+
+					//pq eh a primeira jogada de aposta e nao acabou as jogadas
+					if (qtdJogadas != qtdJogadores) {
+						quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
+					}
+
+					//pq ngm apostou nada
+					else {
+						quemJoga = atualJogadorVencedor ;
+					}
+				}
 
 			} // fim if "apostou carta"
 
@@ -277,10 +306,10 @@ int main (void) {
 
 					quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
 					jogada = PrintarTelaCorrerAceitarAumentar(quemJoga, valorRodada, qtdJogadores,
-															  pCabecaSuperior, qtdCartasViradas,
+															  pCabecaSuperior,
+															  quemJogouAPrimeira,
 															  pontosRodadaPar, pontosRodadaImpar,
 															  pontosPartidaPar,pontosPartidaImpar) ;
-
 					//CORREU
 					if (jogada == 49) {
 
@@ -302,12 +331,13 @@ int main (void) {
 					else if (jogada == 51) {
 						valorRodada = ExecutarOpcaoJogada(pCabecaSuperior, quemJoga, jogada, valorRodada) ;
 						qtdJogadasNoAumentoDeAposta = 0 ;
-						quemAumentou = quemJoga ;
-						quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
 						jogada = PrintarTelaCorrerAceitarAumentar(quemJoga, valorRodada, qtdJogadores,
-																  pCabecaSuperior, qtdCartasViradas,
+																  pCabecaSuperior,
+																  quemJogouAPrimeira,
 																  pontosRodadaPar, pontosRodadaImpar,
 																  pontosPartidaPar,pontosPartidaImpar) ;
+						quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
+						quemAumentou = quemJoga ;
 					} //fim else if "aumentou"
 
 					qtdJogadasNoAumentoDeAposta += 1 ;
@@ -356,7 +386,7 @@ int main (void) {
 					} //fim switch
 
 					PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-										  qtdRodadas, qtdCartasViradas,
+										  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 										  pontosRodadaPar, pontosRodadaImpar,
 										  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -381,7 +411,7 @@ int main (void) {
 						pontosRodadaPar += 1 ;
 
 						PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-											  qtdRodadas, qtdCartasViradas,
+											  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 											  pontosRodadaPar, pontosRodadaImpar,
 											  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -401,7 +431,7 @@ int main (void) {
 							equipeVencedoraDaAposta = EMPATE2 ;
 
 							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-												  qtdRodadas, qtdCartasViradas,
+												  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 												  pontosRodadaPar, pontosRodadaImpar,
 												  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -426,7 +456,7 @@ int main (void) {
 							} //fim switch
 
 							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-												  qtdRodadas, qtdCartasViradas,
+												  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 												  pontosRodadaPar, pontosRodadaImpar,
 												  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -449,7 +479,7 @@ int main (void) {
 							equipeVencedoraDaAposta = EMPATE3 ;
 
 							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-												  qtdRodadas, qtdCartasViradas,
+												  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 												  pontosRodadaPar, pontosRodadaImpar,
 												  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -476,7 +506,7 @@ int main (void) {
 							} //fim switch
 
 							PrintarTelaFimApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
-												  qtdRodadas, qtdCartasViradas,
+												  qtdRodadas, quemJogouAPrimeira, qtdJogadores,
 												  pontosRodadaPar, pontosRodadaImpar,
 												  pontosPartidaPar, pontosPartidaImpar) ;
 
@@ -501,7 +531,7 @@ int main (void) {
 						equipeVencedoraDaRodada = EQUIPE_PAR ;
 						pontosPartidaPar += valorRodada ;
 						PrintarTelaFimRodada(pCabecaSuperior, valorRodada, equipeVencedoraDaRodada,
-											 qtdRodadas, qtdCartasViradas,
+											 qtdRodadas,
 											 pontosRodadaPar, pontosRodadaImpar,
 											 pontosPartidaPar, pontosPartidaImpar) ;
 					}
@@ -511,16 +541,16 @@ int main (void) {
 						equipeVencedoraDaRodada = EQUIPE_IMPAR ;
 						pontosPartidaImpar += valorRodada ;
 						PrintarTelaFimRodada(pCabecaSuperior, valorRodada, equipeVencedoraDaRodada, 
-											 qtdRodadas, qtdCartasViradas,
+											 qtdRodadas,
 											 pontosRodadaPar, pontosRodadaImpar,
 											 pontosPartidaPar, pontosPartidaImpar) ;
 					}
 
 					//RODADA EMPATOU
 					else {
-						equipeVencedoraDaRodada = NINGUEM_VENCEU ;
+						equipeVencedoraDaRodada = NINGUEM ;
 						PrintarTelaFimRodada(pCabecaSuperior, valorRodada, equipeVencedoraDaRodada,
-											 qtdRodadas, qtdCartasViradas,
+											 qtdRodadas,
 											 pontosRodadaPar, pontosRodadaImpar,
 											 pontosPartidaPar, pontosPartidaImpar) ;
 					}
@@ -629,9 +659,9 @@ void EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 } /***************** Fim função: &Embaralhar vetor cartas ******************/
 
 /***************************************************************************
-*  Função: &Ver quem ganhou entre 2 jogadores
+*  Função: &Determinar resultado
 ***************************************************************************/
-int VerResultadoEntre2Jogadores (LIS_tppLista pCabecaSuperior, int quemJoga) {
+int DeterminarResultado (LIS_tppLista pCabecaSuperior, int quemJoga, int qtdJogadores) {
 
 	BAR_tppCarta pVira = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
 	BAR_tppCarta pAposta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
@@ -640,7 +670,6 @@ int VerResultadoEntre2Jogadores (LIS_tppLista pCabecaSuperior, int quemJoga) {
 	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
 	int i ;
-	int quemVenceu = NINGUEM_VENCEU ;
 
 	BAR_tpValorCarta valorAposta, valorCartaMesa ;
 	BAR_tpNaipeCarta naipeAposta, naipeCartaMesa ;
@@ -676,40 +705,19 @@ int VerResultadoEntre2Jogadores (LIS_tppLista pCabecaSuperior, int quemJoga) {
 
 				//apostador venceu
 				if ((int)naipeAposta > (int)naipeCartaMesa) {
-					switch (quemJoga) {
-					case JOGADOR1: 
-						return JOGADOR1 ; 
-						break;
-					case JOGADOR2: 
-						return JOGADOR2 ; 
-						break;
-					} //fim switch
+					return quemJoga ;
 				} //fim if
 
 				//apostador perdeu
 				else {
-					switch (quemJoga) {
-					case JOGADOR1: 
-						return JOGADOR2 ; 
-						break ;
-					case JOGADOR2: 
-						return JOGADOR1 ; 
-						break ;
-					} //fim switch
+					return 0 ;
 				} //fim else
 
 			} //fim if
 
 			//CARTA DA MESA != MANILHA (apostador venceu)
 			else {
-				switch (quemJoga) {
-				case JOGADOR1: 
-					return JOGADOR1 ; 
-					break;
-				case JOGADOR2: 
-					return JOGADOR2 ; 
-					break;
-				} // fim switch
+				return quemJoga ;
 			} //fim else
 
 		} //fim for
@@ -732,131 +740,33 @@ int VerResultadoEntre2Jogadores (LIS_tppLista pCabecaSuperior, int quemJoga) {
 
 			//apostador venceu
 			if ((int)valorAposta > (int)valorCartaMesa) {
-				switch (quemJoga) {
-				case 1: 
-					return EQUIPE_IMPAR ; 
-					break;
-				case 2: 
-					return EQUIPE_PAR ; 
-					break;
-				} // fim switch
+				return quemJoga ;
 			} //fim if
 
 			//empataram
 			else if ((int)valorAposta == (int)valorCartaMesa) {
 
-				switch (LIS_ObterQtdElem(pCabecaMao)) {
-
-				case 0: //empataram na terceira jogada
-
-					//quemJoga passa a ser o jogador seguinte
-					if (quemJoga == 2) {
-						quemJoga = 1 ;
-					}
-					else { 
-						quemJoga += 1 ;
-					}
-					return EMPATE3;
-					break;
-
-				case 1:	//empataram na segunda jogada
-
-					//quemJoga passa a ser o jogador seguinte
-					if (quemJoga == 2) {
-						quemJoga = 1 ;
-					}
-					else { 
-						quemJoga += 1 ;
-					}
-					return EMPATE2;
-					break;
-
-				case 2: //empataram na primeira jogada
-
-					//quemJoga passa a ser o jogador seguinte
-					if (quemJoga == 2) {
-						quemJoga = 1 ;
-					}
-					else { 
-						quemJoga += 1 ;
-					}
-					return EMPATE1;
-					break;
-
-				} //fim switch
+				quemJoga = ProximoJogador(quemJoga, qtdJogadores) ;
+				return quemJoga ;
 
 			} //fim else if
 				
 			//apostador perdeu
 			else {
-				switch (quemJoga) {
-				case JOGADOR1: 
-					return JOGADOR2 ; 
-					break;
-				case JOGADOR2: 
-					return JOGADOR1 ; 
-					break;
-				} //fim switch 
+				return 0 ;
 			} //fim else
 
 		} //fim if
 
 		//CARTA DA MESA == MANILHA (apostador perdeu)
 		else {
-			switch (quemJoga) {
-			case JOGADOR1: 
-				return JOGADOR2 ; 
-				break;
-			case JOGADOR2: 
-				return JOGADOR1 ; 
-				break;
-			} //fim switch
+			return 0 ;
 		} //fim else
 
 	} //fim else "se a carta apostada nao for manilha"
 
-	return -10;
-} /*************** Fim função: &Comparar cartas 2 jogadores ***************/
-
-/***************************************************************************
-*  Função: &Determinar vencedor da aposta
-***************************************************************************/
-int DeterminarResultadoDaAposta (LIS_tppLista pCabecaSuperior, int quemJoga, int qtdJogadores) {
-
-	int resultado ;
-
-	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-
-	LIS_IrFinalLista(pCabecaSuperior) ;
-	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-
-	LIS_AvancarElementoCorrente(pCabecaSuperior, -1) ;
-	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		
-	switch(qtdJogadores) {
-
-	case 2: 
-
-		resultado = VerResultadoEntre2Jogadores(pCabecaSuperior, quemJoga) ;
-
-		if (resultado == EMPATE1 || resultado == EMPATE2 || resultado == EMPATE3) {
-			return JOGADA_EMPATOU;
-		} //fim if
-
-		else if (resultado == quemJoga) {
-			return JOGADA_VENCEU ;
-		} //fim else if
-
-		else {
-			return JOGADA_PERDEU ;
-		} //fim else
-
-	} //fim switch
-
-	return -10;
-
-} /************* Fim função: &Determinar vencedor da aposta ***************/
+	return 0 ;
+} /*************** Fim função: &Determinar resultado ***************/
 
 /***************************************************************************
 *  Função: &Definir quem comeca
@@ -976,9 +886,14 @@ void PrintarBaralho (LIS_tppLista pCabecaBaralho) {
 /***************************************************************************
 *  Função: &Printar mesa
 ***************************************************************************/
-void PrintarMesa (LIS_tppLista pCabecaMesa, int qtdCartasViradas) {
+void PrintarMesa (LIS_tppLista pCabecaMesa, int quemJogouAPrimeira, int qtdJogadores) {
 	
-	int i, j, qtdCartas, valorInt, naipeInt;
+	int i, 
+		qtdCartas, 
+		valorInt, 
+		naipeInt;
+
+	int jogador = quemJogouAPrimeira ;
 
 	//string que representa o valor
 	char * valorStr = (char*)malloc(sizeof(char));
@@ -998,7 +913,7 @@ void PrintarMesa (LIS_tppLista pCabecaMesa, int qtdCartasViradas) {
 	//obtendo a quantidade de cartas na mesa
 	qtdCartas = LIS_ObterQtdElem(pCabecaMesa) ;
 
-	for(i = 0; i < qtdCartas; i++) {
+	for(i = 1; i <= qtdCartas; i++) {
 
 		//obtem o ponteiro pra uma carta
 		pCarta = BAR_ObterCartaCorr (pCabecaMesa);
@@ -1018,6 +933,7 @@ void PrintarMesa (LIS_tppLista pCabecaMesa, int qtdCartasViradas) {
 		case (7): valorStr = "A"; break;
 		case (8): valorStr = "2"; break;
 		case (9): valorStr = "3"; break;
+		case (10): valorStr = "X"; break;
 		}
 
 		switch (naipeInt) {
@@ -1025,20 +941,23 @@ void PrintarMesa (LIS_tppLista pCabecaMesa, int qtdCartasViradas) {
 		case (1): naipeStr = "Espadas"; break;
 		case (2): naipeStr = "Copas"; break;
 		case (3): naipeStr = "Paus"; break;
+		case (4): break;
 		}
 
-		if (i == 0) {
-			printf ("                   MESA:\n") ;
-			printf ("              VIRA - %s de %s\n", valorStr, naipeStr);
-
-			if (qtdCartasViradas > 0) {
-				for (j = 0; j < qtdCartasViradas; j++) {
-				printf ("             CARTA - X\n");
-				} //fim for
-			} // fim if
+		if (i == 1) {
+				printf ("                  MESA:\n") ;
+				printf ("              VIRA - %s de %s\n", valorStr, naipeStr);
 		} // fim if
+
 		else {
-			printf ("             CARTA - %s de %s\n", valorStr, naipeStr);
+			if (strcmp(valorStr, "X") == 0 ) {
+				printf ("         JOGADOR %d - %s\n", jogador, valorStr);
+			}
+			else {
+				printf ("         JOGADOR %d - %s de %s\n", jogador, valorStr, naipeStr);
+			}
+
+			jogador = ProximoJogador(quemJogouAPrimeira, qtdJogadores) ;
 		} // fim else
 
 		//avancando com o elemento
@@ -1074,7 +993,7 @@ void PrintarMao (LIS_tppLista pCabecaMao) {
 	qtdCartas = LIS_ObterQtdElem(pCabecaMao);
 	
 	//printando as cartas
-	printf("\n                   MAO:\n") ;
+	printf("\n                  MAO:\n") ;
 	for(i = 0; i < qtdCartas; i++) {
 
 		//obtem o ponteiro pra uma carta
@@ -1268,8 +1187,9 @@ int PrintarTelaQtdJogadores () {
 /***************************************************************************
 *  Função: &Printar tela da rodada
 ***************************************************************************/
-int PrintarTelaJogada(int quemJoga, int valorRodada, 
-					  LIS_tppLista pCabecaSuperior, int qtdCartasViradas,
+int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
+					  LIS_tppLista pCabecaSuperior,
+					  int quemJogouAPrimeira, int qtdJogadores,
 					  int pontosRodadaPar, int pontosRodadaImpar, 
 					  int pontosPartidaPar, int pontosPartidaImpar) {
 
@@ -1331,7 +1251,7 @@ int PrintarTelaJogada(int quemJoga, int valorRodada,
 	printf(		   " Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
-	PrintarMesa(pCabecaMesa, qtdCartasViradas) ;
+	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
 	PrintarMao(pCabecaMao) ;
 
 	printf("\n Valor da rodada: %d\n", valorRodada);
@@ -1344,18 +1264,31 @@ int PrintarTelaJogada(int quemJoga, int valorRodada,
 		printf(" (1) Apostar carta 1\n") ;
 		printf(" (4) Dispensar carta 1\n") ;
 
-		switch (valorRodada) {
-		case 1: printf(" (7) Pedir truco\n\n"); break;
-		case 3: printf(" (7) Pedir seis\n\n"); break;
-		case 6: printf(" (7) Pedir doze\n\n"); break;
-		} //fim switch
+		if (quemAumentou != quemJoga) {
+			switch (valorRodada) {
+			case 1: printf(" (7) Pedir truco\n\n"); break;
+			case 3: printf(" (7) Pedir seis\n\n"); break;
+			case 6: printf(" (7) Pedir doze\n\n"); break;
+			} //fim switch
 
-		printf(" Opcao: ") ;
-		scanf_s(" %c", jogada, 1) ;
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
 
-		while (*jogada != 49 && *jogada != 52 && *jogada != 55) {
+			while (*jogada != 49 && *jogada != 52 && *jogada != 55) {
 			scanf_s(" %c", jogada, 1);
-		} //fim while
+
+			} //fim while
+		} //fim if
+
+		else {
+			printf("\n");
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
+
+			while (*jogada != 49 && *jogada != 52) {
+				scanf_s(" %c", jogada, 1);
+			} //fim while
+		} //fim else
 
 		system("cls");
 		break;
@@ -1364,18 +1297,31 @@ int PrintarTelaJogada(int quemJoga, int valorRodada,
 		printf(" (1) Apostar carta 1   | (2) Apostar carta 2 \n") ;
 		printf(" (4) Dispensar carta 1 | (5) Dispensar carta 2\n") ;
 
-		switch (valorRodada) {
-		case 1: printf(" (7) Pedir truco\n\n"); break;
-		case 3: printf(" (7) Pedir seis\n\n"); break;
-		case 6: printf(" (7) Pedir doze\n\n"); break;
-		} //fim switch
+		if (quemAumentou != quemJoga) {
+			switch (valorRodada) {
+			case 1: printf(" (7) Pedir truco\n\n"); break;
+			case 3: printf(" (7) Pedir seis\n\n"); break;
+			case 6: printf(" (7) Pedir doze\n\n"); break;
+			} //fim switch
 
-		printf(" Opcao: ") ;
-		scanf_s(" %c", jogada, 1) ;
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
 
-		while (*jogada != 49 && *jogada != 50 && *jogada != 52 && *jogada != 53 && *jogada != 55 ) {
+			while (*jogada != 49 && *jogada != 50 && *jogada != 52 && *jogada != 53 && *jogada != 55) {
 			scanf_s(" %c", jogada, 1);
-		} //fim while
+
+			} //fim while
+		} //fim if
+
+		else {
+			printf("\n");
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
+
+			while (*jogada != 49 && *jogada != 50 && *jogada != 52 && *jogada != 53) {
+				scanf_s(" %c", jogada, 1);
+			} //fim while
+		} //fim else
 
 		system("cls");
 		break;
@@ -1383,18 +1329,31 @@ int PrintarTelaJogada(int quemJoga, int valorRodada,
 	case 3: //3 cartas na mao (primeira jogada)
 		printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
 
-		switch (valorRodada) {
-		case 1: printf(" (7) Pedir truco\n\n"); break;
-		case 3: printf(" (7) Pedir seis\n\n"); break;
-		case 6: printf(" (7) Pedir doze\n\n"); break;
-		} //fim switch
+		if (quemAumentou != quemJoga) {
+			switch (valorRodada) {
+			case 1: printf(" (7) Pedir truco\n\n"); break;
+			case 3: printf(" (7) Pedir seis\n\n"); break;
+			case 6: printf(" (7) Pedir doze\n\n"); break;
+			} //fim switch
 
-		printf(" Opcao: ") ;
-		scanf_s(" %c", jogada, 1) ;
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
 
-		while (*jogada != 49 && *jogada != 50 && *jogada != 51 && *jogada != 55) {
+			while (*jogada != 49 && *jogada != 50 && *jogada != 51 && *jogada != 55) {
 			scanf_s(" %c", jogada, 1);
-		} //fim while
+
+			} //fim while
+		} //fim if
+
+		else {
+			printf("\n");
+			printf(" Opcao: ") ;
+			scanf_s(" %c", jogada, 1) ;
+
+			while (*jogada != 49 && *jogada != 50 && *jogada != 51) {
+				scanf_s(" %c", jogada, 1);
+			} //fim while
+		} //fim else
 
 		system("cls");
 		break;
@@ -1409,7 +1368,8 @@ int PrintarTelaJogada(int quemJoga, int valorRodada,
 *  Função: &Printar tela de correr, aceitar ou aumentar
 ***************************************************************************/
 int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogadores,
-									 LIS_tppLista pCabecaSuperior, int qtdCartasViradas, 
+									 LIS_tppLista pCabecaSuperior, 
+									 int quemJogouAPrimeira,
 									 int pontosRodadaPar, int pontosRodadaImpar, 
 									 int pontosPartidaPar, int pontosPartidaImpar) {
 
@@ -1464,7 +1424,7 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	LIS_AvancarElementoCorrente(pCabecaSuperior, quemJoga) ;
 	pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
-	PrintarMesa(pCabecaMesa, qtdCartasViradas) ;
+	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
 	PrintarMao(pCabecaMao) ;
 
 	printf("\n Valor da rodada: %d\n", valorRodada);
@@ -1496,7 +1456,7 @@ return 0;
 *  Função: &Printar tela fim da rodada
 ***************************************************************************/
 void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada, 
-						  int equipeVencedoraDaRodada, int qtdRodadas, int qtdCartasViradas,
+						  int equipeVencedoraDaRodada, int qtdRodadas,
 						  int pontosRodadaPar, int pontosRodadaImpar,
 						  int pontosPartidaPar, int pontosPartidaImpar) {
 
@@ -1532,7 +1492,7 @@ void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada,
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
-	case NINGUEM_VENCEU:
+	case NINGUEM:
 		printf(	   "               Rodada empatou\n") ;
 		printf(	   "         (nenhuma das equipes pontua)\n") ;
 		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1561,8 +1521,8 @@ void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada,
 *  Função: &Printar tela fim das apostas
 ***************************************************************************/
 void PrintarTelaFimApostas(LIS_tppLista pCabecaSuperior, int valorRodada, 
-						  int equipeVencedoraDaAposta, int qtdRodadas,
-						  int qtdCartasViradas,
+						  int equipeVencedoraDaAposta, int qtdRodadas, 
+						  int quemJogouAPrimeira, int qtdJogadores,
 						  int pontosRodadaPar, int pontosRodadaImpar,
 						  int pontosPartidaPar, int pontosPartidaImpar) {
 
@@ -1630,11 +1590,9 @@ void PrintarTelaFimApostas(LIS_tppLista pCabecaSuperior, int valorRodada,
 
 	} //fim switch
 
-	if (pontosRodadaPar < 2 && pontosRodadaImpar < 2) {
-		printf("\n") ;
-		PrintarMesa(pCabecaMesa, qtdCartasViradas) ;
-		printf("\n") ;
-	}
+	printf("\n") ;
+	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
+	printf("\n") ;
 
 	printf(" Digite '1' para avancar.\n");
 	printf(" ");
@@ -1792,12 +1750,16 @@ void ExecutarOpcaoDispensarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, in
 
 	LIS_tppLista pCabecaMao = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
+	BAR_tppCarta pCartaVirada = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
 
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, quemJoga) ;
 	pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
 	LIS_IrFinalLista(pCabecaSuperior) ;
+	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, -1) ;
 	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
@@ -1818,5 +1780,8 @@ void ExecutarOpcaoDispensarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, in
 		BAR_TransferirCarta(pCabecaMao, pCabecaLixo) ;
 		break; 
 	} // fim switch "opcao"
+
+	pCartaVirada = BAR_CriarCarta(_X, X) ;
+	LIS_InserirElementoApos(pCabecaMesa, pCartaVirada) ;
 
 } //fim função
