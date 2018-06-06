@@ -283,12 +283,74 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 
-
 		LIS_IrInicioLista(pCabecaBaralho) ;
 
 		break;
 	
 	case 6:
+		
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao5 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao6 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+		//preenche a mao 1
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+
+		//preenche a mao 2
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		
+		//preenche a mao 3
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+
+		//preenche a mao 4
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+
+		//preenche a mao 5
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 2) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
+
+		//preenche a mao 6
+		LIS_AvancarElementoCorrente(pCabecaBaralho, -13) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
+
+		LIS_IrInicioLista(pCabecaBaralho) ;
+
 		break;
 
 	} //fim switch
@@ -428,6 +490,49 @@ void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 	}
 
 }
+
+/***************************************************************************
+*  Função: &Iniciar partida NAO TA FUNCIONANDO NAO SEI PQ
+***************************************************************************/
+int MES_IniciarPartida (LIS_tppLista pCabecaBaralho, LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2, 
+						 LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4, LIS_tppLista pCabecaMao5,
+						 LIS_tppLista pCabecaMao6, LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa,
+						 LIS_tppLista pCabecaSuperior) {
+
+	pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
+
+	pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao1 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao2 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao3 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao4 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao5 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMao6 = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
+
+	LIS_IrInicioLista(pCabecaSuperior) ;
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;	//inicio
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;		//1
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;		//2
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;		//3
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;		//4
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao5) ;		//5
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;		//6
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaLixo) ;		//7
+	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;		//final
+
+	return 49;
+
+} // fim funcao
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/

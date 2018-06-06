@@ -184,6 +184,11 @@ int main (void) {
 
 	opcao = 49 ;
 
+	//nao ta funcionando nao sei pq
+/*	opcao = MES_IniciarPartida (pCabecaBaralho, pCabecaMao1, pCabecaMao2, pCabecaMao3,
+								pCabecaMao4, pCabecaMao5, pCabecaMao6, pCabecaLixo,
+								pCabecaMesa, pCabecaSuperior) ;*/
+
 	//inicio da partida
 	while (opcao == 49) {
 

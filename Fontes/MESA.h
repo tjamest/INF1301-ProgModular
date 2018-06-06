@@ -28,6 +28,21 @@
    #define MESA_EXT extern
 #endif
 
+
+/***************************************************************************
+*  $FC Função: MES  &Iniciar Partida NAO TA FUNCIONANDO NAO SEI PQ
+*
+*  $ED Descrição da função
+*     Cria as listas.
+*
+*  $FV Valor retornado
+*     Retorna o valor 49 que inicia o loop da partida. 
+***************************************************************************/
+int MES_IniciarPartida (LIS_tppLista pCabecaBaralho, LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2, 
+						LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4, LIS_tppLista pCabecaMao5,
+						LIS_tppLista pCabecaMao6, LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa,
+						LIS_tppLista pCabecaSuperior) ;
+
 /***************************************************************************
 *  $FC Função: MES  &Criar Lista de Listas
 *
