@@ -296,18 +296,6 @@ int LIS_ObterQtdElem(LIS_tppLista pLista) ;
 
 
 /***********************************************************************
-*  $FC Função: LIS  &Obter lista corrente
-*
-*  $ED Descrição da função
-*     Obtem um ponteiro pra lista corrente na lista de listas.
-*
-*  $EP Parâmetros
-*	  Ponteiro pra cabeça da lista superior.
-***********************************************************************/
-LIS_tppLista LIS_ObterListaCorr(LIS_tppLista pCabecaLista) ;
-
-
-/***********************************************************************
 *  $FC Função: LIS  &Excluir ponteiro para elemento
 *
 *  $ED Descrição da função

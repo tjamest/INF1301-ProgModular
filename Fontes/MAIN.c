@@ -5,14 +5,9 @@
 #include   <stdlib.h>	//rand e srand
 #include   <string.h>	//strcmp
 
-//1 PARTIDA formada por varias RODADAS
-//1 RODADA formada por 3 baterias de apostas
-//1 BATERIA DE APOSTA é formada por 2, 4 ou 6 jogadas
-
-//TODO MUNDO PODE PEDIR TRUCO MAS N PODE ESCONDER A CARTA NA PRIMEIRA JOGADA
-
 #define TAM 40
 
+//resultados
 #define CORREU 0
 #define EQUIPE_IMPAR 1
 #define EQUIPE_PAR 2
@@ -1224,8 +1219,8 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	system("cls");
 
 	//tela da jogada
-			printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-			printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
 	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
@@ -1377,17 +1372,17 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
 	//tela de confirmacao
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
-	case 1: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 2: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
-	case 3: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 4: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
-	case 5: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 6: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
+	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 3: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 5: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	}
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	printf(" Jogador %d joga (nao deixe que ninguem veja suas cartas).\n\n", quemJoga) ;
 	printf(" Digite '1' para avancar.\n");
 	printf(" ");
@@ -1396,21 +1391,21 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	system("cls") ;
 
 	//printa cabeçalho da tela
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
-	case 1: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 2: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
-	case 3: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 4: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
-	case 5: printf("~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~\n", quemJoga); break;
-	case 6: printf("~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~\n", quemJoga); break;
+	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 3: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 5: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	}
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   " Equipe Par                 Equipe Impar\n") ;
-	printf(		   " Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-	printf(		   " Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
+	printf(		   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, quemJoga) ;
@@ -1542,23 +1537,23 @@ void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodad
 
 		case EQUIPE_PAR: //EQUIPE PAR VENCEU
 
-				printf(	   "      Equipe PAR venceu a(s) aposta(s)\n") ;
-				printf(	   "            (jogador %d correu)\n", quemCorreu) ;
+				printf(	   "                       Equipe PAR venceu a(s) aposta(s)\n") ;
+				printf(	   "                              (jogador %d correu)\n", quemCorreu) ;
 		
 			switch (pontosRodadaPar) {
 
 			case 0: //EQUIPE PAR TEM 0 PONTO
-				printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-				printf(	   " Equipe Par                Equipe Impar\n") ;
-				printf(	   " Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-				printf(	   " Rodada: %d(+2)/2           Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+				printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+				printf(	   "                    Equipe Par                Equipe Impar\n") ;
+				printf(	   "                    Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+				printf(	   "                    Rodada: %d(+2)/2           Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 				break;
 
 			case 1: //EQUIPE PAR TEM 1 PONTO
-				printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-				printf(	   " Equipe Par                Equipe Impar\n") ;
-				printf(	   " Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-				printf(	   " Rodada: %d(+1)/2           Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+				printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+				printf(	   "                    Equipe Par                Equipe Impar\n") ;
+				printf(	   "                    Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+				printf(	   "                    Rodada: %d(+1)/2           Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 				break;
 
 			} // fim switch "equipe par venceu"
@@ -1567,23 +1562,23 @@ void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodad
 
 		case EQUIPE_IMPAR: //EQUIPE IMPAR VENCEU
 
-				printf(	   "      Equipe IMPAR venceu a(s) aposta(s)\n") ;
-				printf(	   "            (jogador %d correu)\n", quemCorreu) ;
+				printf(	   "                      Equipe IMPAR venceu a(s) aposta(s)\n") ;
+				printf(	   "                              (jogador %d correu)\n", quemCorreu) ;
 
 			switch (pontosRodadaImpar) {
 
 			case 0: //EQUIPE IMPAR TEM 0 PONTO
-				printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-				printf(	   " Equipe Par                Equipe Impar\n") ;
-				printf(	   " Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-				printf(	   " Rodada: %d/2               Rodada: %d(+2)/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+				printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+				printf(	   "                    Equipe Par                Equipe Impar\n") ;
+				printf(	   "                    Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+				printf(	   "                    Rodada: %d/2               Rodada: %d(+2)/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 				break;
 
 			case 1: //EQUIPE IMPAR TEM 1 PONTO
-				printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-				printf(	   " Equipe Par                Equipe Impar\n") ;
-				printf(	   " Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-				printf(	   " Rodada: %d/2               Rodada: %d(+1)/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+				printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+				printf(	   "                    Equipe Par                Equipe Impar\n") ;
+				printf(	   "                    Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+				printf(	   "                    Rodada: %d/2               Rodada: %d(+1)/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 				break;
 			} // fim switch "equipe impar venceu"
 
@@ -1591,7 +1586,7 @@ void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodad
 
 		} // fim switch
 
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
 	} //fim switch
@@ -1694,24 +1689,24 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 	
 	//tela fim apostas 
-	printf(		   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   "~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~\n") ;
-	printf(		   "~~~~~~~~~~~~~~~~ PARTIDA %d ~~~~~~~~~~~~~~~~\n", qtdPartidas) ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PARTIDA %d ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", qtdPartidas) ;
 
 	switch (equipeVencedoraDaPartida) {
 
 	case EQUIPE_PAR:
-		printf(	   "        Equipe PAR venceu a partida\n") ; 
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   " Equipe Par: 12            Equipe Impar: %d\n", pontosPartidaImpar) ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(	   "                        Equipe PAR venceu a partida\n") ; 
+		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(	   "                    Equipe Par: 12            Equipe Impar: %d\n", pontosPartidaImpar) ;
+		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
 	case EQUIPE_IMPAR:
 		printf(	   "       Equipe IMPAR venceu a partida\n") ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   " Equipe Par: %d            Equipe Impar: 12\n", pontosPartidaPar) ;
-		printf(	   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+		printf(	   "                    Equipe Par: %d            Equipe Impar: 12\n", pontosPartidaPar) ;
+		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
 	} //fim switch
