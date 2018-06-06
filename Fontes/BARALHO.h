@@ -43,7 +43,9 @@ typedef struct BAR_tagCarta * BAR_tppCarta ;
 *     Condições de retorno das funções de carta.
 ***************************************************************************/
 typedef enum {
-   BAR_CondRetOK,			
+   BAR_CondRetOK,
+   BAR_CondRetNaoPreencheuVetor,
+   BAR_CondRetNaoEmbaralhouVetor,
    BAR_CondRetNaoObteveCarta,		
    BAR_CondRetNaoInseriuCarta,
    BAR_CondRetNaoExcluiuPtrParaElem,
@@ -89,8 +91,27 @@ typedef enum {
 } BAR_tpNaipeCarta ;
 
 
-/***************************************************************************
+/**************************************************************************/
 
+
+/***************************************************************************
+*  $FC Função: BAR  &Preencher vetor cartas
+*
+*  $ED Descrição da função
+*     Preenche ordenadamente um vetor com 40 cartas
+*	  (sem incluir o 8, 9, 10 e coringas).
+* 
+***************************************************************************/
+BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
+
+/***************************************************************************
+*  $FC Função: BAR  &Preencher vetor cartas
+*
+*  $ED Descrição da função
+*     Embaralha aleatoriamente um vetor trocando seus indices de posição
+*
+***************************************************************************/
+BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) ;
 
 /***************************************************************************
 *  $FC Função: BAR  &Criar Baralho
@@ -143,7 +164,7 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe);
 *  $EP Parâmetros
 *     Recebe ponteiro pra um tipo void.
 ***************************************************************************/
-void BAR_DestruirCarta(void * pLista);
+void BAR_DestruirCarta(void * pCarta);
 
 /***************************************************************************
 *  $FC Função: BAR  &Destruir Baralho

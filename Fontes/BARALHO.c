@@ -17,6 +17,7 @@
 #include   <stdio.h>	//printf
 #include   <stdlib.h>	//malloc, free
 #include   <assert.h>	//assert
+#include   <time.h>
 
 #define BARALHO_OWN
 #include "BARALHO.h"
@@ -40,6 +41,100 @@ typedef struct BAR_tagCarta {
 
 
 /***********  CÓDIGO DAS FUNÇÕES EXPORTADAS PELO MÓDULO  ******************/
+
+/***************************************************************************
+*  Função: BAR &Preencher vetor cartas
+***************************************************************************/
+BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
+	
+	int i ,
+		valor = 0,
+		naipe = 0 ;
+
+	//preenchendo o vetor de cartas de forma ordenada
+	for (i = 0; i < TAM; i++, valor++) {
+		
+		//faz a transformacao de int pra tipo especifico
+		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
+		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
+
+		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
+
+		vtCartas[i] = pCarta;
+
+		if (vtCartas[i] == NULL) {
+			return BAR_CondRetNaoPreencheuVetor ;
+		}
+
+		if (i == 9 || i == 19 || i == 29) {
+
+			//reinicia o preenchimento do valor de 0 a 9
+			valor = -1 ;
+			//passa pro proximo naipe
+			naipe++;
+
+		} //fim if
+	} //fim for
+
+	return BAR_CondRetOK ;
+
+} /***************** Fim função: &Preencher vetor cartas *******************/
+
+/***************************************************************************
+*  Função: BAR &Embaralhar vetor cartas
+***************************************************************************/
+BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
+
+	int i ,
+		valor = 0,
+		naipe = 0 ;
+
+	//preenchendo o vetor de cartas de forma ordenada
+	for (i = 0; i < TAM; i++, valor++) {
+		
+		//faz a transformacao de int pra tipo especifico
+		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
+		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
+
+		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
+		vtCartas[i] = pCarta;
+
+		if (i == 9 || i == 19 || i == 29) {
+
+			//reinicia o preenchimento do valor de 0 a 9
+			valor = -1 ;
+			//passa pro proximo naipe
+			naipe++;
+
+		} //fim if
+	} //fim for
+	
+	//função suporte da rand que faz gerar números diferentes sempre
+	srand ((unsigned)time(NULL));
+
+	//embaralhando o vetor (troca os indices aleatoriamente)
+	for (i = 0; i < TAM; i++){
+
+		//declara um ponteiro pra um tipo carta
+		BAR_tppCarta pCartaAux;
+		
+		//gera um número aleatorio entre 0 e 39
+		int random = rand() % TAM ;
+
+		//embaralhando os indices
+		pCartaAux = vtCartas[i] ;
+		vtCartas[i] = vtCartas[random] ;
+		vtCartas[random] = pCartaAux ;
+
+		if (vtCartas[i] == NULL) {
+			return BAR_CondRetNaoEmbaralhouVetor ;
+		}
+		
+	} //fim for
+
+	return BAR_CondRetOK ;
+
+} /***************** Fim função: &Embaralhar vetor cartas ******************/
 
 /***************************************************************************
 *  Função: BAR  &Criar baralho
@@ -123,15 +218,14 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 /***************************************************************************
 *  Função: BAR  &Destruir carta
 ***************************************************************************/
-void BAR_DestruirCarta(void * pLista) {
+void BAR_DestruirCarta(void * pCarta) {
 
-	LIS_tpCondRet condRetLista ;
+	BAR_tppCarta pCartaAux = (BAR_tppCarta) pCarta;
+	
+	if (pCarta == NULL)
+		return;
 
-	#ifdef _DEBUG
-		assert( pLista != NULL ) ;
-	#endif
-
-	condRetLista = LIS_ExcluirElemento(pLista) ;
+	free(pCartaAux);
 
 } /************ Fim função: BAR &Destruir carta ****************************/
 

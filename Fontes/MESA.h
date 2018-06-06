@@ -112,7 +112,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 *  $FC Função: MES  &Esvaziar mesa
 *
 *  $ED Descrição da função
-*     Tira as cartas da mesa.
+*     Tira as cartas da lista mesa e põe na lista lixo.
 *
 *  $EP Parâmetros
 *     Ponteiros para cabeca da mesa, cabeca do lixo e tipo, que pode ser:
@@ -120,6 +120,17 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 *	  de uma rodada.
 ***************************************************************************/
 void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
+
+/***************************************************************************
+*  $FC Função: MES  &Esvaziar lixo
+*
+*  $ED Descrição da função
+*     Tira as cartas da lista mesa e põe na lista lixo.
+*
+*  $EP Parâmetros
+*     Ponteiro para cabeca do lixo.
+***************************************************************************/
+void MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Obter quantidade de cartas
@@ -141,6 +152,17 @@ int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaAp
 *	  de todas listas pra penultima lista (lixo).
 ***************************************************************************/
 void MES_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
+
+int MES_DeterminarResultado(LIS_tppLista pCabecaSuperior, int quemJoga, int quemJogouAPrimeira, int qtdJogadores) ;
+
+int MES_DefinirQuemComeca(int qtdJogadores) ;
+
+void MES_IdentificarQuemJogouQual(int qtdJogadores, int quemJogouAPrimeira, int *quemJogouASegunda, int *quemJogouATerceira, 
+							  int *quemJogouAQuarta, int *quemJogouAQuinta, int *quemJogouASexta) ;
+
+int MES_ProximoJogador(int quemJoga, int qtdJogadores) ;
+
+int MES_ProximoJogadorDaMesmaEquipe(int quemJoga, int qtdJogadores) ;
 
 #undef MESA_EXT
 
