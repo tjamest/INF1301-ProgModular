@@ -150,3 +150,12 @@ T4:
 	Sendo necessario agora fazer isso pra um jogo de 4 ou 6 jogadores.
 	Falta impedir que quem tenha aumentado a aposta possa aumentar de novo apos aceitarem.
 	Falta determinar quem jogará em caso de empate (jogador que apostou a carta empatada primeiro).
+
+04/06/2018 - 3h trabalhadas - Codificar módulo
+	Foi iniciado o desenvolvimento do jogo para 4 jogadores.
+
+05/06/2018 - 5h trabalhadas - Codificar módulo, Projetar
+	Foi criada a função MES_ObterQtdCartas para não precisar usar a LIS_ObterQtdElem.
+	A função DeterminarResultado está funcionando para 4 jogadores desde que nao tenha aumento de aposta.
+	Foi feito um diagrama de fluxo identificando os processos do programa do inicio ao fim.
+	Foi feita a função MES_CriarListaDeListas para não precisar usar a LIS_CriarLista.

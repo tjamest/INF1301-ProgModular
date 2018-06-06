@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI Módulo de implementação: MES  Mesa
+*  $MCI MÃ³dulo de implementaÃ§Ã£o: MES  Mesa
 *
 *  Arquivo gerado:              MESA.c
 *  Letras identificadoras:      MES
@@ -7,9 +7,9 @@
 *  Projeto: INF 1301 Jogo de Truco
 *  Autores: gsc, jvr, tgf
 *
-*  $HA Histórico de evolução:
-*  Versão  		Autor  			Data    	Observações
-*     1     gsc, jvr, tgf    11/mai/2018    início desenvolvimento
+*  $HA HistÃ³rico de evoluÃ§Ã£o:
+*  VersÃ£o  		Autor  			Data    	ObservaÃ§Ãµes
+*     1     gsc, jvr, tgf    11/mai/2018    inÃ­cio desenvolvimento
 ***************************************************************************/
 
 #include   <stdio.h>	//printf
@@ -24,70 +24,92 @@
 #define DEIXA_VIRA 0
 #define TIRA_VIRA 1
 
+#define SEM_PRIMEIRA 0
+#define COM_PRIMEIRA 1
+#define SEM_ULTIMA 0
+#define COM_ULTIMA 1
+
 #undef MESA_OWN
 
 
-/************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
+/************ PROTÃ“TIPOS DAS FUNÃ‡Ã•ES ENCAPSULADAS NO MÃ“DULO ***************/
 //ainda nao ha funcoes encapsuladas no modulo
 
 
-/***********  CÓDIGO DAS FUNÇÕES EXPORTADAS PELO MÓDULO  ******************/
+/***********  CÃ“DIGO DAS FUNÃ‡Ã•ES EXPORTADAS PELO MÃ“DULO  ******************/
 
 /***************************************************************************
-*  Função: MES  &Criar mesa
+*  FunÃ§Ã£o: MES  &Criar lista de listas
+***************************************************************************/
+LIS_tppLista MES_CriarListaDeListas() {
+
+	//criando ponteiro pra cabeca da lista mesa
+	LIS_tppLista pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
+
+	//assertiva de saÃ­da
+	#ifdef _DEBUG
+		assert( pCabecaSuperior != NULL ) ;
+	#endif
+
+	return pCabecaSuperior ;
+
+} /***************** Fim funÃ§Ã£o: MES &Criar lista de listas *****************/
+
+/***************************************************************************
+*  FunÃ§Ã£o: MES  &Criar mesa
 ***************************************************************************/
 LIS_tppLista MES_CriarMesa() {
 
 	//criando ponteiro pra cabeca da lista mesa
 	LIS_tppLista pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
 
-	//assertiva de saída
+	//assertiva de saÃ­da
 	#ifdef _DEBUG
 		assert( pCabecaMesa != NULL ) ;
 	#endif
 
 	return pCabecaMesa ;
 
-} /***************** Fim função: MES &Criar lista***********************/
+} /***************** Fim funÃ§Ã£o: MES &Criar mesa ***********************/
 
 /***************************************************************************
-*  Função: MES  &Criar mao
+*  FunÃ§Ã£o: MES  &Criar mao
 ***************************************************************************/
 LIS_tppLista MES_CriarMao() {
 
 	//criando ponteiro pra cabeca da lista mao
 	LIS_tppLista pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
 
-	//assertiva de saída
+	//assertiva de saÃ­da
 	#ifdef _DEBUG
 		assert( pCabecaMao != NULL ) ;
 	#endif
 
 	return pCabecaMao ;
 
-} /***************** Fim função: MES &Criar mao ***********************/
+} /***************** Fim funÃ§Ã£o: MES &Criar mao ***********************/
 
 /***************************************************************************
-*  Função: MES  &Criar lixo
+*  FunÃ§Ã£o: MES  &Criar lixo
 ***************************************************************************/
 LIS_tppLista MES_CriarLixo() {
 
 	//criando ponteiro pra cabeca da lista mao
 	LIS_tppLista pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
 
-	//assertiva de saída
+	//assertiva de saÃ­da
 	#ifdef _DEBUG
 		assert( pCabecaLixo != NULL ) ;
 	#endif
 
 	return pCabecaLixo ;
 
-} /***************** Fim função: MES &Criar lixo ***********************/
+} /***************** Fim funÃ§Ã£o: MES &Criar lixo ***********************/
 
 /***************************************************************************
-*  Função: MES  &Distribuir maos
+*  FunÃ§Ã£o: MES  &Distribuir maos
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
+void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 
 	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
@@ -97,7 +119,8 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
-	if (numJogadores == 2) {
+	switch(qtdJogadores) {
+	case 2:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -110,9 +133,9 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
-	} //fim if
+		break;
 	
-	else if (numJogadores == 4) {
+	case 4:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -135,9 +158,9 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;	
-	} //fim else if
+		break;
 	
-	else {
+	case 6:
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
@@ -170,12 +193,14 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
-	} //fim else
+		break;
 
-} /***************** Fim função: MES &Distribuir maos ***********************/
+	}//fim switch
+
+} /***************** Fim funÃ§Ã£o: MES &Distribuir maos ***********************/
 
 /***************************************************************************
-*  Função: MES  &Distribuir maos para testar empates
+*  FunÃ§Ã£o: MES  &Distribuir maos para testar empates
 ***************************************************************************/
 void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) {
 
@@ -217,6 +242,50 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		break;
 	
 	case 4:
+
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+		//preenche a mao 1
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
+
+		//preenche a mao 2
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
+		
+		//preenche a mao 3
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
+
+		//preenche a mao 4
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
+		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
+
+
+		LIS_IrInicioLista(pCabecaBaralho) ;
+
 		break;
 	
 	case 6:
@@ -224,10 +293,10 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 
 	} //fim switch
 
-} /***************** Fim função: MES &Distribuir maos ***********************/
+} /***************** Fim funÃ§Ã£o: MES &Distribuir maos ***********************/
 
 /***************************************************************************
-*  Função: &Esvaziar mesa
+*  FunÃ§Ã£o: &Esvaziar mesa
 ***************************************************************************/
 void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) {
 
@@ -251,10 +320,41 @@ void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int t
 
 	} //fim switch
 
-} /******* fim função EsvaziaMesa*********/
+} /******* fim funÃ§Ã£o EsvaziaMesa*********/
 
 /***************************************************************************
-*  Função: &Transferir todas cartas pro lixo
+*  FunÃ§Ã£o: &Obter quantidade de cartas
+***************************************************************************/
+int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaApostada) {
+
+	switch (tipoVira) {
+
+	case COM_PRIMEIRA:
+
+		switch (tipoUltimaApostada) {
+		case COM_ULTIMA:
+			return LIS_ObterQtdElem(pCabecaMesa) ;
+		case SEM_ULTIMA:
+			return LIS_ObterQtdElem(pCabecaMesa)-1 ;
+		} //fim switch
+
+	case SEM_PRIMEIRA:
+
+		switch (tipoUltimaApostada) {
+		case COM_ULTIMA:
+			return LIS_ObterQtdElem(pCabecaMesa)-1 ;
+		case SEM_ULTIMA:
+			return LIS_ObterQtdElem(pCabecaMesa)-2 ;
+		} //fim switch
+
+	} //fim switch
+
+	return 0;
+
+} /*************** FIM FUNÃ‡ÃƒO: Obter quantidade de cartas *****************/
+
+/***************************************************************************
+*  FunÃ§Ã£o: &Transferir todas cartas pro lixo
 ***************************************************************************/
 void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 
@@ -330,7 +430,7 @@ void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 }
 
 
-/***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
+/***********  CÃ“DIGO DAS FUNÃ‡Ã•ES ENCAPSULADAS NO MÃ“DULO  *******************/
 //ainda nao ha funcoes encapsuladas no modulo
 
-/************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: MES Mesa ******************/
+/************ FIM DO MÃ“DULO DE IMPLEMENTAÃ‡ÃƒO: MES Mesa ******************/

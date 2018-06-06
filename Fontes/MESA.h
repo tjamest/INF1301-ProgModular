@@ -29,6 +29,19 @@
 #endif
 
 /***************************************************************************
+*  $FC Função: MES  &Criar Lista de Listas
+*
+*  $ED Descrição da função
+*     Cria uma lista que terá elementos tipo ponteiro pra lista.
+*
+*  $FV Valor retornado
+*     Se executar corretamente retorna o ponteiro para a cabeca da lista
+*     (ponteiro para o tipo lista). Este ponteiro será utilizado pelas
+*     funções que manipulem esta lista. 
+***************************************************************************/
+LIS_tppLista MES_CriarListaDeListas() ;
+
+/***************************************************************************
 *  $FC Função: MES  &Criar Mesa
 *
 *  $ED Descrição da função
@@ -92,6 +105,18 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 *	  de uma rodada.
 ***************************************************************************/
 void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
+
+/***************************************************************************
+*  $FC Função: MES  &Obter quantidade de cartas
+*
+*  $ED Descrição da função
+*     Obtem a quantidade de cartas na mesa.
+*
+*  $EP Parâmetros
+*     Ponteiros para cabeca da mesa, e tipos, que podem ser:
+*	  COM_PRIMEIRA ou SEM_PRIMEIRA e COM_ULTIMA e SEM_ULTIMA.
+***************************************************************************/
+int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaApostada) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Transferir todas cartas pro lixo
