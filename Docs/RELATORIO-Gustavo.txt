@@ -159,3 +159,9 @@ T4:
 	A função DeterminarResultado está funcionando para 4 jogadores desde que nao tenha aumento de aposta.
 	Foi feito um diagrama de fluxo identificando os processos do programa do inicio ao fim.
 	Foi feita a função MES_CriarListaDeListas para não precisar usar a LIS_CriarLista.
+
+06/06/2018 - 4h trabalhadas - Codificar módulo, Revisar projetos, Revisar especificações
+	Foi concluído o jogo, faltando apenas tratar o caso de "mão de onze".
+	Foi feito um diagrama de fluxo para facilitar o entendimento dos processos do programa.
+	Foi atualizada a arquitetura do programa.
+	Foram atualizados os requisitos funcionais e nao-funcionais do programa.

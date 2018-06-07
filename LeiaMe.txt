@@ -22,9 +22,10 @@
 *	TesteLista.comp 	Arquivo de composição do Teste Lista		*
 *********************************************************************
 * Docs: 															*
-*	Requisitos Funcionais e Não-Funcionais.docx 					*
+*	Requisitos Funcionais e Não-Funcionais.pdf	 					*
 *	Modelo Estrutural da Lista de Listas.png 						*
 *	Arquitetura do Programa.png 									*
+*	Diagrama de Fluxo.png											*
 *	Modelo Físico.png 												*
 *	RELATORIO-Gustavo.txt											*
 *	RELATORIO-Thiago.txt 											*
@@ -34,25 +35,30 @@
 *	Compilebanner.exe			Compilador	 						*
 *	exbestat.exe 				Mostra as estatísticas dos testes 	*
 *	GMake.exe 					Gera o arquivo .make para compilar 	*
-*	MAIN.c 						Usada para testes do módulo BARALHO *
 *********************************************************************
 * Fontes:															*
 *	BARALHO.c 		Implementação do módulo BARALHO 				*
 *	BARALHO.h 		Definição do módulo BARALHO 					*
-*	GENERICO.h 		Módulo de suporte para teste com arcabouço 		*
-*	LERPARM.h 		Módulo de suporte para teste com arcabouço 		*
 *	LISTA.c 		Implementação do módulo LISTA  					*
 *	LISTA.h 		Definição do módulo LISTA 						*
+*	MESA.c 			Implementação do módulo MESA  					*
+*	MESA.h 			Definição do módulo MESA 						*
+*	INTERFACE.c 	Implementação do módulo INTERFACE 				*
+*	INTERFACE.h 	Definição do módulo INTERFACE 					*
 *	TestBAR.c 		Implementação do módulo TESTE BARALHO 			*
-*	TestLis.c 		Implementação do módulo TESTE LISTA 			*
+*	TestLIS.c 		Implementação do módulo TESTE LISTA 			*
+*	GENERICO.h 		Módulo de suporte para teste com arcabouço 		*
+*	LERPARM.h 		Módulo de suporte para teste com arcabouço 		*
 *	TST_ESPC.h 		Módulo de suporte para teste com arcabouço 		*
+*	CONTA.h 		Módulo de suporte para teste com arcabouço 		*
 *********************************************************************
 * Objetos:															*
-*	ArcaboucoTeste.lib	Biblioteca do arcabouço						*
+*	ArcaboucoTeste.lib		Biblioteca do arcabouço					*
 *********************************************************************
 * Produtos:															*
-*	TesteBaralho.exe 		Arquivo executável do módulo BARALHO	*
-*	TesteLista.exe 			Arquivo executável do módulo BARALHO	*
+*	TesteBaralho.exe Arquivo executável do teste do módulo BARALHO	*
+*	TesteLista.exe 	 Arquivo executável do teste do módulo LISTA	*
+*	JogoDeTruco.exe  Arquivo executável do Jogo de Truco			*
 *********************************************************************
 * Scripts: 															*
 *	TesteBaralho.script 	Script de testes do módulo BARALHO 		*

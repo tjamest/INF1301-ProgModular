@@ -15,7 +15,7 @@
 #include   <stdio.h>	//printf
 #include   <stdlib.h>	//malloc, free
 #include   <assert.h>	//assert
-#include   <time.h>	//assert
+#include   <time.h>
 
 #define MESA_OWN
 #include "MESA.h"
@@ -737,19 +737,26 @@ int MES_DeterminarResultado (LIS_tppLista pCabecaSuperior, int quemJoga, int que
 ***************************************************************************/
 int MES_DefinirQuemComeca(int qtdJogadores) {
 
+	int quemComeca = NINGUEM ;
+
 	//função suporte da rand que faz gerar números diferentes sempre
 	srand ((unsigned)time(NULL));
 
-	switch (qtdJogadores) {
+	while (quemComeca == NINGUEM) {
+		switch (qtdJogadores) {
 		case 2: 
-			return 1 + (rand() % 2) ;
+			quemComeca = 1 + (rand() % 2) ;
+			break ;
 		case 4: 
-			return 1 + (rand() % 4) ;
+			quemComeca = 1 + (rand() % 4) ;
+			break ;
 		case 6: 
-			return 1 + (rand() % 6) ;
-	} //fim switch
+			quemComeca = 1 + (rand() % 6) ;
+			break ;
+		} //fim switch
+	}//fim while
 
-	return 0;
+	return quemComeca;
 } //fim funcao
 
 /***************************************************************************

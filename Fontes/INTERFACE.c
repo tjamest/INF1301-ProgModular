@@ -1,9 +1,10 @@
 #include "LISTA.h"
 #include "BARALHO.h"
 #include "MESA.h"
-#include   <stdio.h>	//printf
-#include   <stdlib.h>	//rand e srand
-#include   <string.h>	//strcmp
+#include "INTERFACE.h"
+#include <stdio.h>	//printf
+#include <stdlib.h>	//rand e srand
+#include <string.h>	//strcmp
 
 #define TAM 40
 
@@ -46,54 +47,6 @@
 //parâmetros pra função MES_DeterminarResultado
 #define DESCONSIDERAR 0
 #define CONSIDERAR 1
-
-/************ PROTÓTIPOS DAS FUNÇÕES ENCAPSULADAS NO MÓDULO ***************/
-
-//printar listas
-void PrintarMesa (LIS_tppLista pCabecaMesa, int quemJogouAPrimeira, int qtdJogadores) ;
-void PrintarMao (LIS_tppLista pCabecaMao) ;
-//void PrintarBaralho (LIS_tppLista pCabecaBaralho) ;
-//void PrintarLixo (LIS_tppLista pCabecaLixo) ;
-
-//printar telas pré-partida
-int PrintarTelaInicio () ;
-int PrintarTelaRegras () ;
-int PrintarTelaQtdJogadores () ;
-
-//printar telas da partida
-int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
-					  LIS_tppLista pCabecaSuperior,
-					  int quemJogouAPrimeira, int qtdJogadores,
-					  int pontosRodadaPar, int pontosRodadaImpar,
-					  int pontosPartidaPar, int pontosPartidaImpar) ;
-
-int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogadores,
-									 LIS_tppLista pCabecaSuperior, 
-									 int quemJogouAPrimeira,
-									 int pontosRodadaPar, int pontosRodadaImpar, 
-									 int pontosPartidaPar, int pontosPartidaImpar) ;
-
-void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodada, int equipeVencedoraDaAposta,
-									int qtdRodadas, int quemJogouAPrimeira, int qtdJogadores, int quemCorreu,
-									int pontosRodadaPar, int pontosRodadaImpar,
-									int pontosPartidaPar, int pontosPartidaImpar) ;
-
-void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada, int equipeVencedoraDaRodada,
-						  int qtdRodadas,
-						  int pontosRodadaPar, int pontosRodadaImpar,
-						  int pontosPartidaPar, int pontosPartidaImpar) ;
-
-int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
-						  int equipeVencedoraDaPartida, int qtdPartidas,
-						  int pontosPartidaPar, int pontosPartidaImpar) ;
-
-//executar opcoes
-int ExecutarOpcaoInicio(int opcao) ;
-void ExecutarOpcaoRegras(int opcao) ;
-int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, int valorRodada) ;
-void ExecutarOpcaoApostarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, int jogada) ;
-void ExecutarOpcaoDispensarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, int jogada) ;
-/**************************************************************************/
 
 BAR_tppCarta VetorAux[TAM];
 
@@ -171,12 +124,12 @@ int main (void) {
 	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;		//final
 
 	opcao = 49 ;
-
+	/*
 	//nao ta funcionando nao sei pq
-/*	opcao = MES_IniciarPartida (pCabecaBaralho, pCabecaMao1, pCabecaMao2, pCabecaMao3,
+	opcao = MES_IniciarPartida (pCabecaBaralho, pCabecaMao1, pCabecaMao2, pCabecaMao3,
 								pCabecaMao4, pCabecaMao5, pCabecaMao6, pCabecaLixo,
-								pCabecaMesa, pCabecaSuperior) ;*/
-
+								pCabecaMesa, pCabecaSuperior) ;
+	*/
 	//inicio da partida
 	while (opcao == 49) {
 
@@ -198,9 +151,9 @@ int main (void) {
 		//inicio da rodada
 		while (pontosPartidaPar < 12 && pontosPartidaImpar < 12) {
 
-			atualJogadorVencedor = 0 ;
-			quemAumentou = NINGUEM ;
 			quemJogouAPrimeira = NINGUEM ;
+			quemAumentou = NINGUEM ;
+			atualJogadorVencedor = NINGUEM ;
 
 			pontosRodadaPar = 0 ;
 			pontosRodadaImpar = 0 ;
@@ -221,10 +174,10 @@ int main (void) {
 
 			//distribui as maos
 			MES_DistribuirMaos(pCabecaSuperior, qtdJogadores) ;
-
+			/*
 			//distribui as maos para testar empates (deve-se comentar a funçao embaralhar)
 			//MES_DistribuirMaosParaTestarEmpates(pCabecaSuperior, qtdJogadores) ;
-
+			*/
 			//transfere a vira do baralho pra mesa
 			BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
 
@@ -258,7 +211,6 @@ int main (void) {
 					if ((MES_ObterQtdCartas(pCabecaMesa, SEM_PRIMEIRA, SEM_ULTIMA) - qtdCartasViradas) > 0) {
 
 						//determina o resultado da aposta (VENCEU / PERDEU / EMPATOU)
-						//retorna quemJoga se venceu, primeiro jogador com quem empatou se empatou e 0 se perdeu
 						resultado = MES_DeterminarResultado(pCabecaSuperior, quemJoga, quemJogouAPrimeira, qtdJogadores) ;
 
 						//JOGADOR VENCEU TODAS CARTAS DA MESA
@@ -281,7 +233,7 @@ int main (void) {
 						else if (resultado != quemJoga && resultado != 0) {
 
 							//se foi a ultima jogada da bateria de apostas
-							if ( qtdJogadas == qtdJogadores) {
+							if (qtdJogadas == qtdJogadores) {
 
 								//quem joga na proxima é quem pôs a primeira carta q empatou
 								quemJoga = resultado ;
@@ -683,7 +635,15 @@ int main (void) {
 				MES_EsvaziarLixo (pCabecaLixo) ;
 
 			} // fim if "alguem venceu a partida"
-	
+			/*
+			//MAO DE ONZE
+			else if (pontosPartidaPar == 11 || pontosPartidaImpar == 11) {
+
+				//PrintarTelaMaoDeOnze() ;
+
+
+			} //fim else if "mao de onze"
+			*/	
 		} //fim while rodada
 
 		opcao = PrintarTelaFimPartida(pCabecaSuperior, equipeVencedoraDaPartida, qtdPartidas,
@@ -1077,10 +1037,10 @@ int PrintarTelaInicio () {
 int PrintarTelaRegras() {
 
 	char * opcao = (char*)malloc(sizeof(char));
-
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+			 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
 	printf(" No jogo de truco os jogadores sao distribuidos em duas equipes: PAR e IMPAR.\n") ;
 
@@ -1089,16 +1049,16 @@ int PrintarTelaRegras() {
 	printf(" Cada bateria de apostas eh formada por 2, 4 ou 6 jogadas.\n\n") ;
 
 	printf(" As opcoes de jogadas sao:\n") ;
-	printf(" Apostar carta, dispensar carta ou aumentar valor da aposta (para 3, 6 ou 12 pontos).\n\n") ;
+	printf(" Apostar carta, dispensar carta ou aumentar valor da rodada (para 3, 6 ou 12 pontos).\n\n") ;
 
 	printf(" No caso de aumento de aposta, as opcoes de jogadas sao:\n") ;
 	printf(" Correr, aceitar ou aumentar ainda mais o valor da aposta.\n\n") ;
 
 	printf(" Caso alguem aumente o valor da aposta:\n") ;
-	printf(" Cada jogador da equipe adversaria deve 'aceitar' o aumento de aposta.\n\n") ;
+	printf(" Cada jogador da equipe adversaria deve 'aceitar' o aumento de valor.\n\n") ;
 
 	printf(" Caso alguem 'corra' do aumento de aposta:\n") ;
-	printf(" O aumento do valor da rodada nao ocorre e a equipe de adversaria ganha a rodada.\n\n") ;
+	printf(" O aumento do valor da rodada nao ocorre e a equipe adversaria ganha a rodada.\n\n") ;
 
 	printf(" Em cada rodada, uma carta eh retirada do baralho e colocada sobre a mesa (a vira).\n") ;
 	printf(" Essa carta determina qual a carta mais forte da rodada (a manilha).\n\n") ;
@@ -1223,24 +1183,28 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
 	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 3: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 5: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	}
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
 	printf(		   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
-	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	if (valorRodada < 10) {
+		printf(	   "                                                         Valor da Rodada: %d\n", valorRodada) ;
+	}
+	else {
+		printf(	   "                                                        Valor da Rodada: %d\n", valorRodada) ;
+	}
 
 	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
 	PrintarMao(pCabecaMao) ;
 
-	printf("\n Valor da rodada: %d\n", valorRodada);
-
-	printf(" \n O que deseja fazer?\n\n") ;
+	printf(		   " \n O que deseja fazer?\n\n") ;
 
 	switch (MES_ObterQtdCartas(pCabecaMao, COM_PRIMEIRA, COM_ULTIMA)) {
 
@@ -1376,11 +1340,11 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
 	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 3: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 5: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	}
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	printf(" Jogador %d joga (nao deixe que ninguem veja suas cartas).\n\n", quemJoga) ;
@@ -1395,17 +1359,23 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (quemJoga) {
 	case 1: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 2: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 3: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 4: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	case 5: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
-	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
+	case 6: printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR JOGADOR %d ~~~~~~~~~~~~~~~~~~~~~~~~~~\n", quemJoga); break;
 	}
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
 	printf(		   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
-	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	if (valorRodada < 10) {
+		printf(	   "                                                         Valor da Rodada: %d\n", valorRodada) ;
+	}
+	else {
+		printf(	   "                                                        Valor da Rodada: %d\n", valorRodada) ;
+	}
 
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, quemJoga) ;
@@ -1413,8 +1383,6 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 
 	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
 	PrintarMao(pCabecaMao) ;
-
-	printf("\n Valor da rodada: %d\n", valorRodada);
 
 	printf(" \n O que deseja fazer?\n\n") ;
 	printf(" (1) Correr   | (2) Aceitar") ;
@@ -1691,28 +1659,25 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 	//tela fim apostas 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PARTIDA %d ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", qtdPartidas) ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ PARTIDA %d ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", qtdPartidas) ;
 
 	switch (equipeVencedoraDaPartida) {
 
 	case EQUIPE_PAR:
-		printf(	   "                        Equipe PAR venceu a partida\n") ; 
+		printf(	   "                         Equipe PAR venceu a partida\n") ; 
 		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   "                    Equipe Par: 12            Equipe Impar: %d\n", pontosPartidaImpar) ;
+		printf(	   "                  Equipe Par: %d            Equipe Impar: %d\n", pontosPartidaPar, pontosPartidaImpar) ;
 		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
 	case EQUIPE_IMPAR:
-		printf(	   "       Equipe IMPAR venceu a partida\n") ;
+		printf(	   "                        Equipe IMPAR venceu a partida\n") ;
 		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-		printf(	   "                    Equipe Par: %d            Equipe Impar: 12\n", pontosPartidaPar) ;
+		printf(	   "                  Equipe Par: %d            Equipe Impar: %d\n", pontosPartidaPar, pontosPartidaImpar) ;
 		printf(	   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 		break ;
 
 	} //fim switch
-
-	//PrintarLixo(pCabecaLixo) ;
-	//printf("\n") ;
 
 	printf(" \n O que deseja fazer?\n\n") ;
 	printf(" (1) Ir pro inicio | (2) Sair\n\n") ;
@@ -1734,25 +1699,30 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 ***************************************************************************/
 int ExecutarOpcaoInicio (int opcao) {
 
+	int qtdJogadores ;
+
 	switch(opcao) {
 
 	case 49: //(1) iniciar partida
 
-		opcao = PrintarTelaQtdJogadores ();
-		switch(opcao) {
+		qtdJogadores = PrintarTelaQtdJogadores ();
+		switch(qtdJogadores) {
 		case 49: 
-			return 2;
+			qtdJogadores = 2;
+			break;
 		case 50: 
-			return 4;
+			qtdJogadores = 4;
+			break;
 		case 51: 
-			return 6;
+			qtdJogadores = 6;
+			break;
 		}
 		break;
 
 	case 50: //(2) ver regras
 
 		opcao = PrintarTelaRegras();
-		ExecutarOpcaoRegras(opcao);
+		qtdJogadores = ExecutarOpcaoRegras(opcao);
 		break;
 
 	case 51: //(3) sair
@@ -1761,23 +1731,27 @@ int ExecutarOpcaoInicio (int opcao) {
 
 	} //fim switch
 
-	return 0;
+	return qtdJogadores;
 }
 
 /***************************************************************************
 *  Função: &Executar opcao da tela de regras
 ***************************************************************************/
-void ExecutarOpcaoRegras (int opcao) {
+int ExecutarOpcaoRegras (int opcao) {
+
+	int qtdJogadores;
 
 	switch(opcao) {
 	case 49: //(1) voltar
 		opcao = PrintarTelaInicio();
-		ExecutarOpcaoInicio(opcao);
+		qtdJogadores = ExecutarOpcaoInicio(opcao);
 		break;
 	case 50: //(2) sair
 		exit(0);
 		break;
 	}
+
+	return qtdJogadores ;
 }
 
 /***************************************************************************
