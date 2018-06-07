@@ -65,8 +65,8 @@ int main (void) {
 	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//final
 
 	//declara variaveis
-	int opcao,								//opcao de inicio de jogo escolhida (iniciar, regras, qtd jogadores, ir pro inicio, sair)
-		jogada,								//jogada escolhida (apostar 123, dispensar 123, aumentar, correr, aceitar)
+	int opcao ,								//opcao de inicio de jogo escolhida (iniciar, regras, qtd jogadores, ir pro inicio, sair)
+		jogada ,							//jogada escolhida (apostar 123, dispensar 123, aumentar, correr, aceitar)
 		valorRodada ,						//valor da rodada corrente
 		pontosRodadaPar ,					//quantidade de bateria de apostas ganhas da equipe par
 		pontosRodadaImpar ,					//quantidade de bateria de apostas ganhas da equipe impar
@@ -84,8 +84,8 @@ int main (void) {
 		qtdEmpates ,						//quantidade de empates
 		qtdCartasViradas ,					//quantidade de cartas apostadas pra baixo (dispensadas)
 		qtdBateriasDeApostas ,				//quantidade de baterias de apostas (3 é a ultima da rodada)
-		atualJogadorVencedor,				//quem é o atual vencedor das apostas de cartas
-		equipeVencedoraDaPrimeiraAposta,	//equipe que venceu a primeira bateria de apostas
+		atualJogadorVencedor ,				//quem é o atual vencedor das apostas de cartas
+		equipeVencedoraDaPrimeiraAposta ,	//equipe que venceu a primeira bateria de apostas
 		equipeVencedoraDaAposta ,			//equipe que venceu a atual bateria de apostas
 		equipeVencedoraDaRodada ,			//equipe que venceu a rodada
 		equipeVencedoraDaPartida ,			//equipe que venceu a partida
@@ -340,7 +340,7 @@ int main (void) {
 							//restarta o loop
 							qtdAceitos = 0 ;
 
-							quemAumentou = quemJoga ;
+							//quemAumentou = quemJoga ;
 
 							if (jogada == 51) {
 								jogada = 55;
