@@ -22,6 +22,7 @@
 #define BARALHO_OWN
 #include "BARALHO.h"
 #include "LISTA.h"
+#include "CONTA.h"
 
 #undef BARALHO_OWN
 
@@ -46,10 +47,16 @@ typedef struct BAR_tagCarta {
 *  Função: BAR &Preencher vetor cartas
 ***************************************************************************/
 BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
-	
+
 	int i ,
 		valor = 0,
 		naipe = 0 ;
+
+	CNT_InicializarContadores(NULL, NULL) ;
+
+	#ifdef _DEBUG
+		CNT_CONTAR("Antes de entrar no for") ;
+	#endif
 
 	//preenchendo o vetor de cartas de forma ordenada
 	for (i = 0; i < TAM; i++, valor++) {
@@ -60,13 +67,26 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 
 		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
 
-		vtCartas[i] = pCarta;
+		#ifdef _DEBUG
+			CNT_CONTAR("Depois de entrar no for 'preencher o vetor'") ;
+		#endif
+
+		vtCartas[i] = pCarta ;
 
 		if (vtCartas[i] == NULL) {
+
+			#ifdef _DEBUG
+				CNT_CONTAR("Depois de entrar no if 'null'") ;
+			#endif
+
 			return BAR_CondRetNaoPreencheuVetor ;
 		}
 
 		if (i == 9 || i == 19 || i == 29) {
+
+			#ifdef _DEBUG
+				CNT_CONTAR("Depois de entrar no if 'i = 9 ou 19 ou 29'") ;
+			#endif
 
 			//reinicia o preenchimento do valor de 0 a 9
 			valor = -1 ;
@@ -74,7 +94,16 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 			naipe++;
 
 		} //fim if
+
+		#ifdef _DEBUG
+			CNT_CONTAR("Depois de sair do if 'i = 9 ou 19 ou 29'") ;
+		#endif
+
 	} //fim for
+
+	#ifdef _DEBUG
+		CNT_CONTAR("Depois de sair do for 'preencher o vetor'") ;
+	#endif
 
 	return BAR_CondRetOK ;
 
