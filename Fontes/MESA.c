@@ -18,10 +18,17 @@
 #include   <time.h>
 
 #define MESA_OWN
+
 #include "MESA.h"
 #include "BARALHO.h"
 #include "LISTA.h"
-#include "CONTA.h"
+
+#ifdef _DEBUG
+   #include   "Generico.h"
+   #include   "Conta.h"
+   #include   "cespdin.h"
+   #include   "..\\tabelas\\IdTiposEspaco.def"
+#endif
 
 //jogadores
 #define NINGUEM 0
@@ -62,8 +69,10 @@ LIS_tppLista MES_CriarListaDeListas() {
 	
 	LIS_tppLista pCabecaSuperior ;
 
-	CNT_CONTAR("Antes de chamar 'LIS_CriarLista'") ;
-	
+	#ifdef _DEBUG
+	CNT_CONTAR("MES_CriarListaDeListas.Antes de chamar 'LIS_CriarLista'") ;
+	#endif
+
 	//criando ponteiro pra cabeca da lista mesa
 	pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
 
@@ -179,10 +188,6 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 	#endif
 	
 	switch(qtdJogadores) {
-			
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_DistribuirMaos.Depois de entrar no switch") ;
-	#endif
 			
 	case 2:
 			
@@ -1326,7 +1331,6 @@ int MES_DeterminarResultado (LIS_tppLista pCabecaSuperior, int quemJoga, int que
 		return primeiroComQuemEmpatou ;
 	}
 
-	return 0 ;
 } /*************** Fim função: &Determinar resultado ***************/
 
 /***************************************************************************

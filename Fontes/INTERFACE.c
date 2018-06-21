@@ -8,6 +8,8 @@
 
 #define TAM 40
 
+#define INICIALIZAR 0
+
 //resultados
 #define CORREU 0
 #define EQUIPE_IMPAR 1
@@ -90,6 +92,11 @@ int main (void) {
 		equipeVencedoraDaRodada ,			//equipe que venceu a rodada
 		equipeVencedoraDaPartida ,			//equipe que venceu a partida
 		resultado ;							//resultado da rodada
+
+		equipeVencedoraDaAposta = INICIALIZAR ;
+		equipeVencedoraDaPrimeiraAposta = INICIALIZAR ;
+		equipeVencedoraDaPartida = INICIALIZAR ;
+		qtdJogadores = INICIALIZAR ;
 
 	//cria a cabeça da lista de listas
 	pCabecaSuperior = MES_CriarListaDeListas() ;
@@ -313,7 +320,7 @@ int main (void) {
 							atualJogadorVencedor = quemAumentou ;
 							quemJoga = quemAumentou ;
 
-							PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+							PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 														   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 														   pontosRodadaPar, pontosRodadaImpar,
 														   pontosPartidaPar, pontosPartidaImpar) ;
@@ -404,7 +411,7 @@ int main (void) {
 
 						} //fim switch
 
-						PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+						PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 													   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 													   pontosRodadaPar, pontosRodadaImpar,
 													   pontosPartidaPar, pontosPartidaImpar) ;
@@ -429,7 +436,7 @@ int main (void) {
 							pontosRodadaImpar += 1 ;
 							pontosRodadaPar += 1 ;
 
-							PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+							PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 														   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 														   pontosRodadaPar, pontosRodadaImpar,
 														   pontosPartidaPar, pontosPartidaImpar) ;
@@ -449,7 +456,7 @@ int main (void) {
 
 								equipeVencedoraDaAposta = EMPATE2 ;
 
-								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 															   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 															   pontosRodadaPar, pontosRodadaImpar,
 															   pontosPartidaPar, pontosPartidaImpar) ;
@@ -474,7 +481,7 @@ int main (void) {
 									break;
 								} //fim switch
 
-								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 															   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 															   pontosRodadaPar, pontosRodadaImpar,
 															   pontosPartidaPar, pontosPartidaImpar) ;
@@ -497,7 +504,7 @@ int main (void) {
 
 								equipeVencedoraDaAposta = EMPATE3 ;
 
-								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 															   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 															   pontosRodadaPar, pontosRodadaImpar,
 															   pontosPartidaPar, pontosPartidaImpar) ;
@@ -524,7 +531,7 @@ int main (void) {
 									break;
 								} //fim switch
 
-								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, valorRodada, equipeVencedoraDaAposta,
+								PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 															   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
 															   pontosRodadaPar, pontosRodadaImpar,
 															   pontosPartidaPar, pontosPartidaImpar) ;
@@ -1403,14 +1410,13 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	system("cls") ;
 	return *opcao ;
 
-return 0;
 }
 
 
 /***************************************************************************
 *  Função: &Printar tela fim das apostas
 ***************************************************************************/
-void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodada, 
+void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior,  
 									int equipeVencedoraDaAposta, int qtdRodadas,
 									int quemJogouAPrimeira, int qtdJogadores, int quemCorreu,
 									int pontosRodadaPar, int pontosRodadaImpar,
@@ -1699,7 +1705,7 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 ***************************************************************************/
 int ExecutarOpcaoInicio (int opcao) {
 
-	int qtdJogadores ;
+	int qtdJogadores = INICIALIZAR;
 
 	switch(opcao) {
 
@@ -1739,7 +1745,7 @@ int ExecutarOpcaoInicio (int opcao) {
 ***************************************************************************/
 int ExecutarOpcaoRegras (int opcao) {
 
-	int qtdJogadores;
+	int qtdJogadores = INICIALIZAR ;
 
 	switch(opcao) {
 	case 49: //(1) voltar

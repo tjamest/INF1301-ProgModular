@@ -1,4 +1,4 @@
-# Teste do módulo lista compilado com debug
+# Teste do módulo Arvore compilado com debug
 
 [Diretorios]
 
@@ -11,11 +11,11 @@ h           =  ..\Fontes
 def         =  ..\Tabelas
 
 [Modulos]
-Lista      /D_DEBUG
-TestLIS    /D_DEBUG
+Arvore      /D_DEBUG
+TestArv     /D_DEBUG
 
 [BuildInicio]
-/OUT:..\produto\TesteListaDebug.exe
+/OUT:..\produto\TesteArvoreDebug.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

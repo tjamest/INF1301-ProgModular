@@ -22,7 +22,13 @@
 #define BARALHO_OWN
 #include "BARALHO.h"
 #include "LISTA.h"
-#include "CONTA.h"
+
+#ifdef _DEBUG
+   #include   "Generico.h"
+   #include   "Conta.h"
+   #include   "cespdin.h"
+   #include   "..\\tabelas\\IdTiposEspaco.def"
+#endif
 
 #undef BARALHO_OWN
 
@@ -57,17 +63,15 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 
 	BAR_tppCarta pCarta ;
 
-	CNT_InicializarContadores(NULL, NULL) ;
-
 	#ifdef _DEBUG
-		CNT_CONTAR("Antes de entrar no for 'Preenchendo o vetor'") ;
+		CNT_CONTAR("BAR_PreencherVetorCartas_Antes de entrar no for 'Preenchendo o vetor'") ;
 	#endif
 
 	//preenchendo o vetor de cartas de forma ordenada
 	for (i = 0; i < TAM; i++, valor++) {
 		
 		#ifdef _DEBUG
-			CNT_CONTAR("Depois de entrar no for 'Preenchendo o vetor'") ;
+			CNT_CONTAR("BAR_Depois de entrar no for 'Preenchendo o vetor'") ;
 		#endif
 		
 		//faz a transformacao de int pra tipo especifico
@@ -333,11 +337,7 @@ BAR_tpCondRet BAR_PreencherBaralho(LIS_tppLista pCabecaBaralho, BAR_tppCarta Vet
 		
 		return BAR_CondRetNaoPreencheuBaralho ;
 	}
-/*	
-	#ifdef _DEBUG
-		CNT_CONTAR("Não entrou no segundo if 'Assertiva de saída'") ;
-	#endif
-*/	
+
 	else {
 		
 		#ifdef _DEBUG
@@ -601,11 +601,7 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 			
 			return BAR_CondRetEhManilha ;
 		} //fim if
-/*		
-		#ifdef _DEBUG
-			CNT_CONTAR("Antes de entrar no else do 'Aposta = manilha'") ;
-		#endif
-*/		
+		
 		else {
 			
 			#ifdef _DEBUG
@@ -616,18 +612,14 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 		} //fim else
 
 	} //fim if
-/*
-	#ifdef _DEBUG
-		CNT_CONTAR("Antes de entrar no else do 'Vira = 9'") ;
-	#endif
-*/	
+	
 	else {
 		
 		#ifdef _DEBUG
 			CNT_CONTAR("Depois de entrar no else do 'Vira = 9'") ;
 		#endif
-
-		(int)valorEspManilha = ((int)valorEspVira) + 1 ;
+		
+		valorEspManilha = ((int)valorEspVira) + 1 ;
 
 		#ifdef _DEBUG
 			CNT_CONTAR("Antes de entrar no segundo if 'Aposta = Manilha'") ;
@@ -641,11 +633,7 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 			
 			return BAR_CondRetEhManilha ;
 		} //fim if
-/*		
-		#ifdef _DEBUG
-			CNT_CONTAR("Antes de entrar no else do segundo if 'Aposta = Manilha'") ;
-		#endif
-*/		
+		
 		else {
 			
 			#ifdef _DEBUG

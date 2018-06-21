@@ -125,7 +125,7 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 *  $ED Descrição da função
 *     Imprime a tela com os resultados da bateria de apostas.
 ***************************************************************************/
-void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int valorRodada, int equipeVencedoraDaAposta,
+void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior, int equipeVencedoraDaAposta,
 									int qtdRodadas, int quemJogouAPrimeira, int qtdJogadores, int quemCorreu,
 									int pontosRodadaPar, int pontosRodadaImpar,
 									int pontosPartidaPar, int pontosPartidaImpar) ;
