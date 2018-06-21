@@ -52,6 +52,11 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 		valor = 0,
 		naipe = 0 ;
 
+	BAR_tpValorCarta Valor ;
+	BAR_tpNaipeCarta Naipe ;
+
+	BAR_tppCarta pCarta ;
+
 	CNT_InicializarContadores(NULL, NULL) ;
 
 	#ifdef _DEBUG
@@ -66,10 +71,10 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) {
 		#endif
 		
 		//faz a transformacao de int pra tipo especifico
-		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
-		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
+		Valor = (BAR_tpValorCarta) valor;
+		Naipe = (BAR_tpNaipeCarta) naipe;
 
-		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
+		pCarta = BAR_CriarCarta(Valor, Naipe);
 
 		vtCartas[i] = pCarta ;
 		
@@ -125,6 +130,10 @@ BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 	int i ,
 		valor = 0,
 		naipe = 0 ;
+
+	BAR_tpValorCarta Valor ;
+	BAR_tpNaipeCarta Naipe ;
+	BAR_tppCarta pCarta ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de entrar no for 'Preenchendo o vetor'") ;
@@ -138,10 +147,10 @@ BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 		#endif
 		
 		//faz a transformacao de int pra tipo especifico
-		BAR_tpValorCarta Valor = (BAR_tpValorCarta) valor;
-		BAR_tpNaipeCarta Naipe = (BAR_tpNaipeCarta) naipe;
+		Valor = (BAR_tpValorCarta) valor;
+		Naipe = (BAR_tpNaipeCarta) naipe;
 
-		BAR_tppCarta pCarta = BAR_CriarCarta(Valor, Naipe);
+		pCarta = BAR_CriarCarta(Valor, Naipe);
 		vtCartas[i] = pCarta;
 		
 		#ifdef _DEBUG
@@ -175,16 +184,18 @@ BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 	
 	//embaralhando o vetor (troca os indices aleatoriamente)
 	for (i = 0; i < TAM; i++){
+
+		//declara um ponteiro pra um tipo carta
+		BAR_tppCarta pCartaAux;
+
+		int random ;
 				
 		#ifdef _DEBUG
 			CNT_CONTAR("Depois de entrar no for 'Embaralhando o vetor'") ;
 		#endif
 		
-		//declara um ponteiro pra um tipo carta
-		BAR_tppCarta pCartaAux;
-		
 		//gera um número aleatorio entre 0 e 39
-		int random = rand() % TAM ;
+		random = rand() % TAM ;
 
 		//embaralhando os indices
 		pCartaAux = vtCartas[i] ;
@@ -223,15 +234,14 @@ BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) {
 ***************************************************************************/
 LIS_tppLista BAR_CriarBaralho() {
 	
-//	int i ; //contador
-	
+	LIS_tppLista pCabecaBaralho ;	
 
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de chamar 'LIS_CriarLista'") ;
 	#endif
 	
 	//cria uma lista retornando um ponteiro pra cabeca da lista
-	LIS_tppLista pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
+	pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
 
 	//assertiva de saída
 	#ifdef _DEBUG
@@ -265,11 +275,12 @@ BAR_tpCondRet BAR_PreencherBaralho(LIS_tppLista pCabecaBaralho, BAR_tppCarta Vet
 	//preenche um por um usando o vetor embaralhado
 	for (i = 0; i < TAM; i++){
 		
+		BAR_tppCarta pCarta;
+
 		#ifdef _DEBUG
 			CNT_CONTAR("Depois de entrar no for 'Preenche usando o vetor embaralhado'") ;
 		#endif
 		
-		BAR_tppCarta pCarta;
 		pCarta = VetorAux[i] ;
 	
 		#ifdef _DEBUG
@@ -322,12 +333,11 @@ BAR_tpCondRet BAR_PreencherBaralho(LIS_tppLista pCabecaBaralho, BAR_tppCarta Vet
 		
 		return BAR_CondRetNaoPreencheuBaralho ;
 	}
-	
-
+/*	
 	#ifdef _DEBUG
 		CNT_CONTAR("Não entrou no segundo if 'Assertiva de saída'") ;
 	#endif
-	
+*/	
 	else {
 		
 		#ifdef _DEBUG
@@ -344,12 +354,14 @@ BAR_tpCondRet BAR_PreencherBaralho(LIS_tppLista pCabecaBaralho, BAR_tppCarta Vet
 ****************************************************************************/
 BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 
+	BAR_tppCarta pCarta ;
+
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de alocar o espaço para carta") ;
 	#endif
 	
 	//declara um ponteiro pra um tipo carta e aloca memoria
-	BAR_tppCarta pCarta = (BAR_tppCarta) malloc(sizeof(BAR_tpCarta)) ;
+	pCarta = (BAR_tppCarta) malloc(sizeof(BAR_tpCarta)) ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de atribuir o valor e o naipe") ;
@@ -424,12 +436,14 @@ void BAR_DestruirBaralho(void * pLista) {
 ***************************************************************************/
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaLista) {
 
+	BAR_tppCarta pCarta ;
+
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de chamar 'LIS_ObterValor'") ;
 	#endif
 	
 	//obtem o valor corrente de uma lista e retorna
-	BAR_tppCarta pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaLista) ;
+	pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaLista) ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("Depois de chamar 'LIS_ObterValor'") ;
@@ -473,12 +487,14 @@ BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
 BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 
 	LIS_tpCondRet CondRetLista ;
+
+	BAR_tppCarta pCarta ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de chamar 'BAR_ObterCartaCorr'") ;
 	#endif
 	
-	BAR_tppCarta pCarta = BAR_ObterCartaCorr(pOrigem) ;
+	pCarta = BAR_ObterCartaCorr(pOrigem) ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("Depois de chamar 'BAR_ObterCartaCorr' e antes de entrar no if 'NULL'") ;
@@ -571,7 +587,7 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 			CNT_CONTAR("Depois de entrar no if 'vira = 9'") ;
 		#endif
 
-		(int)valorEspManilha = 0 ;
+		valorEspManilha = _4 ;
 		
 		#ifdef _DEBUG
 			CNT_CONTAR("Antes de entrar no if 'Aposta = Manilha'") ;
@@ -585,11 +601,11 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 			
 			return BAR_CondRetEhManilha ;
 		} //fim if
-		
+/*		
 		#ifdef _DEBUG
 			CNT_CONTAR("Antes de entrar no else do 'Aposta = manilha'") ;
 		#endif
-		
+*/		
 		else {
 			
 			#ifdef _DEBUG
@@ -600,11 +616,11 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 		} //fim else
 
 	} //fim if
-
+/*
 	#ifdef _DEBUG
 		CNT_CONTAR("Antes de entrar no else do 'Vira = 9'") ;
 	#endif
-	
+*/	
 	else {
 		
 		#ifdef _DEBUG
@@ -625,11 +641,11 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 			
 			return BAR_CondRetEhManilha ;
 		} //fim if
-		
+/*		
 		#ifdef _DEBUG
 			CNT_CONTAR("Antes de entrar no else do segundo if 'Aposta = Manilha'") ;
 		#endif
-		
+*/		
 		else {
 			
 			#ifdef _DEBUG

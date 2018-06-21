@@ -21,6 +21,7 @@
 #include "MESA.h"
 #include "BARALHO.h"
 #include "LISTA.h"
+#include "CONTA.h"
 
 //jogadores
 #define NINGUEM 0
@@ -59,12 +60,12 @@
 ***************************************************************************/
 LIS_tppLista MES_CriarListaDeListas() {
 	
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarListaDeListas.Antes de chamar 'LIS_CriarLista'") ;
-	#endif
+	LIS_tppLista pCabecaSuperior ;
+
+	CNT_CONTAR("Antes de chamar 'LIS_CriarLista'") ;
 	
 	//criando ponteiro pra cabeca da lista mesa
-	LIS_tppLista pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
+	pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
 
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarListaDeListas.Depois de chamar 'LIS_CriarLista'") ;
@@ -84,12 +85,14 @@ LIS_tppLista MES_CriarListaDeListas() {
 ***************************************************************************/
 LIS_tppLista MES_CriarMesa() {
 
+	LIS_tppLista pCabecaMesa ;
+
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarMesa.Antes de chamar 'LIS_CriarLista'") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mesa
-	LIS_tppLista pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
+	pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarMesa.Depois de chamar 'LIS_CriarLista'") ;
@@ -109,12 +112,14 @@ LIS_tppLista MES_CriarMesa() {
 ***************************************************************************/
 LIS_tppLista MES_CriarMao() {
 
+	LIS_tppLista pCabecaMao ;
+
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarMao.Antes de chamar 'LIS_CriarLista'") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mao
-	LIS_tppLista pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
+	pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
 
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarMao.Depois de chamar 'LIS_CriarLista'") ;
@@ -134,12 +139,14 @@ LIS_tppLista MES_CriarMao() {
 ***************************************************************************/
 LIS_tppLista MES_CriarLixo() {
 
+	LIS_tppLista pCabecaLixo ;
+
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarLixo.Antes de chamar 'LIS_CriarLista'") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mao
-	LIS_tppLista pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
+	pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
 
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_CriarLixo.Depois de chamar 'LIS_CriarLista'") ;
