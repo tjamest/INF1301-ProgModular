@@ -1,11 +1,16 @@
 ////////////////////////////////////////////////
 //
 // Exemplo de arquivo de declaração de contadores
-// Conta módulo Arvore marcado
+// Conta módulo Baralho marcado
 //
 ///////////////////////////////////////////////
     
+    BAR_PreencherVetorCartas
+    BAR_EmbaralharVetorCartas
     BAR_CriarBaralho
+    BAR_PreencherBaralho
     BAR_CriarCarta
     BAR_DestruirCarta
+    BAR_ObterValor
+    BAR_ObterNaipe
 	 XPTO nome adicionado para fins de teste\=-2

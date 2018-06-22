@@ -1,4 +1,4 @@
-// Script:    TesteBaralho.script
+// Script:    TesteBaralhoComContador.script
 // Autor:     Gustavo Contreiras, João Victor Galindo, Thiago Gioso Fernandes
 // Data:      05/mai/2018
 // Propósito: Testar o módulo baralho do jogo de truco
@@ -63,7 +63,23 @@
 =lercontadores          "..\\scripts\\Baralho"
 =iniciarcontagem
 
-== TESTES
+== Verificar quantidade de contadores com zero
+=verificarcontagens 8
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  0
+=contagemcontador   "BAR_CriarBaralho"  0
+=contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterValor"  0
+=contagemcontador   "BAR_ObterNaipe"  0
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 8
+
+== TESTE
 =resetteste
 
 == Criar carta 4 de ouros
@@ -78,16 +94,21 @@
 == Criar carta 4 de paus
 =criarcarta carta4 0 3
 
-== Verificar se tem 2 contadores com zero
-=verificarcontagens    2
+== Verificar quantidade de contadores com zero
+=verificarcontagens 7
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  4
 =contagemcontador   "BAR_CriarBaralho"  0
 =contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterValor"  0
+=contagemcontador   "BAR_ObterNaipe"  0
 
-== Verificar falhas (contador = 0 eh uma falha)
-=AceitaFalhasAcumuladas 2
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 7
 
 == TESTE
 =resetteste
@@ -137,16 +158,21 @@
 == Criar Baralhos
 =criarbaralho baralho0
 
-== Verificar se tem 1 contador com zero
-=verificarcontagens    1
+== Verificar quantidade de contadores com zero
+=verificarcontagens 6
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  44
 =contagemcontador   "BAR_CriarBaralho"  1
 =contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterValor"  0
+=contagemcontador   "BAR_ObterNaipe"  0
 
-== Verificar falhas (contador = 0 eh uma falha)
-=AceitaFalhasAcumuladas 1
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 6
 
 == Obter todos naipes de todas cartas do baralho
 =obternaipe carta0
@@ -232,6 +258,22 @@
 =obtervalor carta38
 =obtervalor carta39
 
+== Verificar quantidade de contadores com zero
+=verificarcontagens 4
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  44
+=contagemcontador   "BAR_CriarBaralho"  1
+=contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterValor"  40
+=contagemcontador   "BAR_ObterNaipe"  40
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 4
+
 == Destruir todas cartas do baralho
 =destruircarta carta0
 =destruircarta carta1
@@ -274,18 +316,23 @@
 =destruircarta carta38
 =destruircarta carta39
 
-== Verificar se tem 0 contadores com zero
-=verificarcontagens    0
+== Verificar quantidade de contadores com zero
+=verificarcontagens 3
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  44
 =contagemcontador   "BAR_CriarBaralho"  1
 =contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterValor"  40
+=contagemcontador   "BAR_ObterNaipe"  40
 
-== Verificar falhas (contador = 0 eh uma falha)
-=AceitaFalhasAcumuladas 0
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 3
 
-== MASSA DE TESTE 5
+== TESTE
 =resetteste
 
 == Criar carta 5 de ouros
@@ -412,7 +459,7 @@
 == Obter naipe carta 23
 =obternaipe carta23
 
-== MASSA DE TESTE 6
+== TESTE
 =resetteste
 
 == Obter naipe de carta que nao existe
@@ -427,7 +474,7 @@
 =obternaipe carta25
 =recuperar
 
-== MASSA DE TESTE 7
+== TESTE
 =resetteste
 
 == Criar Cartas
@@ -448,9 +495,87 @@
 =obtervalor carta37
 =obtervalor carta8
 
+== Verificar quantidade de contadores com zero
+=verificarcontagens    3
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  83
+=contagemcontador   "BAR_CriarBaralho"  2
+=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_PreencherVetorCartas"  0
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterNaipe"  48
+=contagemcontador   "BAR_ObterValor"  44
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 3
+
+== TESTE
+=resetteste
+
+== Preencher vetor de cartas
+=preenchervetorcartas
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens  2
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  123
+=contagemcontador   "BAR_CriarBaralho"  2
+=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_PreencherVetorCartas"  1
+=contagemcontador   "BAR_EmbaralharVetorCartas"  0
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterNaipe"  48
+=contagemcontador   "BAR_ObterValor"  44
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 2
+
+== Embaralhar vetor de cartas (a funcao CriarCarta eh chamada 40 vezes)
+=embaralharvetorcartas
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens  1
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  163
+=contagemcontador   "BAR_CriarBaralho"  2
+=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_PreencherVetorCartas"  1
+=contagemcontador   "BAR_EmbaralharVetorCartas"  1
+=contagemcontador   "BAR_PreencherBaralho"  0
+=contagemcontador   "BAR_ObterNaipe"  48
+=contagemcontador   "BAR_ObterValor"  44
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 1
+
+== Criar baralho 7
+=criarbaralho 7
+
+== Preencher baralho 7
+=preencherbaralho 7
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens  0
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "BAR_CriarCarta"  163
+=contagemcontador   "BAR_CriarBaralho"  3
+=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_PreencherVetorCartas"  1
+=contagemcontador   "BAR_EmbaralharVetorCartas"  1
+=contagemcontador   "BAR_PreencherBaralho"  1
+=contagemcontador   "BAR_ObterNaipe"  48
+=contagemcontador   "BAR_ObterValor"  44
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 0
+
 == Terminar controlar contadores
 =pararcontagem
-=verificarcontagens    0
 
 == Terminar contagem
 =terminarcontadores

@@ -70,19 +70,16 @@ LIS_tppLista MES_CriarListaDeListas() {
 	LIS_tppLista pCabecaSuperior ;
 
 	#ifdef _DEBUG
-	CNT_CONTAR("MES_CriarListaDeListas Antes de chamar LIS_CriarLista") ;
+	CNT_CONTAR("MES_CriarListaDeListas - Depois de entrar e declarar variaveis") ;
 	#endif
 
 	//criando ponteiro pra cabeca da lista mesa
 	pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
 
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarListaDeListas Depois de chamar LIS_CriarLista") ;
-	#endif
-	
 	//assertiva de saída
 	#ifdef _DEBUG
 		assert( pCabecaSuperior != NULL ) ;
+		CNT_CONTAR("MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair") ;
 	#endif
 
 	return pCabecaSuperior ;
@@ -97,19 +94,16 @@ LIS_tppLista MES_CriarMesa() {
 	LIS_tppLista pCabecaMesa ;
 
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarMesa Antes de chamar LIS_CriarLista") ;
+		CNT_CONTAR("MES_CriarMesa - Depois de entrar e declarar variaveis") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mesa
 	pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
-	
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarMesa Depois de chamar LIS_CriarLista") ;
-	#endif
 
 	//assertiva de saída
 	#ifdef _DEBUG
 		assert( pCabecaMesa != NULL ) ;
+		CNT_CONTAR("MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair") ;
 	#endif
 
 	return pCabecaMesa ;
@@ -124,19 +118,16 @@ LIS_tppLista MES_CriarMao() {
 	LIS_tppLista pCabecaMao ;
 
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarMao Antes de chamar LIS_CriarLista") ;
+		CNT_CONTAR("MES_CriarMao - Depois de entrar e declarar variaveis") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mao
 	pCabecaMao = LIS_CriarLista (BAR_DestruirCarta) ;
-
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarMao Depois de chamar LIS_CriarLista") ;
-	#endif
 	
 	//assertiva de saída
 	#ifdef _DEBUG
 		assert( pCabecaMao != NULL ) ;
+		CNT_CONTAR("MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair") ;
 	#endif
 
 	return pCabecaMao ;
@@ -151,19 +142,16 @@ LIS_tppLista MES_CriarLixo() {
 	LIS_tppLista pCabecaLixo ;
 
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarLixo Antes de chamar LIS_CriarLista") ;
+		CNT_CONTAR("MES_CriarLixo - Depois de entrar e declarar variaveis") ;
 	#endif
 	
 	//criando ponteiro pra cabeca da lista mao
 	pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
 
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_CriarLixo Depois de chamar LIS_CriarLista") ;
-	#endif
-	
 	//assertiva de saída
 	#ifdef _DEBUG
 		assert( pCabecaLixo != NULL ) ;
+		CNT_CONTAR("MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair") ;
 	#endif
 
 	return pCabecaLixo ;
@@ -184,16 +172,12 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_DistribuirMaos Antes de entrar no switch") ;
+		CNT_CONTAR("MES_DistribuirMaos - Depois de entrar e declarar variaveis") ;
 	#endif
 	
 	switch(qtdJogadores) {
 			
 	case 2:
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos 2 Depois de entrar no case 2 e antes de chamar LIS_IrInicioLista") ;
-		#endif
 			
 		LIS_IrInicioLista(pCabecaSuperior) ;
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -201,32 +185,19 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos 2 Depois de chamar LIS_ObterValor e antes de chamar BAR_TransferirCarta") ;
-		#endif
+
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos 2 Depois de chamar BAR_TransferirCarta e antes de sair do case 2") ;
-		#endif
 			
 		break;
 	
-	case 4:
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.4.Depois de entrar no case 4 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif	
+	case 4:	
 			
 		LIS_IrInicioLista(pCabecaSuperior) ;	
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.4.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
-		#endif
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -236,9 +207,7 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 		pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.4.Depois de chamar 'LIS_ObterValor' e 'LIS_ObterValor' e antes de chamar 'BAR_TransferirCarta'") ;
-		#endif
+
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
@@ -252,22 +221,11 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;	
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.4.Depois de chamar 'BAR_TransferirCarta' e antes de sair do case 4") ;
-		#endif
-			
 		break;
 	
 	case 6:
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.6.Depois de entrar no case 6 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
-			
 		LIS_IrInicioLista(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.6.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
-		#endif
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -281,9 +239,7 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 		pCabecaMao5 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao6 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.6.Depois de chamar 'LIS_ObterValor' e antes de chamar 'BAR_TransferirCarta'") ;
-		#endif
+		
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
@@ -303,16 +259,12 @@ void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) {
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaos.6.Depois de chamar 'BAR_TransferirCarta' e antes de sair do case 6") ;
-		#endif
-			
 		break;
 
 	}//fim switch
 	
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_DistribuirMaos.Depois de sair do switch") ;
+		CNT_CONTAR("MES_DistribuirMaos - Depois de sair do switch e antes de retornar") ;
 	#endif
 
 } /***************** Fim função: MES &Distribuir maos ***********************/

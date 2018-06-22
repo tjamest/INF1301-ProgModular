@@ -274,7 +274,6 @@ void BAR_DestruirCarta(void * pCarta) {
 	#endif
 	
 	if (pCarta == NULL) {
-		
 		return;
 	}
 	
@@ -307,10 +306,6 @@ void BAR_DestruirBaralho(void * pLista) {
 BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaLista) {
 
 	BAR_tppCarta pCarta ;
-
-	#ifdef _DEBUG
-		CNT_CONTAR("BAR_ObterCartaCorr") ;
-	#endif
 	
 	//obtem o valor corrente de uma lista e retorna
 	pCarta = (BAR_tppCarta)LIS_ObterValor (pCabecaLista) ;
@@ -329,6 +324,7 @@ BAR_tppCarta BAR_ObterCartaCorr(LIS_tppLista pCabecaLista) {
 BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 
 	#ifdef _DEBUG
+		CNT_CONTAR("BAR_ObterNaipe") ;
 		assert( pCarta != NULL ) ;
 	#endif
 
@@ -339,8 +335,9 @@ BAR_tpNaipeCarta BAR_ObterNaipe(BAR_tppCarta pCarta) {
 *  Função: BAR  &Obter valor
 ****************************************************************************/
 BAR_tpValorCarta BAR_ObterValor(BAR_tppCarta pCarta) {
-	
+
 	#ifdef _DEBUG
+		CNT_CONTAR("BAR_ObterValor") ;
 		assert( pCarta != NULL ) ;
 	#endif
 
@@ -355,10 +352,6 @@ BAR_tpCondRet BAR_TransferirCarta(LIS_tppLista pOrigem, LIS_tppLista pDestino) {
 	LIS_tpCondRet CondRetLista ;
 
 	BAR_tppCarta pCarta ;
-	
-	#ifdef _DEBUG
-		CNT_CONTAR("BAR_TransferirCarta") ;
-	#endif
 	
 	pCarta = BAR_ObterCartaCorr(pOrigem) ;
 	
@@ -395,10 +388,6 @@ BAR_tpCondRet BAR_VerificarSeEhManilha(BAR_tppCarta pAposta, BAR_tppCarta pVira)
 
 	//declara valor especifico pra vira e pra carta apostada
 	BAR_tpValorCarta valorEspVira, valorEspAposta, valorEspManilha;
-
-	#ifdef _DEBUG
-		CNT_CONTAR("BAR_VerificarSeEhManilha") ;
-	#endif
 	
 	//obtem o valor tpValorCarta da carta que acabou de ser apostada e da vira
 	valorEspAposta = BAR_ObterValor(pAposta) ;

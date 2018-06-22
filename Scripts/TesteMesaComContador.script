@@ -1,426 +1,153 @@
-// Script:    TesteBaralho.script
+// Script:    TesteMesaComContador.script
 // Autor:     Gustavo Contreiras, João Victor Galindo, Thiago Gioso Fernandes
 // Data:      05/mai/2018
 // Propósito: Testar o módulo baralho do jogo de truco
 //
 
-== Inicializar valores validos de indice do vetor baralhos
-=declararparm   baralho0	int 0
-=declararparm   baralho1	int 1
-=declararparm   baralho2	int 2
-=declararparm   baralho3	int 3
-=declararparm   baralho4	int 4
-=declararparm   baralho5	int 5
-=declararparm   baralho6	int 6
-=declararparm   baralho7	int 7
-=declararparm   baralho8	int 8
-=declararparm   baralho9	int 9
-
-== Inicializar valores validos de indice do vetor cartas
-=declararparm   carta0	int 0
-=declararparm   carta1	int 1
-=declararparm   carta2	int 2
-=declararparm   carta3	int 3
-=declararparm   carta4	int 4
-=declararparm   carta5	int 5
-=declararparm   carta6	int 6
-=declararparm   carta7	int 7
-=declararparm   carta8	int 8
-=declararparm   carta9	int 9
-=declararparm   carta10	int 10
-=declararparm   carta11	int 11
-=declararparm   carta12	int 12
-=declararparm   carta13	int 13
-=declararparm   carta14	int 14
-=declararparm   carta15	int 15
-=declararparm   carta16	int 16
-=declararparm   carta17	int 17
-=declararparm   carta18	int 18
-=declararparm   carta19	int 19
-=declararparm   carta20	int 20
-=declararparm   carta21	int 21
-=declararparm   carta22	int 22
-=declararparm   carta23	int 23
-=declararparm   carta24	int 24
-=declararparm   carta25	int 25
-=declararparm   carta26	int 26
-=declararparm   carta27	int 27
-=declararparm   carta28	int 28
-=declararparm   carta29	int 29
-=declararparm   carta30	int 30
-=declararparm   carta31	int 31
-=declararparm   carta32	int 32
-=declararparm   carta33	int 33
-=declararparm   carta34	int 34
-=declararparm   carta35	int 35
-=declararparm   carta36	int 36
-=declararparm   carta37	int 37
-=declararparm   carta38	int 38
-=declararparm   carta39	int 39
+== Inicializar valores validos de indice do vetor maos
+=declararparm   mao0	int 0
+=declararparm   mao1	int 1
+=declararparm   mao2	int 2
+=declararparm   mao3	int 3
+=declararparm   mao4	int 4
+=declararparm   mao5	int 5
 
 == Iniciar contagem
 =inicializarcontadores  ""
-=lercontadores          "..\\scripts\\Baralho"
+=lercontadores          "..\\scripts\\Mesa"
 =iniciarcontagem
 
-== TESTES
-=resetteste
+== Verificar quantidade de contadores com zero
+=verificarcontagens 10
 
-== Criar carta 4 de ouros
-=criarcarta carta1 0 0
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  0
 
-== Criar carta 4 de espadas
-=criarcarta carta2 0 1
-
-== Criar carta 4 de copas
-=criarcarta carta3 0 2
-
-== Criar carta 4 de paus
-=criarcarta carta4 0 3
-
-== Verificar contadores
-=contagemcontador   "BAR_CriarCarta"  4
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 10
 
 == TESTE
 =resetteste
 
-== Criar todas cartas do baralho
-=criarcarta carta0 0 0
-=criarcarta carta1 1 0
-=criarcarta carta2 2 0
-=criarcarta carta3 3 0
-=criarcarta carta4 4 0
-=criarcarta carta5 5 0
-=criarcarta carta6 6 0
-=criarcarta carta7 7 0
-=criarcarta carta8 8 0
-=criarcarta carta9 9 0
-=criarcarta carta10 0 1
-=criarcarta carta11 1 1
-=criarcarta carta12 2 1
-=criarcarta carta13 3 1
-=criarcarta carta14 4 1
-=criarcarta carta15 5 1
-=criarcarta carta16 6 1
-=criarcarta carta17 7 1
-=criarcarta carta18 8 1
-=criarcarta carta19 9 1
-=criarcarta carta20 0 2
-=criarcarta carta21 1 2
-=criarcarta carta22 2 2
-=criarcarta carta23 3 2
-=criarcarta carta24 4 2
-=criarcarta carta25 5 2
-=criarcarta carta26 6 2
-=criarcarta carta27 7 2
-=criarcarta carta28 8 2
-=criarcarta carta29 9 2
-=criarcarta carta30 0 3
-=criarcarta carta31 1 3
-=criarcarta carta32 2 3
-=criarcarta carta33 3 3
-=criarcarta carta34 4 3
-=criarcarta carta35 5 3
-=criarcarta carta36 6 3
-=criarcarta carta37 7 3
-=criarcarta carta38 8 3
-=criarcarta carta39 9 3
+== Criar lista de listas
+=criarlistadelistas
 
-== Criar Baralhos
-=criarbaralho baralho0
+== Verificar quantidade de contadores com zero
+=verificarcontagens 8
 
-== Obter todos naipes de todas cartas do baralho
-=obternaipe carta0
-=obternaipe carta1
-=obternaipe carta2
-=obternaipe carta3
-=obternaipe carta4
-=obternaipe carta5
-=obternaipe carta6
-=obternaipe carta7
-=obternaipe carta8
-=obternaipe carta9
-=obternaipe carta10
-=obternaipe carta11
-=obternaipe carta12
-=obternaipe carta13
-=obternaipe carta14
-=obternaipe carta15
-=obternaipe carta16
-=obternaipe carta17
-=obternaipe carta18
-=obternaipe carta19
-=obternaipe carta20
-=obternaipe carta21
-=obternaipe carta22
-=obternaipe carta23
-=obternaipe carta24
-=obternaipe carta25
-=obternaipe carta26
-=obternaipe carta27
-=obternaipe carta28
-=obternaipe carta29
-=obternaipe carta30
-=obternaipe carta31
-=obternaipe carta32
-=obternaipe carta33
-=obternaipe carta34
-=obternaipe carta35
-=obternaipe carta36
-=obternaipe carta37
-=obternaipe carta38
-=obternaipe carta39
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  0
 
-== Obter todos valores de todas cartas do baralho
-=obtervalor carta0
-=obtervalor carta1
-=obtervalor carta2
-=obtervalor carta3
-=obtervalor carta4
-=obtervalor carta5
-=obtervalor carta6
-=obtervalor carta7
-=obtervalor carta8
-=obtervalor carta9
-=obtervalor carta10
-=obtervalor carta11
-=obtervalor carta12
-=obtervalor carta13
-=obtervalor carta14
-=obtervalor carta15
-=obtervalor carta16
-=obtervalor carta17
-=obtervalor carta18
-=obtervalor carta19
-=obtervalor carta20
-=obtervalor carta21
-=obtervalor carta22
-=obtervalor carta23
-=obtervalor carta24
-=obtervalor carta25
-=obtervalor carta26
-=obtervalor carta27
-=obtervalor carta28
-=obtervalor carta29
-=obtervalor carta30
-=obtervalor carta31
-=obtervalor carta32
-=obtervalor carta33
-=obtervalor carta34
-=obtervalor carta35
-=obtervalor carta36
-=obtervalor carta37
-=obtervalor carta38
-=obtervalor carta39
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 8
 
-== Destruir todas cartas do baralho
-=destruircarta carta0
-=destruircarta carta1
-=destruircarta carta2
-=destruircarta carta3
-=destruircarta carta4
-=destruircarta carta5
-=destruircarta carta6
-=destruircarta carta7
-=destruircarta carta8
-=destruircarta carta9
-=destruircarta carta10
-=destruircarta carta11
-=destruircarta carta12
-=destruircarta carta13
-=destruircarta carta14
-=destruircarta carta15
-=destruircarta carta16
-=destruircarta carta17
-=destruircarta carta18
-=destruircarta carta19
-=destruircarta carta20
-=destruircarta carta21
-=destruircarta carta22
-=destruircarta carta23
-=destruircarta carta24
-=destruircarta carta25
-=destruircarta carta26
-=destruircarta carta27
-=destruircarta carta28
-=destruircarta carta29
-=destruircarta carta30
-=destruircarta carta31
-=destruircarta carta32
-=destruircarta carta33
-=destruircarta carta34
-=destruircarta carta35
-=destruircarta carta36
-=destruircarta carta37
-=destruircarta carta38
-=destruircarta carta39
+== Criar todas mãos
+=criarmao mao0
+=criarmao mao1
+=criarmao mao2
+=criarmao mao3
+=criarmao mao4
+=criarmao mao5
 
-== MASSA DE TESTE 5
-=resetteste
+== Verificar quantidade de contadores com zero
+=verificarcontagens 6
 
-== Criar carta 5 de ouros
-=criarcarta carta5  1 0
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  6
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  6
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  0
 
-== Criar carta 5 de espadas
-=criarcarta carta6 1 1
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 6
 
-== Criar carta 5 de copas
-=criarcarta carta7 1 2
+== Criar lixo
+=criarlixo
 
-== Criar carta 5 de paus
-=criarcarta carta8 1 3
+== Verificar quantidade de contadores com zero
+=verificarcontagens 4
 
-== Criar carta 6 de ouros
-=criarcarta carta9 2 0
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  6
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  6
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  0
 
-== Criar carta 6 de espadas
-=criarcarta carta10 2 1
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 4
 
-== Criar carta 6 de copas
-=criarcarta carta11 2 2
+== Criar mesa
+=criarmesa
 
-== Criar carta 6 de paus
-=criarcarta carta12 2 3
+== Verificar quantidade de contadores com zero
+=verificarcontagens 2
 
-== Criar carta 7 de ouros
-=criarcarta carta13 3 0
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  6
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  6
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  0
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  0
 
-== Criar carta 7 de espadas
-=criarcarta carta14 3 1
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 2
 
-== Criar carta 7 de copas
-=criarcarta carta15 3 2
+== Distribuir maos
+=distribuirmaos 6
 
-== Criar carta 7 de paus
-=criarcarta carta16 3 3
+== Verificar quantidade de contadores com zero
+=verificarcontagens 0
 
-== Criar baralho
-=criarbaralho baralho9
-
-== Criar carta Q de ouros
-=criarcarta carta17 4 0
-
-== Criar carta Q de espadas
-=criarcarta carta18 4 1
-
-== Criar carta Q de copas
-=criarcarta carta19 4 2
-
-== Criar carta Q de paus
-=criarcarta carta20 4 3
-
-== Criar carta J de ouros
-=criarcarta carta21 5 0
-
-== Criar baralho de indice invalido
-=criarbaralho 20
-=recuperar
-
-== Criar carta J de espadas
-=criarcarta carta22 5 1
-
-== Criar carta J de copas
-=criarcarta carta23 5 2
-
-== Criar carta J de paus
-=criarcarta carta24 5 3
-
-== Criar carta K de ouros
-=criarcarta carta25 6 0
-
-== Criar carta K de espadas
-=criarcarta carta26 6 1
-
-== Criar carta K de copas
-=criarcarta carta27 6 2
-
-== Criar carta K de paus
-=criarcarta carta28 6 3
-
-== Criar carta A de ouros
-=criarcarta carta29 7 0
-
-== Criar carta A de espadas
-=criarcarta carta30 7 1
-
-== Criar carta A de copas
-=criarcarta carta31 7 2
-
-== Criar carta A de paus
-=criarcarta carta32 7 3
-
-== Criar carta 2 de ouros
-=criarcarta carta33 8 0
-
-== Criar carta 2 de espadas
-=criarcarta carta34 8 1
-
-== Criar carta 2 de copas
-=criarcarta carta35 8 2
-
-== Criar carta 2 de paus
-=criarcarta carta36 8 3
-
-== Criar carta 3 de ouros
-=criarcarta carta37 9 0
-
-== Criar carta 3 de espadas
-=criarcarta carta38 9 1
-
-== Criar carta 3 de copas
-=criarcarta carta39 9 2
-
-== Obter naipe carta 39
-=obternaipe carta39
-
-== Obter naipe carta 37
-=obternaipe carta37
-
-== Obter naipe carta 10
-=obternaipe carta10
-
-== Obter naipe carta 23
-=obternaipe carta23
-
-== MASSA DE TESTE 6
-=resetteste
-
-== Obter naipe de carta que nao existe
-=obternaipe carta36
-=recuperar
-
-== Obter naipe carta de indice invalido
-=obternaipe 43
-=recuperar
-
-== Obter naipe carta que nao existe
-=obternaipe carta25
-=recuperar
-
-== MASSA DE TESTE 7
-=resetteste
-
-== Criar Cartas
-=criarcarta carta10 8 3
-=criarcarta carta23 7 2
-=criarcarta carta37 9 0
-=criarcarta carta8 0 1
-
-== Obter Naipes
-=obternaipe carta10
-=obternaipe carta23
-=obternaipe carta37
-=obternaipe carta8
-
-== Obter Valores
-=obtervalor carta10
-=obtervalor carta23
-=obtervalor carta37
-=obtervalor carta8
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  6
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  6
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
 
 == Terminar controlar contadores
 =pararcontagem
-=verificarcontagens    0
+=verificarcontagens 0
 
 == Terminar contagem
 =terminarcontadores

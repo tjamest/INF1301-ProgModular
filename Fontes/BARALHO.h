@@ -100,7 +100,10 @@ typedef enum {
 *  $ED Descrição da função
 *     Preenche ordenadamente um vetor com 40 cartas
 *	  (sem incluir o 8, 9, 10 e coringas).
-* 
+*
+*  $FV Valor retornado
+*     Retorna BAR_CondRetNaoPreencheuVetor se falhou ou 
+*     BAR_CondRetOK se obteve sucesso. 
 ***************************************************************************/
 BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
 
@@ -110,6 +113,9 @@ BAR_tpCondRet BAR_PreencherVetorCartas (BAR_tppCarta vtCartas[]) ;
 *  $ED Descrição da função
 *     Embaralha aleatoriamente um vetor trocando seus indices de posição
 *
+*  $FV Valor retornado
+*     Retorna BAR_CondRetNaoEmbaralhouVetor se falhou ou 
+*     BAR_CondRetOK se obteve sucesso. 
 ***************************************************************************/
 BAR_tpCondRet BAR_EmbaralharVetorCartas (BAR_tppCarta vtCartas[]) ;
 

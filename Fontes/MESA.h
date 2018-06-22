@@ -158,7 +158,7 @@ int MES_DeterminarResultado(LIS_tppLista pCabecaSuperior, int quemJoga, int quem
 int MES_DefinirQuemComeca(int qtdJogadores) ;
 
 void MES_IdentificarQuemJogouQual(int qtdJogadores, int quemJogouAPrimeira, int *quemJogouASegunda, int *quemJogouATerceira, 
-							  int *quemJogouAQuarta, int *quemJogouAQuinta, int *quemJogouASexta) ;
+							  	  int *quemJogouAQuarta, int *quemJogouAQuinta, int *quemJogouASexta) ;
 
 int MES_ProximoJogador(int quemJoga, int qtdJogadores) ;
 

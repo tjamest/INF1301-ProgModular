@@ -1,23 +1,23 @@
 ////////////////////////////////////////////////
 //
 // Exemplo de arquivo de declaração de contadores
-// Conta módulo Arvore marcado
+// Conta módulo Mesa marcado
 //
 ///////////////////////////////////////////////
     
-    MES_CriarListaDeListas Antes de chamar LIS_CriarLista
-    MES_CriarMesa Antes de chamar LIS_CriarLista
-    MES_CriarMao Antes de chamar LIS_CriarLista
-    MES_CriarLixo Antes de chamar LIS_CriarLista
-    MES_DistribuirMaos Antes de entrar no switch
-    MES_EsvaziarMesa Antes de entrar no switch
-    MES_ObterQtdCartas Antes de entrar no switch
-    MES_TransferirTodasCartasProLixo Antes de chamar LIS_IrInicioLista
-    MES_IniciarPartida Antes de chamar LIS_CriarLista para cada cabeca
-    MES_DeterminarResultado pCabecaMao Antes de chamar LIS_IrInicioLista para pCabecaSuperior
-    MES_DefinirQuemComeca Antes de entrar no while
-    MES_IdentificarQuemJogouQual Antes de entrar no switch
-    MES_ProximoJogador Antes de entrar no switch
-    MES_ProximoJogadorDaMesmaEquipe Antes de entrar no switch
-    MES_EsvaziarLixo Antes de entrar no if
+    MES_CriarListaDeListas - Depois de entrar e declarar variaveis
+    MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair
+
+    MES_CriarMao - Depois de entrar e declarar variaveis
+    MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair
+
+    MES_CriarLixo - Depois de entrar e declarar variaveis
+    MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair
+
+    MES_CriarMesa - Depois de entrar e declarar variaveis
+    MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair
+
+    MES_DistribuirMaos - Depois de entrar e declarar variaveis
+	MES_DistribuirMaos - Depois de sair do switch e antes de retornar
+
 	 XPTO nome adicionado para fins de teste\=-2
