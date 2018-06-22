@@ -1,0 +1,31 @@
+arvore.c
+testarv.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\produto\TesteArvore.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+arvore.obj testarv.obj 
+ArcaboucoTeste.lib 
+arvore.c
+testarv.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\produto\TesteArvoreDebug.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+arvore.obj testarv.obj 
+ArcaboucoTeste.lib 
+arvore.c
+testarv.c
+Microsoft (R) Incremental Linker Version 10.00.40219.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/OUT:..\produto\TesteArvoreProd.exe 
+/INCREMENTAL:NO 
+/MACHINE:IX86 
+arvore.obj testarv.obj 
+ArcaboucoTeste.lib 
+

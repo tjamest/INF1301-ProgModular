@@ -1,8 +1,8 @@
-# Jogo de Truco usando os módulos interface, mesa, baralho e lista e a biblioteca contendo o arcabouço
+# Teste do m�dulo Mesa compilado com debug
 
 [Diretorios]
 
-Nome        =  JogoDeTruco
+Nome        =  TesteMesaDebug
 PathDefault =  ..\Fontes
 err         =  ..\Produto
 obj         =  ..\Objetos
@@ -13,12 +13,11 @@ def         =  ..\Tabelas
 [Modulos]
 Lista
 Baralho
-Mesa 		
-Interface
-
+Mesa 		/D_DEBUG
+TestMES 	/D_DEBUG
 
 [BuildInicio]
-/OUT:..\produto\JogoDeTruco.exe
+/OUT:..\produto\TesteMesaDebug.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

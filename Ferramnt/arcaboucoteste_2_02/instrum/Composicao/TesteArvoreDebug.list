@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: TesteArvoreDebug.comp
 
    Nome do Construto:           TesteArvoreDebug
-   Diretório base:              D:\AutoTest\instrum\composicao
+   Diretório base:              G:\Gustavo\OneDrive\GitHub\INF1301-ProgModular\Ferramnt\arcaboucoteste_2_02\instrum\composicao
 
    Arquivo composição:          TesteArvoreDebug.comp
    Arquivo plataforma:          gmake.parm

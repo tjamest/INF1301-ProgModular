@@ -22,7 +22,10 @@ del *.err
 
 cd ..\Objetos
 del *.bak
-del *.obj
+del baralho.obj
+del lista.obj
+del mesa.obj
+del interface.obj
 del *.build
 
 cd ..\Produto

@@ -9,6 +9,10 @@ cd ..\ferramnt
 
 gmake /b..\composicao /cTesteLista
 
-gmake /b..\composicao /cTesteBaralho
+gmake /b..\composicao /cTesteBaralhoDebug
+
+gmake /b..\composicao /cTesteMesaDebug
+
+gmake /b..\composicao /cJogoDeTruco
 
 popd

@@ -58,6 +58,11 @@
 =declararparm   carta38	int 38
 =declararparm   carta39	int 39
 
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Baralho"
+=iniciarcontagem
+
 == TESTES
 =resetteste
 
@@ -72,6 +77,9 @@
 
 == Criar carta 4 de paus
 =criarcarta carta4 0 3
+
+== Verificar contadores
+=contagemcontador   "BAR_CriarCarta"  4
 
 == TESTE
 =resetteste
@@ -409,5 +417,12 @@
 =obtervalor carta23
 =obtervalor carta37
 =obtervalor carta8
+
+== Terminar controlar contadores
+=pararcontagem
+=verificarcontagens    0
+
+== Terminar contagem
+=terminarcontadores
 
 // fim

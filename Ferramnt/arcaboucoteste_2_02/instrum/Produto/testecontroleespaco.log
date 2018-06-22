@@ -43,35 +43,35 @@ cc>    7  Linha:    46   Contagem em "ARV_ObterValorCorr" é zero.
    88  == Inserir à direita
    92  == Controlar vazamento de memória
 
-!!!  Espaco de dados, id:     3  pValor: 00329712  hexa: 12 97 32 00  E' origem lista  Id suc:     2
+!!!  Espaco de dados, id:     3  pValor: 00F7C90A  hexa: 0A C9 F7 00  E' origem lista  Id suc:     2
      Id tipo valor: 2  Tamanho: 20  Ativo  Linha onde alocou: 920  Arquivo: ..\Fontes\arvore.c
      Controle antes OK  Controle apos OK
           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F   0123456789ABCDEF
-    000  AA 94 32 00 72 95 32 00 00 00 00 00 00 00 00 00   ª”2.r•2.........
+    000  E2 C5 F7 00 EA C6 F7 00 00 00 00 00 00 00 00 00   âÅ÷.êÆ÷.........
     010  63 7C 7C 7C                                       c|||
 
 
-!!!  Espaco de dados, id:     2  pValor: 00329642  hexa: 42 96 32 00  Id ant:     3  Id suc:     1
+!!!  Espaco de dados, id:     2  pValor: 00F7C7FA  hexa: FA C7 F7 00  Id ant:     3  Id suc:     1
      Id tipo valor: 2  Tamanho: 20  Ativo  Linha onde alocou: 920  Arquivo: ..\Fontes\arvore.c
      Controle antes OK  Controle apos OK
           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F   0123456789ABCDEF
-    000  AA 94 32 00 72 95 32 00 00 00 00 00 00 00 00 00   ª”2.r•2.........
+    000  E2 C5 F7 00 EA C6 F7 00 00 00 00 00 00 00 00 00   âÅ÷.êÆ÷.........
     010  62 7C 7C 7C                                       b|||
 
 
-!!!  Espaco de dados, id:     1  pValor: 00329572  hexa: 72 95 32 00  Id ant:     2  Id suc:     0
+!!!  Espaco de dados, id:     1  pValor: 00F7C6EA  hexa: EA C6 F7 00  Id ant:     2  Id suc:     0
      Id tipo valor: 2  Tamanho: 20  Ativo  Linha onde alocou: 920  Arquivo: ..\Fontes\arvore.c
      Controle antes OK  Controle apos OK
           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F   0123456789ABCDEF
-    000  AA 94 32 00 00 00 00 00 42 96 32 00 12 97 32 00   ª”2.....B–2..—2.
+    000  E2 C5 F7 00 00 00 00 00 FA C7 F7 00 0A C9 F7 00   âÅ÷.....úÇ÷..É÷.
     010  61 7C 7C 7C                                       a|||
 
 
-!!!  Espaco de dados, id:     0  pValor: 003294AA  hexa: AA 94 32 00  Id ant:     1  E' final lista
+!!!  Espaco de dados, id:     0  pValor: 00F7C5E2  hexa: E2 C5 F7 00  Id ant:     1  E' final lista
      Id tipo valor: 1  Tamanho: 8  Ativo  Linha onde alocou: 154  Arquivo: ..\Fontes\arvore.c
      Controle antes OK  Controle apos OK
           0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F   0123456789ABCDEF
-    000  72 95 32 00 12 97 32 00                           r•2..—2.
+    000  EA C6 F7 00 0A C9 F7 00                           êÆ÷..É÷.
 
    97  == Ir para no pai
   101  == Ir para no pai

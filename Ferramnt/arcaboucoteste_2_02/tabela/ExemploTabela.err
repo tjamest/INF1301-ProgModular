@@ -8,7 +8,7 @@ GeraTab - Gerar a tabela de strings residentes em memória
   Arquivo string:  TesteTabelaString.espstr
 
 Tabstr.c
-g:\gustavo\onedrive\github\inf1301-progmodular\ferramnt\arcaboucoteste_2_02\tabela\TabelaString.tab(100) : warning C4125: decimal digit terminates octal escape sequence
+g:\gustavo\downloads salvos\arcaboucoteste_2_02\tabela\TabelaString.tab(100) : warning C4125: decimal digit terminates octal escape sequence
 TestTbs.c
 Microsoft (R) Incremental Linker Version 10.00.40219.01
 Copyright (C) Microsoft Corporation.  All rights reserved.

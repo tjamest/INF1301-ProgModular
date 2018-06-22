@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ExemploManual.comp
 
    Nome do Construto:           ExemploManual
-   Diretório base:              D:\AutoTest\Manual
+   Diretório base:              G:\Gustavo\OneDrive\GitHub\INF1301-ProgModular\Ferramnt\arcaboucoteste_2_02\manual
 
    Arquivo composição:          ExemploManual.comp
    Arquivo plataforma:          gmake.parm

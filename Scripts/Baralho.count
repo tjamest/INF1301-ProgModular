@@ -5,5 +5,7 @@
 //
 ///////////////////////////////////////////////
     
-    BAR_PreencherVetorCartas_Antes de entrar no for 'Preenchendo o vetor'
+    BAR_CriarBaralho
+    BAR_CriarCarta
+    BAR_DestruirCarta
 	 XPTO nome adicionado para fins de teste\=-2

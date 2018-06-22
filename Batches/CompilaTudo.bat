@@ -12,7 +12,21 @@ del ..\objetos\*.obj
 
 REM compila para producao sem otimizacoes
 pushd .
-nmake /F..\composicao\TesteBaralho.make
+nmake /F..\composicao\TesteBaralhoDebug.make
+popd
+
+del ..\objetos\*.obj
+
+REM compila para producao sem otimizacoes
+pushd .
+nmake /F..\composicao\TesteMesaDebug.make
+popd
+
+del ..\objetos\*.obj
+
+REM compila para producao sem otimizacoes
+pushd .
+nmake /F..\composicao\JogoDeTruco.make
 popd
 
 del ..\objetos\*.obj

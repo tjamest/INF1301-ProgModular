@@ -4,7 +4,7 @@ GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
 Composição do construto: ExemploTabela.comp
 
    Nome do Construto:           ExemploTabela
-   Diretório base:              G:\Gustavo\OneDrive\GitHub\INF1301-ProgModular\Ferramnt\arcaboucoteste_2_02\tabela
+   Diretório base:              G:\Gustavo\Downloads Salvos\arcaboucoteste_2_02\tabela
 
    Arquivo composição:          ExemploTabela.comp
    Arquivo plataforma:          gmake.parm
