@@ -105,19 +105,21 @@ BAR_tppCarta VetorAux [ 40 ] ;
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   
+	LIS_tppLista pCabecaBaralho ; 
+
   	int inxMao  = -1 ,
   		inxQtdJogadores = -1 ,
       	numLidos = -1 ,
 	  	comando = 0 ,
 	  	i ;
 
-	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
   	comando = IdentificarComando(ComandoTeste) ;
 
   	switch (comando) {
 
-  	case 1: //resetteste
+  	case 1: //RESET TESTE
 
   		//preenche o vetor lista de listas com Null
 		for( i = 0 ; i < DIM_VT_LISTA_DE_LISTAS ; i++ ) {
@@ -141,7 +143,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
 		return TST_CondRetOK ;
 
-	case 2: //criarlistadelistas
+	case 2: //CRIAR LISTA DE LISTAS
 
 		//criarlistadelistas retorna ponteiro pra tpLista
 		vtListaDeListas[0] = MES_CriarListaDeListas() ;
@@ -151,7 +153,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 										 vtListaDeListas[0] ,
 						 				 "Erro na criacao do ponteiro da lista de listas." ) ;
 
-	case 3: //criarmesa
+	case 3: //CRIAR MESA
 
 		//criarmesa retorna ponteiro pra tpLista
 		vtMesa[0] = MES_CriarMesa() ;
@@ -161,7 +163,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 										 vtMesa[0] ,
 						 				 "Erro na criacao do ponteiro da mesa." ) ;
 
-	case 4: //criarmao
+	case 4: //CRIAR MAO
 
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros( "i" , &inxMao ) ;
@@ -179,7 +181,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 										 vtMaos[inxMao] ,
 						 				 "Erro na criacao do ponteiro da mao." ) ;
 
-	case 5: //criarlixo
+	case 5: //CRIAR LIXO
 
 		//criarlixo retorna ponteiro pra tpLista
 		vtLixo[0] = MES_CriarLixo() ;
@@ -189,13 +191,13 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 										 vtLixo[0] ,
 						 				 "Erro na criacao do ponteiro do lixo." ) ;
 
-	case 6: //distribuirmaos
+	case 6: //DISTRIBUIR MAOS
 
 		//conta quantos parametros foram declarados
 		numLidos = LER_LerParametros( "i" , &inxQtdJogadores ) ;
 
 		//assertiva de entrada dos parametros do comando
-		if ( (numLidos != 1) || (inxQtdJogadores != 2 || inxQtdJogadores != 4 || inxQtdJogadores != 6) )  {
+		if ( (numLidos != 1) || (inxQtdJogadores != 2 && inxQtdJogadores != 4 && inxQtdJogadores != 6) )  {
 			return TST_CondRetParm ;
 		}//fim if
 
@@ -206,61 +208,94 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
 		LIS_IrInicioLista(vtListaDeListas[0]) ;
 		LIS_InserirElementoApos(vtListaDeListas[0], pCabecaBaralho) ;	//inicio
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[0]) ;		//1
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[1]) ;		//2
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[2]) ;		//3
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[3]) ;		//4
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[4]) ;		//5
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[5]) ;		//6
-		LIS_InserirElementoApos(vtListaDeListas[0], vtLixo[0]) ;		//7
-		LIS_InserirElementoApos(vtListaDeListas[0], vtMesa[0]) ;		//final
 
-		MES_DistribuirMaos(vtListaDeListas[0], inxQtdJogadores) ;
+		if (inxQtdJogadores == 2) {
 
-		if (LIS_ObterQtdElem(vtMaos[0]) != 3 || LIS_ObterQtdElem(vtMaos[1]) != 3 ||
-			LIS_ObterQtdElem(vtMaos[2]) != 3 || LIS_ObterQtdElem(vtMaos[3]) != 3 ||
-			LIS_ObterQtdElem(vtMaos[4]) != 3 ||	LIS_ObterQtdElem(vtMaos[5]) != 3) {
+			if (vtMaos[0] == NULL || vtMaos[1] == NULL) {
+				return TST_CondRetParm ;
+			}
+
+			LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[0]) ;		//1
+			LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[1]) ;		//2
+
+		}
+
+		else {
+
+			if (inxQtdJogadores == 4) {
+
+				if (vtMaos[0] == NULL || vtMaos[1] == NULL ||
+					vtMaos[2] == NULL || vtMaos[3] == NULL) {
+					return TST_CondRetParm ;
+				}
+
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[0]) ;		//1
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[1]) ;		//2
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[2]) ;		//3
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[3]) ;		//4
+			}
+
+			else {
+
+				if (vtMaos[0] == NULL || vtMaos[1] == NULL ||
+					vtMaos[2] == NULL || vtMaos[3] == NULL ||
+					vtMaos[4] == NULL || vtMaos[5] == NULL) {
+					return TST_CondRetParm ;
+				}
+
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[0]) ;		//1
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[1]) ;		//2
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[2]) ;		//3
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[3]) ;		//4
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[4]) ;		//5
+				LIS_InserirElementoApos(vtListaDeListas[0], vtMaos[5]) ;		//6
+
+			}
+
+		}
+
+		if (MES_DistribuirMaos(vtListaDeListas[0], inxQtdJogadores) != TST_CondRetOK) {
 
 			return TST_CondRetErro ;
 		}
 
 		return TST_CondRetOK ;
 
-	case 7: //esvaziarmesa
+	case 7: //ESVAZIAR MESA
 
 		return TST_CondRetOK ;
 
-  	case 8: //esvaziarlixos
+  	case 8: //ESVAZIAR LIXO
 
 		return TST_CondRetOK ;
 
-	case 9: //obterqtdcartas
+	case 9: //OBTER QTD DE CARTAS
 
 		return TST_CondRetOK ;
 
-	case 10: //transferircartasprolixo
+	case 10: //TRANSFERIR CARTAS PRO LIXO
 
 		return TST_CondRetOK ;
 
-	case 11: //determinarresultado
+	case 11: //DETERMINAR RESULTADO
 
 		return TST_CondRetOK ;
 
-	case 12: //definirquemcomeca
+	case 12: //DEFINIR QUEM COMECA
 
 		return TST_CondRetOK ;
 
-	case 13: //identificarquemjogouqual
+	case 13: //IDENTIFICAR QUEM JOGOU QUAL
 
 		return TST_CondRetOK ;
 
-	default: //comando nao existe
+	default: //COMANDO NAO EXISTE
 
 		return TST_CondRetNaoConhec ;
 
   	} //fim switch "comando"
 
-} /***************** Fim função: TBAR &Testar baralho *********************/
+} /***************** Fim função: TBAR &Testar mesa *********************/
 
 
 /***************  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  **************/

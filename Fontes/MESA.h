@@ -28,6 +28,20 @@
    #define MESA_EXT extern
 #endif
 
+/***************************************************************************
+*  $TC Tipo de dados: MES Condições de retorno
+*
+*  $ED Descrição do tipo
+*     Condições de retorno das funções de MES.
+***************************************************************************/
+typedef enum {
+   MES_CondRetOK,
+   MES_CondRetNaoDistribuiuMaos,
+   MES_CondRetNaoEsvaziouMesa,
+   MES_CondRetNaoEsvaziouLixo,		
+   MES_CondRetNaoTransferiuTodasCartasProLixo,
+   MES_CondRetNaoIdentificouQuemJogouQual
+} MES_tpCondRet;
 
 /***************************************************************************
 *  $FC Função: MES  &Iniciar Partida NAO TA FUNCIONANDO NAO SEI PQ
@@ -37,7 +51,7 @@
 *
 *  $FV Valor retornado
 *     Retorna o valor 49 que inicia o loop da partida. 
-***************************************************************************/
+***************************************************************************//*
 int MES_IniciarPartida (LIS_tppLista pCabecaBaralho, LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2, 
 						LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4, LIS_tppLista pCabecaMao5,
 						LIS_tppLista pCabecaMao6, LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa,
@@ -105,8 +119,8 @@ LIS_tppLista MES_CriarLixo() ;
 *     Ponteiros para cabeca do baralho e das maos.
 *	  Numero de jogadores.
 ***************************************************************************/
-void MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
-void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) ;
+MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
+//void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Esvaziar mesa
@@ -119,7 +133,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 *	  TIRA_VIRA ou DEIXA_VIRA caso seja apenas o fim de uma aposta ou fim
 *	  de uma rodada.
 ***************************************************************************/
-void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
+MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Esvaziar lixo
@@ -130,7 +144,7 @@ void MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int t
 *  $EP Parâmetros
 *     Ponteiro para cabeca do lixo.
 ***************************************************************************/
-void MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) ;
+MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Obter quantidade de cartas

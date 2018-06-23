@@ -40,7 +40,7 @@ typedef struct BAR_tagCarta * BAR_tppCarta ;
 *  $TC Tipo de dados: BAR Condições de retorno
 *
 *  $ED Descrição do tipo
-*     Condições de retorno das funções de carta.
+*     Condições de retorno das funções de BAR.
 ***************************************************************************/
 typedef enum {
    BAR_CondRetOK,
