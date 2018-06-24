@@ -1,3 +1,17 @@
+/***************************************************************************
+*  $MCI Módulo de implementação: INT Interface
+*
+*  Arquivo gerado:              INTERFACE.c
+*  Letras identificadoras:      INT
+*
+*  Projeto: INF 1301 Jogo de Truco
+*  Autores: gsc, jvr, tgf
+*
+*  $HA Histórico de evolução:
+*  Versão  		Autor  			Data    	Observações
+*     1     gsc, jvr, tgf    02/jun/2018    início desenvolvimento
+***************************************************************************/
+
 #include "LISTA.h"
 #include "BARALHO.h"
 #include "MESA.h"
@@ -7,7 +21,6 @@
 #include <string.h>	//strcmp
 
 #ifdef _DEBUG
-	#include <dos.h> //delay
 	#include <assert.h> //assert
 #endif
 
@@ -102,6 +115,7 @@ int main (void) {
 
 	#ifdef _DEBUG
 		BAR_tppCarta pCartaAux ;
+		char * opcaoDebug = (char*)malloc(sizeof(char));
 	#endif
 
 	equipeVencedoraDaAposta = INICIALIZAR ;
@@ -113,9 +127,9 @@ int main (void) {
 	pCabecaSuperior = MES_CriarListaDeListas() ;
 
 	#ifdef _DEBUG
-		system("cls") ;
 		assert( pCabecaSuperior != NULL ) ;
 		printf("Lista de listas criada.\n") ;
+		Delay() ;
 	#endif
 
 	//cria a lista baralho (vazia)
@@ -123,7 +137,8 @@ int main (void) {
 
 	#ifdef _DEBUG
 		assert( pCabecaBaralho != NULL ) ;
-		printf("Lista baralho criada.\n") ;
+		printf("Baralho criado.\n") ;
+		Delay() ;
 	#endif
 
 	//cria as 6 maos (vazias)
@@ -141,7 +156,8 @@ int main (void) {
 		assert( pCabecaMao4 != NULL ) ;
 		assert( pCabecaMao5 != NULL ) ;
 		assert( pCabecaMao6 != NULL ) ;
-		printf("Listas de mao criadas.\n") ;
+		printf("Maos criadas.\n") ;
+		Delay() ;
 	#endif
 
 	//cria o lixo (vazio)
@@ -149,7 +165,8 @@ int main (void) {
 
 	#ifdef _DEBUG
 		assert( pCabecaLixo != NULL ) ;
-		printf("Lista lixo criada.\n") ;
+		printf("Lixo criado.\n") ;
+		Delay() ;
 	#endif
 
 	//cria a mesa (vazia)
@@ -157,7 +174,8 @@ int main (void) {
 
 	#ifdef _DEBUG
 		assert( pCabecaMesa != NULL ) ;
-		printf("Lista mesa criada.\n") ;
+		printf("Mesa criada.\n") ;
+		Delay() ;
 	#endif
 
 	//insere as listas (baralho, maos, lixo e mesa) na lista de listas
@@ -174,7 +192,9 @@ int main (void) {
 
 	#ifdef _DEBUG
 		assert( LIS_ObterQtdElem(pCabecaSuperior) == 9 ) ;
-		printf("Listas inseridas na lista de listas.\n") ;
+		printf("Listas inseridas na lista de listas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+		scanf(" %c", opcaoDebug);
+		Delay() ;
 	#endif
 
 	opcao = 49 ;
@@ -193,7 +213,8 @@ int main (void) {
 
 		#ifdef _DEBUG
 			assert(qtdJogadores == 2 || qtdJogadores == 4 || qtdJogadores == 6) ;
-			printf("%d jogadores.\n", qtdJogadores) ;
+			printf("Quantidade de jogadores definida.\n") ;
+			Delay() ;
 		#endif
 	
 		//define quem comeca
@@ -206,7 +227,8 @@ int main (void) {
 
 		#ifdef _DEBUG
 			assert(quemJoga >= 1 && quemJoga <=6) ;
-			printf("Jogador %d comeca.\n", quemJoga) ;
+			printf("Quem comeca definido.\n") ;
+			Delay() ;
 		#endif
 
 		//preenche um vetor com cartas
@@ -214,7 +236,8 @@ int main (void) {
 
 		#ifdef _DEBUG
 			assert ( (sizeof(VetorAux) / sizeof(VetorAux[0])) == 40 ) ;
-			printf("Vetor auxiliar preenchido com 40 cartas.\n") ;
+			printf("Vetor cartas preenchido.\n") ;
+			Delay() ;
 		#endif
 
 		//inicio da rodada
@@ -244,8 +267,8 @@ int main (void) {
 
 			#ifdef _DEBUG
 				assert (pCartaAux != VetorAux[0]) ;
-				printf("Vetor auxiliar embaralhado.\n") ;
-
+				printf("Vetor cartas embaralhado.\n") ;
+				Delay() ;
 			#endif
 
 			//preenche o baralho
@@ -253,8 +276,8 @@ int main (void) {
 
 			#ifdef _DEBUG
 				assert (LIS_ObterQtdElem(pCabecaBaralho) == 40) ;
-				printf("Baralho preenchido.\n") ;
-
+				printf("Baralho preenchido com o vetor embaralhado.\n") ;
+				Delay() ;
 			#endif
 
 			//distribui as maos
@@ -263,7 +286,7 @@ int main (void) {
 			#ifdef _DEBUG
 				assert (mesaCondRet == MES_CondRetOK) ;
 				printf("Maos distribuidas.\n") ;
-
+				Delay() ;
 			#endif
 
 			/*
@@ -275,8 +298,8 @@ int main (void) {
 
 			#ifdef _DEBUG
 				assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
-				printf("Vira colocada na mesa.\n") ;
-
+				printf("Vira transferida pra mesa.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+				scanf(" %c", opcaoDebug);
 			#endif
 
 			//inicio da jogada
@@ -299,11 +322,6 @@ int main (void) {
 				if (MES_ObterQtdCartas(pCabecaMesa, SEM_PRIMEIRA, COM_ULTIMA) == 1 && 
 				   (jogada == 49 || jogada == 50 || jogada == 51)) {
 
-				   	#ifdef _DEBUG
-						printf("Primeira carta apostada na bateria de apostas.\n") ;
-		
-					#endif
-
 					quemJogouAPrimeira = quemJoga ;
 				}
 
@@ -319,25 +337,22 @@ int main (void) {
 						//JOGADOR VENCEU TODAS CARTAS DA MESA
 						if (resultado == quemJoga) {
 
-							#ifdef _DEBUG
-								printf("Venceu todas cartas da mesa.\n") ;
-				
-						#endif
-
 							//se foi a ultima jogada da bateria de apostas
 							if ( qtdJogadas == qtdJogadores) {
 								atualJogadorVencedor = quemJoga ;
-
-								#ifdef _DEBUG
-									printf("Venceu a bateria de apostas.\n") ;
-					
-								#endif
 							}
 
 							//se nao foi a ultima jogada da bateria de apostas
 							else {
 								atualJogadorVencedor = quemJoga ;
 								quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
+
+								#ifdef _DEBUG
+									assert (quemJoga >= 0 && quemJoga <= 6) ;
+									printf("(1) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+									scanf(" %c", opcaoDebug);
+									Delay() ;
+								#endif
 							}
 
 						} //fim if "se venceu"
@@ -345,28 +360,24 @@ int main (void) {
 						//JOGADOR EMPATOU COM A MAIOR CARTA DA MESA
 						else if (resultado != quemJoga && resultado != 0) {
 
-							#ifdef _DEBUG
-								printf("Empatou com a maior carta da mesa.\n") ;
-				
-							#endif
-
 							//se foi a ultima jogada da bateria de apostas
 							if (qtdJogadas == qtdJogadores) {
 
 								//quem joga na proxima é quem pôs a primeira carta q empatou
 								quemJoga = resultado ;
 								atualJogadorVencedor = NINGUEM ;
-
-								#ifdef _DEBUG
-									printf("Bateria de apostas empatou.\n") ;
-					
-								#endif
 							}
 
 							//se nao foi a ultima jogada da bateria de apostas
 							else {
 								quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
 								atualJogadorVencedor = NINGUEM ;
+								#ifdef _DEBUG
+									assert (quemJoga >= 0 && quemJoga <= 6) ;
+									printf("(2) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+									scanf(" %c", opcaoDebug);
+									Delay() ;
+								#endif
 							}
 
 						} //fim else if "empatou com alguma carta da mesa"
@@ -376,9 +387,10 @@ int main (void) {
 							quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
 
 							#ifdef _DEBUG
-								assert(quemJoga >= 0 && quemJoga <= 6) ;
-								printf("Perdeu a bateria de apostas.\n") ;
-				
+								assert (quemJoga >= 0 && quemJoga <= 6) ;
+								printf("(3) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+								scanf(" %c", opcaoDebug);
+								Delay() ;
 							#endif
 						}
 
@@ -392,6 +404,13 @@ int main (void) {
 						//pq eh a primeira jogada de aposta e nao acabou as jogadas
 						if (qtdJogadas != qtdJogadores) {
 							quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
+
+							#ifdef _DEBUG
+								assert (quemJoga >= 0 && quemJoga <= 6) ;
+								printf("(4) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+								scanf(" %c", opcaoDebug);
+								Delay() ;
+							#endif
 						}
 
 						//pq ngm apostou nada e acabaram as jogadas
@@ -399,11 +418,11 @@ int main (void) {
 							quemJoga = atualJogadorVencedor ;
 
 							#ifdef _DEBUG
-								assert(quemJoga >= 0 && quemJoga <= 6) ;
-								printf("Venceu a bateria de apostas.\n") ;
-				
+								assert (quemJoga >= 0 && quemJoga <= 6) ;
+								printf("(5) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+								scanf(" %c", opcaoDebug);
+								Delay() ;
 							#endif
-
 						}
 					}
 
@@ -413,6 +432,13 @@ int main (void) {
 				else if (jogada >= 52 && jogada <= 54) {
 					qtdCartasViradas += 1 ;
 					quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
+
+					#ifdef _DEBUG
+						assert (quemJoga >= 0 && quemJoga <= 6) ;
+						printf("(6) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+						scanf(" %c", opcaoDebug);
+						Delay() ;
+					#endif
 				}
 
 				//AUMENTOU APOSTA
@@ -421,6 +447,13 @@ int main (void) {
 					qtdAceitos = 0 ;
 					quemAumentou = quemJoga ;
 					quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
+
+					#ifdef _DEBUG
+						assert (quemJoga >= 0 && quemJoga <= 6) ;
+						printf("(7) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+						scanf(" %c", opcaoDebug);
+						Delay() ;
+					#endif
 
 					while( jogada != 49 && qtdAceitos < qtdJogadores/2){ 
 
@@ -431,6 +464,11 @@ int main (void) {
 																  pontosPartidaPar,pontosPartidaImpar) ;
 						//CORREU
 						if (jogada == 49) {
+
+							#ifdef _DEBUG
+								printf("Correu.\n") ;
+								Delay() ;
+							#endif
 
 							switch (valorRodada) {
 							case 3: 
@@ -448,6 +486,13 @@ int main (void) {
 							equipeVencedoraDaAposta = CORREU ;
 							atualJogadorVencedor = quemAumentou ;
 							quemJoga = quemAumentou ;
+
+							#ifdef _DEBUG
+								assert (quemJoga >= 0 && quemJoga <= 6) ;
+								printf("(8) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+								scanf(" %c", opcaoDebug);
+								Delay() ;
+							#endif
 
 							PrintarTelaFimBateriaDeApostas(pCabecaSuperior, equipeVencedoraDaAposta,
 														   qtdRodadas, quemJogouAPrimeira, qtdJogadores, quemCorreu,
@@ -486,18 +531,48 @@ int main (void) {
 
 							quemJoga = MES_ProximoJogador(quemJoga, qtdJogadores) ;
 
+							#ifdef _DEBUG
+								assert (quemJoga >= 0 && quemJoga <= 6) ;
+								printf("(9) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+								scanf(" %c", opcaoDebug);
+								Delay() ;
+							#endif
+
 						} //fim else if "aumentou"
 
 						//ACEITOU
 						else {
+
+							#ifdef _DEBUG
+								printf("Aceitou.\n") ;
+								Delay() ;
+							#endif
+
 							qtdAceitos += 1 ;
 							quemJoga = MES_ProximoJogadorDaMesmaEquipe(quemJoga, qtdJogadores) ;
+
+							#ifdef _DEBUG
+								if (qtdAceitos != qtdJogadores/2) {
+									assert (quemJoga >= 0 && quemJoga <= 6) ;
+									printf("(10) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+									scanf(" %c", opcaoDebug);
+									Delay() ;
+								}
+							#endif
+
 						} //fim else "aceitou"
 
 					} // fim while
 
 					if (qtdAceitos == qtdJogadores/2) {
 						quemJoga = quemAumentou ;
+
+						#ifdef _DEBUG
+							assert (quemJoga >= 0 && quemJoga <= 6) ;
+							printf("(11) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+							scanf(" %c", opcaoDebug);
+							Delay() ;
+						#endif
 					}
 
 					qtdJogadas -= 1;
@@ -548,11 +623,20 @@ int main (void) {
 						mesaCondRet = MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
 
 						#ifdef _DEBUG
-							assert(mesaCondRet == MES_CondRetOK) ;
-							printf("Mesa esvaziada deixando a vira.\n") ;
+							assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
+							printf("(1) Mesa esvaziada deixando a vira.\n") ;
+							Delay() ;
 						#endif
 
 						quemJoga = atualJogadorVencedor ;
+
+						#ifdef _DEBUG
+							assert (quemJoga >= 0 && quemJoga <= 6) ;
+							printf("(12) Proximo jogador definido.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+							scanf(" %c", opcaoDebug);
+							Delay() ;
+						#endif
+
 						qtdCartasViradas = 0 ;
 						qtdJogadas = 0;
 
@@ -577,6 +661,12 @@ int main (void) {
 
 							MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
 
+							#ifdef _DEBUG
+								assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+								printf("(2) Mesa esvaziada deixando a vira.\n") ;
+								Delay() ;
+							#endif
+
 							//quemJoga = atualJogadorVencedor;
 							qtdJogadas = 0;
 
@@ -596,6 +686,12 @@ int main (void) {
 															   pontosPartidaPar, pontosPartidaImpar) ;
 
 								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
+
+								#ifdef _DEBUG
+									assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+									printf("(3) Mesa esvaziada deixando a vira.\n") ;
+									Delay() ;
+								#endif
 
 								//quemJoga = atualJogadorVencedor;
 								qtdJogadas = 0;
@@ -622,6 +718,12 @@ int main (void) {
 
 								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
 
+								#ifdef _DEBUG
+									assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+									printf("(4) Mesa esvaziada tirando a vira.\n") ;
+									Delay() ;
+								#endif
+
 								//quemJoga = atualJogadorVencedor;
 								qtdJogadas = 0;
 								qtdCartasViradas = 0 ;
@@ -643,7 +745,13 @@ int main (void) {
 															   pontosRodadaPar, pontosRodadaImpar,
 															   pontosPartidaPar, pontosPartidaImpar) ;
 
-								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
+								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
+
+								#ifdef _DEBUG
+									assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+									printf("(5) Mesa esvaziada tirando a vira.\n") ;
+									Delay() ;
+								#endif
 
 								pontosRodadaPar = 2 ;
 								pontosRodadaImpar = 2 ;
@@ -671,6 +779,12 @@ int main (void) {
 															   pontosPartidaPar, pontosPartidaImpar) ;
 
 								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
+
+								#ifdef _DEBUG
+									assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+									printf("(6) Mesa esvaziada tirando a vira.\n") ;
+									Delay() ;
+								#endif
 
 								qtdJogadas = 0;
 								qtdCartasViradas = 0 ;
@@ -717,6 +831,12 @@ int main (void) {
 
 						MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
 
+						#ifdef _DEBUG
+							assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+							printf("(7) Mesa esvaziada tirando a vira.\n") ;
+							Delay() ;
+						#endif
+
 					} //fim if "se a rodada acabou"
 
 				} //fim if "se todo mundo ja fez sua jogada"
@@ -749,6 +869,12 @@ int main (void) {
 
 						MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, TIRA_VIRA) ;
 
+						#ifdef _DEBUG
+							assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+							printf("(8) Mesa esvaziada tirando a vira.\n") ;
+							Delay() ;
+						#endif
+
 					} //fim if alguem correu
 
 				} //fim else nem todos fizeram jogadas
@@ -757,6 +883,20 @@ int main (void) {
 
 			//LIMPA
 			MES_TransferirTodasCartasProLixo(pCabecaSuperior) ;
+
+			#ifdef _DEBUG
+				assert (LIS_ObterQtdElem(pCabecaBaralho) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao1) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao2) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao3) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao4) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao5) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMao6) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+				assert (LIS_ObterQtdElem(pCabecaLixo) > 0) ;
+				printf("Todas cartas foram transferidas pro lixo.\n") ;
+				Delay() ;
+			#endif
 
 			//ALGUEM VENCEU A PARTIDA
 			if (pontosPartidaPar >= 12 || pontosPartidaImpar >= 12) {
@@ -774,6 +914,13 @@ int main (void) {
 				}
 
 				MES_EsvaziarLixo (pCabecaLixo) ;
+
+				#ifdef _DEBUG
+					assert (LIS_ObterQtdElem(pCabecaLixo) == 0) ;
+					printf("Lixo esvaziado.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+					scanf(" %c", opcaoDebug);
+					Delay() ;
+				#endif
 
 			} // fim if "alguem venceu a partida"
 			/*
@@ -803,6 +950,14 @@ int main (void) {
 	LIS_DestruirLista(pCabecaLixo) ;
 	LIS_DestruirLista(pCabecaMesa) ;
 	LIS_DestruirLista(pCabecaSuperior) ;
+
+	#ifdef _DEBUG
+		if (LIS_ObterValor(pCabecaSuperior) == NULL) {
+			printf("Listas destruidas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		}
+	#endif
 
 	return 0;
 }
@@ -1156,6 +1311,10 @@ int PrintarTelaInicio () {
 
 	char * opcao = (char*)malloc(sizeof(char));
 
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
+
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
@@ -1178,6 +1337,10 @@ int PrintarTelaInicio () {
 int PrintarTelaRegras() {
 
 	char * opcao = (char*)malloc(sizeof(char));
+
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
 			 
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1253,6 +1416,10 @@ int PrintarTelaQtdJogadores () {
 
 	char * opcao = (char*)malloc(sizeof(char));
 
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
+
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
@@ -1290,6 +1457,10 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, quemJoga) ;
 	pCabecaMao = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
 	
 	//tela de confirmacao 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1476,6 +1647,10 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	LIS_IrFinalLista(pCabecaSuperior) ;
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
+
 	//tela de confirmacao
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1562,6 +1737,10 @@ void PrintarTelaFimBateriaDeApostas(LIS_tppLista pCabecaSuperior,
 
 	LIS_IrFinalLista(pCabecaSuperior) ;
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
 	
 	//tela fim apostas 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1730,6 +1909,10 @@ void PrintarTelaFimRodada(LIS_tppLista pCabecaSuperior, int valorRodada,
 
 	LIS_IrFinalLista(pCabecaSuperior) ;
 	pCabecaMesa = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
 	
 	//tela fim rodada 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1795,6 +1978,10 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 	LIS_IrFinalLista(pCabecaSuperior) ;
 	LIS_AvancarElementoCorrente(pCabecaSuperior, -1) ;
 	pCabecaLixo = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+
+	#ifdef _DEBUG
+		system("cls") ;
+	#endif
 	
 	//tela fim apostas 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
@@ -1839,11 +2026,23 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 ***************************************************************************/
 int ExecutarOpcaoInicio (int opcao) {
 
-	int qtdJogadores = INICIALIZAR;
+	int qtdJogadores ;
+
+	#ifdef _DEBUG
+	char * opcaoDebug = (char*)malloc(sizeof(char)) ;
+	#endif
+
+	qtdJogadores = INICIALIZAR ;
 
 	switch(opcao) {
 
 	case 49: //(1) iniciar partida
+
+		#ifdef _DEBUG
+			printf("Escolheu iniciar partida.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		#endif
 
 		qtdJogadores = PrintarTelaQtdJogadores ();
 		switch(qtdJogadores) {
@@ -1861,11 +2060,22 @@ int ExecutarOpcaoInicio (int opcao) {
 
 	case 50: //(2) ver regras
 
+		#ifdef _DEBUG
+			printf("Escolheu ver regras.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		#endif
+
 		opcao = PrintarTelaRegras();
 		qtdJogadores = ExecutarOpcaoRegras(opcao);
 		break;
 
 	case 51: //(3) sair
+		#ifdef _DEBUG
+			printf("Escolheu sair.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		#endif
 		exit(0);
 		break;
 
@@ -1881,12 +2091,32 @@ int ExecutarOpcaoRegras (int opcao) {
 
 	int qtdJogadores = INICIALIZAR ;
 
+	#ifdef _DEBUG
+	char * opcaoDebug = (char*)malloc(sizeof(char)) ;
+	#endif
+
+	qtdJogadores = INICIALIZAR ;
+
 	switch(opcao) {
 	case 49: //(1) voltar
+
+		#ifdef _DEBUG
+			printf("Escolheu voltar.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		#endif
+
 		opcao = PrintarTelaInicio();
 		qtdJogadores = ExecutarOpcaoInicio(opcao);
 		break;
 	case 50: //(2) sair
+
+		#ifdef _DEBUG
+			printf("Escolheu sair.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
+			Delay() ;
+		#endif
+
 		exit(0);
 		break;
 	}
@@ -1899,10 +2129,6 @@ int ExecutarOpcaoRegras (int opcao) {
 ***************************************************************************/
 int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, int valorRodada) {
 
-	#ifdef _DEBUG
-			printf("Jogada anterior:\n") ;
-	#endif
-
 	switch(jogada) {
 
 	case APOSTAR_CARTA_1: //(1)
@@ -1911,6 +2137,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Apostou carta 1.\n") ;
+			Delay() ;
 		#endif
 
 		break;
@@ -1920,6 +2147,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Apostou carta 2.\n") ;
+			Delay() ;
 		#endif
 
 		break;
@@ -1929,6 +2157,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Apostou carta 3.\n") ;
+			Delay() ;
 		#endif
 
 		break;
@@ -1938,6 +2167,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Dispensou carta 1.\n") ;
+			Delay() ;
 		#endif
 
 		break;
@@ -1947,7 +2177,8 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Dispensou carta 2.\n") ;
-		#endif		
+			Delay() ;
+		#endif
 
 		break;
 
@@ -1956,14 +2187,16 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 		#ifdef _DEBUG
 			printf("Dispensou carta 3.\n") ;
+			Delay() ;
 		#endif
 
 		break;
 
-	case AUMENTAR_APOSTA: //(6)
+	case AUMENTAR_APOSTA: //(7)
 
 		#ifdef _DEBUG
-			printf("Aumentou a aposta.\n") ;
+			printf("Pediu para aumentar o valor da rodada.\n") ;
+			Delay() ;
 		#endif
 
 		switch(valorRodada) {
@@ -2064,7 +2297,7 @@ void Delay () {
 	int a, b, c, d ;
 	c = INICIALIZAR ;
 	for (a = 0; a < 30000; a++) {
-		for (b = 0; b < 15000; b++) {
+		for (b = 0; b < 6000; b++) {
 			c++ ;
 			d = c * b ;
 		}

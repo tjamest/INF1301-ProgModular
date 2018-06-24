@@ -1,7 +1,7 @@
 // Script:    TesteMesaComContador.script
 // Autor:     Gustavo Contreiras, Joao Victor Galindo, Thiago Gioso Fernandes
 // Data:      05/mai/2018
-// Proposito: Testar o modulo baralho do jogo de truco
+// Proposito: Testar o modulo mesa do jogo de truco
 //
 
 == Inicializar valores validos de indice do vetor maos
@@ -16,19 +16,19 @@
 =declararparm   deixavira	int 0
 =declararparm   tiravira	int 1
 
+== TESTE 1 - CRIAR LISTA DE LISTAS / CRIAR TODAS MAOS  / CRIAR LIXO / CRIAR MESA / DISTRIBUIR TODAS MAOS
+=resetteste
+
 == Iniciar contagem
 =inicializarcontadores  ""
 =lercontadores          "..\\scripts\\Mesa"
 =iniciarcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 10
+=verificarcontagens 12
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 10
-
-== TESTE 1 - CRIAR LISTA DE LISTAS / CRIAR TODAS MAOS  / CRIAR LIXO / CRIAR MESA / DISTRIBUIR TODAS MAOS
-=resetteste
+=AceitaFalhasAcumuladas 12
 
 == Criar lista de listas
 =criarlistadelistas
@@ -63,7 +63,7 @@
 =contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
 
 == Criar mesa
-=criarmesa
+=criarmesa 0
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
@@ -76,7 +76,7 @@
 =contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
 
 == Distribuir todas maos
-=distribuirmaos 6
+=distribuirmaos
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
@@ -90,8 +90,29 @@
 =contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  1
 =contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
 
+== Parar contagem
+=pararcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 2
+=AceitaFalhasAcumuladas 2
+
+== Terminar contagem
+=terminarcontadores
+
 == TESTE 2 - CRIAR LISTA DE LISTAS / CRIAR 4 MAOS / DISTRIBUIR 4 MAOS
 =resetteste
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Mesa"
+=iniciarcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 12
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 12
 
 == Criar lista de listas
 =criarlistadelistas
@@ -103,22 +124,39 @@
 =criarmao mao3
 
 == Distribuir 4 maos
-=distribuirmaos 4
+=distribuirmaos
 
 == Verificar quantidade de contadores contados
-=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  2
-=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  2
-=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  10
-=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  10
-=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  2
-=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  2
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  4
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  4
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
+
+== Parar contagem
+=pararcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 6
+=AceitaFalhasAcumuladas 6
+
+== Terminar contagem
+=terminarcontadores
 
 == TESTE 3 - CRIAR LISTA DE LISTAS / CRIAR 2 MAOS / DISTRIBUIR 2 MAOS
 =resetteste
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Mesa"
+=iniciarcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 12
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 12
 
 == Criar lista de listas
 =criarlistadelistas
@@ -128,51 +166,61 @@
 =criarmao mao1
 
 == Distribuir 2 maos
-=distribuirmaos 2
+=distribuirmaos
 
 == Verificar quantidade de contadores contados
-=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  3
-=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  3
-=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  12
-=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  12
-=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  3
-=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  3
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  2
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  2
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
 
-== TESTE 4 - CRIAR LISTA DE LISTAS / CRIAR 2 MAOS / DISTRIBUIR 4 MAOS
-=resetteste
-
-== Criar lista de listas
-=criarlistadelistas
-
-== Criar 2 maos
-=criarmao mao0
-=criarmao mao1
-
-== Distribuir 4 maos
-=distribuirmaos 4
-=recuperar
-
-== Verificar quantidade de contadores contados
-=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  4
-=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  4
-=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  14
-=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  14
-=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
-=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
-=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  3
-=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  3
-
-== Terminar controlar contadores
-=pararcontagem
-=verificarcontagens 0
+== Verificar quantidade de contadores com zero
+=verificarcontagens 6
+=AceitaFalhasAcumuladas 6
 
 == Terminar contagem
 =terminarcontadores
+
+== TESTE 4 - CRIAR MESA / CRIAR LIXO / ESVAZIAR MESA
+=resetteste
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Mesa"
+=iniciarcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 12
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 12
+
+== Criar mesa
+=criarmesa 4
+
+== Criar lixo
+=criarlixo
+
+== Esvaziar mesa
+=esvaziarmesa tiravira
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_EsvaziarMesa - Depois de entrar"  1
+=contagemcontador   "MES_EsvaziarMesa - Depois de sair do switch e antes de retornar"  1
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 6
+=AceitaFalhasAcumuladas 6
+
+== Terminar contagem
+=terminarcontadores
+
+
 
 // fim

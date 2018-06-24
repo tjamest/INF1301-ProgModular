@@ -26,7 +26,6 @@
 #ifdef _DEBUG
    #include   "Generico.h"
    #include   "Conta.h"
-   #include   "cespdin.h"
    #include   "..\\tabelas\\IdTiposEspaco.def"
 #endif
 

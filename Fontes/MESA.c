@@ -24,10 +24,9 @@
 #include "LISTA.h"
 
 #ifdef _DEBUG
-   #include   "Generico.h"
-   #include   "Conta.h"
-   #include   "cespdin.h"
-   #include   "..\\tabelas\\IdTiposEspaco.def"
+   #include "Generico.h"
+   #include "Conta.h"
+   #include "..\\tabelas\\IdTiposEspaco.def"
 #endif
 
 //jogadores
@@ -70,7 +69,7 @@ LIS_tppLista MES_CriarListaDeListas() {
 	LIS_tppLista pCabecaSuperior ;
 
 	#ifdef _DEBUG
-	CNT_CONTAR("MES_CriarListaDeListas - Depois de entrar e declarar variaveis") ;
+		CNT_CONTAR("MES_CriarListaDeListas - Depois de entrar e declarar variaveis") ;
 	#endif
 
 	//criando ponteiro pra cabeca da lista mesa
@@ -591,6 +590,10 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 *  Função: &Esvaziar mesa
 ***************************************************************************/
 MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) {
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_EsvaziarMesa - Depois de entrar") ;
+	#endif
 	
 	switch (tipo) {
 
@@ -629,6 +632,10 @@ MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLi
 		break;
 		
 	} //fim switch
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_EsvaziarMesa - Depois de sair do switch e antes de retornar") ;
+	#endif
 
 	return MES_CondRetOK ;
 

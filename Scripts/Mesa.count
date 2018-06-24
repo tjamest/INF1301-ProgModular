@@ -20,4 +20,7 @@
     MES_DistribuirMaos - Depois de entrar e declarar variaveis
 	MES_DistribuirMaos - Depois de sair do switch e antes de retornar
 
+    MES_EsvaziarMesa - Depois de entrar
+    MES_EsvaziarMesa - Depois de sair do switch e antes de retornar
+
 	 XPTO nome adicionado para fins de teste\=-2
