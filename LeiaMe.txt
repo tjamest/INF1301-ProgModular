@@ -3,9 +3,9 @@
 							   INF1301 - Jogo de Truco
 
 **********************************************************************************
-* 1521816  Thiago Gioso Fernandes  thiagogiosofernandes@hotmail.com
-* 1621146  João Victor Galindo Borges do Rego 	 doublito@gmail.com 
-* 1420397  Gustavo Contreiras			 gcontreiras@inf.puc-rio.br
+* 1521816 	Thiago Gioso Fernandes  		 	thiagogiosofernandes@hotmail.com
+* 1621146 	João Victor Galindo Borges do Rego 	doublito@gmail.com 
+* 1420397 	Gustavo Contreiras			 		gcontreiras@inf.puc-rio.br
 **********************************************************************************
 
 									 Instruções
@@ -19,18 +19,22 @@
 
 **********************************************************************************
 * Para compilar e rodar os testes de cada módulo:
-* 	Abra o terminal (prompt de comando) ;
-*	Vá para o diretório da pasta Batches ;
+* 	Abra o terminal (prompt de comando)
+*	Vá para o diretório da pasta Batches
 *	Carregue o ambiente do VS2010 executando "vsvars32.bat"
-*	(necessário ter o VS2010 instalado no diretório padrão) ;
-*	Execute "Tudo.bat" ;
-*	Os executáveis compilados e os logs de erro estarão na pasta "Produto".
+*	(necessário ter o VS2010 instalado no diretório padrão)
+*	Execute "Tudo.bat" para limpar arquivos gerados anteriormente
+*	Os executáveis compilados e os logs estarão na pasta "Produto".
 *
-* Para apenas rodar os testes de cada módulo:
-* 	Abra o terminal (prompt de comando) ;
-*	Vá para o diretório da pasta Batches ;
-*	Execute "TestaTudo.bat" ;
-*	Os logs de teste estarão na pasta "Produto".
+* 	- Para apenas compilar:
+*		Execute "LimpaTudo.bat" para limpar arquivos gerados anteriormente
+*		Execute "GMakeTudo.bat" para gerar os arquivos necessários para comoilar
+*		Execute "CompilaTudo.bat" para compilar
+*		Os executáveis compilados e os logs de erro estarão na pasta "Produto"
+*
+* 	- Para apenas rodar os testes de cada módulo:
+*		Execute "TestaTudo.bat" ;
+*		Os logs de teste estarão na pasta "Produto"
 *
 * Para adicionar ou remover comandos de teste:						
 * 	Acesse TesteLista.script										
@@ -56,7 +60,7 @@
 *	LimpaTudo.bat 				Limpa arquivos de testes anteriores		 		
 *	GMakeTudo.bat 				Gera os arquivos necessários para compilar	 	
 *	CompilTudo.bat 				Compila o programa							 	
-*	TestaTudo.bat 				Executa os testes dos módulos BARALHO e LISTA 	
+*	TestaTudo.bat 				Executa os testes 	
 **********************************************************************************
 * Composicao:
 *	Gmake.parm 					Parâmetros para a ferramenta GMake
