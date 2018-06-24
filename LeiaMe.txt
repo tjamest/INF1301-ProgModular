@@ -45,6 +45,7 @@
 *	MESA.h 			Definição do módulo MESA 						*
 *	INTERFACE.c 	Implementação do módulo INTERFACE 				*
 *	INTERFACE.h 	Definição do módulo INTERFACE 					*
+*	TestMES.c 		Implementação do módulo TESTE MESA	 			*
 *	TestBAR.c 		Implementação do módulo TESTE BARALHO 			*
 *	TestLIS.c 		Implementação do módulo TESTE LISTA 			*
 *	GENERICO.h 		Módulo de suporte para teste com arcabouço 		*
@@ -61,6 +62,7 @@
 *	JogoDeTruco.exe  Arquivo executável do Jogo de Truco			*
 *********************************************************************
 * Scripts: 															*
+*	TesteMesa.script 	 	Script de testes do módulo BARALHO 		*
 *	TesteBaralho.script 	Script de testes do módulo BARALHO 		*
 *	TesteLista.script 		Script de testes do módulo LISTA 		*
 *********************************************************************
@@ -80,8 +82,10 @@
 * Para adicionar ou remover comandos de teste:						*
 * 	Acesse TesteLista.script										*
 *	Acesse TesteBaralho.scripts 									*
+*	Acesse TesteMesa.scripts 										*
 * 																	*
 * Para ver detalhes dos testes realizado:							*
 * 	Acesse TesteLista.log											*
 *	Acesse TesteBaralho.log 										*
+*	Acesse TesteMesa.scripts 										*
 *********************************************************************

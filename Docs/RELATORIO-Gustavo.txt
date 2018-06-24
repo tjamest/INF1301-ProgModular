@@ -165,3 +165,11 @@ T4:
 	Foi feito um diagrama de fluxo para facilitar o entendimento dos processos do programa.
 	Foi atualizada a arquitetura do programa.
 	Foram atualizados os requisitos funcionais e nao-funcionais do programa.
+
+18/06/2018 - 2h trabalhadas - Estudar
+	Foi estudado o módulo contador porém não foi entendido totalmente.
+
+22/06/2018 - 10h trabalhadas - Codificar módulo, Estudar
+	Foi estudado o módulo contador e finalmente foi entendido.
+	O TestBAR.c foi incrementado com novas funções do módulo Baralho.
+	Foi iniciado o desenvolvimento do TestMES.c

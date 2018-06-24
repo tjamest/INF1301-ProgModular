@@ -13,6 +13,8 @@ gmake /b..\composicao /cTesteBaralhoDebug
 
 gmake /b..\composicao /cTesteMesaDebug
 
+gmake /b..\composicao /cJogoDeTrucoDebug
+
 gmake /b..\composicao /cJogoDeTruco
 
 popd

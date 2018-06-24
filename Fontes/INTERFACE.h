@@ -201,6 +201,10 @@ void ExecutarOpcaoApostarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, int 
 void ExecutarOpcaoDispensarCarta (LIS_tppLista pCabecaSuperior, int quemJoga, int jogada) ;
 /**************************************************************************/
 
+#ifdef _DEBUG
+void Delay () ;
+#endif
+
 #undef INTERFACE_EXT
 
 /********* Fim do módulo de definição: INT  Interface do usuario **********/

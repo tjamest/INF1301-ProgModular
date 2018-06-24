@@ -33,13 +33,13 @@ static const char CRIAR_MESA_CMD [ ] 					= "=criarmesa" ;				//3
 static const char CRIAR_MAO_CMD [ ] 					= "=criarmao" ; 				//4
 static const char CRIAR_LIXO_CMD [ ] 					= "=criarlixo"	; 				//5
 static const char DISTRIBUIR_MAOS_CMD [ ] 				= "=distribuirmaos" ; 			//6
-static const char ESVAZIAR_MESA_CMD [ ] 				= "=esvaziarmesa" ; 			//7
-static const char ESVAZIAR_LIXO_CMD [ ] 				= "=esvaziarlixo" ;				//8
-static const char OBTER_QTD_CARTAS_CMD [ ] 				= "=obterqtdcartas" ; 			//9
-static const char TRANSFERIR_CARTAS_PRO_LIXO_CMD [ ] 	= "=transferircartasprolixo" ;	//10
-static const char DETERMINAR_RESULTADO_CMD [ ] 			= "=determinarresultado" ; 		//11
-static const char DEFINIR_QUEM_COMECA_CMD [ ] 			= "=definirquemcomeca" ; 		//12
-static const char IDENTIFICAR_QUEM_JOGOU_QUAL_CMD [ ] 	= "=identificarquemjogouqual" ; //13
+//static const char ESVAZIAR_MESA_CMD [ ] 				= "=esvaziarmesa" ; 			//7
+//static const char ESVAZIAR_LIXO_CMD [ ] 				= "=esvaziarlixo" ;				//8
+//static const char OBTER_QTD_CARTAS_CMD [ ] 			= "=obterqtdcartas" ; 			//9
+//static const char TRANSFERIR_CARTAS_PRO_LIXO_CMD [ ] 	= "=transferircartasprolixo" ;	//10
+//static const char DETERMINAR_RESULTADO_CMD [ ] 		= "=determinarresultado" ; 		//11
+//static const char DEFINIR_QUEM_COMECA_CMD [ ] 		= "=definirquemcomeca" ; 		//12
+//static const char IDENTIFICAR_QUEM_JOGOU_QUAL_CMD [ ] = "=identificarquemjogouqual" ; //13
 
 #define TRUE  1
 #define FALSE 0
@@ -94,6 +94,8 @@ BAR_tppCarta VetorAux [ 40 ] ;
 *		- retorna um ponteiro pra cabeça do lixo que é armazenado no vtLixo.
 *
 *     =distribuirmaos <inxQtdJogadores>
+*
+*	  Comandos não implementados:
 *     =esvaziarmesa
 *	  =esvaziarlixo
 *	  =obterqtdcartas
@@ -106,6 +108,7 @@ BAR_tppCarta VetorAux [ 40 ] ;
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
   
 	LIS_tppLista pCabecaBaralho ; 
+	BAR_tppCarta pCarta ;
 
   	int inxMao  = -1 ,
   		inxQtdJogadores = -1 ,
@@ -114,6 +117,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 	  	i ;
 
 	pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
 
   	comando = IdentificarComando(ComandoTeste) ;
 
@@ -260,7 +264,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		}
 
 		return TST_CondRetOK ;
-
+/*
 	case 7: //ESVAZIAR MESA
 
 		return TST_CondRetOK ;
@@ -288,7 +292,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 	case 13: //IDENTIFICAR QUEM JOGOU QUAL
 
 		return TST_CondRetOK ;
-
+*/
 	default: //COMANDO NAO EXISTE
 
 		return TST_CondRetNaoConhec ;
@@ -352,7 +356,7 @@ int IdentificarComando( char * ComandoTeste ) {
 	else if ( strcmp( ComandoTeste , DISTRIBUIR_MAOS_CMD ) == 0 ) {
 		return 6 ;
   	}
-
+/*
 	else if ( strcmp( ComandoTeste , ESVAZIAR_MESA_CMD ) == 0 ) {
 		return 7 ;
   	}
@@ -380,12 +384,12 @@ int IdentificarComando( char * ComandoTeste ) {
 	else if ( strcmp( ComandoTeste , IDENTIFICAR_QUEM_JOGOU_QUAL_CMD ) == 0 ) {
 		return 13 ;
   	}
-
+*/
   	else {
   		return 0 ;
   	}
 } /************** Fim função: &Identificar Comando ************************/
 
 
-/********* FIM DO MÓDULO DE IMPLEMENTAÇÃO: TMES Teste Mesa *************/
+/********* FIM DO MÓDULO DE IMPLEMENTAÇÃO: TMES Teste Mesa ****************/
 
