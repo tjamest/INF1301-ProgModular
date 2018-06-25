@@ -34,12 +34,10 @@ static const char CRIAR_MAO_CMD [ ] 					= "=criarmao" ; 				//4
 static const char CRIAR_LIXO_CMD [ ] 					= "=criarlixo"	; 				//5
 static const char DISTRIBUIR_MAOS_CMD [ ] 				= "=distribuirmaos" ; 			//6
 static const char ESVAZIAR_MESA_CMD [ ] 				= "=esvaziarmesa" ; 			//7
-//static const char ESVAZIAR_LIXO_CMD [ ] 				= "=esvaziarlixo" ;				//8
-//static const char OBTER_QTD_CARTAS_CMD [ ] 			= "=obterqtdcartas" ; 			//9
-//static const char TRANSFERIR_CARTAS_PRO_LIXO_CMD [ ] 	= "=transferircartasprolixo" ;	//10
-//static const char DETERMINAR_RESULTADO_CMD [ ] 		= "=determinarresultado" ; 		//11
-//static const char DEFINIR_QUEM_COMECA_CMD [ ] 		= "=definirquemcomeca" ; 		//12
-//static const char IDENTIFICAR_QUEM_JOGOU_QUAL_CMD [ ] = "=identificarquemjogouqual" ; //13
+static const char ESVAZIAR_LIXO_CMD [ ] 				= "=esvaziarlixo" ;				//8
+static const char OBTER_QTD_CARTAS_CMD [ ] 				= "=obterqtdcartas" ; 			//9
+static const char TRANSFERIR_CARTAS_PRO_LIXO_CMD [ ] 	= "=transferircartasprolixo" ;	//10
+static const char IDENTIFICAR_QUEM_JOGOU_QUAL_CMD [ ] 	= "=identificarquemjogouqual" ; //11
 
 #define TRUE  1
 #define FALSE 0
@@ -54,8 +52,13 @@ static const char ESVAZIAR_MESA_CMD [ ] 				= "=esvaziarmesa" ; 			//7
 #define DIM_VT_MESA  1
 #define DIM_VT_LIXO  1
 
-#define DEIXAVIRA 0
-#define TIRAVIRA 1
+#define DEIXA_VIRA 0
+#define TIRA_VIRA 1
+
+#define SEM_PRIMEIRA 0
+#define COM_PRIMEIRA 1
+#define SEM_ULTIMA 0
+#define COM_ULTIMA 1
 
 LIS_tppLista vtListaDeListas [ DIM_VT_LISTA_DE_LISTAS ] ;
 LIS_tppLista vtMaos [ DIM_VT_MAOS ] ;
@@ -97,16 +100,18 @@ BAR_tppCarta VetorAux [ 40 ] ;
 *	  =criarlixo
 *		- retorna um ponteiro pra cabeça do lixo que é armazenado no vtLixo.
 *
-*     =distribuirmaos <inxQtdJogadores>
-*
-*	  Comandos não implementados:
+*     =distribuirmaos
 *     =esvaziarmesa
+
 *	  =esvaziarlixo
-*	  =obterqtdcartas
+*		- deve-se esvaziar uma mesa com cartas antes para que tenha cartas no lixo.
+*
+*	  =obterqtdcartas <tipoPrimeira> <tipoUltima>
+*		- os tipos podem ser semprimeira ou comprimeira e semltima ou comultima.
+*
 *	  =transferircartasprolixo
-*	  =determinarresultado
-*	  =definirquemcomeca
-*	  =identificarquemjogouqual
+*
+*	  =identificarquemjogouqual <qtdJogadores> <quemJogouAPrimeira>
 ***************************************************************************/
 
 TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
@@ -120,7 +125,16 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
       	numLidos = -1 ,
 	  	comando = 0 ,
 	  	tipoEsvaziarMesa = -1 ,
+	  	tipoPrimeira = -1 ,
+	  	tipoUltima = -1 ,
+	  	quemJogouAPrimeira = -1 ,
 	  	i ;
+
+	int * quemJogouASegunda = (int*)malloc(sizeof(int)) ;
+	int * quemJogouATerceira = (int*)malloc(sizeof(int)) ;
+	int * quemJogouAQuarta = (int*)malloc(sizeof(int)) ;
+	int * quemJogouAQuinta = (int*)malloc(sizeof(int)) ;
+	int * quemJogouASexta = (int*)malloc(sizeof(int)) ;
 
 	pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	pCarta = (BAR_tppCarta)malloc(sizeof(BAR_tppCarta)) ;
@@ -280,7 +294,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		numLidos = LER_LerParametros( "i" , &tipoEsvaziarMesa ) ;
 
 		//assertiva de entrada dos parametros do comando
-		if ( (numLidos != 1) || (tipoEsvaziarMesa != DEIXAVIRA && tipoEsvaziarMesa != TIRAVIRA) )  {
+		if ( (numLidos != 1) || (tipoEsvaziarMesa != DEIXA_VIRA && tipoEsvaziarMesa != TIRA_VIRA) )  {
 			return TST_CondRetParm ;
 		}//fim if
 
@@ -289,31 +303,114 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		}
 
 		return TST_CondRetOK ;
-/*
+
   	case 8: //ESVAZIAR LIXO
+
+		if (MES_EsvaziarLixo (vtLixo[0]) != MES_CondRetOK) {
+			return TST_CondRetErro ;
+		}
 
 		return TST_CondRetOK ;
 
 	case 9: //OBTER QTD DE CARTAS
 
-		return TST_CondRetOK ;
+		//conta quantos parametros foram declarados
+		numLidos = LER_LerParametros( "ii" , &tipoPrimeira, &tipoUltima ) ;
+
+		//assertiva de entrada dos parametros do comando
+		if ( (numLidos != 2) || 
+		     (tipoPrimeira != COM_PRIMEIRA && tipoPrimeira != SEM_PRIMEIRA) ||
+		     (tipoUltima != COM_ULTIMA && tipoUltima != SEM_ULTIMA) )  {
+			return TST_CondRetParm ;
+		}//fim if
+
+		qtdCartas = LIS_ObterQtdElem(vtMesa[0]) ;
+
+		if (tipoPrimeira == COM_PRIMEIRA) {
+
+			//com primeira com ultima
+			if (tipoUltima == COM_ULTIMA) {
+				if ((qtdCartas) != MES_ObterQtdCartas(vtMesa[0], COM_PRIMEIRA, COM_ULTIMA)) {
+					return TST_CondRetErro ;
+				}
+				else {
+					return TST_CondRetOK ;
+				}
+			}
+
+			//com primeira sem ultima
+			else {
+				if ((qtdCartas-1) != MES_ObterQtdCartas(vtMesa[0], COM_PRIMEIRA, SEM_ULTIMA)) {
+					return TST_CondRetErro ;
+				}
+				else {
+					return TST_CondRetOK ;
+				}
+			}
+		}//fim if
+
+		else {
+
+			//sem primeira com ultima
+			if (tipoUltima == COM_ULTIMA) {
+				if ((qtdCartas-1) != MES_ObterQtdCartas(vtMesa[0], SEM_PRIMEIRA, COM_ULTIMA)) {
+					return TST_CondRetErro ;
+				}
+				else {
+					return TST_CondRetOK ;
+				}
+			}
+
+			//sem primeira sem ultima
+			else {
+				if ((qtdCartas-2) != MES_ObterQtdCartas(vtMesa[0], SEM_PRIMEIRA, SEM_ULTIMA)) {
+					return TST_CondRetErro ;
+				}
+				else {
+					return TST_CondRetOK ;
+				}
+			}
+		}//fim else
 
 	case 10: //TRANSFERIR CARTAS PRO LIXO
 
+		LIS_IrInicioLista (vtListaDeListas[0]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[0]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[1]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[2]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[3]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[4]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMaos[5]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtLixo[0]) ;
+		LIS_InserirElementoApos (vtListaDeListas[0], vtMesa[0]) ;
+
+		if (MES_TransferirTodasCartasProLixo (vtListaDeListas[0]) != MES_CondRetOK) {
+			return TST_CondRetErro ;
+		}
+
 		return TST_CondRetOK ;
 
-	case 11: //DETERMINAR RESULTADO
+	case 11: //IDENTIFICAR QUEM JOGOU QUAL
+
+		//conta quantos parametros foram declarados
+		numLidos = LER_LerParametros( "ii" , &qtdJogadores, &quemJogouAPrimeira ) ;
+
+		//assertiva de entrada dos parametros do comando
+		if ( (numLidos != 2) || 
+		     (qtdJogadores != 2 && qtdJogadores != 4 && qtdJogadores != 6) ||
+		     (quemJogouAPrimeira < 1 || quemJogouAPrimeira > 6) )  {
+			return TST_CondRetParm ;
+		}//fim if
+
+		if (MES_IdentificarQuemJogouQual(qtdJogadores, 
+										 quemJogouAPrimeira, quemJogouASegunda,
+										 quemJogouATerceira, quemJogouAQuarta,
+										 quemJogouAQuinta, quemJogouASexta) != MES_CondRetOK) {
+			return TST_CondRetErro ;
+		}
 
 		return TST_CondRetOK ;
 
-	case 12: //DEFINIR QUEM COMECA
-
-		return TST_CondRetOK ;
-
-	case 13: //IDENTIFICAR QUEM JOGOU QUAL
-
-		return TST_CondRetOK ;
-*/
 	default: //COMANDO NAO EXISTE
 
 		return TST_CondRetNaoConhec ;
@@ -381,7 +478,7 @@ int IdentificarComando( char * ComandoTeste ) {
 	else if ( strcmp( ComandoTeste , ESVAZIAR_MESA_CMD ) == 0 ) {
 		return 7 ;
   	}
-/*
+
 	else if ( strcmp( ComandoTeste , ESVAZIAR_LIXO_CMD ) == 0 ) {
 		return 8 ;
   	}
@@ -394,18 +491,10 @@ int IdentificarComando( char * ComandoTeste ) {
 		return 10 ;
   	}
 
-	else if ( strcmp( ComandoTeste , DETERMINAR_RESULTADO_CMD ) == 0 ) {
+	else if ( strcmp( ComandoTeste , IDENTIFICAR_QUEM_JOGOU_QUAL_CMD ) == 0 ) {
 		return 11 ;
   	}
 
-	else if ( strcmp( ComandoTeste , DEFINIR_QUEM_COMECA_CMD ) == 0 ) {
-		return 12 ;
-  	}
-
-	else if ( strcmp( ComandoTeste , IDENTIFICAR_QUEM_JOGOU_QUAL_CMD ) == 0 ) {
-		return 13 ;
-  	}
-*/
   	else {
   		return 0 ;
   	}

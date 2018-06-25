@@ -16,6 +16,12 @@
 =declararparm   deixavira	int 0
 =declararparm   tiravira	int 1
 
+== Inicializar valores validos de indice do tipo da funcao obter qtd cartas
+=declararparm   semprimeira	int 0
+=declararparm   comprimeira	int 1
+=declararparm   semultima	int 0
+=declararparm   comultima	int 1
+
 == TESTE 1 - CRIAR LISTA DE LISTAS / CRIAR TODAS MAOS  / CRIAR LIXO / CRIAR MESA / DISTRIBUIR TODAS MAOS
 =resetteste
 
@@ -25,10 +31,10 @@
 =iniciarcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 12
+=verificarcontagens 23
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 12
+=AceitaFalhasAcumuladas 23
 
 == Criar lista de listas
 =criarlistadelistas
@@ -94,8 +100,8 @@
 =pararcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 2
-=AceitaFalhasAcumuladas 2
+=verificarcontagens 13
+=AceitaFalhasAcumuladas 13
 
 == Terminar contagem
 =terminarcontadores
@@ -109,10 +115,10 @@
 =iniciarcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 12
+=verificarcontagens 23
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 12
+=AceitaFalhasAcumuladas 23
 
 == Criar lista de listas
 =criarlistadelistas
@@ -138,8 +144,8 @@
 =pararcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 6
-=AceitaFalhasAcumuladas 6
+=verificarcontagens 17
+=AceitaFalhasAcumuladas 17
 
 == Terminar contagem
 =terminarcontadores
@@ -153,10 +159,10 @@
 =iniciarcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 12
+=verificarcontagens 23
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 12
+=AceitaFalhasAcumuladas 23
 
 == Criar lista de listas
 =criarlistadelistas
@@ -177,13 +183,13 @@
 =contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 6
-=AceitaFalhasAcumuladas 6
+=verificarcontagens 17
+=AceitaFalhasAcumuladas 17
 
 == Terminar contagem
 =terminarcontadores
 
-== TESTE 4 - CRIAR MESA / CRIAR LIXO / ESVAZIAR MESA
+== TESTE 4 - CRIAR MESA / OBTER QTD CARTAS / CRIAR LIXO / ESVAZIAR MESA / ESVAZIAR LIXO
 =resetteste
 
 == Iniciar contagem
@@ -192,19 +198,34 @@
 =iniciarcontagem
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 12
+=verificarcontagens 23
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 12
+=AceitaFalhasAcumuladas 23
 
 == Criar mesa
 =criarmesa 4
+
+== Obter quantidade de cartas
+=obterqtdcartas semprimeira semultima
+
+== Obter quantidade de cartas
+=obterqtdcartas comprimeira semultima
+
+== Obter quantidade de cartas
+=obterqtdcartas semprimeira comultima
+
+== Obter quantidade de cartas
+=obterqtdcartas comprimeira comultima
 
 == Criar lixo
 =criarlixo
 
 == Esvaziar mesa
 =esvaziarmesa tiravira
+
+== Esvaziar lixo
+=esvaziarlixo
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
@@ -213,10 +234,114 @@
 =contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
 =contagemcontador   "MES_EsvaziarMesa - Depois de entrar"  1
 =contagemcontador   "MES_EsvaziarMesa - Depois de sair do switch e antes de retornar"  1
+=contagemcontador   "MES_EsvaziarLixo - Depois de entrar"  1
+=contagemcontador   "MES_EsvaziarLixo - Antes de retornar"  1
+=contagemcontador   "MES_ObterQtdCartas - Depois de entrar"  4
+=contagemcontador   "MES_ObterQtdCartas - ComPrimeira e ComUltima - Antes de retornar"  1
+=contagemcontador   "MES_ObterQtdCartas - ComPrimeira e SemUltima - Antes de retornar"  1
+=contagemcontador   "MES_ObterQtdCartas - SemPrimeira e ComUltima - Antes de retornar"  1
+=contagemcontador   "MES_ObterQtdCartas - SemPrimeira e SemUltima - Antes de retornar"  1
 
 == Verificar quantidade de contadores com zero
-=verificarcontagens 6
-=AceitaFalhasAcumuladas 6
+=verificarcontagens 10
+=AceitaFalhasAcumuladas 10
+
+== Terminar contagem
+=terminarcontadores
+
+== TESTE 5 - CRIAR LISTA DE LISTAS / CRIAR 6 MAOS / DISTRIBUIR MAOS / CRIAR MESA COM 6 CARTAS / CRIAR LIXO / TRANSFERIR TUDO PRO LIXO
+=resetteste
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Mesa"
+=iniciarcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 23
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 23
+
+== Criar lista de listas
+=criarlistadelistas
+
+== Criar 6 maos
+=criarmao mao0
+=criarmao mao1
+=criarmao mao2
+=criarmao mao3
+=criarmao mao4
+=criarmao mao5
+
+== Distribuir maos
+=distribuirmaos
+
+== Criar mesa
+=criarmesa 6
+
+== Criar lixo
+=criarlixo
+
+== Transferir todas cartas pro lixo
+=transferircartasprolixo
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarMao - Depois de entrar e declarar variaveis"  6
+=contagemcontador   "MES_CriarMao - Depois de atribuir valor NaoNULL e antes de sair"  6
+=contagemcontador   "MES_DistribuirMaos - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_DistribuirMaos - Depois de sair do switch e antes de retornar"  1
+=contagemcontador   "MES_CriarMesa - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarMesa - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_CriarLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_CriarLixo - Depois de atribuir valor NaoNULL e antes de sair"  1
+=contagemcontador   "MES_TransferirTodasCartasProLixo - Depois de entrar e declarar variaveis"  1
+=contagemcontador   "MES_TransferirTodasCartasProLixo - Antes de retornar"  1
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 11
+=AceitaFalhasAcumuladas 11
+
+== Terminar contagem
+=terminarcontadores
+
+== TESTE 6 - IDENTIFICAR QUEM JOGOU QUAL
+=resetteste
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Mesa"
+=iniciarcontagem
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 23
+
+== Verificar falhas (contador com zero eh uma falha)
+=AceitaFalhasAcumuladas 23
+
+== Identificar quem jogou
+=identificarquemjogouqual 2 1
+=identificarquemjogouqual 2 2
+=identificarquemjogouqual 4 1
+=identificarquemjogouqual 4 2
+=identificarquemjogouqual 4 3
+=identificarquemjogouqual 4 4
+=identificarquemjogouqual 6 1
+=identificarquemjogouqual 6 2
+=identificarquemjogouqual 6 3
+=identificarquemjogouqual 6 4
+=identificarquemjogouqual 6 5
+=identificarquemjogouqual 6 6
+
+== Verificar quantidade de contadores contados
+=contagemcontador   "MES_IdentificarQuemJogouQual - Depois de entrar"  12
+=contagemcontador   "MES_IdentificarQuemJogouQual - Depois de sair do switch e antes de retornar"  12
+
+== Verificar quantidade de contadores com zero
+=verificarcontagens 21
+=AceitaFalhasAcumuladas 21
 
 == Terminar contagem
 =terminarcontadores

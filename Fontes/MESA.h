@@ -44,20 +44,6 @@ typedef enum {
 } MES_tpCondRet;
 
 /***************************************************************************
-*  $FC Função: MES  &Iniciar Partida NAO TA FUNCIONANDO NAO SEI PQ
-*
-*  $ED Descrição da função
-*     Cria as listas.
-*
-*  $FV Valor retornado
-*     Retorna o valor 49 que inicia o loop da partida. 
-***************************************************************************//*
-int MES_IniciarPartida (LIS_tppLista pCabecaBaralho, LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2, 
-						LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4, LIS_tppLista pCabecaMao5,
-						LIS_tppLista pCabecaMao6, LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa,
-						LIS_tppLista pCabecaSuperior) ;
-
-/***************************************************************************
 *  $FC Função: MES  &Criar Lista de Listas
 *
 *  $ED Descrição da função
@@ -116,11 +102,21 @@ LIS_tppLista MES_CriarLixo() ;
 *     Distribui as maos para os jogadores
 *
 *  $EP Parâmetros
-*     Ponteiros para cabeca do baralho e das maos.
-*	  Numero de jogadores.
+*     Ponteiro pra cabeca da lista de listas e a qtdJogadores.
 ***************************************************************************/
-MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores) ;
-//void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) ;
+MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores) ;
+
+/***************************************************************************
+*  $FC Função: MES  &Distribuir maos para testar empates
+*
+*  $ED Descrição da função
+*     Distribui as maos de forma que se possa empatar propositalmente.
+*     Deve-se comentar com // a função BAR_EmbaralharVetorCartas se for usá-la.
+*
+*  $EP Parâmetros
+*     Ponteiro pra cabeca da lista de listas e a qtdJogadores.
+***************************************************************************/
+//void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int qtdJogadores) ;
 
 /***************************************************************************
 *  $FC Função: MES  &Esvaziar mesa
@@ -130,8 +126,12 @@ MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int numJogadores)
 *
 *  $EP Parâmetros
 *     Ponteiros para cabeca da mesa, cabeca do lixo e tipo, que pode ser:
-*	  TIRA_VIRA ou DEIXA_VIRA caso seja apenas o fim de uma aposta ou fim
-*	  de uma rodada.
+*	   TIRA_VIRA ou DEIXA_VIRA caso seja apenas o fim de uma aposta ou fim
+*	   de uma rodada.
+*
+*  $FV Valor retornado
+*     MES_CondRetOK se nada deu errado.
+*     MES_CondRetNaoEsvaziouMesa se algo deu errado.
 ***************************************************************************/
 MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLixo, int tipo) ;
 
@@ -143,6 +143,10 @@ MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLi
 *
 *  $EP Parâmetros
 *     Ponteiro para cabeca do lixo.
+*
+*  $FV Valor retornado
+*     MES_CondRetOK se nada deu errado.
+*     MES_CondRetNaoEsvaziouLixo se algo deu errado.
 ***************************************************************************/
 MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) ;
 
@@ -150,11 +154,11 @@ MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) ;
 *  $FC Função: MES  &Obter quantidade de cartas
 *
 *  $ED Descrição da função
-*     Obtem a quantidade de cartas na mesa.
+*     Obtem a quantidade de cartas na mesa (ou de qualquer lista).
 *
 *  $EP Parâmetros
 *     Ponteiros para cabeca da mesa, e tipos, que podem ser:
-*	  COM_PRIMEIRA ou SEM_PRIMEIRA e COM_ULTIMA e SEM_ULTIMA.
+*	   COM_PRIMEIRA ou SEM_PRIMEIRA e COM_ULTIMA ou SEM_ULTIMA.
 ***************************************************************************/
 int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaApostada) ;
 
@@ -163,19 +167,84 @@ int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaAp
 *
 *  $EP Parâmetros
 *     Recebe uma lista de listas de cartas e transfere todos elementos
-*	  de todas listas pra penultima lista (lixo).
+*	   de todas listas pra penultima lista (lixo).
+*
+*  $FV Valor retornado
+*     MES_CondRetOK se nada deu errado.
+*     MES_CondRetNaoTransferiuTodasCartasProLixo se algo deu errado.
 ***************************************************************************/
-void MES_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
+MES_tpCondRet MES_TransferirTodasCartasProLixo(LIS_tppLista pCabecaSuperior) ;
 
+/***************************************************************************
+*  $FC Função: MES  &Determinar resultado
+*
+*  $ED Descrição da função
+*     Determina o resultado de uma jogada de aposta, que pode ser venceu/perdeu/empatou.
+*
+*  $EP Parâmetros
+*     Recebe uma lista de listas de cartas, quem esta fazendo a jogada,
+*     quem fez a primeira jogada da bateria de apostas e a quantidade de jogadores.
+*
+*  $FV Valor retornado
+*     0: se o jogador perdeu de todos adversarios fazendo sua jogada.
+*     quemJoga: se o jogador venceu todos adversarios fazendo sua jogada.
+*     primeiroComQuemEmpatou: se o jogador empatou com algum adversario.
+***************************************************************************/
 int MES_DeterminarResultado(LIS_tppLista pCabecaSuperior, int quemJoga, int quemJogouAPrimeira, int qtdJogadores) ;
 
+/***************************************************************************
+*  $FC Função: MES  &Definir quem começa
+*
+*  $ED Descrição da função
+*     Define quem começa a partida.
+*
+*  $EP Parâmetros
+*     Recebe a quantidade de jogadores que vao jogar.
+*
+*  $FV Valor retornado
+*     Um numero aleatorio entre 1 e a qtdJogadores.
+***************************************************************************/
 int MES_DefinirQuemComeca(int qtdJogadores) ;
 
-void MES_IdentificarQuemJogouQual(int qtdJogadores, int quemJogouAPrimeira, int *quemJogouASegunda, int *quemJogouATerceira, 
-							  	  int *quemJogouAQuarta, int *quemJogouAQuinta, int *quemJogouASexta) ;
+/***************************************************************************
+*  $FC Função: MES  &Identificar quem jogou qual
+*
+*  $ED Descrição da função
+*     Identificar qual jogador jogou qual carta que ta na mesa.
+*
+*  $EP Parâmetros
+*     Recebe a quantidade de jogadores, quem jogou a primeira carta e
+*     ponteiros para armazenar quem jogou qual.
+*
+*  $FV Valor retornado
+*     MES_CondRetOK se nada deu errado.
+*     MES_CondRetNaoIdentificouQuemJogouQual se algo deu errado.
+***************************************************************************/
+MES_tpCondRet MES_IdentificarQuemJogouQual(int qtdJogadores, 
+                                           int quemJogouAPrimeira, int *quemJogouASegunda,
+                                           int *quemJogouATerceira, int *quemJogouAQuarta, 
+                                           int *quemJogouAQuinta, int *quemJogouASexta) ;
 
+/***************************************************************************
+*  $FC Função: MES  &Proximo jogador
+*
+*  $ED Descrição da função
+*     Determinar o proximo jogador em sequência dentre todos que estao jogando.
+*
+*  $EP Parâmetros
+*     Recebe.quemJoga e a qtdJogadores.
+***************************************************************************/
 int MES_ProximoJogador(int quemJoga, int qtdJogadores) ;
 
+/***************************************************************************
+*  $FC Função: MES  &Proximo jogador da mesma equipe
+*
+*  $ED Descrição da função
+*     Determinar o proximo jogador em sequência da mesma equipe.
+*
+*  $EP Parâmetros
+*     Recebe.quemJoga e a qtdJogadores.
+***************************************************************************/
 int MES_ProximoJogadorDaMesmaEquipe(int quemJoga, int qtdJogadores) ;
 
 #undef MESA_EXT

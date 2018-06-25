@@ -23,4 +23,19 @@
     MES_EsvaziarMesa - Depois de entrar
     MES_EsvaziarMesa - Depois de sair do switch e antes de retornar
 
+    MES_EsvaziarLixo - Depois de entrar
+    MES_EsvaziarLixo - Antes de retornar
+
+    MES_ObterQtdCartas - Depois de entrar
+    MES_ObterQtdCartas - ComPrimeira e ComUltima - Antes de retornar
+    MES_ObterQtdCartas - ComPrimeira e SemUltima - Antes de retornar
+    MES_ObterQtdCartas - SemPrimeira e ComUltima - Antes de retornar
+    MES_ObterQtdCartas - SemPrimeira e SemUltima - Antes de retornar
+
+    MES_TransferirTodasCartasProLixo - Depois de entrar e declarar variaveis
+    MES_TransferirTodasCartasProLixo - Antes de retornar
+
+    MES_IdentificarQuemJogouQual - Depois de entrar
+    MES_IdentificarQuemJogouQual - Depois de sair do switch e antes de retornar
+
 	 XPTO nome adicionado para fins de teste\=-2

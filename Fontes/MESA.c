@@ -645,6 +645,10 @@ MES_tpCondRet MES_EsvaziarMesa (LIS_tppLista pCabecaMesa, LIS_tppLista pCabecaLi
 *  Função: &Obter quantidade de cartas
 ***************************************************************************/
 int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaApostada) {
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_ObterQtdCartas - Depois de entrar") ;
+	#endif
 	
 	switch (tipoVira) {
 
@@ -652,8 +656,14 @@ int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaAp
 
 		switch (tipoUltimaApostada) {
 		case COM_ULTIMA:
+			#ifdef _DEBUG
+				CNT_CONTAR("MES_ObterQtdCartas - ComPrimeira e ComUltima - Antes de retornar") ;
+			#endif
 			return LIS_ObterQtdElem(pCabecaMesa) ;
 		case SEM_ULTIMA:
+			#ifdef _DEBUG
+				CNT_CONTAR("MES_ObterQtdCartas - ComPrimeira e SemUltima - Antes de retornar") ;
+			#endif
 			return LIS_ObterQtdElem(pCabecaMesa)-1 ;
 		} //fim switch
 
@@ -661,8 +671,14 @@ int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaAp
 
 		switch (tipoUltimaApostada) {
 		case COM_ULTIMA:
+			#ifdef _DEBUG
+				CNT_CONTAR("MES_ObterQtdCartas - SemPrimeira e ComUltima - Antes de retornar") ;
+			#endif
 			return LIS_ObterQtdElem(pCabecaMesa)-1 ;
 		case SEM_ULTIMA:
+			#ifdef _DEBUG
+				CNT_CONTAR("MES_ObterQtdCartas - SemPrimeira e SemUltima - Antes de retornar") ;
+			#endif
 			return LIS_ObterQtdElem(pCabecaMesa)-2 ;
 		} //fim switch
 
@@ -675,7 +691,7 @@ int MES_ObterQtdCartas (LIS_tppLista pCabecaMesa, int tipoVira, int tipoUltimaAp
 /***************************************************************************
 *  Função: &Transferir todas cartas pro lixo
 ***************************************************************************/
-void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
+MES_tpCondRet MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 
 	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
@@ -686,6 +702,10 @@ void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_TransferirTodasCartasProLixo - Depois de entrar e declarar variaveis") ;
+	#endif
 	
 	LIS_IrInicioLista(pCabecaSuperior) ;
 	pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -708,94 +728,67 @@ void MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 
 	while (LIS_ObterQtdElem(pCabecaBaralho) > 0) {
 		LIS_IrFinalLista(pCabecaBaralho) ;
-		BAR_TransferirCarta(pCabecaBaralho, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaBaralho, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
 	while (LIS_ObterQtdElem(pCabecaMao1) > 0) {
 		LIS_IrFinalLista(pCabecaMao1) ;
-		BAR_TransferirCarta(pCabecaMao1, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao1, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
 	while (LIS_ObterQtdElem(pCabecaMao2) > 0) {
 		LIS_IrFinalLista(pCabecaMao2) ;
-		BAR_TransferirCarta(pCabecaMao2, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao2, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
 	while (LIS_ObterQtdElem(pCabecaMao3) > 0) {
 		LIS_IrFinalLista(pCabecaMao3) ;
-		BAR_TransferirCarta(pCabecaMao3, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao3, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
 	while (LIS_ObterQtdElem(pCabecaMao4) > 0) {
 		LIS_IrFinalLista(pCabecaMao4) ;
-		BAR_TransferirCarta(pCabecaMao4, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao4, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 	
 	while (LIS_ObterQtdElem(pCabecaMao5) > 0) {
 		LIS_IrFinalLista(pCabecaMao5) ;
-		BAR_TransferirCarta(pCabecaMao5, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao5, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
 	while (LIS_ObterQtdElem(pCabecaMao6) > 0) {
 		LIS_IrFinalLista(pCabecaMao6) ;
-		BAR_TransferirCarta(pCabecaMao6, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMao6, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 	
 	while (LIS_ObterQtdElem(pCabecaMesa) > 0) {
 		LIS_IrFinalLista(pCabecaMesa) ;
-		BAR_TransferirCarta(pCabecaMesa, pCabecaLixo) ;
+		if (BAR_TransferirCarta(pCabecaMesa, pCabecaLixo) != BAR_CondRetOK) {
+			return MES_CondRetNaoTransferiuTodasCartasProLixo ;
+		}
 	}
 
-} /*************** FIM FUNÇÃO: Transferir todas cartas pro lixp ***********/
-
-/***************************************************************************
-*  Função: &Iniciar partida NAO TA FUNCIONANDO NAO SEI PQ
-***************************************************************************//*
-int MES_IniciarPartida (LIS_tppLista pCabecaBaralho, LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2, 
-						 LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4, LIS_tppLista pCabecaMao5,
-						 LIS_tppLista pCabecaMao6, LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa,
-						 LIS_tppLista pCabecaSuperior) {
-	
 	#ifdef _DEBUG
-		CNT_CONTAR("MES_IniciarPartida Antes de chamar LIS_CriarLista para cada cabeca") ;
-	#endif
-	
-	pCabecaSuperior = LIS_CriarLista (BAR_DestruirBaralho) ;
-	pCabecaBaralho = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao1 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao2 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao3 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao4 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao5 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMao6 = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaLixo = LIS_CriarLista (BAR_DestruirCarta) ;
-	pCabecaMesa = LIS_CriarLista (BAR_DestruirCarta) ;
-	
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_IniciarPartida.Depois de chamar 'LIS_CriarLista' para cada cabeça e antes de chamar 'LIS_IrInicioLista'") ;
+		CNT_CONTAR("MES_TransferirTodasCartasProLixo - Antes de retornar") ;
 	#endif
 
-	LIS_IrInicioLista(pCabecaSuperior) ;
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_IniciarPartida.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_InserirElementoApos'") ;
-	#endif
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;	//inicio
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;		//1
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;		//2
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;		//3
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;		//4
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao5) ;		//5
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;		//6
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaLixo) ;		//7
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;		//final
+	return MES_CondRetOK ;
 
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_IniciarPartida.Depois de chamar 'LIS_InserirElementoApos'") ;
-	#endif
-	
-	return 49;
-
-} // fim funcao
+} /*************** FIM FUNÇÃO: Transferir todas cartas pro lixo ***********/
 
 /***************************************************************************
 *  Função: &Determinar resultado
@@ -975,7 +968,7 @@ int MES_DeterminarResultado (LIS_tppLista pCabecaSuperior, int quemJoga, int que
 		return primeiroComQuemEmpatou ;
 	}
 
-} /*************** Fim função: &Determinar resultado ***************/
+} /****************** FIM FUNÇÃO: &Determinar resultado *******************/
 
 /***************************************************************************
 *  Função: &Definir quem comeca
@@ -1002,13 +995,23 @@ int MES_DefinirQuemComeca(int qtdJogadores) {
 	}//fim while
 
 	return quemComeca;
-} //fim funcao
+} /****************** FIM FUNÇÃO: &Definir quem comeca ********************/
 
 /***************************************************************************
 *  Função: &Identificar quem jogou qual
 ***************************************************************************/
-void MES_IdentificarQuemJogouQual(int qtdJogadores, int quemJogouAPrimeira, int *quemJogouASegunda, int *quemJogouATerceira, 
-							  int *quemJogouAQuarta, int *quemJogouAQuinta, int *quemJogouASexta) {
+MES_tpCondRet MES_IdentificarQuemJogouQual(int qtdJogadores, 
+										   int quemJogouAPrimeira, int *quemJogouASegunda,
+										   int *quemJogouATerceira, int *quemJogouAQuarta,
+										   int *quemJogouAQuinta, int *quemJogouASexta) {
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_IdentificarQuemJogouQual - Depois de entrar") ;
+	#endif
+
+	if (quemJogouAPrimeira < 1 || quemJogouAPrimeira > 6) {
+		return MES_CondRetNaoIdentificouQuemJogouQual ;
+	}
 
 	//identificando quem jogou qual
 	switch (quemJogouAPrimeira) {
@@ -1115,7 +1118,13 @@ void MES_IdentificarQuemJogouQual(int qtdJogadores, int quemJogouAPrimeira, int 
 
 	} //fim switch quem jogou a primeira
 
-} //fim funcao
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_IdentificarQuemJogouQual - Depois de sair do switch e antes de retornar") ;
+	#endif
+
+	return MES_CondRetOK ;
+
+} /*********** FIM FUNÇÃO: &Identificar quem jogou qual *******************/
 
 /***************************************************************************
 *  Função: &Proximo jogador
@@ -1158,7 +1167,7 @@ int MES_ProximoJogador(int quemJoga, int qtdJogadores) {
 		}
 	}
 	return 0 ;
-} //fim funcao
+} /******************** FIM FUNÇÃO: &Proximo jogador **********************/
 
 /***************************************************************************
 *  Função: &Proximo jogador da mesma equipe
@@ -1205,9 +1214,16 @@ int MES_ProximoJogadorDaMesmaEquipe(int quemJoga, int qtdJogadores) {
 
 	return 0 ;
 
-} //fim funcao
+} /********* FIM FUNÇÃO: &Proximo jogador da mesma equipe *****************/
 
+/***************************************************************************
+*  Função: &Esvaziar lixo
+***************************************************************************/
 MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) {
+
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_EsvaziarLixo - Depois de entrar") ;
+	#endif
 	
 	if (LIS_ObterQtdElem(pCabecaLixo) > 0) {
 		LIS_EsvaziarLista (pCabecaLixo) ;
@@ -1217,12 +1233,16 @@ MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) {
 		}
 	}
 
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_EsvaziarLixo - Antes de retornar") ;
+	#endif
+
 	return MES_CondRetOK ;
 
-} //fim funçao
+} /********************** FIM FUNÇÃO: &Esvaziar lixo ***********************/
 
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
 //ainda nao ha funcoes encapsuladas no modulo
 
-/************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: MES Mesa ******************/
+/************ FIM DO MÓDULO DE IMPLEMENTAÇÃO: MES Mesa *********************/
