@@ -178,8 +178,8 @@ T4:
 	Foram estudadas possibilidades para testar o módulo Interface que contém a main.
 	Foi incrementada a implementação do TestMES.c
 
-24/06/2017 - 6h trabalhadas - Codificar módulo, Revisar projetos
+24/06/2017 - 10h trabalhadas - Codificar módulo, Revisar projetos
 	Foram colocados "printfs" depois de "asserts" dentro de blocos _DEBUG na main para 
 	checar os retornos das funções, testando assim o módulo Interface.
-	Foi incrementado o módulo TestMES.c
+	Foi finalizado o módulo TestMES.c
 	Foi atualizado o Leia-me.txt
