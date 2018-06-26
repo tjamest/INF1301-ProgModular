@@ -183,3 +183,13 @@ T4:
 	checar os retornos das funções, testando assim o módulo Interface.
 	Foi finalizado o módulo TestMES.c
 	Foi atualizado o Leia-me.txt
+
+24/06/2017 - 6h trabalhadas - Codificar módulo
+	Foi verificado o TestBAR.c, tendo novas funções e comandos inseridos.
+
+26/06/2017 - 3h trabalhadas - Codificar módulo, estudar
+	A TestLIS.c foi reestruturada, com a criação da função IdentificarComando.
+	Foram adicionados novos comandos na TestLIS.c relativos a novas funções inseridas no Lista.c
+	Foi elaborado o script de teste do módulo lista usando contadores em praticamente todas instruções de função.
+	Foi estudado o módulo Controlador de Espaço Dinâmico.
+	Foi iniciado o uso do CEspDin no teste do módulo Lista.

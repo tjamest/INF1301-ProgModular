@@ -11,7 +11,7 @@ h           =  ..\Fontes
 def         =  ..\Tabelas
 
 [Modulos]
-Lista
+Lista 	/D_DEBUG
 TestLIS
 
 [BuildInicio]

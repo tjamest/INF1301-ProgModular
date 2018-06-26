@@ -1,0 +1,21 @@
+////////////////////////////////////////////////
+//
+// Exemplo de arquivo de declaração de contadores
+// Conta módulo Mesa marcado
+//
+///////////////////////////////////////////////
+    
+    LIS_CriarLista - Entrou e declarou variaveis
+    LIS_DestruirLista - Entrou e assertou pLista != NULL
+    LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_ExcluirPtrParaElemento - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_ObterQtdElem - Entrou, declarou variaveis e assertou pLista != NULL
+    LIS_ObterValor - Entrou e assertou pLista != NULL
+    LIS_IrInicioLista - Entrou e assertou pLista != NULL
+    LIS_IrFinalLista - Entrou e assertou pLista != NULL
+    LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL
+
+	 XPTO nome adicionado para fins de teste\=-2

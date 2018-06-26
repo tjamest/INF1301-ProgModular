@@ -17,8 +17,8 @@
 *
 ***************************************************************************/
 
-      ARV_TipoEspacoLista , 
-      ARV_TipoEspacoElemLista    ,
+      LIS_TipoEspacoLista , 
+      LIS_TipoEspacoElemLista    ,
 
 /********** Fim do arquivo de definição: TiposEspacosLista.def  **********/
 

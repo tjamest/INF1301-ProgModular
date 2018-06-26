@@ -16,7 +16,6 @@
 =declararparm   str3    string  "inf1301"
 =declararparm   str4    string  "programacao modular"
 
-
 =declararparm   OK             int  0
 =declararparm   ListaVazia     int  1
 =declararparm   FimLista       int  2
@@ -26,8 +25,33 @@
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
 
+=declararparm   CriterioExibir int  1
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores          "..\\scripts\\Lista"
+=iniciarcontagem
+
+== Verificar espaços alocados
+=verificartodosespacos       1
+=obternumeroespacosalocados  0
+
 == Criar a lista 0
-=criarlista      lista0 
+=criarlista      lista0
+
+== Verificar espaços alocados, 1 deles já contou
+=verificartodosespacos       1
+=obternumeroespacosalocados  1
+
+== Controlar vazamento de memória
+=exibirtodosespacos            CriterioExibir
+=verificartodosespacos         CriterioExibir
+=obternumeroespacosalocados    1	// cabeca da lista criada
+
+== Verificar contadores, 1 deles já contou
+=verificarcontagens    11
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=AceitaFalhasAcumuladas 11
 
 == Verificar ObterValor relativo a lista vazia
 =obtervalorelem  lista0   "???"     		pNULL
@@ -38,23 +62,66 @@
 =obtervalorelem  lista0   "15618~sdq´"     	pNULL
 =obtervalorelem  lista0   "*@&!¨#(*][;/"    pNULL
 
+== Verificar contadores, 2 deles já contou
+=verificarcontagens    10
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  6
+=AceitaFalhasAcumuladas 10
+
 == Inserir elemento em lista vazia
 =inselemantes    lista0   str0   OK
 =obtervalorelem  lista0   str0   pNaoNULL
+
+== Verificar contadores, 3 deles já contou
+=verificarcontagens    9
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  7
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 9
 
 == Inserir elemento após primeiro
 =irinicio		 lista0
 =inselemapos     lista0   str1   OK
 =obtervalorelem  lista0   str1   pNaoNULL
 
+== Verificar contadores, 5 deles já contou
+=verificarcontagens    7
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  8
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 7
+
 == Inserir elemento antes do último
 =irfinal		 lista0
 =inselemantes    lista0   str2   OK
 =obtervalorelem  lista0   str2   pNaoNULL
 
+== Verificar contadores, 6 deles já contou
+=verificarcontagens    6
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  9
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 6
+
 == Excluir elemento corrente
 =obtervalorelem  lista0   str2   pNaoNULL
 =excluirelem     lista0             OK
+
+== Verificar contadores, 7 deles já contou
+=verificarcontagens    5
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  10
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  1
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 5
 
 == Excluir elemento do início
 =irinicio		 lista0
@@ -66,28 +133,79 @@
 =obtervalorelem  lista0   str1   pNaoNULL
 =excluirelem     lista0             OK
 
+== Verificar contadores, 7 deles já contou
+=verificarcontagens    5
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  12
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=AceitaFalhasAcumuladas 5
+
 == Ver se a lista ficou vazia
 =irinicio		 lista0
 =obtervalorelem  lista0   "???"     pNULL
 =avancarelem	 lista0	  1 	ListaVazia
 
-== Destruir a lista
+== Verificar contadores, 8 deles já contou
+=verificarcontagens    4
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  13
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 4
+
+== Destruir a lista (chama a LIS_EsvaziarLista)
 =destruirlista   lista0
 =irinicio lista0
 =recuperar
+
+== Verificar contadores, 10 deles já contou
+=verificarcontagens    2
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  13
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  1
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 2
 
 == Criar uma lista com quatro elementos
 =criarlista      lista1 
 =inselemapos     lista1   str0   	OK
 =inselemapos     lista1   str1   	OK
-=inselemapos     lista1   str4   		OK
+=inselemapos     lista1   str4   	OK
 =inselemapos     lista1   "@"	  	OK
 
 == Esvaziar a lista e ver se ficou vazia
 =esvaziarlista   lista1
 =obtervalorelem  lista1   "???"     pNULL
 
-== Destruir a lista
+== Verificar contadores, 10 deles já contou
+=verificarcontagens    2
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  2
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  14
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  5
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  1
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=AceitaFalhasAcumuladas 2
+
+== Destruir a lista (chama a LIS_EsvaziarLista)
 =destruirlista   lista1
 
 == Criar uma lista com quatro elementos
@@ -96,6 +214,20 @@
 =inselemapos     lista2   str1   OK
 =inselemapos     lista2   str2   OK
 =inselemapos     lista2   str3   OK
+
+== Verificar contadores, 10 deles já contou
+=verificarcontagens    2
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  3
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  14
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  9
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=AceitaFalhasAcumuladas 2
 
 == Verificar a lista de trás para diante
 =irfinal		 lista2
@@ -118,6 +250,20 @@
 =obtervalorelem  lista2   str3   pNaoNULL
 =avancarelem     lista2   1      FimLista
 
+== Verificar contadores, 10 deles já contou
+=verificarcontagens    2
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  3
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  22
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  9
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  9
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  2
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=AceitaFalhasAcumuladas 2
+
 == Verificar a lista andando demais de trás para diante
 =irfinal		 lista2
 =avancarelem     lista2   -10     FimLista
@@ -128,7 +274,55 @@
 =avancarelem     lista2   10     FimLista
 =obtervalorelem  lista2   str3   pNaoNULL
 
-== Destruir a lista
+== Destruir a lista (chama a LIS_EsvaziarLista)
 =destruirlista   lista2
+
+== Verificar contadores, 10 deles já contou
+=verificarcontagens    2
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  3
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  24
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  9
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  11
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  4
+=AceitaFalhasAcumuladas 2
+
+== Obter quantidade de elementos de uma lista
+=criarlista 	lista3
+=inselemapos    lista3   str0   	OK
+=inselemapos    lista3   str1   	OK
+=inselemapos    lista3   str4   	OK
+=inselemapos    lista3   "@"	  	OK
+=obterqtdelem	lista3
+
+== Excluir ponteiro para elemento corrente de uma lista (chama a LIS_ObterValor)
+=excluirptrparaelem lista3
+
+== Verificar contadores, 12 deles já contou
+=verificarcontagens    0
+=contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  4
+=contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  25
+=contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  13
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
+=contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  11
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  3
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  4
+=contagemcontador   "LIS_ExcluirPtrParaElemento - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=contagemcontador   "LIS_ObterQtdElem - Entrou, declarou variaveis e assertou pLista != NULL"  1
+=AceitaFalhasAcumuladas 0
+
+== Terminar controlar contadores
+=pararcontagem
+=verificarcontagens    0
+
+== Terminar contagem
+=terminarcontadores
 
 // fim
