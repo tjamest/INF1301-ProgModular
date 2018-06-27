@@ -47,7 +47,6 @@ static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"        ; //11
 static const char EXCLUIR_PTR_ELEM_CMD    [ ] = "=excluirptrparaelem" ; //12
 static const char OBTER_QTD_ELEM_CMD      [ ] = "=obterqtdelem"       ; //13
 
-
 #define TRUE  1
 #define FALSE 0
 

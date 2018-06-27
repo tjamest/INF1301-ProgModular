@@ -293,46 +293,46 @@ LIS_tpCondRet LIS_ExcluirElemento( LIS_tppLista pLista )
 ***************************************************************************/
 LIS_tpCondRet LIS_ExcluirPtrParaElemento( LIS_tppLista pLista )
 {
-      tpElemLista *pElem ;
+  tpElemLista *pElem ;
 
-      #ifdef _DEBUG
-        assert( pLista  != NULL ) ;
-        CNT_CONTAR("LIS_ExcluirPtrParaElemento - Entrou, declarou variaveis e assertou pLista != NULL") ;
-      #endif
+  #ifdef _DEBUG
+    assert( pLista  != NULL ) ;
+    CNT_CONTAR("LIS_ExcluirPtrParaElemento - Entrou, declarou variaveis e assertou pLista != NULL") ;
+  #endif
 
-      if ( pLista->pElemCorr == NULL )
-      {
-         return LIS_CondRetListaVazia ;
-      } //fim if
+  if ( pLista->pElemCorr == NULL )
+  {
+     return LIS_CondRetListaVazia ;
+  } //fim if
 
-      pElem = pLista->pElemCorr ;
+  pElem = pLista->pElemCorr ;
 
-      // Desencadeia à esquerda
+  // Desencadeia à esquerda
 
-         if ( pElem->pAnt != NULL )
-         {
-            pElem->pAnt->pProx   = pElem->pProx ;
-            pLista->pElemCorr    = pElem->pAnt ;
-         } else {
-            pLista->pElemCorr    = pElem->pProx ;
-            pLista->pOrigemLista = pLista->pElemCorr ;
-         } //fim if
+     if ( pElem->pAnt != NULL )
+     {
+        pElem->pAnt->pProx   = pElem->pProx ;
+        pLista->pElemCorr    = pElem->pAnt ;
+     } else {
+        pLista->pElemCorr    = pElem->pProx ;
+        pLista->pOrigemLista = pLista->pElemCorr ;
+     } //fim if
 
-      // Desencadeia à direita
+  // Desencadeia à direita
 
-         if ( pElem->pProx != NULL )
-         {
-            pElem->pProx->pAnt = pElem->pAnt ;
-         } else
-         {
-            pLista->pFimLista = pElem->pAnt ;
-         } //fim if
+     if ( pElem->pProx != NULL )
+     {
+        pElem->pProx->pAnt = pElem->pAnt ;
+     } else
+     {
+        pLista->pFimLista = pElem->pAnt ;
+     } //fim if
 
-      free(pElem) ;
+  free(pElem) ;
 
-	  pLista->numElem-- ;
+pLista->numElem-- ;
 
-      return LIS_CondRetOK ;
+return LIS_CondRetOK ;
 
 } /**** Fim função: LIS &Excluir ponteiro para elemento ****************/
 
@@ -563,6 +563,10 @@ tpElemLista * CriarElemento( LIS_tppLista pLista, void * pValor  ) {
   pElem->pProx  = NULL  ;
 
   pLista->numElem ++ ;
+
+  #ifdef _DEBUG
+ 	  CED_DefinirTipoEspaco( pElem, LIS_TipoEspacoElemLista ) ;
+  #endif
 
   return pElem ;
 

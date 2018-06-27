@@ -1,7 +1,7 @@
 // Script:    TesteLista.script
 // Autor:     Arndt von Staa
 // Data:      02/abr/2008
-// Propósito: Testar superficialmente o módulo lista genérica duplamente encadeada
+// Propósito: Testar o módulo lista genérica duplamente encadeada
 //
 
 == Inicializar valores
@@ -25,7 +25,12 @@
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
 
-=declararparm   CriterioExibir int  1
+=declararparm   ExibirTodos int  1
+=declararparm   ExibirAtivos int  2
+=declararparm   ExibirInativos int  3
+
+=declararparm   ComErro int 0
+=declararparm   SemErro int 1
 
 == Iniciar contagem
 =inicializarcontadores  ""
@@ -33,20 +38,18 @@
 =iniciarcontagem
 
 == Verificar espaços alocados
-=verificartodosespacos       1
+=verificartodosespacos       SemErro
 =obternumeroespacosalocados  0
 
 == Criar a lista 0
 =criarlista      lista0
 
 == Verificar espaços alocados, 1 deles já contou
-=verificartodosespacos       1
-=obternumeroespacosalocados  1
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  1 // cabeca da lista criada
 
 == Controlar vazamento de memória
-=exibirtodosespacos            CriterioExibir
-=verificartodosespacos         CriterioExibir
-=obternumeroespacosalocados    1	// cabeca da lista criada
+=exibirtodosespacos	ExibirTodos
 
 == Verificar contadores, 1 deles já contou
 =verificarcontagens    11
@@ -71,6 +74,13 @@
 == Inserir elemento em lista vazia
 =inselemantes    lista0   str0   OK
 =obtervalorelem  lista0   str0   pNaoNULL
+
+== Verificar espaços alocados, 3 deles já contou
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  3 //cabeca da lista e elemento criado (2 pra cada elemento)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
 
 == Verificar contadores, 3 deles já contou
 =verificarcontagens    9
@@ -97,6 +107,13 @@
 =irfinal		 lista0
 =inselemantes    lista0   str2   OK
 =obtervalorelem  lista0   str2   pNaoNULL
+
+== Verificar espaços alocados, 7 deles já contou
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  7 //cabeca da lista e 3 elementos criado (2 pra cada elemento)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
 
 == Verificar contadores, 6 deles já contou
 =verificarcontagens    6
@@ -166,6 +183,13 @@
 =irinicio lista0
 =recuperar
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 //lista e elementos liberados
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
+
 == Verificar contadores, 10 deles já contou
 =verificarcontagens    2
 =contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  1
@@ -186,6 +210,13 @@
 =inselemapos     lista1   str1   	OK
 =inselemapos     lista1   str4   	OK
 =inselemapos     lista1   "@"	  	OK
+
+== Verificar espaços alocados, 9 deles já contou
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  9 //cabeca da lista e 4 elementos criado (2 pra cada elemento)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
 
 == Esvaziar a lista e ver se ficou vazia
 =esvaziarlista   lista1
@@ -208,12 +239,26 @@
 == Destruir a lista (chama a LIS_EsvaziarLista)
 =destruirlista   lista1
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 //lista e elementos liberados
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
+
 == Criar uma lista com quatro elementos
 =criarlista      lista2 
 =inselemapos     lista2   str0   OK
 =inselemapos     lista2   str1   OK
 =inselemapos     lista2   str2   OK
 =inselemapos     lista2   str3   OK
+
+== Verificar espaços alocados, 9 deles já contou
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  9 //cabeca da lista e 4 elementos criado (2 pra cada elemento)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
 
 == Verificar contadores, 10 deles já contou
 =verificarcontagens    2
@@ -277,6 +322,13 @@
 == Destruir a lista (chama a LIS_EsvaziarLista)
 =destruirlista   lista2
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 //lista e elementos liberados
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
+
 == Verificar contadores, 10 deles já contou
 =verificarcontagens    2
 =contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  3
@@ -297,23 +349,44 @@
 =inselemapos    lista3   str1   	OK
 =inselemapos    lista3   str4   	OK
 =inselemapos    lista3   "@"	  	OK
+=inselemapos    lista3   "paulista"	OK
+=inselemapos    lista3   "ouros"	OK
+=inselemapos    lista3   "king"	  	OK
 =obterqtdelem	lista3
 
+== Verificar espaços alocados, 15 deles já contou
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  15 //cabeca da lista e 7 elementos criado (2 pra cada elemento)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
+
 == Excluir ponteiro para elemento corrente de uma lista (chama a LIS_ObterValor)
+=irinicio		 lista3
 =excluirptrparaelem lista3
+
+== Destruir a lista (chama a LIS_EsvaziarLista)
+=destruirlista   lista3
+
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  1 	//de 'excluirptrparaelem', usado na funcao BAR_TransferirCarta (deve permancer alocado)
+
+== Controlar vazamento de memória
+=exibirtodosespacos            ExibirTodos
 
 == Verificar contadores, 12 deles já contou
 =verificarcontagens    0
 =contagemcontador   "LIS_CriarLista - Entrou e declarou variaveis"  4
 =contagemcontador   "LIS_ObterValor - Entrou e assertou pLista != NULL"  25
 =contagemcontador   "LIS_InserirElementoAntes - Entrou, declarou variaveis e assertou pLista != NULL"  2
-=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  13
-=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_InserirElementoApos - Entrou, declarou variaveis e assertou pLista != NULL"  16
+=contagemcontador   "LIS_IrInicioLista - Entrou e assertou pLista != NULL"  5
 =contagemcontador   "LIS_IrFinalLista - Entrou e assertou pLista != NULL"  4
 =contagemcontador   "LIS_ExcluirElemento - Entrou, declarou variaveis e assertou pLista != NULL"  3
 =contagemcontador   "LIS_AvancarElementoCorrente - Entrou, declarou variaveis e assertou pLista != NULL"  11
-=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  3
-=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  4
+=contagemcontador   "LIS_DestruirLista - Entrou e assertou pLista != NULL"  4
+=contagemcontador   "LIS_EsvaziarLista - Entrou, declarou variaveis e assertou pLista != NULL"  5
 =contagemcontador   "LIS_ExcluirPtrParaElemento - Entrou, declarou variaveis e assertou pLista != NULL"  1
 =contagemcontador   "LIS_ObterQtdElem - Entrou, declarou variaveis e assertou pLista != NULL"  1
 =AceitaFalhasAcumuladas 0

@@ -24,9 +24,10 @@
 #include "LISTA.h"
 
 #ifdef _DEBUG
-   #include "Generico.h"
-   #include "Conta.h"
-   #include "..\\tabelas\\IdTiposEspaco.def"
+   	#include "Generico.h"
+	#include "CEspDin.h"
+   	#include "Conta.h"
+   	#include "..\\tabelas\\IdTiposEspaco.def"
 #endif
 
 //jogadores
@@ -322,6 +323,13 @@ MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores)
 	
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_DistribuirMaos - Depois de sair do switch e antes de retornar") ;
+		CED_DefinirTipoEspaco( pCabecaBaralho, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao1, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao2, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao3, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao4, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao5, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao6, LIS_TipoEspacoLista ) ;
 	#endif
 
 	return MES_CondRetOK ;
@@ -784,6 +792,15 @@ MES_tpCondRet MES_TransferirTodasCartasProLixo (LIS_tppLista pCabecaSuperior) {
 
 	#ifdef _DEBUG
 		CNT_CONTAR("MES_TransferirTodasCartasProLixo - Antes de retornar") ;
+		CED_DefinirTipoEspaco( pCabecaBaralho, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao1, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao2, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao3, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao4, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao5, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao6, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaLixo, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMesa, LIS_TipoEspacoLista ) ;
 	#endif
 
 	return MES_CondRetOK ;
@@ -957,6 +974,15 @@ int MES_DeterminarResultado (LIS_tppLista pCabecaSuperior, int quemJoga, int que
 		} //fim else "se a carta apostada nao for manilha"
 
 	} //fim for
+
+	#ifdef _DEBUG
+		CED_DefinirTipoEspaco( pCartaVira, LIS_TipoEspacoElemLista ) ;
+		CED_DefinirTipoEspaco( pCartaAposta, LIS_TipoEspacoElemLista ) ;
+		CED_DefinirTipoEspaco( pCartaQueEmpatou, LIS_TipoEspacoElemLista ) ;
+		CED_DefinirTipoEspaco( pCartaMesa, LIS_TipoEspacoElemLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMao, LIS_TipoEspacoLista ) ;
+		CED_DefinirTipoEspaco( pCabecaMesa, LIS_TipoEspacoLista ) ;
+	#endif
 
 	//se venceu todas cartas colocadas na mesa
 	if (qtdCartasVencidas == MES_ObterQtdCartas(pCabecaMesa, SEM_PRIMEIRA, SEM_ULTIMA)) {
