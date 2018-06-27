@@ -25,6 +25,7 @@
 
 #ifdef _DEBUG
    #include   "Generico.h"
+   #include   "CEspDin.h"
    #include   "Conta.h"
    #include   "..\\tabelas\\IdTiposEspaco.def"
 #endif
@@ -182,6 +183,10 @@ LIS_tppLista BAR_CriarBaralho() {
 	#ifdef _DEBUG
 		assert( pCabecaBaralho != NULL ) ;
 	#endif
+	
+	#ifdef _DEBUG
+		CED_DefinirTipoEspaco(pCabecaBaralho, BAR_TipoEspacoBaralho) ;
+	#endif
 
 	return pCabecaBaralho ;
    
@@ -255,6 +260,10 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 	//atribui valor e naipe a um tipo carta
 	pCarta->valor = valor ;
 	pCarta->naipe = naipe ;
+	
+	#ifdef _DEBUG
+		CED_DefinirTipoEspaco(pCarta, BAR_TipoEspacoCarta) ;
+	#endif
 	
 	//retorna um ponteiro pra um tipo carta
 	return pCarta ;
