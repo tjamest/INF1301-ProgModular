@@ -70,11 +70,12 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 ***********************************************************************/
 
    typedef enum {
-         LIS_CondRetOK ,			// Concluiu corretamente
-         LIS_CondRetListaVazia ,	// A lista não contém elementos
-         LIS_CondRetFimLista ,		// Foi atingido o fim de lista
-         LIS_CondRetNaoAchou ,		// Não encontrou o valor procurado
-         LIS_CondRetFaltouMemoria	// Faltou memória ao tentar criar um elemento de lista
+         LIS_CondRetOK ,			// 0 Concluiu corretamente
+         LIS_CondRetListaVazia ,	// 1 A lista não contém elementos
+         LIS_CondRetFimLista ,		// 2 Foi atingido o fim de lista
+         LIS_CondRetNaoAchou ,		// 3 Não encontrou o valor procurado
+         LIS_CondRetFaltouMemoria ,	// 4 Faltou memória ao tentar criar um elemento de lista
+         LIS_CondRetErroEstrutura	// 5 Erro na estrutura da lista
    } LIS_tpCondRet ;
 
 
@@ -304,11 +305,31 @@ int LIS_ObterQtdElem(LIS_tppLista pLista) ;
 *	  Consequentemente permite a transferência de cartas entre baralhos.
 *
 *  $EP Parâmetros
+*	  Ponteiro pra lista contendo o elemento corrente a ser excluido.
 *
 *  $FV Valor retornado
-*
+*     LIS_CondRetOK  - se excluiu.
+*     LIS_CondRetNaoExcluiuPtrParaElem - se nao excluiu.
 ***********************************************************************/
 LIS_tpCondRet LIS_ExcluirPtrParaElemento(LIS_tppLista pLista) ;
+
+/***********************************************************************
+*  $FC Função: LIS  &Verificar cabeca
+*
+*  $ED Descrição da função
+***********************************************************************/
+#ifdef _DEBUG
+LIS_tpCondRet LIS_VerificarCabeca( void * pCabecaParm ) ;
+#endif
+
+/***********************************************************************
+*  $FC Função: LIS  &Verificar lista
+*
+*  $ED Descrição da função
+***********************************************************************/
+#ifdef _DEBUG
+LIS_tpCondRet LIS_VerificarLista( void * pListaParm ) ;
+#endif
 
 
 #undef LISTA_EXT

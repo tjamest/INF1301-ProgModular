@@ -21,6 +21,7 @@
 =declararparm   FimLista       int  2
 =declararparm   NaoAchou       int  3
 =declararparm   FaltouMemoria  int  4
+=declararparm	ErroEstrutura  int  5
 
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
@@ -40,6 +41,9 @@
 == Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  0
+
+== Verificar lista
+=verificarlista lista0 OK
 
 == Criar a lista 0
 =criarlista      lista0
@@ -78,9 +82,6 @@
 == Verificar espaços alocados, 3 deles já contou
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  3 //cabeca da lista e elemento criado (2 pra cada elemento)
-
-== Controlar vazamento de memória
-=exibirtodosespacos            ExibirTodos
 
 == Verificar contadores, 3 deles já contou
 =verificarcontagens    9

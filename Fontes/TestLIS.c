@@ -47,6 +47,13 @@ static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"        ; //11
 static const char EXCLUIR_PTR_ELEM_CMD    [ ] = "=excluirptrparaelem" ; //12
 static const char OBTER_QTD_ELEM_CMD      [ ] = "=obterqtdelem"       ; //13
 
+#ifdef _DEBUG
+  static const char VER_CABECA_CMD        [ ] = "=verificarcabeca"    ; //14
+  static const char VER_LISTA_CMD         [ ] = "=verificarlista"     ; //15
+  static const char VER_MEMORIA_CMD       [ ] = "=verificarmemoria"   ; //16
+  static const char DETURPAR_CMD          [ ] = "=deturpar"           ; //17
+#endif
+
 #define TRUE  1
 #define FALSE 0
 
@@ -307,13 +314,35 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste ) {
 
     numLidos = LER_LerParametros( "i" , &inxLista) ;
 
-    if ( ( numLidos != 1 ) || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) ) {
+    if ( ( numLidos != 1 ) || ( ! ValidarInxLista( inxLista, NAO_VAZIO )) ) {
        return TST_CondRetParm ;
     }
 
     if (LIS_ObterQtdElem (vtListas[inxLista]) < 0 ) {
       return TST_CondRetErro ;
     }
+
+    return TST_CondRetOK ;
+
+  case 14: //VERIFICARCABECA
+
+    return TST_CondRetOK ;
+
+  case 15: //VERIFICARLISTA
+
+    NumLidos = LER_LerParametros("ii", &inxLista, &CondRetEsperada) ;
+
+    if ( ( NumLidos != 2 ) || !VerificarInx( inxLista )) {
+      return TST_CondRetParm ;
+    }
+
+    return TST_CompararInt(CondRetEsperada, LIS_VerificarLista(vtListas[inxLista]), "Retorno incorreto ao verificar lista.") ;
+
+  case 16: //VERIFICARMEMORIA
+
+    return TST_CondRetOK ;
+
+  case 17: //DETURPAR
 
     return TST_CondRetOK ;
 
@@ -363,7 +392,7 @@ int ValidarInxLista( int inxLista , int Modo ) {
 } /* Fim função: TLIS -Validar indice de lista */
 
 /***************************************************************************
-*  $FC Função: Identificar Comando
+*  $FC Função: TLIS -Identificar Comando
 ***************************************************************************/
 int IdentificarComando( char * ComandoTeste ) {
 
@@ -430,6 +459,26 @@ int IdentificarComando( char * ComandoTeste ) {
   //OBTER QTD DE ELEMENTOS (se o comando for "obterqtdelem")
   else if ( strcmp( ComandoTeste , OBTER_QTD_ELEM_CMD ) == 0 ) {
     return 13 ;
+  }
+
+  //VERIFICAR CABECA (se o comando for "verificarcabeca")
+  else if ( strcmp( ComandoTeste , VER_CABECA_CMD ) == 0 ) {
+    return 14 ;
+  }
+
+  //VERIFICAR LISTA (se o comando for "verificarlista")
+  else if ( strcmp( ComandoTeste , VER_LISTA_CMD ) == 0 ) {
+    return 15 ;
+  }
+
+  //VERIFICAR MEMORIA (se o comando for "verificarmemoria")
+  else if ( strcmp( ComandoTeste , VER_MEMORIA_CMD ) == 0 ) {
+    return 16 ;
+  }
+
+  //DETURPAR (se o comando for "deturpar")
+  else if ( strcmp( ComandoTeste , DETURPAR_CMD ) == 0 ) {
+    return 17 ;
   }
 
   //COMANDO NAO EXISTE
