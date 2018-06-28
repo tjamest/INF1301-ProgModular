@@ -17,8 +17,7 @@
 *
 ***************************************************************************/
 
-	  BAR_TipoEspacoBaralho ,
-      BAR_TipoEspacoCarta , 
+      BAR_TipoEspacoCarta
 
 /********** Fim do arquivo de definição: TiposEspacosBaralho.def  **********/
 

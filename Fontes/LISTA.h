@@ -318,7 +318,7 @@ LIS_tpCondRet LIS_ExcluirPtrParaElemento(LIS_tppLista pLista) ;
 *
 *  $ED Descrição da função
 ***********************************************************************/
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 LIS_tpCondRet LIS_VerificarCabeca( void * pCabecaParm ) ;
 #endif
 
@@ -327,11 +327,20 @@ LIS_tpCondRet LIS_VerificarCabeca( void * pCabecaParm ) ;
 *
 *  $ED Descrição da função
 ***********************************************************************/
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 LIS_tpCondRet LIS_VerificarLista( void * pListaParm ) ;
 #endif
 
 
+/***********************************************************************
+*  $FC Função: LIS  &Verificar elemento
+*
+*  $ED Descrição da função
+***********************************************************************/
+/*#ifdef _DEBUG
+LIS_tpCondRet LIS_VerificarElem( void * pElemParm )
+#endif
+*/
 #undef LISTA_EXT
 
 /********** Fim do módulo de definição: LIS  Lista duplamente encadeada **********/

@@ -18,7 +18,7 @@
 ***************************************************************************/
 
       LIS_TipoEspacoLista , 
-      LIS_TipoEspacoElemLista    ,
+      LIS_TipoEspacoElemLista ,
 
 /********** Fim do arquivo de definição: TiposEspacosLista.def  **********/
 

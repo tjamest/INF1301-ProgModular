@@ -18,7 +18,7 @@ Interface
 
 
 [BuildInicio]
-/OUT:..\JogoDeTruco.exe
+/OUT:..\Produto\JogoDeTruco.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

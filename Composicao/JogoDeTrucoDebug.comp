@@ -17,7 +17,7 @@ Mesa
 Interface 	/D_DEBUG
 
 [BuildInicio]
-/OUT:..\JogoDeTrucoDebug.exe
+/OUT:..\Produto\JogoDeTrucoDebug.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 

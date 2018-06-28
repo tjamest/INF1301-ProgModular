@@ -591,15 +591,14 @@ void LimparCabeca( LIS_tppLista pLista ) {
 /***************************************************************************
 *  $FC Função: LIS  -Verificar lista
 ***************************************************************************/
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 LIS_tpCondRet LIS_VerificarLista( void * pListaParm ) {
 
   LIS_tpLista * pLista = NULL ;
 
-  if ( LIS_VerificarCabeca( pListaParm ) != LIS_CondRetOK )
-  {
+  if ( LIS_VerificarCabeca( pListaParm ) != LIS_CondRetOK ) {
      return LIS_CondRetErroEstrutura ;
-  } /* if */
+  }
 
   CED_MarcarEspacoAtivo( pListaParm ) ;
 
@@ -608,12 +607,12 @@ LIS_tpCondRet LIS_VerificarLista( void * pListaParm ) {
   return VerificarElem( pLista->pElemCorr ) ;
 
 } /**************** Fim função: LIS -Verificar lista ***********************/
-#endif
+//#endif
 
 /***************************************************************************
 *  $FC Função: LIS  -Verificar cabeca
 ***************************************************************************/
-#ifdef _DEBUG
+/*#ifdef _DEBUG
 LIS_tpCondRet LIS_VerificarCabeca( void * pCabecaParm ) {
 
   tpLista * pLista = NULL ;
@@ -666,109 +665,92 @@ LIS_tpCondRet LIS_VerificarCabeca( void * pCabecaParm ) {
   return LIS_CondRetOK ;
 
 } /* Fim função: LIS  &Verificar um nó cabeça */
-#endif
+//#endif
 
 /***************************************************************************
 *  $FC Função: LIS  -Verificar elemento
 ***************************************************************************/
+/*
+#ifdef _DEBUG
+LIS_tpCondRet LIS_VerificarElem( void * pElemParm ) {
 
-ARV_tpCondRet ARV_VerificarElem( void * pNoParm ) {
+  tpElemLista * pElem = NULL ;
+  LIS_tpLista * pLista = NULL ;
 
-  tpNoArvore * pNo     = NULL ;
-  tpArvore   * pArvore = NULL ;
-
-  	// Verificar se é nó estrutural
-
-	if ( pNoParm == NULL )
-	{
-		TST_NotificarFalha( "Tentou verificar nó inexistente." ) ;
-		return ARV_CondRetErroEstrutura ;
-
+  	//Verificar se é nó estrutural
+	if ( pElemParm == NULL ) {
+		TST_NotificarFalha( "Tentou verificar elemento inexistente." ) ;
+		return LIS_CondRetErroEstrutura ;
 	}
 
-	if ( ! CED_VerificarEspaco( pNoParm , NULL ))
-	{
+	if ( ! CED_VerificarEspaco( pElemParm , NULL )) {
 		TST_NotificarFalha( "Controle do espaço acusou erro." ) ;
-		return ARV_CondRetErroEstrutura ;
+		return LIS_CondRetErroEstrutura ;
 	}
 
-	if ( TST_CompararInt( ARV_TipoEspacoNo , CED_ObterTipoEspaco( pNoParm ) ,
-	  	 "Tipo do espaço de dados não é nó de árvore." ) != TST_CondRetOK )
-	{
-		return ARV_CondRetErroEstrutura ;
-	} /* if */
+	if ( TST_CompararInt( LIS_TipoEspacoElemLista, CED_ObterTipoEspaco( pElemParm ) ,
+	  	 				  "Tipo do espaço de dados não é elemento de lista." ) != TST_CondRetOK ) {
+		return LIS_CondRetErroEstrutura ;
+	}
 
-	pNo     = ( tpNoArvore * )( pNoParm ) ;
-	pArvore = pNo->pCabeca ;
+	pElem  = ( tpElemLista * )( pElemParm ) ;
+	//pLista = pNo->pCabeca ;
 
-  /* Verificar cabeça */
+  	//Verificar cabeça
+	if ( pArvore->pNoRaiz != NULL  ) {
+		if ( TST_CompararPonteiro( pArvore , pArvore->pNoRaiz->pCabeca ,
+		     "Nó não pertence à árvore." ) != TST_CondRetOK ) {
+		   return LIS_CondRetErroEstrutura ;
+		}
+	} 
+	else {
+		return TST_NotificarFalha( "Nó pertence a árvore vazia." ) ;
+	}
 
-     if ( pArvore->pNoRaiz != NULL  )
-     {
-        if ( TST_CompararPonteiro( pArvore , pArvore->pNoRaiz->pCabeca ,
-             "Nó não pertence à árvore." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-     } else
-     {
-        return TST_NotificarFalha( "Nó pertence a árvore vazia." ) ;
-     } /* if */
+  	//Verificar pai
+	if ( pNo->pNoPai != NULL ) {
+		if ( ( pNo->pNoPai->pNoEsq != pNo ) && ( pNo->pNoPai->pNoDir != pNo )) {
+	   		return LIS_CondRetErroEstrutura ;
+		}
+	}
+	else {
+		if ( TST_CompararPonteiro( pNo , pArvore->pNoRaiz ,
+		     "Nó raiz não é apontado por cabeça da árvore." ) != TST_CondRetOK ) {
+			return LIS_CondRetErroEstrutura ;
+		}
+	}
 
-  /* Verificar pai */
+  	// Verificar filho à esquerda
+	if ( pNo->pNoEsq != NULL ) {
+		if ( TST_CompararPonteiro( pNo , pNo->pNoEsq->pNoPai ,
+		     "Pai de filho à esquerda não é este nó." ) != TST_CondRetOK ) {
+	   		return LIS_CondRetErroEstrutura ;
+		}
+		if ( TST_CompararPonteiro( pArvore , pNo->pNoEsq->pCabeca ,
+		     "Filho à esquerda não pertence à mesma árvore." ) != TST_CondRetOK ) {
+	   		return LIS_CondRetErroEstrutura ;
+		}
+	}
 
-     if ( pNo->pNoPai != NULL )
-     {
-        if ( ( pNo->pNoPai->pNoEsq != pNo )
-          && ( pNo->pNoPai->pNoDir != pNo ))
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-     } else
-     {
-        if ( TST_CompararPonteiro( pNo , pArvore->pNoRaiz ,
-             "Nó raiz não é apontado por cabeça da árvore." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-     } /* if */
-
-  /* Verificar filho à esquerda */
-
-     if ( pNo->pNoEsq != NULL )
-     {
-        if ( TST_CompararPonteiro( pNo , pNo->pNoEsq->pNoPai ,
-             "Pai de filho à esquerda não é este nó." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-        if ( TST_CompararPonteiro( pArvore , pNo->pNoEsq->pCabeca ,
-             "Filho à esquerda não pertence à mesma árvore." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-     } /* if */
-
-  /* Verificar filho à direita */
-
-     if ( pNo->pNoDir != NULL )
-     {
+  	// Verificar filho à direita
+    if ( pNo->pNoDir != NULL )
+    {
         if ( TST_CompararPonteiro( pNo , pNo->pNoDir->pNoPai ,
-             "Pai de filho à direita não é este nó." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
+             "Pai de filho à direita não é este nó." ) != TST_CondRetOK ) {
+           return LIS_CondRetErroEstrutura ;
+        }
         if ( TST_CompararPonteiro( pArvore , pNo->pNoDir->pCabeca ,
-             "Filho à direita não pertence à mesma árvore." ) != TST_CondRetOK )
-        {
-           return ARV_CondRetErroEstrutura ;
-        } /* if */
-     } /* if */
+             "Filho à direita não pertence à mesma árvore." ) != TST_CondRetOK ) {
+           return LIS_CondRetErroEstrutura ;
+        }
+    }
 
-  return ARV_CondRetOK ;
 
-} /* Fim função: ARV  &Verificar um nó de estrutura */
+  return LIS_CondRetOK ;
 
+} // Fim função: LIS  &Verificar um elemento de estrutura
+#endif
+*/
 
 /************* FIM DO MÓDULO DE IMPLEMENTAÇÃO: LIS Lista ******************/
 
