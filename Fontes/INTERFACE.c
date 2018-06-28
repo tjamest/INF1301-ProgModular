@@ -926,8 +926,17 @@ int main (void) {
 			/*
 			//MAO DE ONZE
 			else if (pontosPartidaPar == 11 || pontosPartidaImpar == 11) {
+				
 
-				//PrintarTelaMaoDeOnze() ;
+				/*if (pontosPartidaPar == 11 && pontosPartidaImpar == 11){
+				Os jogadores veem as mãos dos seus colegas e a partida é iniciada Valendo 1 ponto mesmo pois quem fizer ganha
+				
+				
+				}*/
+				/*else
+				Apenas os jogadores com 11 pontos vê a mão do seu colega e decidem se vão ou não aceitar o truco (jogar valendo 3 pontos 
+				ou perdem 1 ponto)
+				*/
 
 
 			} //fim else if "mao de onze"
