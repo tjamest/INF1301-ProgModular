@@ -46,14 +46,14 @@ static const char IR_FIM_CMD              [ ] = "=irfinal"            ; //10
 static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"        ; //11
 static const char EXCLUIR_PTR_ELEM_CMD    [ ] = "=excluirptrparaelem" ; //12
 static const char OBTER_QTD_ELEM_CMD      [ ] = "=obterqtdelem"       ; //13
-
+/*
 #ifdef _DEBUG
   static const char VER_CABECA_CMD        [ ] = "=verificarcabeca"    ; //14
   static const char VER_LISTA_CMD         [ ] = "=verificarlista"     ; //15
   static const char VER_MEMORIA_CMD       [ ] = "=verificarmemoria"   ; //16
   static const char DETURPAR_CMD          [ ] = "=deturpar"           ; //17
 #endif
-
+*/
 #define TRUE  1
 #define FALSE 0
 
@@ -323,14 +323,14 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste ) {
     }
 
     return TST_CondRetOK ;
-
+/*
   case 14: //VERIFICARCABECA
 
     return TST_CondRetOK ;
 
   case 15: //VERIFICARLISTA
 
-    NumLidos = LER_LerParametros("ii", &inxLista, &CondRetEsperada) ;
+    numLidos = LER_LerParametros("ii", &inxLista, &CondRetEsperada) ;
 
     if ( ( NumLidos != 2 ) || !VerificarInx( inxLista )) {
       return TST_CondRetParm ;
@@ -345,7 +345,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste ) {
   case 17: //DETURPAR
 
     return TST_CondRetOK ;
-
+*/
   default: //COMANDO NAO EXISTE
 
     return TST_CondRetNaoConhec ;
@@ -460,7 +460,7 @@ int IdentificarComando( char * ComandoTeste ) {
   else if ( strcmp( ComandoTeste , OBTER_QTD_ELEM_CMD ) == 0 ) {
     return 13 ;
   }
-
+/*
   //VERIFICAR CABECA (se o comando for "verificarcabeca")
   else if ( strcmp( ComandoTeste , VER_CABECA_CMD ) == 0 ) {
     return 14 ;
@@ -480,7 +480,7 @@ int IdentificarComando( char * ComandoTeste ) {
   else if ( strcmp( ComandoTeste , DETURPAR_CMD ) == 0 ) {
     return 17 ;
   }
-
+*/
   //COMANDO NAO EXISTE
   else {
     return 0 ;

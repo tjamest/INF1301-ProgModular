@@ -58,18 +58,31 @@
 =declararparm   carta38	int 38
 =declararparm   carta39	int 39
 
+== Inicializar valores de controle de espaco dinamico
+=declararparm   ExibirTodos 	int  1
+=declararparm   ExibirAtivos 	int  2
+=declararparm   ExibirInativos 	int  3
+
+=declararparm   ComErro int 0
+=declararparm   SemErro int 1
+
 == Iniciar contagem
 =inicializarcontadores  ""
 =lercontadores          "..\\scripts\\Baralho"
 =iniciarcontagem
 
-== Verificar quantidade de contadores com zero
-=verificarcontagens 8
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0
+
+== Verificar quantidade de contadores com zero (todos)
+=verificarcontagens 9
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  0
 =contagemcontador   "BAR_CriarBaralho"  0
 =contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_DestruirBaralho"  0
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -77,7 +90,7 @@
 =contagemcontador   "BAR_ObterNaipe"  0
 
 == Verificar falhas (contador com zero eh uma falha)
-=AceitaFalhasAcumuladas 8
+=AceitaFalhasAcumuladas 9
 
 == TESTE
 =resetteste
@@ -94,13 +107,28 @@
 == Criar carta 4 de paus
 =criarcarta carta4 0 3
 
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  4 // cartas criadas
+
+== Destruir cartas criadas
+=destruircarta carta1
+=destruircarta carta2
+=destruircarta carta3
+=destruircarta carta4
+
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 // cartas destruidas
+
 == Verificar quantidade de contadores com zero
 =verificarcontagens 7
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  4
 =contagemcontador   "BAR_CriarBaralho"  0
-=contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_DestruirCarta"  4
+=contagemcontador   "BAR_DestruirBaralho"  0
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -155,6 +183,10 @@
 =criarcarta carta38 8 3
 =criarcarta carta39 9 3
 
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  40 // cartas criadas
+
 == Criar Baralhos
 =criarbaralho baralho0
 
@@ -164,7 +196,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  44
 =contagemcontador   "BAR_CriarBaralho"  1
-=contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_DestruirCarta"  4
+=contagemcontador   "BAR_DestruirBaralho"  0
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -264,7 +297,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  44
 =contagemcontador   "BAR_CriarBaralho"  1
-=contagemcontador   "BAR_DestruirCarta"  0
+=contagemcontador   "BAR_DestruirCarta"  4
+=contagemcontador   "BAR_DestruirBaralho"  0
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -316,13 +350,21 @@
 =destruircarta carta38
 =destruircarta carta39
 
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 // cartas destruidas
+
+== Destruir baralho
+=destruirbaralho baralho0
+
 == Verificar quantidade de contadores com zero
 =verificarcontagens 3
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  44
 =contagemcontador   "BAR_CriarBaralho"  1
-=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_DestruirCarta"  44
+=contagemcontador   "BAR_DestruirBaralho"  1
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -459,6 +501,51 @@
 == Obter naipe carta 23
 =obternaipe carta23
 
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  35 // cartas criadas
+
+== Destruir cartas
+=destruircarta carta5
+=destruircarta carta6
+=destruircarta carta7
+=destruircarta carta8
+=destruircarta carta9
+=destruircarta carta10
+=destruircarta carta11
+=destruircarta carta12
+=destruircarta carta13
+=destruircarta carta14
+=destruircarta carta15
+=destruircarta carta16
+=destruircarta carta17
+=destruircarta carta18
+=destruircarta carta19
+=destruircarta carta20
+=destruircarta carta21
+=destruircarta carta22
+=destruircarta carta23
+=destruircarta carta24
+=destruircarta carta25
+=destruircarta carta26
+=destruircarta carta27
+=destruircarta carta28
+=destruircarta carta29
+=destruircarta carta30
+=destruircarta carta31
+=destruircarta carta32
+=destruircarta carta33
+=destruircarta carta34
+=destruircarta carta35
+=destruircarta carta36
+=destruircarta carta37
+=destruircarta carta38
+=destruircarta carta39
+
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 // cartas destruidas
+
 == TESTE
 =resetteste
 
@@ -483,6 +570,10 @@
 =criarcarta carta37 9 0
 =criarcarta carta8 0 1
 
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  4 // cartas criadas
+
 == Obter Naipes
 =obternaipe carta10
 =obternaipe carta23
@@ -501,7 +592,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  83
 =contagemcontador   "BAR_CriarBaralho"  2
-=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_DestruirCarta"  79
+=contagemcontador   "BAR_DestruirBaralho"  1
 =contagemcontador   "BAR_PreencherVetorCartas"  0
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -510,6 +602,16 @@
 
 == Verificar falhas (contador com zero eh uma falha)
 =AceitaFalhasAcumuladas 3
+
+== Destruir cartas
+=destruircarta carta10
+=destruircarta carta23
+=destruircarta carta37
+=destruircarta carta8
+
+== Verificar espacos alocados
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  0 // cartas destruidas
 
 == TESTE
 =resetteste
@@ -523,7 +625,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  123
 =contagemcontador   "BAR_CriarBaralho"  2
-=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_DestruirCarta"  83
+=contagemcontador   "BAR_DestruirBaralho"  1
 =contagemcontador   "BAR_PreencherVetorCartas"  1
 =contagemcontador   "BAR_EmbaralharVetorCartas"  0
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -542,7 +645,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  163
 =contagemcontador   "BAR_CriarBaralho"  2
-=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_DestruirCarta"  83
+=contagemcontador   "BAR_DestruirBaralho"  1
 =contagemcontador   "BAR_PreencherVetorCartas"  1
 =contagemcontador   "BAR_EmbaralharVetorCartas"  1
 =contagemcontador   "BAR_PreencherBaralho"  0
@@ -564,7 +668,8 @@
 == Verificar quantidade de contadores contados
 =contagemcontador   "BAR_CriarCarta"  163
 =contagemcontador   "BAR_CriarBaralho"  3
-=contagemcontador   "BAR_DestruirCarta"  40
+=contagemcontador   "BAR_DestruirCarta"  83
+=contagemcontador   "BAR_DestruirBaralho"  1
 =contagemcontador   "BAR_PreencherVetorCartas"  1
 =contagemcontador   "BAR_EmbaralharVetorCartas"  1
 =contagemcontador   "BAR_PreencherBaralho"  1

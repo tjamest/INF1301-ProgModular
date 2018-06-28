@@ -22,6 +22,14 @@
 =declararparm   semultima	int 0
 =declararparm   comultima	int 1
 
+== Inicializar valores para controle de espacos
+=declararparm   ExibirTodos 	int  1
+=declararparm   ExibirAtivos 	int  2
+=declararparm   ExibirInativos 	int  3
+
+=declararparm   ComErro int 0
+=declararparm   SemErro int 1
+
 == TESTE 1 - CRIAR LISTA DE LISTAS / CRIAR TODAS MAOS  / CRIAR LIXO / CRIAR MESA / DISTRIBUIR TODAS MAOS
 =resetteste
 
@@ -84,6 +92,10 @@
 == Distribuir todas maos
 =distribuirmaos
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  7 	//baralho e maos
+
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
 =contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
@@ -132,6 +144,10 @@
 == Distribuir 4 maos
 =distribuirmaos
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  14 	//baralho e maos (2x)
+
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
 =contagemcontador   "MES_CriarListaDeListas - Depois de atribuir valor NaoNULL e antes de sair"  1
@@ -173,6 +189,10 @@
 
 == Distribuir 2 maos
 =distribuirmaos
+
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  21 	//baralho e maos (3x)
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
@@ -277,6 +297,10 @@
 == Distribuir maos
 =distribuirmaos
 
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  28	//baralho e maos (3x)
+
 == Criar mesa
 =criarmesa 6
 
@@ -285,6 +309,10 @@
 
 == Transferir todas cartas pro lixo
 =transferircartasprolixo
+
+== Verificar espaços alocados apos destruicao da lista
+=verificartodosespacos       SemErro
+=obternumeroespacosalocados  37 	//baralho e maos (3x) + todas listas
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1

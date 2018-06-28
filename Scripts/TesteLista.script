@@ -26,9 +26,9 @@
 =declararparm   pNULL          int  0
 =declararparm   pNaoNULL       int  1
 
-=declararparm   ExibirTodos int  1
-=declararparm   ExibirAtivos int  2
-=declararparm   ExibirInativos int  3
+=declararparm   ExibirTodos 	int  1
+=declararparm   ExibirAtivos 	int  2
+=declararparm   ExibirInativos 	int  3
 
 =declararparm   ComErro int 0
 =declararparm   SemErro int 1
@@ -42,13 +42,10 @@
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  0
 
-== Verificar lista
-=verificarlista lista0 OK
-
 == Criar a lista 0
 =criarlista      lista0
 
-== Verificar espaços alocados, 1 deles já contou
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  1 // cabeca da lista criada
 
@@ -109,7 +106,7 @@
 =inselemantes    lista0   str2   OK
 =obtervalorelem  lista0   str2   pNaoNULL
 
-== Verificar espaços alocados, 7 deles já contou
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  7 //cabeca da lista e 3 elementos criado (2 pra cada elemento)
 
@@ -212,7 +209,7 @@
 =inselemapos     lista1   str4   	OK
 =inselemapos     lista1   "@"	  	OK
 
-== Verificar espaços alocados, 9 deles já contou
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  9 //cabeca da lista e 4 elementos criado (2 pra cada elemento)
 
@@ -254,7 +251,7 @@
 =inselemapos     lista2   str2   OK
 =inselemapos     lista2   str3   OK
 
-== Verificar espaços alocados, 9 deles já contou
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  9 //cabeca da lista e 4 elementos criado (2 pra cada elemento)
 
@@ -355,7 +352,7 @@
 =inselemapos    lista3   "king"	  	OK
 =obterqtdelem	lista3
 
-== Verificar espaços alocados, 15 deles já contou
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  15 //cabeca da lista e 7 elementos criado (2 pra cada elemento)
 

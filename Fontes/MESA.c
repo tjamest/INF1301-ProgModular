@@ -337,12 +337,12 @@ MES_tpCondRet MES_DistribuirMaos(LIS_tppLista pCabecaSuperior, int qtdJogadores)
 } /***************** Fim função: MES &Distribuir maos ***********************/
 
 /***************************************************************************
-*  Função: MES  &Distribuir maos para testar empates
-***************************************************************************//*
+*  Função: MES  &Distribuir maos para testar empates (DEBUG)
+***************************************************************************/
+#ifdef _DEBUG
 void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJogadores) {
 
 	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
-
 	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
@@ -350,39 +350,32 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
 
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.Antes de entrar no switch") ;
-	#endif
+	CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.Antes de entrar no switch") ;
 	
 	switch (numJogadores) {
 
 	case 2:
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de entrar no case 2 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif	
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de entrar no case 2 e antes de chamar 'LIS_IrInicioLista'") ;	
 			
 		LIS_IrInicioLista(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
+
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
 
 		//preenche a mao 1
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
 
 		//preenche a mao 2
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
@@ -392,28 +385,22 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de preencher a mão 2 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depois de preencher a mão 2 e antes de chamar 'LIS_IrInicioLista'") ;
 
 		LIS_IrInicioLista(pCabecaBaralho) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depis de chamar 'LIS_IrInicioLista' e antes de sair do case 2") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.2.Depis de chamar 'LIS_IrInicioLista' e antes de sair do case 2") ;
 
 		break;
 	
 	case 4:
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de entrar no case 4 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de entrar no case 4 e antes de chamar 'LIS_IrInicioLista'") ;
 
 		LIS_IrInicioLista(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
+
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -424,18 +411,14 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao4 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
 
 		//preenche a mao 1
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
 
 		//preenche a mao 2
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
@@ -445,9 +428,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 2 e antes de preencher a mão 3") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 2 e antes de preencher a mão 3") ;
 		
 		//preenche a mao 3
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
@@ -457,9 +438,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 3 e antes de preencher a mão 4") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 3 e antes de preencher a mão 4") ;
 
 		//preenche a mao 4
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
@@ -469,28 +448,22 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 4 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de preencher a mão 4 e antes de chamar 'LIS_IrInicioLista'") ;
 
 		LIS_IrInicioLista(pCabecaBaralho) ;
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_IrInicioLista' e antes de sair do case 4") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.4.Depois de chamar 'LIS_IrInicioLista' e antes de sair do case 4") ;
 
 		break;
 	
 	case 6:
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de entrar no case 6 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de entrar no case 6 e antes de chamar 'LIS_IrInicioLista'") ;
 		
 		LIS_IrInicioLista(pCabecaSuperior) ;
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_IrInicioLista' e antes de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.'") ;
+
 		pCabecaBaralho = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
@@ -504,19 +477,15 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		pCabecaMao5 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
 		LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
 		pCabecaMao6 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
-		#endif
+			 
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_ObterValor' e 'LIS_AvancarElem.Cor.' e antes de preencher a mão 1") ;
 
 		//preenche a mao 1
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao1) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 1 e antes de preencher a mão 2") ;
 
 		//preenche a mao 2
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 7) ;
@@ -525,10 +494,8 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao2) ;
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 2 e antes de preencher a mão 3") ;
-		#endif
+
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 2 e antes de preencher a mão 3") ;
 		
 		//preenche a mao 3
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
@@ -537,10 +504,9 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao3) ;
-			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 3 e antes de preencher a mão 4") ;
-		#endif
+
+	
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 3 e antes de preencher a mão 4") ;
 
 		//preenche a mao 4
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 8) ;
@@ -550,9 +516,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao4) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 4 e antes de preencher a mão 5") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 4 e antes de preencher a mão 5") ;
 
 		//preenche a mao 5
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 2) ;
@@ -562,9 +526,7 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao5) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 5 e antes de preencher a mão 6") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 5 e antes de preencher a mão 6") ;
 
 		//preenche a mao 6
 		LIS_AvancarElementoCorrente(pCabecaBaralho, -13) ;
@@ -574,25 +536,20 @@ void MES_DistribuirMaosParaTestarEmpates(LIS_tppLista pCabecaSuperior, int numJo
 		LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
 		BAR_TransferirCarta(pCabecaBaralho, pCabecaMao6) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 6 e antes de chamar 'LIS_IrInicioLista'") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de preencher a mão 6 e antes de chamar 'LIS_IrInicioLista'") ;
 
 		LIS_IrInicioLista(pCabecaBaralho) ;
 			
-		#ifdef _DEBUG
-			CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_IrInicioLista' e antes de sair do case 6") ;
-		#endif
+		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.6.Depois de chamar 'LIS_IrInicioLista' e antes de sair do case 6") ;
 
 		break;
 
 	} //fim switch
 	
-	#ifdef _DEBUG
-		CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.Depois de sair do switch") ;
-	#endif
+	CNT_CONTAR("MES_DistribuirMaosParaTestarEmpates.Depois de sair do switch") ;
 
 } /******** Fim função: MES &Distribuir maos para testar empates **********/
+#endif
 
 /***************************************************************************
 *  Função: &Esvaziar mesa

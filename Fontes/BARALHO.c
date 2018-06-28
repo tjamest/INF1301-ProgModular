@@ -183,11 +183,7 @@ LIS_tppLista BAR_CriarBaralho() {
 	#ifdef _DEBUG
 		assert( pCabecaBaralho != NULL ) ;
 	#endif
-/*	
-	#ifdef _DEBUG
-		CED_DefinirTipoEspaco(pCabecaBaralho, LIS_TipoEspacoLista) ;
-	#endif
-*/
+
 	return pCabecaBaralho ;
    
 } /***************** Fim função: BAR &Criar baralho ***********************/
@@ -260,11 +256,11 @@ BAR_tppCarta BAR_CriarCarta (BAR_tpValorCarta valor, BAR_tpNaipeCarta naipe) {
 	//atribui valor e naipe a um tipo carta
 	pCarta->valor = valor ;
 	pCarta->naipe = naipe ;
-/*	
+	
 	#ifdef _DEBUG
 		CED_DefinirTipoEspaco(pCarta, BAR_TipoEspacoCarta) ;
 	#endif
-*/	
+	
 	//retorna um ponteiro pra um tipo carta
 	return pCarta ;
 	
@@ -305,6 +301,8 @@ void BAR_DestruirBaralho(void * pLista) {
 	#endif
 	
 	condRetLista = LIS_ExcluirElemento(pLista) ;
+
+	free(pLista);
 	
 } /************ Fim função: BAR &Destruir baralho ****************************/
 

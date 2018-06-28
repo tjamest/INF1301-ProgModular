@@ -11,6 +11,8 @@
     BAR_PreencherBaralho
     BAR_CriarCarta
     BAR_DestruirCarta
+    BAR_DestruirBaralho
     BAR_ObterValor
     BAR_ObterNaipe
+    
 	 XPTO nome adicionado para fins de teste\=-2
