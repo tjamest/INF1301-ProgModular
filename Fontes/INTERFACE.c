@@ -328,7 +328,8 @@ int main (void) {
 			pCartaAux = VetorAux[0] ;
 			#endif
 
-			if (pontosPartidaPar < 11 && pontosPartidaImpar < 11) {
+			if ((pontosPartidaPar < 11 && pontosPartidaImpar < 11) ||
+				(pontosPartidaPar == 11 && pontosPartidaImpar == 11)) {
 
 				valorRodada = 1;
 
@@ -1009,7 +1010,7 @@ int main (void) {
 						equipeComOnze = EQUIPE_IMPAR ;
 					}
 
-					while (opcao != 50) {
+					while (opcao != 50 && pontosPartidaPar != pontosPartidaImpar ) {
 
 						//embaralha o vetor de cartas (comentar em caso de testes de empate)
 						BAR_EmbaralharVetorCartas(VetorAux) ;
@@ -1039,6 +1040,7 @@ int main (void) {
 						#endif
 
 						opcao = PrintarTelaMaoDeOnze(qtdJogadores, pCabecaSuperior,
+													 pontosRodadaPar, pontosRodadaImpar,
 													 pontosPartidaPar, pontosPartidaImpar) ;
 
 						switch (opcao) {
@@ -1066,6 +1068,7 @@ int main (void) {
 							assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
 							assert (LIS_ObterQtdElem(pCabecaLixo) > 0) ;
 							printf("Todas cartas foram transferidas pro lixo.\n") ;
+							Delay();
 							#endif
 
 							break;
@@ -1075,21 +1078,21 @@ int main (void) {
 
 							#ifdef _DEBUG
 							assert (valorRodada == 3) ;
-							printf("Valor da rodada foi atualizado.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-							scanf(" %c", opcaoDebug);
+							printf("Valor da rodada foi atualizado.\n") ;
+							Delay();
 							#endif
 
 							break;
 
-						} //fim switch
+						} //fim switch "opcao"
 
-					} //fim while
+					} //fim while "opcao != 50"
 
-				} //fim if
+				} //fim if "mao de onze"
 
 			} //fim else if "mao de onze"
 				
-		} //fim while rodada
+		} //fim while "rodada"
 
 		opcao = PrintarTelaFimPartida(pCabecaSuperior, equipeVencedoraDaPartida, qtdPartidas,
 									  pontosPartidaPar, pontosPartidaImpar) ;
@@ -1493,7 +1496,12 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	}
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
-	printf(		   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	if (pontosPartidaPar < 10) {
+		printf(	   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	else {
+		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
 	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
@@ -1521,7 +1529,12 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	}
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
-	printf(		   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	if (pontosPartidaPar < 10) {
+		printf(	   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	else {
+		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
 	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	if (valorRodada < 10) {
@@ -1532,7 +1545,12 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	}
 
 	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
-	PrintarMao(pCabecaMao) ;
+	if (pontosPartidaPar != 11 && pontosPartidaImpar != 11) {
+		PrintarMao(pCabecaMao) ;
+	}
+	else {
+		printf(	   "\n                                (Mao de Ferro)\n") ;
+	}
 
 	printf(		   " \n O que deseja fazer?\n\n") ;
 
@@ -2042,7 +2060,8 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 /***************************************************************************
 *  Função: &Printar tela de correr, aceitar ou aumentar
 ***************************************************************************/
-int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,  
+int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
+						 int pontosRodadaPar, int pontosRodadaImpar,  
 						 int pontosPartidaPar, int pontosPartidaImpar) {
 
 	int equipeComOnze = INICIALIZAR ;
@@ -2067,44 +2086,67 @@ int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
 	#endif
 
 	//tela de confirmacao
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (equipeComOnze) {
 	case EQUIPE_IMPAR: 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-	printf(" Equipe impar decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
+	if (pontosPartidaPar < 10) {
+		printf(	   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	else {
+		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " Equipe impar decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
 	break;
 	case EQUIPE_PAR:   
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
-	printf(" Equipe par decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
+	if (pontosPartidaPar < 10) {
+		printf(	   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	else {
+		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " Equipe par decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
 	break;
 	}
-	printf(" Digite '1' para avancar.\n");
-	printf(" ");
-	scanf_s(" %c", opcao, 1);
+	printf(		   " Digite '1' para avancar.\n");
+	printf(		   " ");
+	scanf_s(	   " %c", opcao, 1);
 
 	system("cls") ;
 
 	//printa cabeçalho da tela
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	switch (equipeComOnze) {
 	case EQUIPE_IMPAR: 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	break;
 	case EQUIPE_PAR:   
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	break;
 	}
-	printf("                   Equipe Par                 Equipe Impar\n") ;
-	printf("                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
-	printf("                   Rodada: 0/2                Rodada: 0/2\n") ;
-	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
-	printf("                                                          Valor da Rodada: 1\n") ;
+	printf(		   "                   Equipe Par                 Equipe Impar\n") ;
+	if (pontosPartidaPar < 10) {
+		printf(	   "                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	else {
+		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	}
+	printf(		   "                   Rodada: 0/2                Rodada: 0/2\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(		   "                                                          Valor da Rodada: 1\n") ;
 
 	LIS_IrInicioLista(pCabecaSuperior) ;
 
