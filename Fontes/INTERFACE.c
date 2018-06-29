@@ -72,7 +72,7 @@ BAR_tppCarta VetorAux[TAM];
 
 int main (void) {
 
-	//declara e aloca memória para todas listas do jogo
+	//declara todas listas do jogo
 	LIS_tppLista pCabecaSuperior ; 	//cabeca da lista de listas
 	LIS_tppLista pCabecaBaralho ;	//inicio
 	LIS_tppLista pCabecaMao1 ;		//1
@@ -109,6 +109,7 @@ int main (void) {
 		equipeVencedoraDaAposta ,			//equipe que venceu a atual bateria de apostas
 		equipeVencedoraDaRodada ,			//equipe que venceu a rodada
 		equipeVencedoraDaPartida ,			//equipe que venceu a partida
+		equipeComOnze ,						//equipe com onze pontos
 		resultado ;							//resultado da rodada
 
 	MES_tpCondRet mesaCondRet ;
@@ -121,6 +122,8 @@ int main (void) {
 	qtdPartidas = 0 ;
 	qtdJogadores = 0 ;
 	opcao = 0 ;
+	equipeComOnze = 0 ;
+	valorRodada = 0;
 
 	while (opcao == 0) {
 
@@ -313,7 +316,6 @@ int main (void) {
 
 			pontosRodadaPar = 0 ;
 			pontosRodadaImpar = 0 ;
-			valorRodada = 1;
 
 			qtdCartasViradas = 0 ;
 			qtdJogadas = 0 ;
@@ -323,47 +325,51 @@ int main (void) {
 			qtdRodadas += 1 ;
 
 			#ifdef _DEBUG
-				pCartaAux = VetorAux[0] ;
+			pCartaAux = VetorAux[0] ;
 			#endif
 
-			//embaralha o vetor de cartas (comentar em caso de testes de empate)
-			BAR_EmbaralharVetorCartas(VetorAux) ;
+			if (pontosPartidaPar < 11 && pontosPartidaImpar < 11) {
 
-			#ifdef _DEBUG
+				valorRodada = 1;
+
+				//embaralha o vetor de cartas (comentar em caso de testes de empate)
+				BAR_EmbaralharVetorCartas(VetorAux) ;
+
+				#ifdef _DEBUG
 				assert (pCartaAux != VetorAux[0]) ;
 				printf("Vetor cartas embaralhado.\n") ;
 				Delay() ;
-			#endif
+				#endif
 
-			//preenche o baralho
-			BAR_PreencherBaralho(pCabecaBaralho, VetorAux) ;
+				//preenche o baralho
+				BAR_PreencherBaralho(pCabecaBaralho, VetorAux) ;
 
-			#ifdef _DEBUG
+				#ifdef _DEBUG
 				assert (LIS_ObterQtdElem(pCabecaBaralho) == 40) ;
 				printf("Baralho preenchido com o vetor embaralhado.\n") ;
 				Delay() ;
-			#endif
+				#endif
 
-			//distribui as maos
-			mesaCondRet = MES_DistribuirMaos(pCabecaSuperior, qtdJogadores) ;
+				//distribui as maos
+				mesaCondRet = MES_DistribuirMaos(pCabecaSuperior, qtdJogadores) ;
 
-			#ifdef _DEBUG
+				#ifdef _DEBUG
 				assert (mesaCondRet == MES_CondRetOK) ;
 				printf("Maos distribuidas.\n") ;
 				Delay() ;
-			#endif
-
-			/*
+				#endif
+			}
+			
 			//distribui as maos para testar empates (deve-se comentar a funçao embaralhar)
 			//MES_DistribuirMaosParaTestarEmpates(pCabecaSuperior, qtdJogadores) ;
-			*/
+			
 			//transfere a vira do baralho pra mesa
 			BAR_TransferirCarta(pCabecaBaralho, pCabecaMesa) ;
 
 			#ifdef _DEBUG
-				assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
-				printf("Vira transferida pra mesa.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-				scanf(" %c", opcaoDebug);
+			assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
+			printf("Vira transferida pra mesa.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			scanf(" %c", opcaoDebug);
 			#endif
 
 			//inicio da jogada
@@ -541,8 +547,11 @@ int main (void) {
 							case 6:
 								valorRodada = 3;
 								break;
-							case 12:
+							case 9:
 								valorRodada = 6;
+								break;
+							case 12:
+								valorRodada = 9;
 								break;
 							} //fim switch
 
@@ -564,12 +573,12 @@ int main (void) {
 														   pontosPartidaPar, pontosPartidaImpar) ;
 
 							//rodada acaba e equipe de quem aumentou ganha
-							switch (quemAumentou % 2) {
+							switch (quemCorreu%2) {
 							case 0: 
-								pontosRodadaPar = 2;
+								pontosRodadaImpar = 2;
 								break;
 							case 1:
-								pontosRodadaImpar = 2;
+								pontosRodadaPar = 2;
 								break;
 							} //fim switch
 
@@ -726,7 +735,7 @@ int main (void) {
 							MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
 
 							#ifdef _DEBUG
-								assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+								assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
 								printf("(2) Mesa esvaziada deixando a vira.\n") ;
 								Delay() ;
 							#endif
@@ -752,7 +761,7 @@ int main (void) {
 								MES_EsvaziarMesa(pCabecaMesa, pCabecaLixo, DEIXA_VIRA) ;
 
 								#ifdef _DEBUG
-									assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+									assert (LIS_ObterQtdElem(pCabecaMesa) == 1) ;
 									printf("(3) Mesa esvaziada deixando a vira.\n") ;
 									Delay() ;
 								#endif
@@ -980,22 +989,106 @@ int main (void) {
 				MES_EsvaziarLixo (pCabecaLixo) ;
 
 				#ifdef _DEBUG
-					assert (LIS_ObterQtdElem(pCabecaLixo) == 0) ;
-					printf("Lixo esvaziado.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-					scanf(" %c", opcaoDebug);
-					Delay() ;
+				assert (LIS_ObterQtdElem(pCabecaLixo) == 0) ;
+				printf("Lixo esvaziado.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+				scanf(" %c", opcaoDebug);
 				#endif
 
 			} // fim if "alguem venceu a partida"
-			/*
-			//MAO DE ONZE
+			
 			else if (pontosPartidaPar == 11 || pontosPartidaImpar == 11) {
 
-				//PrintarTelaMaoDeOnze() ;
+				//MAO DE ONZE
+				if ( ( pontosPartidaPar == 11 && pontosPartidaImpar < 11) ||
+					 ( pontosPartidaPar < 11 && pontosPartidaImpar == 11) ) {
 
+					if (pontosPartidaPar == 11 && pontosPartidaImpar < 11) {
+						equipeComOnze = EQUIPE_PAR ;
+					}
+					else if (pontosPartidaPar < 11 && pontosPartidaImpar == 11) {
+						equipeComOnze = EQUIPE_IMPAR ;
+					}
+
+					while (opcao != 50) {
+
+						//embaralha o vetor de cartas (comentar em caso de testes de empate)
+						BAR_EmbaralharVetorCartas(VetorAux) ;
+
+						#ifdef _DEBUG
+						assert (pCartaAux != VetorAux[0]) ;
+						printf("Vetor cartas embaralhado.\n") ;
+						Delay() ;
+						#endif
+
+						//preenche o baralho
+						BAR_PreencherBaralho(pCabecaBaralho, VetorAux) ;
+
+						#ifdef _DEBUG
+						assert (LIS_ObterQtdElem(pCabecaBaralho) == 40) ;
+						printf("Baralho preenchido com o vetor embaralhado.\n") ;
+						Delay() ;
+						#endif
+
+						//distribui as maos
+						mesaCondRet = MES_DistribuirMaos(pCabecaSuperior, qtdJogadores) ;
+
+						#ifdef _DEBUG
+						assert (mesaCondRet == MES_CondRetOK) ;
+						printf("Maos distribuidas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+						scanf(" %c", opcaoDebug);
+						#endif
+
+						opcao = PrintarTelaMaoDeOnze(qtdJogadores, pCabecaSuperior,
+													 pontosPartidaPar, pontosPartidaImpar) ;
+
+						switch (opcao) {
+
+						case 49: //correu
+							switch (equipeComOnze) {
+							case EQUIPE_PAR:
+								pontosPartidaImpar += 1 ;
+								break;
+							case EQUIPE_IMPAR:
+								pontosPartidaPar += 1 ;
+								break;
+							} //fim switch
+
+							MES_TransferirTodasCartasProLixo(pCabecaSuperior) ;
+
+							#ifdef _DEBUG
+							assert (LIS_ObterQtdElem(pCabecaBaralho) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao1) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao2) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao3) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao4) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao5) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMao6) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaMesa) == 0) ;
+							assert (LIS_ObterQtdElem(pCabecaLixo) > 0) ;
+							printf("Todas cartas foram transferidas pro lixo.\n") ;
+							#endif
+
+							break;
+
+						case 50: //aceitou
+							valorRodada = 3 ;
+
+							#ifdef _DEBUG
+							assert (valorRodada == 3) ;
+							printf("Valor da rodada foi atualizado.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+							scanf(" %c", opcaoDebug);
+							#endif
+
+							break;
+
+						} //fim switch
+
+					} //fim while
+
+				} //fim if
 
 			} //fim else if "mao de onze"
-			*/	
+				
 		} //fim while rodada
 
 		opcao = PrintarTelaFimPartida(pCabecaSuperior, equipeVencedoraDaPartida, qtdPartidas,
@@ -1630,7 +1723,8 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 
 	switch (valorRodada) {
 	case 3: printf("   | (3) Pedir seis\n\n"); break;
-	case 6: printf("   | (3) Pedir doze\n\n"); break;
+	case 6: printf("   | (3) Pedir nove\n\n"); break;
+	case 9: printf("   | (3) Pedir doze\n\n"); break;
 	case 12: printf("\n\n"); break;
 	}
 
@@ -1644,7 +1738,7 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	system("cls") ;
 	return *opcao ;
 
-}
+} /*********** FIM FUNÇÃO: Printar tela correr aceitar aumentar ***********/
 
 
 /***************************************************************************
@@ -1943,7 +2037,163 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 
 	return *opcao ;
 	
-} //fim função
+} //fim função Printar tela fim partida
+
+/***************************************************************************
+*  Função: &Printar tela de correr, aceitar ou aumentar
+***************************************************************************/
+int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,  
+						 int pontosPartidaPar, int pontosPartidaImpar) {
+
+	int equipeComOnze = INICIALIZAR ;
+
+	//aloca memoria pra opcao de jogada escolhida										
+	char * opcao = (char*)malloc(sizeof(char)) ;
+
+	//declara e aloca memoria pra cabeca da mao e da mesa
+	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;
+
+	if (pontosPartidaPar == 11 && pontosPartidaImpar < 11) {
+		equipeComOnze = EQUIPE_PAR ;
+	}
+	else if (pontosPartidaPar < 11 && pontosPartidaImpar == 11) {
+		equipeComOnze = EQUIPE_IMPAR ;
+	}
+
+	#ifdef _DEBUG
+	system("cls") ;
+	#endif
+
+	//tela de confirmacao
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	switch (equipeComOnze) {
+	case EQUIPE_IMPAR: 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(" Equipe impar decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
+	break;
+	case EQUIPE_PAR:   
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(" Equipe par decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
+	break;
+	}
+	printf(" Digite '1' para avancar.\n");
+	printf(" ");
+	scanf_s(" %c", opcao, 1);
+
+	system("cls") ;
+
+	//printa cabeçalho da tela
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JOGO DE TRUCO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	switch (equipeComOnze) {
+	case EQUIPE_IMPAR: 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	break;
+	case EQUIPE_PAR:   
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	break;
+	}
+	printf("                   Equipe Par                 Equipe Impar\n") ;
+	printf("                   Partida: %d/12              Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
+	printf("                   Rodada: 0/2                Rodada: 0/2\n") ;
+	printf(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
+	printf("                                                          Valor da Rodada: 1\n") ;
+
+	LIS_IrInicioLista(pCabecaSuperior) ;
+
+	switch (equipeComOnze){
+
+	case EQUIPE_PAR:
+
+		switch (qtdJogadores) {
+
+		case 2:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			break;
+
+		case 4:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao2) ;
+			break;
+
+		case 6:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao2) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao3) ;
+			break;
+		} //fim switch
+
+		break;
+
+	case EQUIPE_IMPAR:
+		
+		switch (qtdJogadores) {
+
+		case 2:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			break;
+
+		case 4:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao2) ;
+			break;
+
+		case 6:
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 1) ;
+			pCabecaMao1 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao1) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao2 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao2) ;
+			LIS_AvancarElementoCorrente(pCabecaSuperior, 2) ;
+			pCabecaMao3 = (LIS_tppLista)LIS_ObterValor(pCabecaSuperior) ;
+			PrintarMao(pCabecaMao3) ;
+			break;
+		} //fim switch
+
+		break;
+
+	} //fim switch
+
+	printf(" \n O que deseja(m) fazer?\n\n") ;
+	printf(" (1) Correr - Equipe adversaria ganha a rodada e ganha 1 ponto.\n (2) Aceitar - Rodada passa a valer 3 pontos.\n\n") ;
+
+	printf(" Opcao: ") ;
+	scanf_s(" %c", opcao, 1) ;
+
+	while (*opcao < 49 && *opcao > 50) {
+		scanf_s(" %c", opcao, 1);
+	} //fim while
+
+	system("cls") ;
+	return *opcao ;
+
+} /*********** FIM FUNÇÃO: Printar tela mão de onze ***********/
 
 /********************* FUNÇÕES DE EXECUCAO DE OPÇÕES **********************/
 /***************************************************************************
@@ -2112,6 +2362,8 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 		case 3:
 			return 6;
 		case 6:
+			return 9;
+		case 9:
 			return 12;
 		} //fim switch
 

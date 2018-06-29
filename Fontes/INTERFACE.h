@@ -152,6 +152,15 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 						  int pontosPartidaPar, int pontosPartidaImpar) ;
 
 /***************************************************************************
+*  $FC Função: MES  &Printar tela de mão de onze
+*
+*  $ED Descrição da função
+*     Imprime a tela as mãos da equipe com onze pontos.
+***************************************************************************/
+int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior, 
+						 int pontosPartidaPar, int pontosPartidaImpar) ;
+
+/***************************************************************************
 *  $FC Função: MES  &Executar opcao de inicio
 *
 *  $ED Descrição da função
