@@ -38,6 +38,7 @@ static const char ESVAZIAR_LIXO_CMD [ ] 				= "=esvaziarlixo" ;				//8
 static const char OBTER_QTD_CARTAS_CMD [ ] 				= "=obterqtdcartas" ; 			//9
 static const char TRANSFERIR_CARTAS_PRO_LIXO_CMD [ ] 	= "=transferircartasprolixo" ;	//10
 static const char IDENTIFICAR_QUEM_JOGOU_QUAL_CMD [ ] 	= "=identificarquemjogouqual" ; //11
+static const char DESTRUIR_LISTAS_CMD [ ] 				= "=destruirlistas" ; 			//12
 
 #define TRUE  1
 #define FALSE 0
@@ -411,6 +412,55 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 
 		return TST_CondRetOK ;
 
+	case 12: //DESTRUIR LISTAS
+/*
+		//MES_DestruirListas( vtListaDeListas[0], pCabecaBaralho, vtMaos[0], vtMaos[1],
+		//					vtMaos[2], vtMaos[3], vtMaos[4], vtMaos[5], vtLixo[0], vtMesa[0] ) ;
+
+		if (vtListaDeListas[0] != NULL) {
+			LIS_DestruirLista( vtListaDeListas[0] ) ;
+		}
+		else if (pCabecaBaralho != NULL) {
+			LIS_DestruirLista( pCabecaBaralho ) ;
+		}
+		else if (vtMaos[0] != NULL) {
+			LIS_DestruirLista( vtMaos[0] ) ;
+		}
+		else if (vtMaos[1] != NULL) {
+			LIS_DestruirLista( vtMaos[1] ) ;
+		}
+		else if (vtMaos[2] != NULL) {
+			LIS_DestruirLista( vtMaos[2] ) ;
+		}
+		else if (vtMaos[3] != NULL) {
+			LIS_DestruirLista( vtMaos[3] ) ;
+		}
+		else if (vtMaos[4] != NULL) {
+			LIS_DestruirLista( vtMaos[4] ) ;
+		}
+		else if (vtMaos[5] != NULL) {
+			LIS_DestruirLista( vtMaos[5] ) ;
+		}
+		else if (vtLixo[0] != NULL) {
+			LIS_DestruirLista( vtLixo[0] ) ;
+		}
+		else if (vtMesa[0] != NULL) {
+			LIS_DestruirLista( vtMesa[0] ) ;
+		}
+
+		vtListaDeListas[0] = NULL ;
+		pCabecaBaralho = NULL ;
+		vtMaos[0] = NULL ;
+		vtMaos[1] = NULL ;
+		vtMaos[2] = NULL ;
+		vtMaos[3] = NULL ;
+		vtMaos[4] = NULL ;
+		vtMaos[5] = NULL ;
+		vtLixo[0] = NULL ;
+		vtMesa[0] = NULL ;
+*/
+		return TST_CondRetOK ;
+
 	default: //COMANDO NAO EXISTE
 
 		return TST_CondRetNaoConhec ;
@@ -493,6 +543,10 @@ int IdentificarComando( char * ComandoTeste ) {
 
 	else if ( strcmp( ComandoTeste , IDENTIFICAR_QUEM_JOGOU_QUAL_CMD ) == 0 ) {
 		return 11 ;
+  	}
+
+  	else if ( strcmp( ComandoTeste , DESTRUIR_LISTAS_CMD ) == 0 ) {
+		return 12 ;
   	}
 
   	else {

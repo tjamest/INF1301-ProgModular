@@ -1,4 +1,4 @@
-/***************************************************************************
+	/***************************************************************************
 *  $MCI Módulo de implementação: INT Interface
 *
 *  Arquivo gerado:              INTERFACE.c
@@ -73,16 +73,16 @@ BAR_tppCarta VetorAux[TAM];
 int main (void) {
 
 	//declara e aloca memória para todas listas do jogo
-	LIS_tppLista pCabecaSuperior = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ; //cabeca da lista de listas
-	LIS_tppLista pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;	//inicio
-	LIS_tppLista pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//1
-	LIS_tppLista pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//2
-	LIS_tppLista pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//3
-	LIS_tppLista pCabecaMao4 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//4
-	LIS_tppLista pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//5
-	LIS_tppLista pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//6
-	LIS_tppLista pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//7
-	LIS_tppLista pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//final
+	LIS_tppLista pCabecaSuperior ; 	//cabeca da lista de listas
+	LIS_tppLista pCabecaBaralho ;	//inicio
+	LIS_tppLista pCabecaMao1 ;		//1
+	LIS_tppLista pCabecaMao2 ;		//2
+	LIS_tppLista pCabecaMao3 ;		//3
+	LIS_tppLista pCabecaMao4 ;		//4
+	LIS_tppLista pCabecaMao5 ;		//5
+	LIS_tppLista pCabecaMao6 ;		//6
+	LIS_tppLista pCabecaLixo ;		//7
+	LIS_tppLista pCabecaMesa ;		//final
 
 	//declara variaveis
 	int opcao ,								//opcao de inicio de jogo escolhida (iniciar, regras, qtd jogadores, ir pro inicio, sair)
@@ -114,42 +114,127 @@ int main (void) {
 	MES_tpCondRet mesaCondRet ;
 
 	#ifdef _DEBUG
-		BAR_tppCarta pCartaAux ;
-		char * opcaoDebug = (char*)malloc(sizeof(char));
+	BAR_tppCarta pCartaAux ;
+	char * opcaoDebug = (char*)malloc(sizeof(char));
 	#endif
 
-	equipeVencedoraDaAposta = INICIALIZAR ;
-	equipeVencedoraDaPrimeiraAposta = INICIALIZAR ;
-	equipeVencedoraDaPartida = INICIALIZAR ;
-	qtdJogadores = INICIALIZAR ;
+	qtdPartidas = 0 ;
+	qtdJogadores = 0 ;
+	opcao = 0 ;
 
-	//cria a cabeça da lista de listas
-	pCabecaSuperior = MES_CriarListaDeListas() ;
+	while (opcao == 0) {
 
-	#ifdef _DEBUG
+		opcao = PrintarTelaInicio() ;
+
+		if (opcao == 50) {
+			opcao = PrintarTelaRegras();
+			if (opcao == 49) {
+				opcao = 0 ;
+			}
+		} //fim if
+
+	} //fim while
+	
+	//inicio da partida
+	while (opcao == 49) {
+
+		if (qtdPartidas > 0) {
+
+			opcao = 0;
+
+			while (opcao == 0) {
+
+				opcao = PrintarTelaInicio() ;
+
+				if (opcao == 50) {
+					opcao = PrintarTelaRegras();
+					if (opcao == 49) {
+						opcao = 0 ;
+					}
+					else {
+						return 0;
+					}
+				} //fim if
+
+				else{
+					if (opcao == 51) {
+						return 0;
+					}
+				} //fim else
+
+			} //fim while
+
+		} //fim if
+
+		#ifdef _DEBUG
+		printf("Escolheu iniciar partida.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+		scanf(" %c", opcaoDebug);
+		#endif
+
+		equipeVencedoraDaAposta = INICIALIZAR ;
+		equipeVencedoraDaPrimeiraAposta = INICIALIZAR ;
+		equipeVencedoraDaPartida = INICIALIZAR ;
+		qtdJogadores = INICIALIZAR ;
+
+		opcao = PrintarTelaQtdJogadores() ;
+
+		switch (opcao) {
+		case 49:
+			qtdJogadores = 2;
+			break;
+		case 50:
+			qtdJogadores = 4;
+			break;
+		case 51:
+			qtdJogadores = 6;
+			break;
+		} //fim switch
+
+		#ifdef _DEBUG
+		assert(qtdJogadores == 2 || qtdJogadores == 4 || qtdJogadores == 6) ;
+		printf("Quantidade de jogadores definida.\n") ;
+		Delay() ;
+		#endif
+
+		//aloca memória para todas listas do jogo
+		pCabecaSuperior = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ; 	//cabeca da lista de listas
+		pCabecaBaralho = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;	//inicio
+		pCabecaMao1 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//1
+		pCabecaMao2 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//2
+		pCabecaMao3 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//3
+		pCabecaMao4 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//4
+		pCabecaMao5 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//5
+		pCabecaMao6 = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//6
+		pCabecaLixo = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//7
+		pCabecaMesa = (LIS_tppLista)malloc(sizeof(LIS_tppLista)) ;		//final
+
+		//cria a cabeça da lista de listas
+		pCabecaSuperior = MES_CriarListaDeListas() ;
+
+		#ifdef _DEBUG
 		assert( pCabecaSuperior != NULL ) ;
 		printf("Lista de listas criada.\n") ;
 		Delay() ;
-	#endif
+		#endif
 
-	//cria a lista baralho (vazia)
-	pCabecaBaralho = BAR_CriarBaralho() ;
+		//cria a lista baralho (vazia)
+		pCabecaBaralho = BAR_CriarBaralho() ;
 
-	#ifdef _DEBUG
+		#ifdef _DEBUG
 		assert( pCabecaBaralho != NULL ) ;
 		printf("Baralho criado.\n") ;
 		Delay() ;
-	#endif
+		#endif
 
-	//cria as 6 maos (vazias)
-	pCabecaMao1 = MES_CriarMao() ;
-	pCabecaMao2 = MES_CriarMao() ;
-	pCabecaMao3 = MES_CriarMao() ;
-	pCabecaMao4 = MES_CriarMao() ;
-	pCabecaMao5 = MES_CriarMao() ;
-	pCabecaMao6 = MES_CriarMao() ;
+		//cria as 6 maos (vazias)
+		pCabecaMao1 = MES_CriarMao() ;
+		pCabecaMao2 = MES_CriarMao() ;
+		pCabecaMao3 = MES_CriarMao() ;
+		pCabecaMao4 = MES_CriarMao() ;
+		pCabecaMao5 = MES_CriarMao() ;
+		pCabecaMao6 = MES_CriarMao() ;
 
-	#ifdef _DEBUG
+		#ifdef _DEBUG
 		assert( pCabecaMao1 != NULL ) ;
 		assert( pCabecaMao2 != NULL ) ;
 		assert( pCabecaMao3 != NULL ) ;
@@ -158,69 +243,48 @@ int main (void) {
 		assert( pCabecaMao6 != NULL ) ;
 		printf("Maos criadas.\n") ;
 		Delay() ;
-	#endif
+		#endif
 
-	//cria o lixo (vazio)
-	pCabecaLixo = MES_CriarLixo() ;
+		//cria o lixo (vazio)
+		pCabecaLixo = MES_CriarLixo() ;
 
-	#ifdef _DEBUG
+		#ifdef _DEBUG
 		assert( pCabecaLixo != NULL ) ;
 		printf("Lixo criado.\n") ;
 		Delay() ;
-	#endif
+		#endif
 
-	//cria a mesa (vazia)
-	pCabecaMesa = MES_CriarMesa() ;
+		//cria a mesa (vazia)
+		pCabecaMesa = MES_CriarMesa() ;
 
-	#ifdef _DEBUG
+		#ifdef _DEBUG
 		assert( pCabecaMesa != NULL ) ;
 		printf("Mesa criada.\n") ;
 		Delay() ;
-	#endif
+		#endif
 
-	//insere as listas (baralho, maos, lixo e mesa) na lista de listas
-	LIS_IrInicioLista(pCabecaSuperior) ;
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;	//inicio
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;		//1
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;		//2
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;		//3
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;		//4
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao5) ;		//5
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;		//6
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaLixo) ;		//7
-	LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;		//final
-
-	#ifdef _DEBUG
-		assert( LIS_ObterQtdElem(pCabecaSuperior) == 9 ) ;
-		printf("Listas inseridas na lista de listas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-		scanf(" %c", opcaoDebug);
-		Delay() ;
-	#endif
-
-	opcao = 49 ;
-	/*
-	//nao ta funcionando nao sei pq
-	opcao = MES_IniciarPartida (pCabecaBaralho, pCabecaMao1, pCabecaMao2, pCabecaMao3,
-								pCabecaMao4, pCabecaMao5, pCabecaMao6, pCabecaLixo,
-								pCabecaMesa, pCabecaSuperior) ;
-	*/
-	//inicio da partida
-	while (opcao == 49) {
-
-		//imprime a tela de abertura do jogo
-		opcao = PrintarTelaInicio() ;
-		qtdJogadores = ExecutarOpcaoInicio(opcao) ;
+		//insere as listas (baralho, maos, lixo e mesa) na lista de listas
+		LIS_IrInicioLista(pCabecaSuperior) ;
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaBaralho) ;	//inicio
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao1) ;		//1
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao2) ;		//2
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao3) ;		//3
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao4) ;		//4
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao5) ;		//5
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMao6) ;		//6
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaLixo) ;		//7
+		LIS_InserirElementoApos(pCabecaSuperior, pCabecaMesa) ;		//final
 
 		#ifdef _DEBUG
-			assert(qtdJogadores == 2 || qtdJogadores == 4 || qtdJogadores == 6) ;
-			printf("Quantidade de jogadores definida.\n") ;
-			Delay() ;
+		assert( LIS_ObterQtdElem(pCabecaSuperior) == 9 ) ;
+		printf("Listas inseridas na lista de listas.\n") ;
+		Delay() ;
 		#endif
 	
 		//define quem comeca
 		quemJoga = MES_DefinirQuemComeca(qtdJogadores) ;
 
-		qtdPartidas = 0 ;
+		qtdPartidas++ ;
 		pontosPartidaPar = 0 ;
 		pontosPartidaImpar = 0 ;
 		qtdRodadas = 0 ;
@@ -937,26 +1001,21 @@ int main (void) {
 		opcao = PrintarTelaFimPartida(pCabecaSuperior, equipeVencedoraDaPartida, qtdPartidas,
 									  pontosPartidaPar, pontosPartidaImpar) ;
 
+		MES_DestruirListas (pCabecaSuperior, pCabecaBaralho,
+						  	pCabecaMao1, pCabecaMao2,
+						  	pCabecaMao3, pCabecaMao4,
+						  	pCabecaMao5, pCabecaMao6,
+						  	pCabecaLixo, pCabecaMesa) ;
+
+		#ifdef _DEBUG
+		printf("Listas destruidas e variaveis alocadas liberadas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+		scanf(" %c", opcaoDebug);
+		#endif
+
 	} //fim while partida
 
-	//libera cada elemento, esvazia a lista e destroi a cabeca
-	LIS_DestruirLista(pCabecaBaralho) ;
-	LIS_DestruirLista(pCabecaMao1) ;
-	LIS_DestruirLista(pCabecaMao2) ;
-	LIS_DestruirLista(pCabecaMao3) ;
-	LIS_DestruirLista(pCabecaMao4) ;
-	LIS_DestruirLista(pCabecaMao5) ;
-	LIS_DestruirLista(pCabecaMao6) ;
-	LIS_DestruirLista(pCabecaLixo) ;
-	LIS_DestruirLista(pCabecaMesa) ;
-	LIS_DestruirLista(pCabecaSuperior) ;
-
 	#ifdef _DEBUG
-		if (LIS_ObterValor(pCabecaSuperior) == NULL) {
-			printf("Listas destruidas.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-			scanf(" %c", opcaoDebug);
-			Delay() ;
-		}
+	free(opcaoDebug);
 	#endif
 
 	return 0;
@@ -1167,140 +1226,6 @@ void PrintarMao (LIS_tppLista pCabecaMao) {
 	}//fim for
 
 } /***************** Fim função: &Printar mao *************************/
-
-/***************************************************************************
-*  Função: &Printar baralho
-***************************************************************************//*
-void PrintarBaralho (LIS_tppLista pCabecaBaralho) {
-
-	int i, qtdCartas, valorInt, naipeInt;
-
-	//string que representa o valor
-	char * valorStr = (char*)malloc(sizeof(char));
-
-	//string que representa o naipe
-	char * naipeStr = (char*)malloc(sizeof(char));
-
-	//condicao de retorno da manipulacao da lista
-	LIS_tpCondRet CondRetLis;
-
-	//declarando ponteiro temporario pra carta
-	BAR_tppCarta pCarta;
-
-	//elemento corrente passa a ser o primeiro
-	LIS_IrInicioLista(pCabecaBaralho);
-
-	//obtem a quantidade de elementos na mao
-	qtdCartas = MES_ObterQtdCartas(pCabecaBaralho, COM_PRIMEIRA, COM_ULTIMA) ;
-	
-	//printando as cartas
-	printf("\n BARALHO:\n") ;
-	for(i = 0; i < qtdCartas; i++) {
-
-		//obtem o ponteiro pra uma carta
-		pCarta = BAR_ObterCartaCorr (pCabecaBaralho);
-
-		//obtem valor e naipe
-		valorInt = (int)BAR_ObterValor (pCarta);
-		naipeInt = (int)BAR_ObterNaipe (pCarta);
-
-		switch (valorInt) {
-		case (0): valorStr = "4"; break;
-		case (1): valorStr = "5"; break;
-		case (2): valorStr = "6"; break;
-		case (3): valorStr = "7"; break;
-		case (4): valorStr = "Q"; break;
-		case (5): valorStr = "J"; break;
-		case (6): valorStr = "K"; break;
-		case (7): valorStr = "A"; break;
-		case (8): valorStr = "2"; break;
-		case (9): valorStr = "3"; break;
-		case (10): valorStr = "X"; break;
-		}
-
-		switch (naipeInt) {
-		case (0): naipeStr = "Ouros"; break;
-		case (1): naipeStr = "Espadas"; break;
-		case (2): naipeStr = "Copas"; break;
-		case (3): naipeStr = "Paus"; break;
-		}
-
-		//printando a carta
-		printf (" %d) %s de %s\n", i+1, valorStr, naipeStr);
-
-		//avancando com o elemento
-		CondRetLis = LIS_AvancarElementoCorrente(pCabecaBaralho, 1) ;
-
-	}//fim for
-
-} /***************** Fim função: &Printar baralho *************************/
-
-/***************************************************************************
-*  Função: &Printar lixo
-***************************************************************************//*
-void PrintarLixo (LIS_tppLista pCabecaLixo) {
-
-	int i, qtdCartas, valorInt, naipeInt;
-
-	//string que representa o valor
-	char * valorStr = (char*)malloc(sizeof(char));
-
-	//string que representa o naipe
-	char * naipeStr = (char*)malloc(sizeof(char));
-
-	//condicao de retorno da manipulacao da lista
-	LIS_tpCondRet CondRetLis;
-
-	//declarando ponteiro temporario pra carta
-	BAR_tppCarta pCarta;
-
-	//elemento corrente passa a ser o primeiro
-	LIS_IrInicioLista(pCabecaLixo);
-
-	//obtem a quantidade de elementos no lixo
-	qtdCartas = MES_ObterQtdCartas(pCabecaLixo, COM_PRIMEIRA, COM_ULTIMA);
-	
-	//printando as cartas
-	printf("\n      LIXO:\n") ;
-	for(i = 0; i < qtdCartas; i++) {
-
-		//obtem o ponteiro pra uma carta
-		pCarta = BAR_ObterCartaCorr (pCabecaLixo);
-
-		//obtem valor e naipe
-		valorInt = (int)BAR_ObterValor (pCarta);
-		naipeInt = (int)BAR_ObterNaipe (pCarta);
-
-		switch (valorInt) {
-		case (0): valorStr = "4"; break;
-		case (1): valorStr = "5"; break;
-		case (2): valorStr = "6"; break;
-		case (3): valorStr = "7"; break;
-		case (4): valorStr = "Q"; break;
-		case (5): valorStr = "J"; break;
-		case (6): valorStr = "K"; break;
-		case (7): valorStr = "A"; break;
-		case (8): valorStr = "2"; break;
-		case (9): valorStr = "3"; break;
-		case (10): valorStr = "X"; break;
-		}
-
-		switch (naipeInt) {
-		case (0): naipeStr = "Ouros"; break;
-		case (1): naipeStr = "Espadas"; break;
-		case (2): naipeStr = "Copas"; break;
-		case (3): naipeStr = "Paus"; break;
-		}
-
-		//printando a carta
-		printf (" %d) %s de %s\n", i+1, valorStr, naipeStr);
-
-		//avancando com o elemento
-		CondRetLis = LIS_AvancarElementoCorrente(pCabecaLixo, 1) ;
-
-	}//fim for
-
-} /***************** Fim função: &Printa lixo *************************/
 
 
 /********************* FUNÇÕES DE IMPRESSAO DE TELAS **********************/
@@ -2038,24 +1963,7 @@ int ExecutarOpcaoInicio (int opcao) {
 
 	case 49: //(1) iniciar partida
 
-		#ifdef _DEBUG
-			printf("Escolheu iniciar partida.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
-			scanf(" %c", opcaoDebug);
-			Delay() ;
-		#endif
-
-		qtdJogadores = PrintarTelaQtdJogadores ();
-		switch(qtdJogadores) {
-		case 49: 
-			qtdJogadores = 2;
-			break;
-		case 50: 
-			qtdJogadores = 4;
-			break;
-		case 51: 
-			qtdJogadores = 6;
-			break;
-		}
+		qtdJogadores = 0;
 		break;
 
 	case 50: //(2) ver regras
@@ -2066,13 +1974,12 @@ int ExecutarOpcaoInicio (int opcao) {
 			Delay() ;
 		#endif
 
-		opcao = PrintarTelaRegras();
-		qtdJogadores = ExecutarOpcaoRegras(opcao);
+		qtdJogadores = 0;
 		break;
 
 	case 51: //(3) sair
 		#ifdef _DEBUG
-			printf("Escolheu sair.\n\nDigite qualquer coisa e tecle 'enter'\n") ;
+			printf("Escolheu sair.\n") ;
 			scanf(" %c", opcaoDebug);
 			Delay() ;
 		#endif

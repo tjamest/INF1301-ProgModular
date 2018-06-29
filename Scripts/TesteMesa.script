@@ -92,7 +92,7 @@
 == Distribuir todas maos
 =distribuirmaos
 
-== Verificar espaços alocados apos destruicao da lista
+== Verificar espacos alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  7 	//baralho e maos
 
@@ -146,7 +146,7 @@
 
 == Verificar espaços alocados apos destruicao da lista
 =verificartodosespacos       SemErro
-=obternumeroespacosalocados  14 	//baralho e maos (2x)
+=obternumeroespacosalocados  14 	//baralho e maos
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
@@ -190,9 +190,9 @@
 == Distribuir 2 maos
 =distribuirmaos
 
-== Verificar espaços alocados apos destruicao da lista
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
-=obternumeroespacosalocados  21 	//baralho e maos (3x)
+=obternumeroespacosalocados  21	//baralho e maos
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
@@ -297,9 +297,9 @@
 == Distribuir maos
 =distribuirmaos
 
-== Verificar espaços alocados apos destruicao da lista
+== Verificar espaços alocados
 =verificartodosespacos       SemErro
-=obternumeroespacosalocados  28	//baralho e maos (3x)
+=obternumeroespacosalocados  28	//baralho e maos
 
 == Criar mesa
 =criarmesa 6
@@ -310,7 +310,7 @@
 == Transferir todas cartas pro lixo
 =transferircartasprolixo
 
-== Verificar espaços alocados apos destruicao da lista
+== Verificar espacos alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  37 	//baralho e maos (3x) + todas listas
 

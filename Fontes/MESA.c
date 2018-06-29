@@ -1224,6 +1224,35 @@ MES_tpCondRet MES_EsvaziarLixo (LIS_tppLista pCabecaLixo) {
 
 } /********************** FIM FUNÇÃO: &Esvaziar lixo ***********************/
 
+/***************************************************************************
+*  Função: &Destruir listas
+***************************************************************************/
+void MES_DestruirListas ( LIS_tppLista pCabecaSuperior, LIS_tppLista pCabecaBaralho,
+						  LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2,
+						  LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4,
+						  LIS_tppLista pCabecaMao5, LIS_tppLista pCabecaMao6,
+						  LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa) {
+/*	#ifdef _DEBUG
+		CNT_CONTAR("MES_DestruirListas - Depois de entrar") ;
+	#endif
+*/
+	LIS_DestruirLista(pCabecaBaralho) ;
+	LIS_DestruirLista(pCabecaMao1) ;
+	LIS_DestruirLista(pCabecaMao2) ;
+	LIS_DestruirLista(pCabecaMao3) ;
+	LIS_DestruirLista(pCabecaMao4) ;
+	LIS_DestruirLista(pCabecaMao5) ;
+	LIS_DestruirLista(pCabecaMao6) ;
+	LIS_DestruirLista(pCabecaLixo) ;
+	LIS_DestruirLista(pCabecaMesa) ;
+	free(pCabecaSuperior) ;
+/*
+	#ifdef _DEBUG
+		CNT_CONTAR("MES_DestruirListas - Antes de retornar") ;
+	#endif
+*/
+} /********************** FIM FUNÇÃO: &Destruir listas *********************/
+
 
 /***********  CÓDIGO DAS FUNÇÕES ENCAPSULADAS NO MÓDULO  *******************/
 //ainda nao ha funcoes encapsuladas no modulo

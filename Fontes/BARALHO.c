@@ -290,8 +290,6 @@ void BAR_DestruirCarta(void * pCarta) {
 ***************************************************************************/
 void BAR_DestruirBaralho(void * pLista) {
 
-	LIS_tpCondRet condRetLista ;
-
 	#ifdef _DEBUG
 		CNT_CONTAR("BAR_DestruirBaralho") ;
 	#endif
@@ -300,9 +298,9 @@ void BAR_DestruirBaralho(void * pLista) {
 		assert( pLista != NULL ) ;
 	#endif
 	
-	condRetLista = LIS_ExcluirElemento(pLista) ;
+	LIS_EsvaziarLista( pLista ) ;
 
-	free(pLista);
+    free( pLista ) ;
 	
 } /************ Fim função: BAR &Destruir baralho ****************************/
 
