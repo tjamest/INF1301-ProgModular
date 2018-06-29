@@ -23,7 +23,8 @@
 *	  Destrói uma carta.
 ***************************************************************************/
 
-#include "LISTA.h"
+#include "lista.h"
+
 #define TAM 40
 
 #if defined( BARALHO_OWN )

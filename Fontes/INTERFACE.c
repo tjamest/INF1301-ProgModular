@@ -322,11 +322,13 @@ int main (void) {
 			qtdEmpates = 0 ;
 			qtdBateriasDeApostas = 0 ;
 
-			qtdRodadas += 1 ;
-
 			#ifdef _DEBUG
 			pCartaAux = VetorAux[0] ;
+			printf("Variaveis reiniciadas.\n") ;
+			Delay() ;
 			#endif
+
+			qtdRodadas += 1 ;
 
 			if ((pontosPartidaPar < 11 && pontosPartidaImpar < 11) ||
 				(pontosPartidaPar == 11 && pontosPartidaImpar == 11)) {
@@ -997,17 +999,40 @@ int main (void) {
 
 			} // fim if "alguem venceu a partida"
 			
+			//ALGUEM TEM ONZE PONTOS
 			else if (pontosPartidaPar == 11 || pontosPartidaImpar == 11) {
 
-				//MAO DE ONZE
+				#ifdef _DEBUG
+				printf("Alguma equipe tem onze pontos.\n") ;
+				Delay() ;
+				#endif
+
+				//SO UMA EQUIPE TEM ONZE PONTOS
 				if ( ( pontosPartidaPar == 11 && pontosPartidaImpar < 11) ||
 					 ( pontosPartidaPar < 11 && pontosPartidaImpar == 11) ) {
 
 					if (pontosPartidaPar == 11 && pontosPartidaImpar < 11) {
+
+						#ifdef _DEBUG
+						printf("Apenas a equipe par tem onze pontos.\n") ;
+						Delay() ;
+						#endif
+
 						equipeComOnze = EQUIPE_PAR ;
 					}
 					else if (pontosPartidaPar < 11 && pontosPartidaImpar == 11) {
+
+						#ifdef _DEBUG
+						printf("Apenas a equipe impar tem onze pontos.\n") ;
+						Delay() ;
+						#endif
+
 						equipeComOnze = EQUIPE_IMPAR ;
+					}
+
+					if (( pontosPartidaPar == 11 && pontosPartidaImpar < 11) ||
+						( pontosPartidaPar < 11 && pontosPartidaImpar == 11)) {
+						opcao = 0;
 					}
 
 					while (opcao != 50 && pontosPartidaPar != pontosPartidaImpar ) {
@@ -1563,7 +1588,8 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 			switch (valorRodada) {
 			case 1: printf(" (7) Pedir truco\n"); break;
 			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir doze\n"); break;
+			case 6: printf(" (7) Pedir nove\n"); break;
+			case 9: printf(" (7) Pedir doze\n"); break;
 			} //fim switch
 
 			printf("\n");
@@ -1597,7 +1623,8 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 			switch (valorRodada) {
 			case 1: printf(" (7) Pedir truco\n"); break;
 			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir doze\n"); break;
+			case 6: printf(" (7) Pedir nove\n"); break;
+			case 9: printf(" (7) Pedir doze\n"); break;			
 			} //fim switch
 
 			printf("\n");
@@ -1624,33 +1651,63 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 		break;
 
 	case 3: //3 cartas na mao (primeira jogada)
+
 		printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
 
 		if (quemAumentou != quemJoga) {
 			switch (valorRodada) {
 			case 1: printf(" (7) Pedir truco\n"); break;
 			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir doze\n"); break;
+			case 6: printf(" (7) Pedir nove\n"); break;
+			case 9: printf(" (7) Pedir doze\n"); break;
 			} //fim switch
 
-			printf("\n");
-			printf(" Opcao: ") ;
+			#ifdef _DEBUG
+			if (valorRodada != 11) {
+				printf(" (8) Aumentar pontuacao pra 11 (para testes)\n") ;
+			}
+			#endif
+
+			printf("\n Opcao: ") ;
 			scanf_s(" %c", jogada, 1) ;
 
+			#ifndef _DEBUG
 			while (*jogada != 49 && *jogada != 50 && *jogada != 51 && *jogada != 55) {
-			scanf_s(" %c", jogada, 1);
+				scanf_s(" %c", jogada, 1);
+			} //fim while
+			#endif
+
+			#ifdef _DEBUG
+			while (*jogada != 49 && *jogada != 50 && *jogada != 51 && *jogada != 55 && *jogada != 56) {
+				scanf_s(" %c", jogada, 1);
 
 			} //fim while
+			#endif
 		} //fim if
 
 		else {
+
+			#ifdef _DEBUG
+			if (valorRodada != 11 && pontosPartidaPar != 11 && pontosPartidaImpar != 11) {
+				printf(" (8) Aumentar pontuacao pra 11 (para testes)\n") ;
+			}
+			#endif
+
 			printf("\n");
 			printf(" Opcao: ") ;
 			scanf_s(" %c", jogada, 1) ;
 
+			#ifndef _DEBUG
 			while (*jogada != 49 && *jogada != 50 && *jogada != 51) {
 				scanf_s(" %c", jogada, 1);
 			} //fim while
+			#endif
+
+			#ifdef _DEBUG
+			while (*jogada != 49 && *jogada != 50 && *jogada != 51 && *jogada != 56) {
+				scanf_s(" %c", jogada, 1);
+			} //fim while
+			#endif
 		} //fim else
 
 		system("cls");
@@ -1736,16 +1793,16 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	PrintarMao(pCabecaMao) ;
 
 	printf(" \n O que deseja fazer?\n\n") ;
-	printf(" (1) Correr   | (2) Aceitar") ;
+	printf(" (1) Correr   | (2) Aceitar\n") ;
 
 	switch (valorRodada) {
-	case 3: printf("   | (3) Pedir seis\n\n"); break;
-	case 6: printf("   | (3) Pedir nove\n\n"); break;
-	case 9: printf("   | (3) Pedir doze\n\n"); break;
-	case 12: printf("\n\n"); break;
+	case 3: printf("   | (3) Pedir seis\n"); break;
+	case 6: printf("   | (3) Pedir nove\n"); break;
+	case 9: printf("   | (3) Pedir doze\n"); break;
+	case 12: printf("\n"); break;
 	}
 
-	printf(" Opcao: ") ;
+	printf("\n Opcao: ") ;
 	scanf_s(" %c", opcao, 1) ;
 
 	while (*opcao < 49 && *opcao > 52) {
@@ -2348,7 +2405,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 		#endif
 
 		break;
-		
+	
 	case APOSTAR_CARTA_3: //(3)
 		ExecutarOpcaoApostarCarta (pCabecaSuperior, quemJoga, jogada) ;
 
@@ -2406,6 +2463,13 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 		case 9:
 			return 12;
 		} //fim switch
+
+	#ifdef _DEBUG
+	case 56: //(8)
+		printf("Aumentou pontuacao pra 11.\n") ;
+		Delay() ;
+		return 11;
+	#endif
 
 	} //fim switch
 

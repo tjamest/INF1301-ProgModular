@@ -20,13 +20,13 @@
 #include   <time.h>
 
 #define BARALHO_OWN
-#include "BARALHO.h"
-#include "LISTA.h"
+#include "baralho.h"
+#include "lista.h"
 
 #ifdef _DEBUG
-   #include   "Generico.h"
-   #include   "CEspDin.h"
-   #include   "Conta.h"
+   #include   "generico.h"
+   #include   "cespdin.h"
+   #include   "conta.h"
    #include   "..\\tabelas\\IdTiposEspaco.def"
 #endif
 

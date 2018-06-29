@@ -19,8 +19,8 @@
 *     
 ***************************************************************************/
 
-#include "BARALHO.h"
-#include "LISTA.h"
+#include "lista.h"
+#include "baralho.h"
 
 #if defined( MESA_OWN )
    #define MESA_EXT
