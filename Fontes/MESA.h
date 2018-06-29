@@ -257,10 +257,10 @@ int MES_ProximoJogadorDaMesmaEquipe(int quemJoga, int qtdJogadores) ;
 *     Recebe quemJoga e a qtdJogadores.
 ***************************************************************************/
 void MES_DestruirListas (LIS_tppLista pCabecaSuperior, LIS_tppLista pCabecaBaralho,
-                                  LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2,
-                                  LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4,
-                                  LIS_tppLista pCabecaMao5, LIS_tppLista pCabecaMao6,
-                                  LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa) ;
+                         LIS_tppLista pCabecaMao1, LIS_tppLista pCabecaMao2,
+                         LIS_tppLista pCabecaMao3, LIS_tppLista pCabecaMao4,
+                         LIS_tppLista pCabecaMao5, LIS_tppLista pCabecaMao6,
+                         LIS_tppLista pCabecaLixo, LIS_tppLista pCabecaMesa) ;
 
 #undef MESA_EXT
 

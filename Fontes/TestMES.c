@@ -413,40 +413,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		return TST_CondRetOK ;
 
 	case 12: //DESTRUIR LISTAS
-/*
-		//MES_DestruirListas( vtListaDeListas[0], pCabecaBaralho, vtMaos[0], vtMaos[1],
-		//					vtMaos[2], vtMaos[3], vtMaos[4], vtMaos[5], vtLixo[0], vtMesa[0] ) ;
 
-		if (vtListaDeListas[0] != NULL) {
-			LIS_DestruirLista( vtListaDeListas[0] ) ;
-		}
-		else if (pCabecaBaralho != NULL) {
-			LIS_DestruirLista( pCabecaBaralho ) ;
-		}
-		else if (vtMaos[0] != NULL) {
-			LIS_DestruirLista( vtMaos[0] ) ;
-		}
-		else if (vtMaos[1] != NULL) {
-			LIS_DestruirLista( vtMaos[1] ) ;
-		}
-		else if (vtMaos[2] != NULL) {
-			LIS_DestruirLista( vtMaos[2] ) ;
-		}
-		else if (vtMaos[3] != NULL) {
-			LIS_DestruirLista( vtMaos[3] ) ;
-		}
-		else if (vtMaos[4] != NULL) {
-			LIS_DestruirLista( vtMaos[4] ) ;
-		}
-		else if (vtMaos[5] != NULL) {
-			LIS_DestruirLista( vtMaos[5] ) ;
-		}
-		else if (vtLixo[0] != NULL) {
-			LIS_DestruirLista( vtLixo[0] ) ;
-		}
-		else if (vtMesa[0] != NULL) {
-			LIS_DestruirLista( vtMesa[0] ) ;
-		}
+		MES_DestruirListas( vtListaDeListas[0], pCabecaBaralho, vtMaos[0], vtMaos[1],
+							vtMaos[2], vtMaos[3], vtMaos[4], vtMaos[5], vtLixo[0], vtMesa[0] ) ;
 
 		vtListaDeListas[0] = NULL ;
 		pCabecaBaralho = NULL ;
@@ -458,7 +427,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )  {
 		vtMaos[5] = NULL ;
 		vtLixo[0] = NULL ;
 		vtMesa[0] = NULL ;
-*/
+
 		return TST_CondRetOK ;
 
 	default: //COMANDO NAO EXISTE

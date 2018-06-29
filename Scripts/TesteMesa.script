@@ -144,7 +144,7 @@
 == Distribuir 4 maos
 =distribuirmaos
 
-== Verificar espaços alocados apos destruicao da lista
+== Verificar espacos alocados
 =verificartodosespacos       SemErro
 =obternumeroespacosalocados  14 	//baralho e maos
 
@@ -312,7 +312,10 @@
 
 == Verificar espacos alocados
 =verificartodosespacos       SemErro
-=obternumeroespacosalocados  37 	//baralho e maos (3x) + todas listas
+=obternumeroespacosalocados  37 	//baralho e maos (7x4) + todas listas (9x1)
+
+== Destruir listas
+=destruirlistas
 
 == Verificar quantidade de contadores contados
 =contagemcontador   "MES_CriarListaDeListas - Depois de entrar e declarar variaveis"  1
