@@ -1040,7 +1040,6 @@ int main (void) {
 						#endif
 
 						opcao = PrintarTelaMaoDeOnze(qtdJogadores, pCabecaSuperior,
-													 pontosRodadaPar, pontosRodadaImpar,
 													 pontosPartidaPar, pontosPartidaImpar) ;
 
 						switch (opcao) {
@@ -1545,11 +1544,11 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	}
 
 	PrintarMesa(pCabecaMesa, quemJogouAPrimeira, qtdJogadores) ;
-	if (pontosPartidaPar != 11 && pontosPartidaImpar != 11) {
-		PrintarMao(pCabecaMao) ;
+	if (pontosPartidaPar == 11 && pontosPartidaImpar == 11){
+		printf(	   "\n                                (Mao de Ferro)\n") ;
 	}
 	else {
-		printf(	   "\n                                (Mao de Ferro)\n") ;
+		PrintarMao(pCabecaMao) ;
 	}
 
 	printf(		   " \n O que deseja fazer?\n\n") ;
@@ -2061,7 +2060,6 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 *  Função: &Printar tela de correr, aceitar ou aumentar
 ***************************************************************************/
 int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
-						 int pontosRodadaPar, int pontosRodadaImpar,  
 						 int pontosPartidaPar, int pontosPartidaImpar) {
 
 	int equipeComOnze = INICIALIZAR ;
@@ -2099,7 +2097,7 @@ int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
 	else {
 		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 	}
-	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+	printf(		   "                   Rodada: 0/2                Rodada: 0/2\n") ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	printf(		   " Equipe impar decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
 	break;
@@ -2113,7 +2111,7 @@ int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
 	else {
 		printf(	   "                   Partida: %d/12             Partida: %d/12\n", pontosPartidaPar, pontosPartidaImpar) ;
 	}
-	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
+	printf(		   "                   Rodada: 0/2                Rodada: 0/2\n") ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 	printf(		   " Equipe par decide (nao deixe que a equipe adversaria veja suas cartas).\n\n");
 	break;
@@ -2130,11 +2128,11 @@ int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior,
 	switch (equipeComOnze) {
 	case EQUIPE_IMPAR: 
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE IMPAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	break;
 	case EQUIPE_PAR:   
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ EQUIPE PAR ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"); 
-	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
+	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") ;
 	break;
 	}
 	printf(		   "                   Equipe Par                 Equipe Impar\n") ;

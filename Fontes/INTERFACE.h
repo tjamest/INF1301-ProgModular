@@ -158,7 +158,6 @@ int PrintarTelaFimPartida(LIS_tppLista pCabecaSuperior,
 *     Imprime a tela as mãos da equipe com onze pontos.
 ***************************************************************************/
 int PrintarTelaMaoDeOnze(int qtdJogadores, LIS_tppLista pCabecaSuperior, 
-	 					 int pontosRodadaPar, int pontosRodadaImpar,
 						 int pontosPartidaPar, int pontosPartidaImpar) ;
 
 /***************************************************************************
