@@ -9,11 +9,11 @@
 *
 *  Projeto: INF 1301 Jogo de Truco
 *  Gestor:
-*  Autores: gsc
+*  Autores: gsc,jvr, tgf
 *
 *  $HA Histórico de evolução:
-*     Versão      Autor         Data            Observações
-*     1            gsc        01/jun/2018     início desenvolvimento
+*     Versão      Autor        Data            Observações
+*     1     	   gsc      01/jun/2018     início desenvolvimento
 *
 *  $ED Descrição do módulo
 *	  Imprime telas no prompt de comando para o usuário escolher opções.
