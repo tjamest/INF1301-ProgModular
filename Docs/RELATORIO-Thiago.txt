@@ -47,5 +47,45 @@ Dado um gás para terminar de codificar o módulo baralho , testar ele no arcabo
 07/05/2018 - 7h trabalhadas - codificar módulo,revisar código do módulo ,realizar os testes,diagnosticar e corrigir os problemas encontrados.
 Término de codificação e correção do modulo baralho, correção dos ultimos bugs e acressentando as assertivas corretamente.
 
+T4:
+
+11/05/2018 - Inicio do trabalho -0h trabalhadas 
+17/05/2018 - 2h trabalhadas - Revião do projeto , estudar o código 
+26/05/2018 - 1h trabalhadas - Estudar o código. 
+
+31/05/2018 - 4h trabalhadas - Codificar parte do módulo, Estudar, Revisar projetos.
+	estudar a lógica do jogo de truco e testar aplicar o jogo para 4 e 6 jogadores.
+	
+
+03/06/2018 - 4h trabalhadas - Codificar módulo, Revisar projetos
+	inicio da tentativa de fazer um jogo de 4 ou 6 jogadores.
+
+08/06/2018 - 5h trabalhadas - Modificações no módulo
+  Foi feita uma função que determina quem é o jogador seguinte através de armazenar em uma lista.
+
+12/06/2018 - 4h trabalhadas - Foi retirada a função que determinava o proximo e o jogador anterior para utilizar outro método.
+
+21/06/2018 - 2h trabalhadas - Estudar o código
+	Ler oque foi feito no módulo
+
+
+23/06/2018 - 4h trabalhadas - Estudar,verificar possiveis locais de se botar contador
+
+24/06/2017 - 4h trabalhadas -Estudar
+estudar a lógica do jogo de truco e suas regras para fazer a mão de ferro e a mão de onze.
+
+
+26/06/2017 - 3h trabalhadas - Codificar módulo, estudar
+	Desenvolvida a mão de onze e a mão de ferro , porém elas apresentam problemas
+  
+  
+  27/06/2017 - 2h trabalhadas - Estudar , modificar modulo
+  Mão de ferro e mão de onze continuam apresentando erros.
+  
+  28/06/2017 - 3h Estudar , modificar modulo
+  tentar ler o módulo para utilizar os recursos possiveis que o módulo apresenta para desenvolver a mão de ferro e mão de onze completamente
+  29/06/2017- 4h Testes, 
+  Feito testes para verificar o funcionamento da mão de ferro e mão de onze.
+
 
 
