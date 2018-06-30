@@ -1529,7 +1529,12 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 	printf(		   "                   Rodada: %d/2                Rodada: %d/2\n", pontosRodadaPar, pontosRodadaImpar) ;
 	printf(		   " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n") ;
 
-	printf(" Jogador %d joga (nao deixe que ninguem veja suas cartas).\n\n", quemJoga) ;
+	if (pontosPartidaPar < 11 && pontosPartidaImpar <11) {
+		printf(" Jogador %d joga (nao deixe que ninguem veja suas cartas).\n\n", quemJoga) ;
+	}
+	else {
+		printf(" Jogador %d joga.\n\n", quemJoga) ;
+	}
 	printf(" Digite '1' para avancar.\n");
 	printf(" ");
 	scanf_s(" %c", jogada, 1);
@@ -1585,12 +1590,16 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 		printf(" (4) Dispensar carta 1\n") ;
 
 		if (quemAumentou != quemJoga) {
-			switch (valorRodada) {
-			case 1: printf(" (7) Pedir truco\n"); break;
-			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir nove\n"); break;
-			case 9: printf(" (7) Pedir doze\n"); break;
-			} //fim switch
+			if ( (pontosPartidaPar < 11 && pontosPartidaImpar < 11) ||
+				 (pontosPartidaPar < 11 && pontosPartidaImpar == 11) ||
+				 (pontosPartidaPar == 11 && pontosPartidaImpar < 11) ) {
+				switch (valorRodada) {
+				case 1: printf(" (7) Pedir truco\n"); break;
+				case 3: printf(" (7) Pedir seis\n"); break;
+				case 6: printf(" (7) Pedir nove\n"); break;
+				case 9: printf(" (7) Pedir doze\n"); break;
+				} //fim switch
+			}
 
 			printf("\n");
 			printf(" Opcao: ") ;
@@ -1620,12 +1629,16 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 		printf(" (4) Dispensar carta 1 | (5) Dispensar carta 2\n") ;
 
 		if (quemAumentou != quemJoga) {
-			switch (valorRodada) {
-			case 1: printf(" (7) Pedir truco\n"); break;
-			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir nove\n"); break;
-			case 9: printf(" (7) Pedir doze\n"); break;			
-			} //fim switch
+			if ( (pontosPartidaPar < 11 && pontosPartidaImpar < 11) ||
+				 (pontosPartidaPar < 11 && pontosPartidaImpar == 11) ||
+				 (pontosPartidaPar == 11 && pontosPartidaImpar < 11) ) {
+				switch (valorRodada) {
+				case 1: printf(" (7) Pedir truco\n"); break;
+				case 3: printf(" (7) Pedir seis\n"); break;
+				case 6: printf(" (7) Pedir nove\n"); break;
+				case 9: printf(" (7) Pedir doze\n"); break;			
+				} //fim switch
+			}
 
 			printf("\n");
 			printf(" Opcao: ") ;
@@ -1655,16 +1668,22 @@ int PrintarTelaJogada(int quemJoga, int valorRodada, int quemAumentou,
 		printf(" (1) Apostar carta 1   | (2) Apostar carta 2   | (3) Apostar carta 3\n") ;
 
 		if (quemAumentou != quemJoga) {
-			switch (valorRodada) {
-			case 1: printf(" (7) Pedir truco\n"); break;
-			case 3: printf(" (7) Pedir seis\n"); break;
-			case 6: printf(" (7) Pedir nove\n"); break;
-			case 9: printf(" (7) Pedir doze\n"); break;
-			} //fim switch
+			if ( (pontosPartidaPar < 11 && pontosPartidaImpar < 11) ||
+				 (pontosPartidaPar < 11 && pontosPartidaImpar == 11) ||
+				 (pontosPartidaPar == 11 && pontosPartidaImpar < 11) ) {
+				switch (valorRodada) {
+				case 1: printf(" (7) Pedir truco\n"); break;
+				case 3: printf(" (7) Pedir seis\n"); break;
+				case 6: printf(" (7) Pedir nove\n"); break;
+				case 9: printf(" (7) Pedir doze\n"); break;
+				} //fim switch
+			}
 
 			#ifdef _DEBUG
 			if (valorRodada != 11) {
-				printf(" (8) Aumentar pontuacao pra 11 (para testes)\n") ;
+				if (pontosPartidaPar != 11 || pontosPartidaImpar != 11) {
+					printf(" (8) Pedir onze (para testes)\n") ;
+				}
 			}
 			#endif
 
@@ -1793,7 +1812,7 @@ int PrintarTelaCorrerAceitarAumentar(int quemJoga, int valorRodada, int qtdJogad
 	PrintarMao(pCabecaMao) ;
 
 	printf(" \n O que deseja fazer?\n\n") ;
-	printf(" (1) Correr   | (2) Aceitar\n") ;
+	printf(" (1) Correr   | (2) Aceitar") ;
 
 	switch (valorRodada) {
 	case 3: printf("   | (3) Pedir seis\n"); break;
@@ -2466,7 +2485,7 @@ int ExecutarOpcaoJogada(LIS_tppLista pCabecaSuperior, int quemJoga, int jogada, 
 
 	#ifdef _DEBUG
 	case 56: //(8)
-		printf("Aumentou pontuacao pra 11.\n") ;
+		printf("Pediu para aumentar o valor da rodada pra 11.\n") ;
 		Delay() ;
 		return 11;
 	#endif

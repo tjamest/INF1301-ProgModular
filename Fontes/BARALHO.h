@@ -25,13 +25,13 @@
 
 #include "lista.h"
 
-#define TAM 40
-
 #if defined( BARALHO_OWN )
    #define BARALHO_EXT
 #else
    #define BARALHO_EXT extern
 #endif
+
+#define TAM 40
 
 /**************** DECLARAÇÕES EXPORTADAS PELO MÓDULO **********************/
 // Tipo referência para uma carta

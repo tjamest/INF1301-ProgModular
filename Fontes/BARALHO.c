@@ -22,6 +22,7 @@
 #define BARALHO_OWN
 #include "baralho.h"
 #include "lista.h"
+#undef BARALHO_OWN
 
 #ifdef _DEBUG
    #include   "generico.h"
@@ -29,8 +30,6 @@
    #include   "conta.h"
    #include   "..\\tabelas\\IdTiposEspaco.def"
 #endif
-
-#undef BARALHO_OWN
 
 /***************************************************************************
 *  $TC Tipo de dados: BAR tpCarta
